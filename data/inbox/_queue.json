@@ -1,0 +1,17 @@
+{
+  "_description": "Очередь актов на обработку ИИ-агентом (Antigravity/ZCode). Пополняется Python-пайплайном (scripts/queue_for_agent.py), обрабатывается агентом. Агент проставляет status: done после записи результатов в data/structured/.",
+  "_workflow": "1) Python кладёт акт в data/raw_acts/ и добавляет запись сюда (status: pending). 2) Агент читает _TASK.md, берёт pending-акты, пишет user_story_<docid>.md + practice_<docid>.md в data/structured/, ставит status: done. 3) Python-верификатор (verify_citations.py) проверяет practice на галлюцинации.",
+  "_last_updated": "2026-06-25",
+  "queue": [
+    {
+      "docid": "yQ8qgPoesvWJ",
+      "act_path": "data/raw_acts/act_yQ8qgPoesvWJ.txt",
+      "case_number": "2-80/2025",
+      "vertical": "Маркетплейсы",
+      "status": "done",
+      "processed_by": "Antigravity",
+      "processed_at": "2026-06-25T10:08:50+03:00",
+      "notes": "Первый пилотный акт; уже есть извлечение через DeepSeek (data/structured/structure_yQ8qgPoesvWJ.json) — можно сравнить с выводом Antigravity."
+    }
+  ]
+}

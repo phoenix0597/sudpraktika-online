@@ -1,0 +1,1 @@
+Какие модели DeepSeek поддерживают анализ изображений (vision/multimodal)? Какой точный model id использовать в API endpoint https://api.deepseek.com/chat/completions для распознавания скриншотов? В каком формате передавать изображение в messages (base64 data URI или url)? Ответ кратко, с конкретным примером JSON тела запроса.

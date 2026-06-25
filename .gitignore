@@ -1,0 +1,22 @@
+# Зависимости
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Учётные данные и секреты — НИКОГДА в репозиторий
+.env
+*.key
+secrets/
+
+# Внутреннее состояние скриптов (счётчики, кэш)
+scripts/.wordstat_counter.json
+
+# Вывод прогонов
+output/
+
+# ОС / редактор
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

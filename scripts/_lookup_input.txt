@@ -1,0 +1,1 @@
+Какие существуют валидные значения enum SearchType для Yandex Search API (searchapi.api.cloud.yandex.net)?

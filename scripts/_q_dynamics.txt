@@ -1,0 +1,1 @@
+Для Yandex Search API Wordstat метод GetDynamics (эндпоинт searchapi.api.cloud.yandex.net/v2/wordstat/dynamics) требует поля period (enum) и from_date, to_date (Timestamp). Какие валидные значения enum Period? И в каком формате from_date/to_date — RFC3339 строка или Timestamp в секундах? Ответ кратко.
