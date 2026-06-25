@@ -1,0 +1,51 @@
+﻿docid,status,dispute_type_code,claim_type_codes,result_type,index_policy,main_site_fit,reason
+0qwM485PLa1s,already_reviewed,goods_defect_art18,refund_price; moral_damage; consumer_fine,partially_satisfied,index,True,already reviewed and committed
+1w89Nc1UMNmm,already_reviewed,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,already reviewed and committed
+1yfD2XxjDDrJ,added,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine; expenses,satisfied,index,True,возврат дивана (товар) ненадлежащего качества
+3mMKR7CNUYQ8,already_reviewed,service_refusal_art32,refund_price; consumer_fine,satisfied,index,True,already reviewed and committed
+4686FPHUhLZC,added,info_violation_art10_12,refund_price; moral_damage; consumer_fine,satisfied,index,True,"возврат массажной накидки из-за отсутствия надлежащей информации на презентации (ст. 10, 12)"
+50MnpFBeHEl8,added,goods_defect_art18,refund_price; penalty; consumer_fine; expenses,partially_satisfied,index,True,возврат стоимости товара ненадлежащего качества
+7hRq36xc81l6,already_reviewed,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine; expenses,rejected,index,True,already reviewed and committed
+82RMC7eXBpH4,already_reviewed,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine; expenses,satisfied,index,True,already reviewed and committed
+b41sumpSMelO,added,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,возврат стоимости технически сложного товара с существенным недостатком
+BRRlQN72V9V6,already_reviewed,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine; expenses,mixed,index,True,already reviewed and committed
+C2EQxwU5LLlC,added,goods_defect_art18,refund_price; price_difference; penalty; moral_damage; consumer_fine; expenses; damages,partially_satisfied,index,True,возврат товара ненадлежащего качества с убытками и разницей в цене
+Cr4ZymF07ubW,added,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,возврат стоимости технически сложного товара с недостатком
+DvLR6OZqCqt,already_reviewed,info_violation_art10_12,information_disclosure; moral_damage; penalty; consumer_fine,rejected,index,True,already reviewed and committed
+ekdTskHpS3WO,added,goods_defect_art18,refund_price; penalty; damages; moral_damage; consumer_fine,partially_satisfied,index,True,расторжение договора купли-продажи технически сложного товара из-за недостатка
+flVxOoBiwCr8,already_reviewed,contract_validity_non_zpp,contract_recognition; debt_dispute,rejected,index,True,already reviewed and committed
+fNiaUxW2zu1p,already_reviewed,distance_sale_return_art26_1,refund_price; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,already reviewed and committed
+FuXzeJou9YYT,already_reviewed,prepaid_goods_delay_art23_1,compel_transfer; penalty; moral_damage; consumer_fine; expenses,mixed,index,True,already reviewed and committed
+hqw9kUZJwtbQ,added,work_service_defect_art29,refund_price; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,"договор изготовления и монтажа пластиковых окон (работа/услуга, ст. 29)"
+hV75aLss4lWU,added,distance_sale_return_art26_1,refund_price; penalty; moral_damage; consumer_fine,partially_satisfied,index,True,отказ от товара при дистанционной продаже (ст. 26.1)
+jbrHdtiKcpxX,added,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,отказ от договора купли-продажи технически сложного товара из-за нарушения срока ремонта
+LEkG8QMUg0gC,already_reviewed,distance_sale_return_art26_1,refund_price; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,already reviewed and committed
+LEM5MFXCKK6L,already_reviewed,contract_validity_non_zpp,contract_recognition; compel_transfer,rejected,index,True,already reviewed and committed
+LY7cqAWIm4Z1,added,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,"товар (окна как изделие) не соответствует эскизу, применены нормы ст. 18"
+MmtWiS16N45R,already_reviewed,prepaid_goods_delay_art23_1,refund_price; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,already reviewed and committed
+NBXqmj3oX2Lm,added,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,недостаток товара и нарушение сроков гарантийного ремонта
+oRobcjYwTdgg,added,goods_defect_art18,refund_price; penalty; moral_damage,rejected,index,True,полный отказ в иске о возврате за технически сложный товар
+OzQpzlDiDWZ,already_reviewed,distance_sale_return_art26_1,refund_price; moral_damage; consumer_fine; penalty,partially_satisfied,index,True,already reviewed and committed
+P5oLZX7sQPoI,added,info_violation_art10_12,refund_price; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,"непредоставление информации о товаре (медицинское изделие, ст. 10, 12)"
+Pde5A0X4dlZj,already_reviewed,service_refusal_art32,insurance_premium_refund; penalty; moral_damage; consumer_fine,partially_satisfied,index,True,already reviewed and committed
+PulUoivdYENP,already_reviewed,prepaid_goods_delay_art23_1,refund_price; penalty; moral_damage; consumer_fine,satisfied,index,True,already reviewed and committed
+pWN4OmLFKfm8,added,distance_sale_return_art26_1,compel_transfer; moral_damage; consumer_fine,partially_satisfied,index,True,одностороннее аннулирование заказа продавцом в интернет-магазине (дистанционная продажа)
+qNPGP4ky266p,exclude_or_hold,non_consumer_hold,hold,hold,hold,False,already reviewed (hold exception)
+qVUccWRuFprb,already_reviewed,info_violation_art10_12,moral_damage,rejected,index,True,already reviewed and committed
+qx9K417NRkWN,already_reviewed,goods_defect_art18,refund_price; damages; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,already reviewed and committed
+QyBl2UIrnndK,added,distance_sale_return_art26_1,refund_price; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,"возврат технически сложного товара надлежащего качества, купленного дистанционно"
+RvLYP9KrC4gQ,added,goods_defect_art18,refund_price; penalty; consumer_fine; expenses,partially_satisfied,index,True,нарушение срока гарантийного ремонта товара
+tD3jmVsAWMbp,added,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,возврат стоимости технически сложного товара с существенным недостатком
+TNm0IBqaQjxP,added,service_refusal_art32,refund_price; moral_damage; consumer_fine,partially_satisfied,index,True,"возврат стоимости навязанной услуги (отказ от договора услуг, ст. 32)"
+TOdqpcvD8z6p,added,prepaid_goods_delay_art23_1,refund_price; penalty; consumer_fine,partially_satisfied,index,True,"смешанный договор поставки и монтажа роллетов, просрочка поставки (ст. 23.1)"
+TZsI5FbnZOZJ,added,info_violation_art10_12,price_difference; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,"несоответствие цены на витрине и на кассе (ненадлежащая информация о цене, ст. 10)"
+v0m4w50eZy5n,already_reviewed,goods_defect_art18,refund_price; price_difference; penalty; moral_damage; expenses,partially_satisfied,index,True,already reviewed and committed
+VLhBBoeb7vWo,added,distance_sale_return_art26_1,refund_price; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,отказ от товара при дистанционной покупке (ст. 26.1)
+WJjAKsJGIglY,added,service_refusal_art32,refund_price; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,отказ от договора услуг (ст. 32)
+Wvd6aNEyrvUy,added,goods_defect_art18,refund_price; damages; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,возврат некачественного технически сложного товара
+xyw1pNsfewV8,added,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine,partially_satisfied,index,True,возврат стоимости технически сложного товара с недостатком
+yc651JdA4PJC,already_reviewed,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine; damages; expenses,partially_satisfied,index,True,already reviewed and committed
+YFjMxNYLsLlX,already_reviewed,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine; damages; expenses,partially_satisfied,index,True,already reviewed and committed
+yQ8qgPoesvWJ,already_reviewed,info_violation_art10_12,price_difference; damages; penalty; moral_damage; consumer_fine,rejected,index,True,already reviewed and committed
+Yse5NQ5b8YbO,already_reviewed,goods_defect_art18,refund_price; penalty; moral_damage; consumer_fine; expenses,partially_satisfied,index,True,already reviewed and committed
+yz0M6YZip7Qn,already_reviewed,service_refusal_art32,refund_price; moral_damage; consumer_fine,mixed,index,True,already reviewed and committed
