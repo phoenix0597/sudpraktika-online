@@ -1,0 +1,160 @@
+{
+  "schema_version": "1.0",
+  "status": "approved_for_pilot",
+  "approved_at": "2026-06-25",
+  "principle": "dispute_type_code is based primarily on legal constructions of the Russian Consumer Protection Law; factual scenario details stay in platform_or_company, object_type, object_name and situation_tags.",
+  "fields": {
+    "taxonomy.dispute_type_code": {
+      "description": "Normalized legal-construction code for the dispute. Use this for clustering and filters.",
+      "values": {
+        "goods_defect_art18": {
+          "label": "товар с недостатком",
+          "legal_basis": ["ЗоЗПП ст. 18"],
+          "description": "Требования потребителя при обнаружении недостатков товара: возврат цены, замена, ремонт, уменьшение цены, убытки и связанные производные требования."
+        },
+        "prepaid_goods_delay_art23_1": {
+          "label": "нарушение срока передачи предварительно оплаченного товара",
+          "legal_basis": ["ЗоЗПП ст. 23.1"],
+          "description": "Продавец получил предоплату, но не передал товар в согласованный срок."
+        },
+        "distance_sale_return_art26_1": {
+          "label": "отказ от товара при дистанционной продаже",
+          "legal_basis": ["ЗоЗПП ст. 26.1"],
+          "description": "Отказ потребителя от товара, купленного дистанционным способом, включая споры о сроках возврата и обязанности принять товар."
+        },
+        "info_violation_art10_12": {
+          "label": "ненадлежащая информация о товаре, услуге, продавце или агрегаторе",
+          "legal_basis": ["ЗоЗПП ст. 10", "ЗоЗПП ст. 12"],
+          "description": "Спор построен вокруг непредоставления, неполноты или недостоверности информации, включая информацию владельца агрегатора."
+        },
+        "aggregator_prepayment_art12_2_2": {
+          "label": "возврат предоплаты через владельца агрегатора",
+          "legal_basis": ["ЗоЗПП ст. 12 п. 2.2"],
+          "description": "Требование к владельцу агрегатора о возврате предоплаты в специальных случаях, когда товар/услуга не переданы."
+        },
+        "work_service_defect_art29": {
+          "label": "недостатки работы или услуги",
+          "legal_basis": ["ЗоЗПП ст. 29"],
+          "description": "Требования потребителя при обнаружении недостатков выполненной работы или оказанной услуги."
+        },
+        "work_service_delay_art28": {
+          "label": "нарушение сроков выполнения работы или оказания услуги",
+          "legal_basis": ["ЗоЗПП ст. 28"],
+          "description": "Исполнитель нарушил срок начала, окончания или промежуточные сроки выполнения работы/оказания услуги."
+        },
+        "service_refusal_art32": {
+          "label": "отказ потребителя от договора работ или услуг",
+          "legal_basis": ["ЗоЗПП ст. 32"],
+          "description": "Потребитель отказывается от договора оказания услуг/выполнения работ и требует возврата денег с учетом фактических расходов исполнителя."
+        },
+        "contract_validity_non_zpp": {
+          "label": "спор о заключенности или исполнении договора вне самостоятельного способа защиты ЗоЗПП",
+          "legal_basis": [],
+          "description": "Пограничный спор: требования сформулированы вокруг заключенности/исполнения договора, а не напрямую вокруг способа защиты из ЗоЗПП. Используется осторожно, часто требует ручной проверки."
+        },
+        "non_consumer_hold": {
+          "label": "непотребительский спор",
+          "legal_basis": [],
+          "description": "Дело не подходит основному гражданскому ЗоПП-каталогу для обычных потребителей; обычно publication.index_policy = hold."
+        }
+      }
+    },
+    "taxonomy.claim_type_codes": {
+      "description": "Normalized list of claims/remedies. Multiple values are allowed.",
+      "values": {
+        "refund_price": {
+          "label": "возврат цены или предоплаты",
+          "legal_basis": ["ЗоЗПП ст. 18", "ЗоЗПП ст. 23.1", "ЗоЗПП ст. 26.1", "ЗоЗПП ст. 28", "ЗоЗПП ст. 29", "ЗоЗПП ст. 32"]
+        },
+        "replacement": {
+          "label": "замена товара",
+          "legal_basis": ["ЗоЗПП ст. 18"]
+        },
+        "repair_or_defect_cure": {
+          "label": "безвозмездное устранение недостатков",
+          "legal_basis": ["ЗоЗПП ст. 18", "ЗоЗПП ст. 29"]
+        },
+        "price_reduction": {
+          "label": "соразмерное уменьшение цены",
+          "legal_basis": ["ЗоЗПП ст. 18", "ЗоЗПП ст. 29"]
+        },
+        "repeat_work": {
+          "label": "повторное выполнение работы или изготовление вещи",
+          "legal_basis": ["ЗоЗПП ст. 29"]
+        },
+        "price_difference": {
+          "label": "разница в цене",
+          "legal_basis": ["ЗоЗПП ст. 24"]
+        },
+        "penalty": {
+          "label": "неустойка",
+          "legal_basis": ["ЗоЗПП ст. 23", "ЗоЗПП ст. 23.1", "ЗоЗПП ст. 28", "ЗоЗПП ст. 31"]
+        },
+        "damages": {
+          "label": "убытки",
+          "legal_basis": ["ЗоЗПП ст. 13", "ЗоЗПП ст. 18", "ЗоЗПП ст. 29"]
+        },
+        "moral_damage": {
+          "label": "компенсация морального вреда",
+          "legal_basis": ["ЗоЗПП ст. 15"]
+        },
+        "consumer_fine": {
+          "label": "штраф 50%",
+          "legal_basis": ["ЗоЗПП ст. 13 п. 6"]
+        },
+        "expenses": {
+          "label": "судебные, экспертные и иные расходы",
+          "legal_basis": []
+        },
+        "compel_transfer": {
+          "label": "обязать передать товар",
+          "legal_basis": ["ЗоЗПП ст. 23.1"]
+        },
+        "information_disclosure": {
+          "label": "обязать предоставить информацию",
+          "legal_basis": ["ЗоЗПП ст. 10", "ЗоЗПП ст. 12"]
+        },
+        "contract_recognition": {
+          "label": "признать договор заключенным или незаключенным",
+          "legal_basis": []
+        },
+        "insurance_premium_refund": {
+          "label": "возврат страховой премии",
+          "legal_basis": ["ЗоЗПП ст. 32"]
+        },
+        "debt_dispute": {
+          "label": "оспаривание задолженности или начислений",
+          "legal_basis": []
+        },
+        "hold": {
+          "label": "нецелевой для основного сайта спор",
+          "legal_basis": []
+        }
+      }
+    },
+    "claims_and_result.outcome.result_type": {
+      "description": "Normalized outcome code from the focus-party perspective.",
+      "values": {
+        "satisfied": "требования удовлетворены полностью или почти полностью",
+        "partially_satisfied": "требования удовлетворены частично",
+        "rejected": "в иске отказано",
+        "mixed": "смешанный исход: разные ответчики или требования решены по-разному",
+        "hold": "дело не подходит для основного индекса/вертикали"
+      }
+    },
+    "publication.index_policy": {
+      "description": "Publication gate for generated pages.",
+      "values": {
+        "index": "можно индексировать после обычной редакционной проверки",
+        "hold": "держать вне индекса/основного сайта до отдельного решения"
+      }
+    }
+  },
+  "normalization_rules": [
+    "Do not encode platform names, brands, courts or product names into dispute_type_code.",
+    "Do not create a new dispute_type_code for a single unusual fact pattern; use situation_tags.",
+    "If a case is not a consumer dispute, use dispute_type_code = non_consumer_hold and publication.index_policy = hold.",
+    "claim_type_codes is a list; combine base remedy and derivative claims such as penalty, moral_damage and consumer_fine.",
+    "Human-readable labels may be adapted for page copy, but enum codes must remain stable."
+  ]
+}

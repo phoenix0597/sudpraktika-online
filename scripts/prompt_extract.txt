@@ -1,37 +1,114 @@
-Ты — юридический аналитик. Извлеки из судебного акта структурированные данные в формате JSON.
+Ты — юридический аналитик. Извлеки из судебного акта структурированные данные конкретного дела в формате JSON.
 
-Текст судебного акта будет дан ниже. Извлеки ОБЯЗАТЕЛЬНО следующие поля:
+СТИЛЬ ОТВЕТА:
+- Отвечай только результатом задания.
+- Не добавляй приветствия, вступления, фразы вроде «я проанализировал...», «ниже приведён...» и любые мета-комментарии о том, что ты делаешь.
+- Результат должен начинаться сразу с JSON-объекта, без текста до или после него.
 
-1. "situation" — жизненная ситуация бытовым языком: что купил потребитель, что пошло не так, что требовал. 2-4 предложения, понятных не-юристу.
+КРИТИЧЕСКИЕ ПРАВИЛА:
+- Отвечай только валидным JSON, без markdown-обёрток.
+- Все ключи верхнего уровня схемы обязательны.
+- Если поле нельзя извлечь из текста акта или переданных технических метаданных — ставь null, пустую строку или пустой массив по смыслу.
+- Правовые ссылки, номера статей, постановления, пункты и дела бери только из текста самого акта. Не добавляй ссылки из своих знаний.
+- Технические поля источника (`docid`, `source_url`, `source_domain`, `raw_act_path`, `raw_text_sha256`) бери из переданных метаданных. Если метаданные не переданы, для Sudact можно восстановить `source_url` как `https://sudact.ru/regular/doc/<docid>/`.
+- Не ставь SEO-оценки, «баллы качества» и прогнозы ранжирования.
 
-2. "remedy" — способ защиты: что просил истец и что в итоге взыскал суд (неустойка, штраф 50%, моральный вред, возврат цены, судебные расходы). Кратко.
+Сформируй JSON по схеме v2:
 
-3. "holding" — вклад в практику: 1-3 предложения. Какое правовое правило подтверждает акт, со ссылками на конкретные статьи Закона о защите прав потребителей (ЗоЗПП) и постановления Пленума ВС РФ, если применимо.
+{
+  "schema_version": "2.0",
+  "source": {
+    "docid": "",
+    "source_url": "",
+    "source_domain": "",
+    "source_title": null,
+    "source_passage": null,
+    "raw_act_path": "",
+    "raw_text_sha256": "",
+    "source_type": "court_act"
+  },
+  "court": {
+    "case_number": "",
+    "court_name": "",
+    "court_level": "",
+    "court_system": "general_jurisdiction",
+    "region": "",
+    "city_or_locality": null,
+    "decision_date": "",
+    "instance": ""
+  },
+  "taxonomy": {
+    "legal_domain": "consumer_protection",
+    "procedure_type": "civil",
+    "audience_segment": "citizen",
+    "topic_vertical": "marketplaces",
+    "dispute_type_code": "",
+    "dispute_type": "",
+    "claim_type_codes": [],
+    "claim_type": "",
+    "platform_or_company": null,
+    "object_type": null,
+    "object_name": null,
+    "situation_tags": []
+  },
+  "parties": {
+    "focus_party": {
+      "role": "consumer",
+      "name_raw": null
+    },
+    "opponents": [],
+    "third_parties": []
+  },
+  "case_summary": {
+    "situation": "",
+    "timeline": [],
+    "key_factors": [],
+    "practical_takeaways": [],
+    "unusual_points": []
+  },
+  "claims_and_result": {
+    "remedy": "",
+    "outcome": {
+      "focus_party_result": "",
+      "result_type": "",
+      "short_reason": ""
+    },
+    "amounts": {
+      "claimed_total": null,
+      "awarded_total": null,
+      "items_claimed": [],
+      "items_awarded": []
+    }
+  },
+  "legal_analysis": {
+    "holding": "",
+    "legal_refs": [],
+    "arguments_rejected": []
+  },
+  "publication": {
+    "main_site_fit": true,
+    "index_policy": "index",
+    "exclude_reason": null,
+    "ai_generated": true,
+    "citations_verified": false,
+    "human_review_status": "not_reviewed",
+    "legal_advice": false
+  },
+  "processing": {
+    "status": "complete",
+    "processed_by": "provider/model",
+    "processed_at": ""
+  }
+}
 
-4. "amounts" — объект с суммами (только числа, в рублях):
-   - "claimed": сумма требований истца
-   - "awarded": сумма, взысканная судом
-   - "penalty": неустойка
-   - "fine_50": штраф 50%
-   - "moral": компенсация морального вреда
-   - "court_costs": судебные расходы
-   Если сумма не указана — null.
-
-5. "timeline" — краткая хронология конфликта: ключевые даты (покупка, претензия, иск, решение) в виде массива строк.
-
-6. "defendant_arguments_rejected" — доводы ответчика, которые суд отверг (массив строк). Если нет — пустой массив.
-
-7. "key_factors" — ключевые моменты, повлиявшие на исход дела (почему суд удовлетворил требования или отказал). 1-3 пункта.
-
-8. "metadata" — объект:
-   - "case_number": номер дела
-   - "court": название суда
-   - "region": регион (субъект РФ: «Москва», «Республика Алтай», «Московская область» и т.д.)
-   - "court_level": уровень суда («районный», «мировой», «областной/краевой», «арбитражный», «Верховный суд»)
-   - "date": дата решения
-   - "instance": инстанция (первая/апелляционная/кассационная)
-   - "vertical": правовая вертикаль (например: "Маркетплейсы", "ДДУ", "Услуги")
-
-Отвечай ТОЛЬКО валидным JSON, без markdown-обёрток и пояснений. Если поле нельзя извлечь — ставь null или пустой массив.
+Пояснения к полям:
+- `taxonomy.dispute_type` — явный вид спора для фильтров и кластеризации.
+- `taxonomy.dispute_type_code` — нормализованный код вида спора из `data/reference/zpp_enum_dictionary.json`; выбирай по правовой конструкции ЗоЗПП, а не по маркетплейсу или товару.
+- `claim_type_codes` — нормализованный список требований из `data/reference/zpp_enum_dictionary.json`.
+- `claim_type` — человекочитаемое описание требования: возврат цены, неустойка, штраф, моральный вред, убытки, отказ в требованиях, ненадлежащий ответчик и т.п.
+- `legal_domain`, `procedure_type`, `audience_segment`, `court_system` нужны, чтобы схема могла масштабироваться за пределы ЗоПП без переделки источника данных.
+- Если дело хозяйственное/арбитражное и не подходит гражданскому ЗоПП-сайту для обычных людей, ставь `publication.main_site_fit: false`, `publication.index_policy: "hold"` и коротко объясняй причину в `exclude_reason`.
+- `legal_refs` заполняй объектами вида: `{"ref": "...", "context": "...", "applied_by_court": "..."}`.
+- `items_claimed` и `items_awarded` заполняй объектами вида: `{"type": "...", "amount": 0, "note": "..."}`. Если точной суммы нет — `amount: null`.
 
 Текст судебного акта:

@@ -15,6 +15,7 @@
   py scripts/queue_for_agent.py --status           # показать статус очереди
 """
 import argparse
+import hashlib
 import json
 from datetime import date
 from pathlib import Path
@@ -44,6 +45,35 @@ def docid_from_filename(name: str) -> str:
     return name[len("act_"):-len(".txt")] if name.startswith("act_") else name
 
 
+def sha256_file(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def source_metadata_for(act_file: Path, docid: str) -> dict:
+    meta_path = act_file.with_suffix(".meta.json")
+    if meta_path.exists():
+        metadata = json.loads(meta_path.read_text(encoding="utf-8"))
+    else:
+        metadata = {
+            "docid": docid,
+            "source_url": f"https://sudact.ru/regular/doc/{docid}/",
+            "source_domain": "sudact.ru",
+            "source_title": None,
+            "source_passage": None,
+            "raw_act_path": act_file.as_posix(),
+            "raw_text_sha256": sha256_file(act_file) if act_file.exists() else "",
+            "source_type": "court_act",
+        }
+    return {
+        "source_url": metadata.get("source_url"),
+        "source_domain": metadata.get("source_domain"),
+        "source_title": metadata.get("source_title"),
+        "source_passage": metadata.get("source_passage"),
+        "raw_text_sha256": metadata.get("raw_text_sha256"),
+        "source_meta_path": meta_path.as_posix() if meta_path.exists() else None,
+    }
+
+
 def register_all() -> int:
     q = load_queue()
     known = known_docids(q)
@@ -55,6 +85,7 @@ def register_all() -> int:
         q.setdefault("queue", []).append({
             "docid": docid,
             "act_path": f"data/raw_acts/{act_file.name}",
+            **source_metadata_for(act_file, docid),
             "case_number": "",
             "vertical": "",
             "status": "pending",
@@ -101,6 +132,7 @@ def main() -> int:
         q.setdefault("queue", []).append({
             "docid": args.docid,
             "act_path": f"data/raw_acts/act_{args.docid}.txt",
+            **source_metadata_for(Path(f"data/raw_acts/act_{args.docid}.txt"), args.docid),
             "case_number": "", "vertical": "",
             "status": "pending",
             "processed_by": None, "processed_at": None, "notes": "",

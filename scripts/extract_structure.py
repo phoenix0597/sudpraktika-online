@@ -5,7 +5,8 @@
 из полного текста судебного акта.
 
 Промпт читается из prompt_extract.txt (UTF-8), текст акта — из act-файла.
-Оба объединяются и отправляются в DeepSeek. Ответ сохраняется в JSON.
+Промпт, технические метаданные источника и текст акта объединяются и отправляются
+в DeepSeek. Ответ сохраняется в JSON.
 
 Использование:
   py scripts/extract_structure.py --act output/act_2-80_2025.txt --output output/structure_2-80_2025.json
@@ -23,6 +24,30 @@ load_dotenv(Path(__file__).parent / ".env")
 KEY = os.environ["DEEPSEEK_API_KEY"].strip()
 
 
+def docid_from_act_path(path: Path) -> str:
+    name = path.name
+    if name.startswith("act_") and name.endswith(".txt"):
+        return name[len("act_"):-len(".txt")]
+    return path.stem
+
+
+def load_source_metadata(act_path: Path) -> dict:
+    meta_path = act_path.with_suffix(".meta.json")
+    if meta_path.exists():
+        return json.loads(meta_path.read_text(encoding="utf-8"))
+    docid = docid_from_act_path(act_path)
+    return {
+        "docid": docid,
+        "source_url": f"https://sudact.ru/regular/doc/{docid}/",
+        "source_domain": "sudact.ru",
+        "source_title": None,
+        "source_passage": None,
+        "raw_act_path": act_path.as_posix(),
+        "raw_text_sha256": "",
+        "source_type": "court_act",
+    }
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="Извлечение структуры акта через DeepSeek")
     ap.add_argument("--act", required=True, help="Файл с чистым текстом акта (UTF-8)")
@@ -30,16 +55,24 @@ def main() -> int:
                     help="Файл промпта извлечения")
     ap.add_argument("--output", required=True,
                     help="Выходной JSON (обычно data/structured/structure_<номер>.json)")
-    ap.add_argument("--model", default="deepseek-v4-flash",
-                    help="Модель DeepSeek (flash=быстро/дёшево, pro=точнее)")
+    ap.add_argument("--model", default="deepseek-v4-pro",
+                    help="Модель DeepSeek")
     args = ap.parse_args()
 
     prompt = Path(args.prompt).read_text(encoding="utf-8")
-    act_text = Path(args.act).read_text(encoding="utf-8")
+    act_path = Path(args.act)
+    act_text = act_path.read_text(encoding="utf-8")
+    source_metadata = load_source_metadata(act_path)
     print(f"Промпт: {len(prompt)} символов | Акт: {len(act_text)} символов | Модель: {args.model}")
 
-    # Объединяем промпт + текст акта
-    full_prompt = prompt + "\n\n" + act_text
+    # Объединяем промпт + детерминированные метаданные + текст акта
+    full_prompt = (
+        prompt
+        + "\n\nТехнические метаданные источника:\n"
+        + json.dumps(source_metadata, ensure_ascii=False, indent=2)
+        + "\n\nТекст судебного акта:\n"
+        + act_text
+    )
 
     url = "https://api.deepseek.com/chat/completions"
     headers = {"Authorization": "Bearer " + KEY, "Content-Type": "application/json"}
@@ -72,8 +105,9 @@ def main() -> int:
     try:
         parsed = json.loads(content)
         print("\n=== ИЗВЛЕЧЁННАЯ СТРУКТУРА ===")
-        for key in ["situation", "remedy", "holding", "amounts", "timeline",
-                    "metadata"]:
+        for key in ["source", "court", "taxonomy", "case_summary",
+                    "claims_and_result", "legal_analysis", "publication",
+                    "processing"]:
             val = parsed.get(key)
             if isinstance(val, (dict, list)):
                 print(f"\n[{key}]")

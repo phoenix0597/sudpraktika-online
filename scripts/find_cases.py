@@ -20,6 +20,7 @@ import csv
 import os
 import re
 import sys
+import time
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
@@ -31,9 +32,20 @@ KEY = os.environ["YANDEX_API_KEY"].strip()
 
 SEARCH_URL = "https://searchapi.api.cloud.yandex.net/v2/web/search"
 # Домены, где лежат судебные акты. sudrf.ru — первичный официальный источник.
-COURT_DOMAINS = ("sudrf.ru", "sudact.ru", "rospravosudie", "sudrf.ru")
+COURT_DOMAINS = ("sudrf.ru", "sudact.ru", "rospravosudie")
+SUDACT_ACT_PATH = "sudact.ru/regular/doc/"
 JUNK_DOMAINS = ("yandex.ru", "vk.com", "youtube", "instagram", "facebook", "9111",
                 "consultant.ru", "garant.ru", "zakonrf")
+DEFAULT_RATE_DELAY = float(os.environ.get("YANDEX_SEARCH_RATE_DELAY", "0.5"))
+MAX_RETRIES = int(os.environ.get("YANDEX_SEARCH_MAX_RETRIES", "3"))
+
+
+def _retry_after_seconds(headers: dict, fallback: int) -> int:
+    raw = headers.get("Retry-After", "")
+    try:
+        return max(1, int(raw))
+    except (TypeError, ValueError):
+        return fallback
 
 
 def search(query: str, page: int = 0) -> list[dict]:
@@ -42,7 +54,19 @@ def search(query: str, page: int = 0) -> list[dict]:
     payload = {"query": {"search_type": "SEARCH_TYPE_RU", "query_text": query,
                          "page": page}}
     data = __import__("json").dumps(payload, ensure_ascii=False).encode("utf-8")
-    r = requests.post(SEARCH_URL, headers=headers, data=data, timeout=30)
+    for attempt in range(MAX_RETRIES + 1):
+        r = requests.post(SEARCH_URL, headers=headers, data=data, timeout=30)
+        if r.status_code == 429 and attempt < MAX_RETRIES:
+            wait_s = _retry_after_seconds(r.headers, fallback=60 * (attempt + 1))
+            print(f"Страница {page}: 429 rate limit, повтор через {wait_s} сек.", file=sys.stderr)
+            time.sleep(wait_s)
+            continue
+        if r.status_code >= 500 and attempt < MAX_RETRIES:
+            wait_s = min(30, 2 ** attempt)
+            print(f"Страница {page}: HTTP {r.status_code}, повтор через {wait_s} сек.", file=sys.stderr)
+            time.sleep(wait_s)
+            continue
+        break
     if r.status_code != 200:
         raise RuntimeError(f"HTTP {r.status_code}: {r.text[:300]}")
     raw = r.json().get("rawData", "")
@@ -84,7 +108,22 @@ def is_court_source(url: str, domain: str) -> bool:
     u = (url or "").lower()
     if any(j in d for j in JUNK_DOMAINS):
         return False
+    if "sudact.ru" in d or "sudact.ru" in u:
+        return SUDACT_ACT_PATH in u and "/regular/doc/?" not in u
     return any(c in d or c in u for c in COURT_DOMAINS)
+
+
+def dedupe_by_url(items: list[dict]) -> list[dict]:
+    """Убирает повторы между страницами выдачи, сохраняя первый порядок появления."""
+    seen = set()
+    deduped = []
+    for item in items:
+        key = (item.get("url") or "").rstrip("/")
+        if not key or key in seen:
+            continue
+        seen.add(key)
+        deduped.append(item)
+    return deduped
 
 
 def main() -> int:
@@ -93,6 +132,8 @@ def main() -> int:
     ap.add_argument("--query-file", default="", help="Файл с запросом (UTF-8, для кириллицы)")
     ap.add_argument("--output", required=True, help="Выходной CSV")
     ap.add_argument("--pages", type=int, default=1, help="Число страниц выдачи")
+    ap.add_argument("--delay", type=float, default=DEFAULT_RATE_DELAY,
+                    help="Пауза между страницами выдачи, сек. По умолчанию 0.5 сек.")
     args = ap.parse_args()
 
     query = args.query
@@ -105,6 +146,8 @@ def main() -> int:
     out_path.parent.mkdir(parents=True, exist_ok=True)
     all_results = []
     for page in range(args.pages):
+        if page > 0 and args.delay > 0:
+            time.sleep(args.delay)
         try:
             hits = search(query, page=page)
         except RuntimeError as e:
@@ -113,9 +156,13 @@ def main() -> int:
         print(f"Страница {page}: найдено {len(hits)} документов всего")
         all_results.extend(hits)
 
-    court_hits = [h for h in all_results if is_court_source(h["url"], h["domain"])]
-    print(f"Из них от судебных источников: {len(court_hits)}")
-    print(f"Прочие (не-суд): {len(all_results) - len(court_hits)}")
+    court_hits_raw = [h for h in all_results if is_court_source(h["url"], h["domain"])]
+    court_hits = dedupe_by_url(court_hits_raw)
+    duplicates = len(court_hits_raw) - len(court_hits)
+    print(f"Из них от судебных источников: {len(court_hits_raw)}")
+    print(f"Дубликатов между страницами: {duplicates}")
+    print(f"Уникальных судебных дел: {len(court_hits)}")
+    print(f"Прочие (не-суд): {len(all_results) - len(court_hits_raw)}")
 
     fields = ["url", "domain", "title", "passage"]
     with out_path.open("w", encoding="utf-8", newline="") as f:

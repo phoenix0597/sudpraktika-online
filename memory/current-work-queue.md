@@ -10,34 +10,46 @@
 - Фаза 0 закрыта: спрос (450K/мес, 88 фраз) ✓, экономика РСЯ (модель 4.5K→54K ₽/мес) ✓, данные (20 актов + полнотекстовой доступ) ✓, инфраструктура (Wordstat, Yandex Search, гибридный поиск) ✓.
 - Фаза 1.1 закрыта: ядро доказано — DeepSeek v4-pro извлекает структуру акта качества уровня верифицированного эталона (A/B-тест с Gemini: не уступает).
 - Фаза 1.1+ закрыта: анти-галлюцинация — промпт с запретом + верификатор `scripts/verify_citations.py`; 4 выдуманных ссылки → 0.
-- Интеграция с Antigravity проверена: первый пилотный акт `yQ8qgPoesvWJ` обработан без галлюцинаций, результат верифицирован, статус очереди изменен на done ✓.
+- Интеграция с Antigravity проверена: первый пилотный акт `yQ8qgPoesvWJ` обработан без галлюцинаций, результат верифицирован ✓.
+- Правило стиля LLM закрыто: запрет приветствий, мета-фраз и описаний процесса добавлен в `scripts/prompt_practice_analysis.txt`, `scripts/prompt_user_story.txt`, `scripts/prompt_extract.txt` и уже был в `data/inbox/_TASK.md`.
+- Лимиты Yandex Search API проверены и закреплены в `assistant-memory.md`; сбор 50–100 актов не упирается в квоты web/search.
+- Фаза 1.3 начата: `find_cases.py` усилен фильтром `sudact.ru/regular/doc/`, retry, задержкой и дедупликацией; `extract_act_text.py` получил batch-режим из CSV.
+- Собрана первая партия: `output/cases_ozon_regular.csv` — 87 уникальных URL актов; в `data/raw_acts/` скачано 50 raw-актов.
+- Фаза 1.3 по md-артефактам закрыта: все 49 pending-актов из `data/inbox/_queue.json` обработаны Gemini-3.5-flash, создано 50 `user_story_*.md` и 50 `practice_*.md`, вся партия верифицирована `verify_all.py` (0 галлюцинаций) ✓.
+- Контракт JSON v2 закрыт по первой партии: полный комплект на акт = `user_story_<docid>.md` + `practice_<docid>.md` + `structure_<docid>.json`. Все 50 JSON имеют `processing.status: "complete"`: 8 успел Antigravity, 42 добиты DeepSeek API на `deepseek-v4-pro`. `validate_structures.py` и `verify_all.py` проходят без ошибок ✓.
+- Словари enum согласованы и закреплены в `data/reference/zpp_enum_dictionary.json`: `dispute_type_code` строится от конструкции ЗоЗПП, `claim_type_codes` — от способов защиты/требований. Ситуационные детали остаются в `platform_or_company`, `object_type`, `object_name`, `situation_tags`.
+- Enum-таксономия доведена до всех 50 JSON: 25 reviewed-значений перенесены из `data/review/phase1-2-enum-suggestions.reviewed.csv`, ещё 25 дозаполнены по словарю `data/reference/zpp_enum_dictionary.json`. Во всех 50 `structure_*.json` есть `taxonomy.dispute_type_code` и `taxonomy.claim_type_codes`; для `qNPGP4ky266p` сохранена hold-логика. Проверки `validate_structures.py` и `verify_all.py` проходят на 50/50; коммиты: `e8e278e`, `8638488`, `beb750d`.
+- Фаза 1.4 первичной кластеризации выполнена: создана карта `data/review/phase1-4-case-clusters.csv` на 50 дел и отчёт `data/review/phase1-4-cluster-summary.md`. Получено 8 кластеров: 1 pillar, 4 landing, 1 long-tail, 2 hold-группы; embeddings пока не нужны.
+- Ручная валидация кластеров выполнена в `data/review/phase1-4-cluster-validation.md`. Для SSG-прототипа выбраны 5 типов страниц: `goods_defect_art18`, `distance_sale_return_art26_1`, `info_violation_art10_12`, `service_refusal_art32`, `prepaid_goods_delay_art23_1`; `work_service_defect_art29` — резерв, `contract_validity_non_zpp`/`non_consumer_hold` — hold.
+- SSG-прототип спроектирован в `data/review/phase1-5-ssg-prototype-design.md`: зафиксированы 5 маршрутов, шаблон страницы-ситуации, контракт карточки дела, фильтры, disclosure-блок, минимальные JSON-поля и ограничения по `timeline`/`amounts`.
 - Пилотный сегмент: маркетплейсы (Озон/ВБ) + процессуальные темы (по данным рыночного замера).
 
 ## Следующий Шаг
 
-**Фаза 1.3 — масштабирование сбора актов** (рекомендуется перед 1.2): собрать 50–100 актов пилотной темы через `scripts/find_cases.py` (Yandex Search + site:sudact.ru) + `scripts/extract_act_text.py`, зарегистрировать в очереди агента (`scripts/queue_for_agent.py`). Цель — валидировать анти-галлюцинацию на большем объёме и проверить интеграцию с Antigravity (Gemini-3.5-flash, 1500+ запросов/сутки). Инструменты готовы.
+**Сгенерировать первый SSG-прототип страниц-ситуаций** по `data/review/phase1-5-ssg-prototype-design.md`: быстрый путь — Python → Markdown/HTML для 5 выбранных маршрутов.
 
-Параллельно — **Фаза 1.2**: эталонная выборка 20–30 актов с ручной разметкой юриста = few-shot + контрольная выборка для метрики ≥90%.
-
-## Извлечение через Antigravity (гибридный путь, заложено 2026-06-25)
+## Извлечение через Antigravity/DeepSeek (гибридный путь, заложено 2026-06-25)
 
 Два пути извлечения структуры акта:
 1. **DeepSeek API** (встроенный, `scripts/extract_structure.py`) — для быстрого прототипирования и метаданных.
 2. **Antigravity (Gemini-3.5-flash)** — для масштабирования: щедрые бесплатные лимиты (1500+/сутки), качество уровня верифицированного эталона.
+3. **DeepSeek API fallback (`deepseek-v4-pro`)** — для добивки незавершённых JSON при исчерпании лимитов Antigravity (`scripts/complete_structures_deepseek.py`).
 
 Интеграция через «почтовый ящик»:
 - Python наполняет очередь: `data/inbox/_queue.json` (`scripts/queue_for_agent.py`).
-- ИИ-агент читает инструкцию: `data/inbox/_TASK.md` (роль, 2 задачи, анти-галлюцинация, формат).
-- Агент пишет результаты: `data/structured/user_story_<docid>.md` + `practice_<docid>.md`, ставит status: done.
-- Вывод проходит через `verify_citations.py` (анти-галлюцинация не зависит от модели).
-- Режимы: ручной запуск агента (MVP) → автоматический CLI.
+- ИИ-агент читает инструкцию: `data/inbox/_TASK.md` (роль, 3 задачи, анти-галлюцинация, JSON v2, формат).
+- Агент пишет результаты: `data/structured/user_story_<docid>.md` + `practice_<docid>.md` + `structure_<docid>.json`; JSON считается готовым только при `processing.status: "complete"`.
+- Python фиксирует source-метаданные при парсинге/бекфилле: `source_url`, домен, путь к акту, SHA-256 текста.
+- Вывод проходит через `verify_citations.py`/`verify_all.py` и `validate_structures.py` (анти-галлюцинация и полнота структуры не зависят от модели).
+- Режимы: ручной запуск агента (MVP) → автоматический CLI; DeepSeek fallback запускается только по незавершённым JSON и не трогает готовые `user_story_*.md`/`practice_*.md`.
 
 ## Задачи в очереди (точечные)
 
-1. **Промпт: убрать мета-фразы и приветствия из ответа LLM.** В анализе практики модель начала ответ с «Здравствуйте. Я проанализировал представленный судебный акт...» — такие мета-фразы и приветствия недопустимы в финальном контенте страницы. Добавить в промпты (`prompt_practice_analysis.txt`, `prompt_user_story.txt`, `prompt_extract.txt`) явное требование: отвечать только содержанием, без приветствий, без описания того, что модель делает, без мета-комментариев о процессе. Правило уже есть в `data/inbox/_TASK.md` (раздел «Стиль ответа»).
-2. **Донастроить извлечение `timeline` и `amounts.claimed`** (few-shot примеры в промпте извлечения) — оба поля пустовали/неполные в первом прогоне.
-3. **Проверить лимиты Yandex Search API** (отдельно от Wordstat) перед сбором 50–100 актов.
-4. **Обсуждение позиционирования и брендинга:** Провести многосторонний анализ и выбор названия/слогана/домена на основе концепции из [topic-positioning.md](file:///D:/YandexDisk/Legal-projects/zpp-consult/memory/topic-positioning.md) перед разработкой шаблонов страниц.
+1. **Сгенерировать прототип 5 страниц-ситуаций** — Python → Markdown/HTML по `phase1-5-ssg-prototype-design.md`.
+2. **Проверить прототип как пользовательскую страницу** — структура, карточки дел, фильтры, читаемость, fallback для пустых `claimed_total`/`timeline`.
+3. **Обсудить и принять решение по дедупликации парсинга** — как избегать повторного fetch уже спарсенных судебных актов: хранить реестр в БД/файле, сверять по `docid`/URL/хэшу текста, когда проверять найденное дело против локального реестра.
+4. **Донастроить `timeline` и `amounts` точечно** только если прототип покажет реальные дыры в шаблоне.
+5. **Обсуждение позиционирования и брендинга:** провести многосторонний анализ и выбор названия/слогана/домена на основе концепции из `memory/topic-positioning.md` перед финальными шаблонами страниц.
 
 ## Затем (Фаза 1 — продолжение)
 
