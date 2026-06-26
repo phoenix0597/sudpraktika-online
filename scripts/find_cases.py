@@ -23,12 +23,13 @@ import sys
 import time
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from urllib.parse import urlparse
 
 import requests
 from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).parent / ".env")
-KEY = os.environ["YANDEX_API_KEY"].strip()
+KEY = os.environ.get("YANDEX_API_KEY", "").strip()
 
 SEARCH_URL = "https://searchapi.api.cloud.yandex.net/v2/web/search"
 # Домены, где лежат судебные акты. sudrf.ru — первичный официальный источник.
@@ -38,6 +39,7 @@ JUNK_DOMAINS = ("yandex.ru", "vk.com", "youtube", "instagram", "facebook", "9111
                 "consultant.ru", "garant.ru", "zakonrf")
 DEFAULT_RATE_DELAY = float(os.environ.get("YANDEX_SEARCH_RATE_DELAY", "0.5"))
 MAX_RETRIES = int(os.environ.get("YANDEX_SEARCH_MAX_RETRIES", "3"))
+DEFAULT_REGISTRY = Path("data/registry/case_registry.csv")
 
 
 def _retry_after_seconds(headers: dict, fallback: int) -> int:
@@ -50,6 +52,8 @@ def _retry_after_seconds(headers: dict, fallback: int) -> int:
 
 def search(query: str, page: int = 0) -> list[dict]:
     """Вызов Yandex Search API. Возвращает список {url,title,domain,passage}."""
+    if not KEY:
+        raise RuntimeError("Не задан YANDEX_API_KEY")
     headers = {"Authorization": "Api-Key " + KEY, "Content-Type": "application/json"}
     payload = {"query": {"search_type": "SEARCH_TYPE_RU", "query_text": query,
                          "page": page}}
@@ -113,17 +117,70 @@ def is_court_source(url: str, domain: str) -> bool:
     return any(c in d or c in u for c in COURT_DOMAINS)
 
 
+def normalize_url(url: str) -> str:
+    return (url or "").strip().rstrip("/")
+
+
+def docid_from_url(url: str) -> str:
+    path = urlparse(url or "").path
+    match = re.search(r"/regular/doc/([^/]+)/?", path)
+    return match.group(1) if match else ""
+
+
 def dedupe_by_url(items: list[dict]) -> list[dict]:
     """Убирает повторы между страницами выдачи, сохраняя первый порядок появления."""
     seen = set()
     deduped = []
     for item in items:
-        key = (item.get("url") or "").rstrip("/")
+        key = normalize_url(item.get("url") or "")
         if not key or key in seen:
             continue
         seen.add(key)
         deduped.append(item)
     return deduped
+
+
+def load_known_cases(registry_path: Path) -> tuple[set[str], set[str]]:
+    """Возвращает уже известные docid/URL для исключения из новых партий."""
+    known_docids: set[str] = set()
+    known_urls: set[str] = set()
+
+    if registry_path.exists():
+        with registry_path.open("r", encoding="utf-8-sig", newline="") as f:
+            for row in csv.DictReader(f):
+                docid = (row.get("docid") or "").strip()
+                url = normalize_url(row.get("source_url") or row.get("normalized_source_url") or "")
+                if docid:
+                    known_docids.add(docid)
+                if url:
+                    known_urls.add(url)
+
+    if known_docids or known_urls:
+        return known_docids, known_urls
+
+    # Fallback на случай, если реестр ещё не сгенерирован.
+    # На больших партиях перед поиском нужно запускать build_case_registry.py,
+    # чтобы не сканировать тысячи файлов при каждом поисковом запросе.
+    for path in Path("data/raw_acts").glob("act_*.txt"):
+        known_docids.add(path.stem.removeprefix("act_"))
+    for path in Path("data/structured").glob("structure_*.json"):
+        known_docids.add(path.stem.removeprefix("structure_"))
+
+    return known_docids, known_urls
+
+
+def exclude_known_cases(items: list[dict], known_docids: set[str], known_urls: set[str]) -> tuple[list[dict], int]:
+    result = []
+    skipped = 0
+    for item in items:
+        url = item.get("url") or ""
+        docid = docid_from_url(url)
+        item["docid"] = docid
+        if docid in known_docids or normalize_url(url) in known_urls:
+            skipped += 1
+            continue
+        result.append(item)
+    return result, skipped
 
 
 def main() -> int:
@@ -134,6 +191,10 @@ def main() -> int:
     ap.add_argument("--pages", type=int, default=1, help="Число страниц выдачи")
     ap.add_argument("--delay", type=float, default=DEFAULT_RATE_DELAY,
                     help="Пауза между страницами выдачи, сек. По умолчанию 0.5 сек.")
+    ap.add_argument("--registry", default=str(DEFAULT_REGISTRY),
+                    help="CSV-реестр уже известных актов для дедупликации")
+    ap.add_argument("--include-known", action="store_true",
+                    help="Не исключать уже известные docid/URL из результата")
     args = ap.parse_args()
 
     query = args.query
@@ -159,12 +220,21 @@ def main() -> int:
     court_hits_raw = [h for h in all_results if is_court_source(h["url"], h["domain"])]
     court_hits = dedupe_by_url(court_hits_raw)
     duplicates = len(court_hits_raw) - len(court_hits)
+    skipped_known = 0
+    if not args.include_known:
+        known_docids, known_urls = load_known_cases(Path(args.registry))
+        court_hits, skipped_known = exclude_known_cases(court_hits, known_docids, known_urls)
+    else:
+        for hit in court_hits:
+            hit["docid"] = docid_from_url(hit.get("url") or "")
+
     print(f"Из них от судебных источников: {len(court_hits_raw)}")
     print(f"Дубликатов между страницами: {duplicates}")
+    print(f"Уже известных по локальному реестру: {skipped_known}")
     print(f"Уникальных судебных дел: {len(court_hits)}")
     print(f"Прочие (не-суд): {len(all_results) - len(court_hits_raw)}")
 
-    fields = ["url", "domain", "title", "passage"]
+    fields = ["docid", "url", "domain", "title", "passage"]
     with out_path.open("w", encoding="utf-8", newline="") as f:
         w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")
         w.writeheader()
