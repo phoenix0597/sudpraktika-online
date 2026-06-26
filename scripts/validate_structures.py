@@ -10,6 +10,7 @@
 """
 import argparse
 import json
+import re
 from pathlib import Path
 
 import verify_citations
@@ -57,12 +58,146 @@ class ErrorLog:
             print(f"[ERR] ...и ещё {hidden} ошибок скрыто")
 
 
+class WarningLog:
+    def __init__(self, limit: int) -> None:
+        self.limit = limit
+        self.count = 0
+
+    def add(self, message: str) -> None:
+        self.count += 1
+        if self.count <= self.limit:
+            print(f"[WARN] {message}")
+
+    def finish(self) -> None:
+        hidden = self.count - self.limit
+        if hidden > 0:
+            print(f"[WARN] ...и ещё {hidden} предупреждений скрыто")
+
+
 def docid_from_act_file(path: Path) -> str:
     return path.name[len("act_"):-len(".txt")]
 
 
 def non_empty(value: object) -> bool:
     return value is not None and value != ""
+
+
+def normalize_practice_line(line: str) -> str:
+    value = line.strip()
+    if value.startswith(("* ", "- ")):
+        value = value[2:].strip()
+    value = re.sub(r"^\*+", "", value).strip()
+    value = re.sub(r"^\*\*(.+?)\*\*", r"\1", value).strip()
+    value = re.sub(r"^\*(.+?)\*", r"\1", value).strip()
+    return value
+
+
+def practice_note_label(line: str) -> str | None:
+    value = normalize_practice_line(line)
+    for label in (
+        "Значение в деле",
+        "Применение судом",
+        "Что означает в деле",
+        "Как применена судом",
+    ):
+        if value.startswith(f"{label}:"):
+            return label
+    return None
+
+
+def is_canonical_practice_note(line: str, label: str) -> bool:
+    return bool(re.match(rf"^\s{{2,}}[*-]\s+\*\*{re.escape(label)}:\*\*\s+\S", line))
+
+
+def is_norms_section_heading(line: str) -> bool:
+    value = line.strip().rstrip(":")
+    return bool(
+        re.match(
+            r"^(?:#{1,6}\s+|\d+\.\s*)Нормы, на которые сослался суд$",
+            value,
+            flags=re.IGNORECASE,
+        )
+    )
+
+
+def is_practice_top_section_heading(line: str) -> bool:
+    value = line.strip()
+    return bool(re.match(r"^#{1,6}\s+\S", value) or re.match(r"^\d+\.\s+\S", value))
+
+
+def validate_practice_markdown_format(docid: str, path: Path, log: object) -> bool:
+    """Проверяет единообразие markdown-формата блока норм в practice_*.md.
+
+    Это не проверка юридической корректности. Юридические ссылки проверяются
+    verify_all.py / verify_citations.py. Здесь ловим только формат, который
+    влияет на единообразный рендеринг страниц.
+    """
+    text = path.read_text(encoding="utf-8")
+    lines = text.splitlines()
+    section_start = None
+    for idx, line in enumerate(lines):
+        if is_norms_section_heading(line):
+            section_start = idx + 1
+            break
+
+    if section_start is None:
+        log.add(f"{docid}: practice.md не содержит раздел 'Нормы, на которые сослался суд'")
+        return False
+
+    blocks: list[list[str]] = []
+    current: list[str] | None = None
+    for line in lines[section_start:]:
+        if is_practice_top_section_heading(line):
+            break
+        if re.match(r"^\s*[*-]\s+\*\*.+?\*\*", line) and practice_note_label(line) is None:
+            if current:
+                blocks.append(current)
+            current = [line]
+        elif current is not None:
+            current.append(line)
+    if current:
+        blocks.append(current)
+
+    if not blocks:
+        log.add(f"{docid}: в блоке норм не найдено пунктов вида '* **Норма**'")
+        return False
+
+    ok = True
+    noncanonical_reported = False
+    for index, block in enumerate(blocks, start=1):
+        labels = [label for line in block[1:] if (label := practice_note_label(line))]
+        if not labels:
+            if not noncanonical_reported:
+                log.add(
+                    f"{docid}: старый или неканонический формат блока норм; нужен '* **Норма**' "
+                    "с вложенными '* **Значение в деле:**' и '* **Применение судом:**'"
+                )
+                noncanonical_reported = True
+            ok = False
+            continue
+
+        has_meaning = any(label in {"Значение в деле", "Что означает в деле"} for label in labels)
+        has_application = any(label in {"Применение судом", "Как применена судом"} for label in labels)
+
+        if not has_meaning:
+            log.add(f"{docid}: норма #{index} без пояснения 'Значение в деле'")
+            ok = False
+        if not has_application:
+            log.add(f"{docid}: норма #{index} без пояснения 'Применение судом'")
+            ok = False
+
+        canonical_meaning = any(is_canonical_practice_note(line, "Значение в деле") for line in block[1:])
+        canonical_application = any(is_canonical_practice_note(line, "Применение судом") for line in block[1:])
+        if (has_meaning or has_application) and not (canonical_meaning and canonical_application):
+            if not noncanonical_reported:
+                log.add(
+                    f"{docid}: неканонический формат блока норм; нужен '* **Норма**' "
+                    "с вложенными '* **Значение в деле:**' и '* **Применение судом:**'"
+                )
+                noncanonical_reported = True
+            ok = False
+
+    return ok
 
 
 def validate_json_citations(docid: str, data: dict, act_text: str,
@@ -146,14 +281,41 @@ def main() -> int:
         action="store_true",
         help="Не проверять правовые ссылки внутри structure_*.json.",
     )
+    parser.add_argument(
+        "--docid",
+        action="append",
+        default=[],
+        help="Проверить только указанные docid. Можно передавать несколько раз или через запятую.",
+    )
+    parser.add_argument(
+        "--check-practice-format",
+        action="store_true",
+        help="Проверять единый markdown-формат блока норм в practice_*.md.",
+    )
+    parser.add_argument(
+        "--strict-practice-format",
+        action="store_true",
+        help="Считать предупреждения по формату practice_*.md ошибками.",
+    )
     args = parser.parse_args()
 
     act_files = sorted(RAW_DIR.glob("act_*.txt"))
+    if args.docid:
+        wanted_docids = {
+            value.strip()
+            for item in args.docid
+            for value in item.split(",")
+            if value.strip()
+        }
+        act_files = [path for path in act_files if docid_from_act_file(path) in wanted_docids]
+
     errors = ErrorLog(args.max_errors)
+    warnings = WarningLog(args.max_errors)
     stats = {
         "acts": len(act_files),
         "user_story_ok": 0,
         "practice_ok": 0,
+        "practice_format_ok": 0,
         "structure_ok": 0,
     }
 
@@ -171,6 +333,10 @@ def main() -> int:
 
         if practice.exists() and practice.stat().st_size > 0:
             stats["practice_ok"] += 1
+            if args.check_practice_format or args.strict_practice_format:
+                format_log = errors if args.strict_practice_format else warnings
+                if validate_practice_markdown_format(docid, practice, format_log):
+                    stats["practice_format_ok"] += 1
         else:
             errors.add(f"{docid}: нет или пустой {practice.as_posix()}")
 
@@ -185,13 +351,18 @@ def main() -> int:
             stats["structure_ok"] += 1
 
     errors.finish()
+    warnings.finish()
 
     print("\n=== ИТОГИ ПРОВЕРКИ STRUCTURED ===")
     print(f"Всего raw актов: {stats['acts']}")
     print(f"  user_story ok: {stats['user_story_ok']}")
     print(f"  practice ok: {stats['practice_ok']}")
+    if args.check_practice_format or args.strict_practice_format:
+        print(f"  practice format ok: {stats['practice_format_ok']}")
     print(f"  structure ok: {stats['structure_ok']}")
     print(f"  ошибок: {errors.count}")
+    if args.check_practice_format and not args.strict_practice_format:
+        print(f"  предупреждений по practice format: {warnings.count}")
 
     return 1 if errors.count else 0
 

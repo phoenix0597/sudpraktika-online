@@ -39,7 +39,7 @@ ENUM_DICT = ROOT / "data/reference/zpp_enum_dictionary.json"
 OUT_DIR = ROOT / "site_prototype"
 SITE_BRAND = "Дела о защите прав потребителей"
 PROTOTYPE_DISCLAIMER = (
-    "Прототип. Не является юридической консультацией. Материалы основаны на судебных актах "
+    "Не является юридической консультацией. Материалы основаны на судебных актах "
     "и обработаны алгоритмом для систематизации и обобщения текущей судебной практики судов разных инстанций."
 )
 
@@ -51,6 +51,7 @@ class SituationPage:
     h1: str
     short_problem: str
     page_type: str
+    nav_label: str
 
     @property
     def route(self) -> str:
@@ -68,6 +69,7 @@ PAGES: list[SituationPage] = [
         "Некачественный товар: как вернуть деньги, взыскать неустойку и штраф",
         "Потребитель купил товар, но он сломался, оказался с недостатком или продавец отказался исполнять гарантийные обязанности.",
         "pillar",
+        "Некачественный товар",
     ),
     SituationPage(
         "distance_sale_return_art26_1",
@@ -75,6 +77,7 @@ PAGES: list[SituationPage] = [
         "Как вернуть товар, купленный онлайн",
         "Покупка была дистанционной: через сайт, маркетплейс или интернет-магазин, а потребитель хочет отказаться от товара и вернуть деньги.",
         "landing",
+        "Возврат онлайн-покупки",
     ),
     SituationPage(
         "info_violation_art10_12",
@@ -82,6 +85,7 @@ PAGES: list[SituationPage] = [
         "Неверная цена, продавец или информация о товаре: что решил суд",
         "Покупателю дали неполную или недостоверную информацию о цене, продавце, свойствах товара или условиях покупки.",
         "landing",
+        "Недостоверная информация",
     ),
     SituationPage(
         "service_refusal_art32",
@@ -89,6 +93,7 @@ PAGES: list[SituationPage] = [
         "Как отказаться от услуги и вернуть деньги",
         "Потребитель хочет отказаться от услуги, курса, страховки, сертификата или сервиса и вернуть оплату.",
         "landing",
+        "Возврат денег за услугу",
     ),
     SituationPage(
         "prepaid_goods_delay_art23_1",
@@ -96,6 +101,7 @@ PAGES: list[SituationPage] = [
         "Оплатили товар, но его не передали: что можно взыскать",
         "Заказ был оплачен заранее, но продавец задержал передачу, отменил заказ или не вернул предоплату.",
         "landing",
+        "Оплатили, но товар не передали",
     ),
 ]
 
@@ -106,6 +112,28 @@ RESULT_LABELS = {
     "rejected": "отказано",
     "mixed": "смешанный результат",
     "hold": "не публиковать",
+}
+
+
+AMOUNT_ITEM_LABELS = {
+    "contract_performance": "исполнение договора",
+    "expert_expenses": "расходы на экспертизу",
+    "fine": "штраф",
+    "legal_expenses": "расходы на юридическую помощь",
+    "loan_interest": "проценты по кредиту",
+    "moral_damage": "компенсация морального вреда",
+    "moral_damages": "компенсация морального вреда",
+    "obligation_to_collect_item": "обязать забрать товар",
+    "ongoing_penalty": "неустойка на будущее",
+    "penalty": "неустойка",
+    "penalty_fine": "потребительский штраф 50%",
+    "penalty_under_contract_248": "неустойка по договору",
+    "penalty_under_contract_249": "неустойка по договору",
+    "postage_expenses": "почтовые расходы",
+    "price_difference": "разница в цене",
+    "refund": "возврат цены или предоплаты",
+    "refund_under_contract_249": "возврат уплаченной суммы по договору",
+    "return_of_premium": "возврат страховой премии",
 }
 
 
@@ -526,6 +554,10 @@ def is_story_title(line: str) -> bool:
         return False
     if stripped.startswith("###"):
         return False
+    if len(cleaned) > 140:
+        return False
+    if re.search(r"[.!?…]\s+\S", cleaned):
+        return False
     return len(cleaned) >= 24
 
 
@@ -594,9 +626,9 @@ def make_case_lead(data: dict[str, Any], result_label: str) -> str:
     problem = CARD_PROBLEM_LABELS.get(taxonomy.get("dispute_type_code")) or taxonomy.get("dispute_type")
 
     if object_text and company:
-        subject = f"Разбор спора о {object_text} с {company}."
+        subject = f"Разбор спора: {object_text}; оппонент — {company}."
     elif object_text:
-        subject = f"Разбор спора о {object_text}."
+        subject = f"Разбор спора: {object_text}."
     elif company:
         subject = f"Разбор спора с {company}."
     elif problem:
@@ -606,19 +638,184 @@ def make_case_lead(data: dict[str, Any], result_label: str) -> str:
 
     result = f"Итог для потребителя: {result_label}." if result_label else ""
     reason = sentence_excerpt(outcome.get("short_reason"), max_sentences=1, limit=220)
-    reason_text = f"Ключевой вопрос: {reason}." if reason else ""
+    reason_text = f"Ключевой вопрос: {reason.rstrip(' .')}." if reason else ""
     return " ".join(part for part in [subject, result, reason_text] if part)
 
 
 def inline_markdown(text: str) -> str:
     html = escape(text.strip())
     html = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", html)
+    html = re.sub(r"(?<!\*)\*(?!\*)([^*\n]+?)(?<!\*)\*(?!\*)", r"<em>\1</em>", html)
+    return html
+
+
+NOTE_LABELS = (
+    "Значение в деле",
+    "Применение судом",
+    "Что означает в деле",
+    "Как применена судом",
+)
+
+PRACTICE_SECTION_TITLES = (
+    "Нормы, на которые сослался суд",
+    "Логика решения",
+    "Факторы, повлиявшие на исход",
+)
+
+LEGACY_APPLICATION_PATTERNS = (
+    r"Суд\s+применил[а]?\b",
+    r"Суд\s+использовал[а]?\b",
+    r"Суд\s+руководствовался\b",
+    r"Суд\s+уч[её]л\b",
+    r"Суд\s+оценивал\b",
+    r"Суд\s+сослался\b",
+    r"Суд\s+указал\b",
+    r"Применен[аы]?\s+судом\b",
+    r"Применен[аы]?\b",
+    r"Использован[аы]?\b",
+)
+
+
+def practice_numbered_heading(line: str) -> str | None:
+    if not re.match(r"^\d+\.\s+", line.strip()):
+        return None
+    return normalize_practice_section_title(line)
+
+
+def practice_heading_title(line: str) -> str | None:
+    return normalize_practice_section_title(line)
+
+
+def normalize_practice_section_title(text: str) -> str | None:
+    title = text.strip()
+    title = re.sub(r"^#{1,6}\s+", "", title).strip()
+    title = re.sub(r"^\d+\.\s*", "", title).strip()
+    title = title.rstrip(":").strip()
+    title = re.sub(r"^\*\*(.+?)\*\*$", r"\1", title).strip()
+    title = re.sub(r"^\*(.+?)\*$", r"\1", title).strip()
+    title = title.replace("Fакторы", "Факторы")
+    title = re.sub(r"\s+", " ", title)
+    return title if title in PRACTICE_SECTION_TITLES else None
+
+
+def semantic_note_markdown(raw_line: str) -> str | None:
+    nested_bullet = re.match(r"^\s+[*-]\s+(.+)$", raw_line)
+    has_indent = bool(re.match(r"^\s+", raw_line))
+    candidate = nested_bullet.group(1).strip() if nested_bullet else raw_line.strip()
+    probe = re.sub(r"^[*_]+", "", candidate).strip()
+    probe = re.sub(r"^[*_]+", "", probe).strip()
+
+    label_pattern = "|".join(re.escape(label) for label in NOTE_LABELS)
+    if re.match(rf"^(?:{label_pattern}):", probe):
+        return candidate
+    if has_indent and re.match(r"^Пункт\s+\d+:", probe):
+        return candidate
+    return None
+
+
+def nested_note_markdown(text: str) -> str:
+    html = inline_markdown(text)
+    html = re.sub(
+        r"^<(?:strong|em)>((?:Значение в деле|Применение судом|Что означает в деле|Как применена судом|Пункт\s+\d+):)</(?:strong|em)>",
+        r"<strong><em>\1</em></strong>",
+        html,
+    )
+    html = re.sub(
+        r"^((?:Значение в деле|Применение судом|Что означает в деле|Как применена судом|Пункт\s+\d+):)",
+        r"<strong><em>\1</em></strong>",
+        html,
+    )
+    return html
+
+
+def split_legacy_application(text: str) -> tuple[str, str | None]:
+    for pattern in LEGACY_APPLICATION_PATTERNS:
+        match = re.search(rf"(.+?)\s+({pattern}.*)$", text, flags=re.IGNORECASE)
+        if match:
+            meaning = match.group(1).strip()
+            application = match.group(2).strip()
+            if meaning and application:
+                return meaning, application
+    return text.strip(), None
+
+
+def render_legacy_norm_item(text: str) -> str | None:
+    match = re.match(r"^\*\*(.+?)\*\*:\s*(.+)$", text.strip())
+    if not match:
+        return None
+
+    norm = match.group(1).strip()
+    details = match.group(2).strip()
+    meaning, application = split_legacy_application(details)
+
+    parts = [
+        "<ul>",
+        f"<li><strong>{escape(norm)}</strong></li>",
+        "</ul>",
+    ]
+    if meaning:
+        parts.append(f'<p class="md-note">{nested_note_markdown(f"Значение в деле: {meaning}")}</p>')
+    if application:
+        parts.append(f'<p class="md-note">{nested_note_markdown(f"Применение судом: {application}")}</p>')
+    return "\n".join(parts)
+
+
+def practice_section_list_type(section: str | None) -> str:
+    return "ol" if section == "Логика решения" else "ul"
+
+
+def practice_list_open_tag(list_type: str, section: str | None) -> str:
+    if section == "Логика решения" and list_type == "ol":
+        return '<ol class="practice-logic">'
+    return f"<{list_type}>"
+
+
+FACTOR_LEAD_DELIMITERS = (
+    r"\s+\(",
+    r"\s+от\s+\d{1,2}\.\d{1,2}\.\d{4}",
+    r"\s+\d{1,2}\.\d{1,2}\.\d{4}",
+    r"\s+в\s+течение\b",
+    r"\s+по\s+ст\.?\s+\d",
+)
+
+
+def factor_lead_markdown(text: str) -> str:
+    value = text.strip()
+    if not value or value.lstrip().startswith("**") or re.match(r"^[^:<]{3,90}:\s+", value):
+        return value
+
+    cuts: list[int] = []
+    for pattern in FACTOR_LEAD_DELIMITERS:
+        match = re.search(pattern, value, flags=re.IGNORECASE)
+        if match:
+            cuts.append(match.start())
+
+    if not cuts:
+        return value
+
+    cut = min(cuts)
+    lead = value[:cut].strip()
+    tail = value[cut:].strip()
+    words = re.findall(r"[A-Za-zА-Яа-яЁё0-9]+", lead)
+    if not tail or len(words) < 2 or len(words) > 10 or len(lead) > 90:
+        return value
+
+    return f"**{lead}:** {tail}"
+
+
+def inline_practice_list_item(text: str, section: str | None) -> str:
+    if section == "Факторы, повлиявшие на исход":
+        text = factor_lead_markdown(text)
+    html = inline_markdown(text)
+    if section == "Факторы, повлиявшие на исход" and not html.lstrip().startswith("<strong>"):
+        html = re.sub(r"^([^:<]{3,90}:)\s+", r"<strong>\1</strong> ", html)
     return html
 
 
 def markdown_to_html(markdown: str) -> str:
     html: list[str] = []
     list_type: str | None = None
+    current_practice_section: str | None = None
 
     def close_list() -> None:
         nonlocal list_type
@@ -632,29 +829,80 @@ def markdown_to_html(markdown: str) -> str:
             close_list()
             continue
 
+        numbered_heading = practice_numbered_heading(line)
+        if numbered_heading:
+            close_list()
+            current_practice_section = numbered_heading
+            html.append(f"<h4>{escape(numbered_heading)}</h4>")
+            continue
+
+        semantic_note = semantic_note_markdown(raw_line)
+        if semantic_note:
+            close_list()
+            html.append(f'<p class="md-note">{nested_note_markdown(semantic_note)}</p>')
+            continue
+
+        nested_bullet = re.match(r"^\s+[*-]\s+(.+)$", raw_line)
+        if nested_bullet:
+            legacy_norm_html = (
+                render_legacy_norm_item(nested_bullet.group(1))
+                if current_practice_section == "Нормы, на которые сослался суд"
+                else None
+            )
+            if legacy_norm_html:
+                close_list()
+                html.append(legacy_norm_html)
+                continue
+
+            target_list_type = practice_section_list_type(current_practice_section)
+            if list_type != target_list_type:
+                close_list()
+                html.append(practice_list_open_tag(target_list_type, current_practice_section))
+                list_type = target_list_type
+            html.append(f"<li>{inline_practice_list_item(nested_bullet.group(1), current_practice_section)}</li>")
+            continue
+
         heading = re.match(r"^(#{1,6})\s+(.+)$", line)
         if heading:
             close_list()
-            level = min(len(heading.group(1)) + 1, 4)
-            html.append(f"<h{level}>{inline_markdown(heading.group(2))}</h{level}>")
+            title = heading.group(2)
+            practice_section = practice_heading_title(title)
+            if practice_section:
+                current_practice_section = practice_section
+                html.append(f"<h4>{escape(practice_section)}</h4>")
+            else:
+                current_practice_section = None
+                level = min(len(heading.group(1)) + 1, 4)
+                html.append(f"<h{level}>{inline_markdown(title)}</h{level}>")
             continue
 
         bullet = re.match(r"^[*-]\s+(.+)$", line)
         if bullet:
-            if list_type != "ul":
+            legacy_norm_html = (
+                render_legacy_norm_item(bullet.group(1))
+                if current_practice_section == "Нормы, на которые сослался суд"
+                else None
+            )
+            if legacy_norm_html:
                 close_list()
-                html.append("<ul>")
-                list_type = "ul"
-            html.append(f"<li>{inline_markdown(bullet.group(1))}</li>")
+                html.append(legacy_norm_html)
+                continue
+
+            target_list_type = practice_section_list_type(current_practice_section)
+            if list_type != target_list_type:
+                close_list()
+                html.append(practice_list_open_tag(target_list_type, current_practice_section))
+                list_type = target_list_type
+            html.append(f"<li>{inline_practice_list_item(bullet.group(1), current_practice_section)}</li>")
             continue
 
         ordered = re.match(r"^\d+\.\s+(.+)$", line)
         if ordered:
             if list_type != "ol":
                 close_list()
-                html.append("<ol>")
+                html.append(practice_list_open_tag("ol", current_practice_section))
                 list_type = "ol"
-            html.append(f"<li>{inline_markdown(ordered.group(1))}</li>")
+            html.append(f"<li>{inline_practice_list_item(ordered.group(1), current_practice_section)}</li>")
             continue
 
         close_list()
@@ -700,6 +948,15 @@ def has_timeline(timeline: Any) -> bool:
     return False
 
 
+def amount_item_label(value: Any) -> str:
+    text = str(value or "").strip()
+    if not text:
+        return "денежное требование"
+    if re.search(r"[А-Яа-яЁё]", text):
+        return text
+    return AMOUNT_ITEM_LABELS.get(text, "денежное требование")
+
+
 def render_amount_items(items: Any, title: str) -> str:
     if not isinstance(items, list) or not items:
         return ""
@@ -707,7 +964,7 @@ def render_amount_items(items: Any, title: str) -> str:
     for item in items:
         if not isinstance(item, dict):
             continue
-        item_type = item.get("type") or "требование"
+        item_type = amount_item_label(item.get("type"))
         amount = money(item.get("amount"))
         note = item.get("note") or ""
         rows.append(
@@ -803,6 +1060,7 @@ def render_case_detail_page(
 
     fallback_title = make_case_title(data)
     title, story_body = extract_story_title_and_body(story_markdown, fallback_title)
+    title = uppercase_first_letter(title)
     result = outcome.get("result_type") or row.get("result_type")
     result_label = RESULT_LABELS.get(result, result or "итог не указан")
     claim_labels = [
@@ -955,7 +1213,7 @@ def render_situation_page(page: SituationPage, cases: list[dict[str, Any]], labe
     body = f"""
 <header class="site-header">
   <a class="brand" href="../../index.html">{escape(SITE_BRAND)}</a>
-  <nav>{' '.join(page_link(p, p.slug, current_page=page) for p in PAGES)}</nav>
+  <nav>{' '.join(page_link(p, p.nav_label, current_page=page) for p in PAGES)}</nav>
 </header>
 <main>
   <section class="hero">
@@ -1051,9 +1309,9 @@ def render_index(by_cluster: dict[str, list[dict[str, Any]]]) -> str:
 </header>
 <main>
   <section class="hero">
-    <p class="eyebrow">SSG-прототип</p>
+    <p class="eyebrow">Судебная практика</p>
     <h1>Первые страницы судебной практики по ЗоЗПП</h1>
-    <p class="lead">Пять страниц-ситуаций собраны из 46 индексируемых судебных актов первой партии. Цель — проверить структуру, карточки и данные перед полноценным фронтендом.</p>
+    <p class="lead">Пять страниц-ситуаций собраны из 46 индексируемых судебных актов первой партии: карточки дел, обобщающие показатели, фильтры и разборы конкретных историй.</p>
   </section>
   <section class="index-grid">
     {''.join(cards)}
@@ -1063,7 +1321,7 @@ def render_index(by_cluster: dict[str, list[dict[str, Any]]]) -> str:
   <p>{escape(PROTOTYPE_DISCLAIMER)}</p>
 </footer>
 """
-    return html_page("SSG-прототип страниц практики", body, "assets/prototype.css")
+    return html_page("Судебная практика по защите прав потребителей", body, "assets/prototype.css")
 
 
 def write_css() -> None:
@@ -1079,6 +1337,9 @@ def write_css() -> None:
   --good: #236b4a;
   --bad: #8f2f2f;
   --mixed: #8a651c;
+  --content-block-padding: 38px;
+  --content-block-padding-mobile: 26px;
+  --card-padding: 24px;
 }
 * { box-sizing: border-box; }
 body {
@@ -1113,7 +1374,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 24px 48px; }
   background: linear-gradient(135deg, #fffdf8, #efe5d5);
   border: 1px solid var(--line);
   border-radius: 28px;
-  padding: 38px;
+  padding: var(--content-block-padding);
   margin: 16px 0 24px;
 }
 .hero h1 { font-size: clamp(32px, 4vw, 56px); line-height: 1.05; margin: 8px 0 16px; }
@@ -1142,9 +1403,10 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 24px 48px; }
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 22px;
-  padding: 24px;
+  padding: var(--card-padding);
   box-shadow: 0 10px 30px rgba(31, 41, 51, .04);
 }
+.panel { padding: var(--content-block-padding); }
 .summary-list { padding-left: 20px; }
 .summary-list li { margin-bottom: 10px; }
 .inline-chips {
@@ -1237,7 +1499,8 @@ dd { margin: 2px 0 0; font-weight: 700; }
 .source-link:hover, .source-link:focus { color: var(--accent-2); }
 .story-content { font-size: 17px; }
 .story-content h3, .story-content h4 { margin-top: 26px; }
-.story-content p, .story-content li { max-width: 900px; }
+.story-content p, .story-content li { max-width: none; }
+.story-content .md-note { margin: 6px 0 10px 42px; padding-left: 14px; border-left: 3px solid #eadcc5; color: #3f3526; }
 .story-content details { border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; background: #fffaf0; }
 .story-content summary { cursor: pointer; font-weight: 750; color: var(--accent-2); }
 .timeline { list-style: none; padding: 0; display: grid; gap: 10px; }
@@ -1267,12 +1530,12 @@ dd { margin: 2px 0 0; font-weight: 700; }
 .index-card h2 { margin-top: 0; }
 [hidden] { display: none !important; }
 @media (max-width: 900px) {
+  :root { --content-block-padding: var(--content-block-padding-mobile); }
   .situation-layout, .grid.two, .index-grid, .filter-grid, .case-facts { grid-template-columns: 1fr; }
   .situation-content, .filter-sidebar { grid-column: auto; grid-row: auto; }
   .filter-sidebar { position: static; max-height: none; overflow: visible; margin-bottom: 18px; }
   .timeline li, .amount-list li { grid-template-columns: 1fr; }
   .site-header { display: block; }
-  .hero { padding: 26px; }
   .case-card__header { display: block; }
   .result { display: inline-block; margin-top: 10px; }
 }

@@ -9,6 +9,9 @@
   --good: #236b4a;
   --bad: #8f2f2f;
   --mixed: #8a651c;
+  --content-block-padding: 38px;
+  --content-block-padding-mobile: 26px;
+  --card-padding: 24px;
 }
 * { box-sizing: border-box; }
 body {
@@ -43,7 +46,7 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 24px 48px; }
   background: linear-gradient(135deg, #fffdf8, #efe5d5);
   border: 1px solid var(--line);
   border-radius: 28px;
-  padding: 38px;
+  padding: var(--content-block-padding);
   margin: 16px 0 24px;
 }
 .hero h1 { font-size: clamp(32px, 4vw, 56px); line-height: 1.05; margin: 8px 0 16px; }
@@ -72,9 +75,10 @@ main { max-width: 1180px; margin: 0 auto; padding: 0 24px 48px; }
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 22px;
-  padding: 24px;
+  padding: var(--card-padding);
   box-shadow: 0 10px 30px rgba(31, 41, 51, .04);
 }
+.panel { padding: var(--content-block-padding); }
 .summary-list { padding-left: 20px; }
 .summary-list li { margin-bottom: 10px; }
 .inline-chips {
@@ -167,7 +171,8 @@ dd { margin: 2px 0 0; font-weight: 700; }
 .source-link:hover, .source-link:focus { color: var(--accent-2); }
 .story-content { font-size: 17px; }
 .story-content h3, .story-content h4 { margin-top: 26px; }
-.story-content p, .story-content li { max-width: 900px; }
+.story-content p, .story-content li { max-width: none; }
+.story-content .md-note { margin: 6px 0 10px 42px; padding-left: 14px; border-left: 3px solid #eadcc5; color: #3f3526; }
 .story-content details { border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; background: #fffaf0; }
 .story-content summary { cursor: pointer; font-weight: 750; color: var(--accent-2); }
 .timeline { list-style: none; padding: 0; display: grid; gap: 10px; }
@@ -197,12 +202,12 @@ dd { margin: 2px 0 0; font-weight: 700; }
 .index-card h2 { margin-top: 0; }
 [hidden] { display: none !important; }
 @media (max-width: 900px) {
+  :root { --content-block-padding: var(--content-block-padding-mobile); }
   .situation-layout, .grid.two, .index-grid, .filter-grid, .case-facts { grid-template-columns: 1fr; }
   .situation-content, .filter-sidebar { grid-column: auto; grid-row: auto; }
   .filter-sidebar { position: static; max-height: none; overflow: visible; margin-bottom: 18px; }
   .timeline li, .amount-list li { grid-template-columns: 1fr; }
   .site-header { display: block; }
-  .hero { padding: 26px; }
   .case-card__header { display: block; }
   .result { display: inline-block; margin-top: 10px; }
 }
