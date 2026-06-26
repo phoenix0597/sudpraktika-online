@@ -39,7 +39,6 @@
 
 | Дискуссия | Стадия | resolves_to |
 |---|---|---|
-| `memory/discussions/multi-agent-process.md` — как организовать обсуждение (dogfood) | round-1 | `memory/topic-multi-agent-discussion.md` |
 | `memory/discussions/statistics-analytics.md` — продуктовый инкремент «статистика/аналитика» | round-1 | `memory/topic-statistics-analytics.md` |
 
 ## Извлечение через Antigravity/DeepSeek (гибридный путь, заложено 2026-06-25)
@@ -78,3 +77,4 @@
 - Шаг 4 — лиды юристам + передача ПДн (отложено пользователем; фокус — РСЯ).
 - DOCX-генератор — пост-MVP.
 - Дополнительные каналы трафика — Фаза 9.
+- После обкатки контракта многосторонних обсуждений на других thread'ах: промоутить процедуру в глобальную память (`C:\Users\Stas\.codex\memories\`) и синхронизировать с репозиторием `~/.codex/codex-memory-kit` с последующим push.
