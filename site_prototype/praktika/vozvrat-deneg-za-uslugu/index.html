@@ -9,7 +9,7 @@
 <body>
 
 <header class="site-header">
-  <a class="brand" href="../../index.html">ZPP Consult · прототип</a>
+  <a class="brand" href="../../index.html">Дела о защите прав потребителей</a>
   <nav><a href="../nekachestvennyy-tovar/index.html">nekachestvennyy-tovar</a> <a href="../vozvrat-tovara-online/index.html">vozvrat-tovara-online</a> <a href="../nedostovernaya-informatsiya/index.html">nedostovernaya-informatsiya</a> <a href="index.html">vozvrat-deneg-za-uslugu</a> <a href="../oplatili-tovar-ne-peredali/index.html">oplatili-tovar-ne-peredali</a></nav>
 </header>
 <main>
@@ -20,61 +20,16 @@
     <p class="disclosure">Практика собрана из судебных актов. Обработка данных выполнена алгоритмически; ссылки на первоисточники сохранены в карточках дел.</p>
   </section>
 
-  <section class="grid two">
-    <div class="panel">
-      <h2>Краткое резюме практики</h2>
-      <ul class="summary-list">
-        <li>Дел в выборке: <b>5</b></li>
-        <li>Присуждённые суммы: <b>от 42 810 ₽ до 228 480 ₽; медиана — 135 240 ₽</b></li>
-        <li>Результаты: <span class="chip">требования удовлетворены частично <b>3</b></span>
-<span class="chip">смешанный исход: разные ответчики или требования решены по-разному <b>1</b></span>
-<span class="chip">требования удовлетворены полностью или почти полностью <b>1</b></span></li>
-      </ul>
-      <p class="hint">Это не статистика по всей судебной практике, а сводка по текущей выборке актов проекта.</p>
-    </div>
-    <div class="panel">
-      <h2>Что обычно требует потребитель</h2>
-      <div class="chips"><span class="chip">штраф 50% <b>5</b></span>
-<span class="chip">возврат цены или предоплаты <b>4</b></span>
-<span class="chip">компенсация морального вреда <b>4</b></span>
-<span class="chip">неустойка <b>2</b></span>
-<span class="chip">судебные, экспертные и иные расходы <b>1</b></span>
-<span class="chip">возврат страховой премии <b>1</b></span></div>
-    </div>
-  </section>
-
-  <section class="grid two">
-    <div class="panel">
-      <h2>Типичные объекты</h2>
-      <div class="chips"><span class="chip">авиабилеты <b>1</b></span>
-<span class="chip">сертификат на ПО <b>1</b></span>
-<span class="chip">онлайн-курс <b>1</b></span>
-<span class="chip">услуга <b>1</b></span>
-<span class="chip">страховая услуга <b>1</b></span></div>
-    </div>
-    <div class="panel">
-      <h2>Компании и платформы</h2>
-      <div class="chips"><span class="chip">Ozon Travel / Air Serbia <b>1</b></span>
-<span class="chip">АО «КарВит» <b>1</b></span>
-<span class="chip">Skillbox <b>1</b></span>
-<span class="chip">ООО «М-Ассистанс» <b>1</b></span>
-<span class="chip">Ренессанс Жизнь <b>1</b></span></div>
-    </div>
-  </section>
-
-  <section class="panel">
-    <h2>Почему суд удовлетворяет или отказывает</h2>
-    <ul><li>Отсутствие в билетах сведений о невозвратности тарифа</li><li>Заблаговременное уведомление перевозчика об отказе от перевозки (за месяц до вылета)</li><li>суд переквалифицировал лицензионный договор в договор возмездного оказания услуг</li><li>потребитель имел право на односторонний отказ от услуги по ст.32 Закона о защите прав потребителей</li><li>Договор оказания услуг и дополнительное соглашение не были подписаны потребителем.</li><li>Обучение на платформе фактически не начиналось, услуги не оказывались.</li></ul>
-  </section>
-
-  
+  <div class="situation-layout">
+    <aside class="filter-sidebar">
+      
 <section class="panel filters">
   <h2>Фильтры по делам</h2>
   <div class="filter-grid">
     <label>Результат<select data-filter="result"><option value="">Все</option>
-<option value="mixed">mixed</option>
-<option value="partially_satisfied">partially_satisfied</option>
-<option value="satisfied">satisfied</option></select></label>
+<option value="mixed">смешанный результат</option>
+<option value="partially_satisfied">требования удовлетворены частично</option>
+<option value="satisfied">требования удовлетворены полностью или почти полностью</option></select></label>
     <label>Компания<select data-filter="company"><option value="">Все</option>
 <option value="Ozon Travel / Air Serbia">Ozon Travel / Air Serbia</option>
 <option value="Skillbox">Skillbox</option>
@@ -88,12 +43,12 @@
 <option value="страховая услуга">страховая услуга</option>
 <option value="услуга">услуга</option></select></label>
     <label>Требование<select data-filter="claims"><option value="">Все</option>
-<option value="consumer_fine">consumer_fine</option>
-<option value="expenses">expenses</option>
-<option value="insurance_premium_refund">insurance_premium_refund</option>
-<option value="moral_damage">moral_damage</option>
-<option value="penalty">penalty</option>
-<option value="refund_price">refund_price</option></select></label>
+<option value="consumer_fine">штраф 50%</option>
+<option value="expenses">судебные, экспертные и иные расходы</option>
+<option value="insurance_premium_refund">возврат страховой премии</option>
+<option value="moral_damage">компенсация морального вреда</option>
+<option value="penalty">неустойка</option>
+<option value="refund_price">возврат цены или предоплаты</option></select></label>
     <label>Регион<select data-filter="region"><option value="">Все</option>
 <option value="Нижегородская область">Нижегородская область</option>
 <option value="Приморский край">Приморский край</option>
@@ -101,13 +56,63 @@
 <option value="Ставропольский край">Ставропольский край</option>
 <option value="Томская область">Томская область</option></select></label>
   </div>
-  <p class="hint">Фильтры работают внутри страницы и не создают отдельные индексируемые URL.</p>
+  <div class="filter-actions">
+    <button type="button" class="button secondary" data-reset-filters>Сбросить фильтры</button>
+  </div>
 </section>
 
+    </aside>
+    <div class="situation-content">
+      <section class="grid two">
+        <div class="panel">
+          <h2>Краткое резюме практики</h2>
+          <ul class="summary-list">
+            <li>Дел в выборке: <b>5</b></li>
+            <li>Присуждённые суммы: <b>от 42 810 ₽ до 228 480 ₽; медиана — 135 240 ₽</b></li>
+            <li><span>Результаты:</span> <span class="inline-chips"><button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="partially_satisfied">требования удовлетворены частично <b>3</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="mixed">смешанный результат <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="satisfied">требования удовлетворены полностью или почти полностью <b>1</b></button></span></li>
+          </ul>
+          <p class="hint">Примечание: показатели являются не статистикой по всей судебной практике, а сводкой по текущей выборке судебных актов.</p>
+        </div>
+        <div class="panel">
+          <h2>Что обычно требует потребитель</h2>
+          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50% <b>5</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты <b>4</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда <b>4</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="penalty">неустойка <b>2</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="insurance_premium_refund">возврат страховой премии <b>1</b></button></div>
+        </div>
+      </section>
 
-  <section>
-    <h2>Дела в этом кластере</h2>
-    <div class="case-list">
+      <section class="grid two">
+        <div class="panel">
+          <h2>Типичные объекты</h2>
+          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="авиабилеты">авиабилеты <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="сертификат на ПО">сертификат на ПО <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="онлайн-курс">онлайн-курс <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="услуга">услуга <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="страховая услуга">страховая услуга <b>1</b></button></div>
+        </div>
+        <div class="panel">
+          <h2>Компании и платформы</h2>
+          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="Ozon Travel / Air Serbia">Ozon Travel / Air Serbia <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="АО «КарВит»">АО «КарВит» <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="Skillbox">Skillbox <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «М-Ассистанс»">ООО «М-Ассистанс» <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="Ренессанс Жизнь">Ренессанс Жизнь <b>1</b></button></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Почему суд удовлетворяет или отказывает</h2>
+        <ul><li>Отсутствие в билетах сведений о невозвратности тарифа</li><li>Заблаговременное уведомление перевозчика об отказе от перевозки (за месяц до вылета)</li><li>суд переквалифицировал лицензионный договор в договор возмездного оказания услуг</li><li>потребитель имел право на односторонний отказ от услуги по ст.32 Закона о защите прав потребителей</li><li>Договор оказания услуг и дополнительное соглашение не были подписаны потребителем.</li><li>Обучение на платформе фактически не начиналось, услуги не оказывались.</li></ul>
+      </section>
+
+      <section>
+        <h2>Дела в этой выборке</h2>
+        <div class="case-list" data-case-list>
 <article class="case-card"
   data-case-card
   data-result="mixed"
@@ -117,23 +122,23 @@
   data-claims="refund_price||moral_damage||consumer_fine">
   <div class="case-card__header">
     <div>
-      <h3>Потребитель приобрела через сайт Ozon Travel авиабилеты на себя и мужа. Через несколько недель умер отец мужа, и они…</h3>
-      <p class="meta">Ростовская область · 2025-04-03 · дело 2-552/2025</p>
+      <h3>Авиабилеты по маршруту Сочи — Белград — Сочи: отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Ростовская область">Ростовская область</button> <span>· 2025-04-03 · дело 2-552/2025</span></p>
     </div>
-    <span class="result result-mixed">смешанный итог</span>
+    <button type="button" class="result result-mixed" data-quick-filter="result" data-quick-value="mixed">смешанный результат</button>
   </div>
-  <p>Потребитель приобрела через сайт Ozon Travel авиабилеты на себя и мужа. Через несколько недель умер отец мужа, и они решили отказаться от поездки. Истица немедленно обратилась в Ozon Travel с заявлением о возврате, однако агент направил запрос перевозчику с задержкой более чем на месяц. Авиакомпания произвела вынужденный возврат за билет мужа, а за билет истицы — только частичный, ссылаясь на невозвратный тариф и…</p>
+  <p>Потребитель приобрела через сайт Ozon Travel авиабилеты на себя и мужа. Через несколько недель умер отец мужа, и они решили отказаться от поездки.</p>
   <dl class="case-facts">
     <div><dt>Объект</dt><dd>авиабилеты по маршруту Сочи — Белград — Сочи</dd></div>
     <div><dt>Компания</dt><dd>Ozon Travel / Air Serbia</dd></div>
     <div><dt>Присуждено</dt><dd>90 480 ₽</dd></div>
   </dl>
-  <div class="chips"><span class="chip small">возврат цены или предоплаты</span> <span class="chip small">компенсация морального вреда</span> <span class="chip small">штраф 50%</span></div>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button></div>
   <h4>Что повлияло на исход</h4>
   <ul><li>Отсутствие в билетах сведений о невозвратности тарифа</li><li>Заблаговременное уведомление перевозчика об отказе от перевозки (за месяц до вылета)</li></ul>
   <div class="case-links">
-    <a href="https://sudact.ru/regular/doc/yz0M6YZip7Qn/" target="_blank" rel="noopener">Первоисточник</a>
-    <span class="muted">Страница дела — позже: yz0M6YZip7Qn</span>
+    <a class="button case-primary-link" href="../../dela/yz0M6YZip7Qn/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/yz0M6YZip7Qn/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
@@ -147,23 +152,23 @@
   data-claims="refund_price||moral_damage||consumer_fine">
   <div class="case-card__header">
     <div>
-      <h3>Покупательница приобрела автомобиль в автосалоне в кредит. При оформлении сотрудники навязали сертификат от АО…</h3>
-      <p class="meta">Ставропольский край · 2025-02-20 · дело 2-553/2025</p>
+      <h3>Сертификат от АО «КарВит»: отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Ставропольский край">Ставропольский край</button> <span>· 2025-02-20 · дело 2-553/2025</span></p>
     </div>
-    <span class="result result-partially_satisfied">частично удовлетворено</span>
+    <button type="button" class="result result-partially_satisfied" data-quick-filter="result" data-quick-value="partially_satisfied">частично удовлетворено</button>
   </div>
-  <p>Покупательница приобрела автомобиль в автосалоне в кредит. При оформлении сотрудники навязали сертификат от АО «КарВит» стоимостью 100 000 рублей, заявив, что без него откажут в кредите. Деньги за сертификат были удержаны из кредитных средств. Истица направила претензию о расторжении договора и возврате средств, но ответчик проигнорировал.</p>
+  <p>Покупательница приобрела автомобиль в автосалоне в кредит. При оформлении сотрудники навязали сертификат от АО «КарВит» стоимостью 100 000 рублей, заявив, что без него откажут в кредите.</p>
   <dl class="case-facts">
     <div><dt>Объект</dt><dd>сертификат от АО «КарВит»</dd></div>
     <div><dt>Компания</dt><dd>АО «КарВит»</dd></div>
     <div><dt>Присуждено</dt><dd>180 000 ₽</dd></div>
   </dl>
-  <div class="chips"><span class="chip small">возврат цены или предоплаты</span> <span class="chip small">компенсация морального вреда</span> <span class="chip small">штраф 50%</span></div>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button></div>
   <h4>Что повлияло на исход</h4>
   <ul><li>суд переквалифицировал лицензионный договор в договор возмездного оказания услуг</li><li>потребитель имел право на односторонний отказ от услуги по ст.32 Закона о защите прав потребителей</li></ul>
   <div class="case-links">
-    <a href="https://sudact.ru/regular/doc/TNm0IBqaQjxP/" target="_blank" rel="noopener">Первоисточник</a>
-    <span class="muted">Страница дела — позже: TNm0IBqaQjxP</span>
+    <a class="button case-primary-link" href="../../dela/TNm0IBqaQjxP/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/TNm0IBqaQjxP/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
@@ -177,23 +182,23 @@
   data-claims="refund_price||consumer_fine">
   <div class="case-card__header">
     <div>
-      <h3>Потребитель планировал приобрести онлайн-курс у ООО &#x27;Скилбокс&#x27; под видом беспроцентной рассрочки, однако фактически…</h3>
-      <p class="meta">Приморский край · 2021-07-15 · дело 2-1302/2021</p>
+      <h3>Онлайн-курс Профессия художник компьютерной графики: отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Приморский край">Приморский край</button> <span>· 2021-07-15 · дело 2-1302/2021</span></p>
     </div>
-    <span class="result result-satisfied">удовлетворено</span>
+    <button type="button" class="result result-satisfied" data-quick-filter="result" data-quick-value="satisfied">удовлетворено</button>
   </div>
-  <p>Потребитель планировал приобрести онлайн-курс у ООО &#x27;Скилбокс&#x27; под видом беспроцентной рассрочки, однако фактически на него был оформлен банковский кредит. Договор оказания услуг потребитель не подписал, к обучению на платформе не приступал. Позже он обратился к онлайн-школе с заявлением о расторжении и возврате средств. Исполнитель деньги не вернул, предлагая альтернативные курсы. В суде ответчик настаивал на…</p>
+  <p>Потребитель планировал приобрести онлайн-курс у ООО &#x27;Скилбокс&#x27; под видом беспроцентной рассрочки, однако фактически на него был оформлен банковский кредит. Договор оказания услуг потребитель не подписал, к обучению на платформе не приступал.</p>
   <dl class="case-facts">
     <div><dt>Объект</dt><dd>онлайн-курс Профессия художник компьютерной графики</dd></div>
     <div><dt>Компания</dt><dd>Skillbox</dd></div>
     <div><dt>Присуждено</dt><dd>228 480 ₽</dd></div>
   </dl>
-  <div class="chips"><span class="chip small">возврат цены или предоплаты</span> <span class="chip small">штраф 50%</span></div>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button></div>
   <h4>Что повлияло на исход</h4>
   <ul><li>Договор оказания услуг и дополнительное соглашение не были подписаны потребителем.</li><li>Обучение на платформе фактически не начиналось, услуги не оказывались.</li></ul>
   <div class="case-links">
-    <a href="https://sudact.ru/regular/doc/3mMKR7CNUYQ8/" target="_blank" rel="noopener">Первоисточник</a>
-    <span class="muted">Страница дела — позже: 3mMKR7CNUYQ8</span>
+    <a class="button case-primary-link" href="../../dela/3mMKR7CNUYQ8/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/3mMKR7CNUYQ8/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
@@ -207,23 +212,23 @@
   data-claims="refund_price||penalty||moral_damage||consumer_fine||expenses">
   <div class="case-card__header">
     <div>
-      <h3>Потребитель при оформлении автокредита приобрёл услугу ВИП-сопровождения (карта «Эксклюзив») стоимостью 54 000 руб.…</h3>
-      <p class="meta">Нижегородская область · 2020-01-21 · дело 2-242/2020</p>
+      <h3>Услуга ВИП-сопровождение (карта «Эксклюзив»): отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Нижегородская область">Нижегородская область</button> <span>· 2020-01-21 · дело 2-242/2020</span></p>
     </div>
-    <span class="result result-partially_satisfied">частично удовлетворено</span>
+    <button type="button" class="result result-partially_satisfied" data-quick-filter="result" data-quick-value="partially_satisfied">частично удовлетворено</button>
   </div>
-  <p>Потребитель при оформлении автокредита приобрёл услугу ВИП-сопровождения (карта «Эксклюзив») стоимостью 54 000 руб. Услугами ни разу не воспользовался, направил заявление об отказе от договора и возврате денег. Компания вернула 27 857 руб., удержав 26 143 руб. как фактически понесённые расходы. Потребитель обратился в суд за взысканием удержанной суммы, неустойки, морального вреда и судебных расходов.</p>
+  <p>Потребитель при оформлении автокредита приобрёл услугу ВИП-сопровождения (карта «Эксклюзив») стоимостью 54 000 руб. Услугами ни разу не воспользовался, направил заявление об отказе от договора и возврате денег. Компания вернула 27 857 руб., удержав 26 143 руб. как фактически понесённые расходы.</p>
   <dl class="case-facts">
     <div><dt>Объект</dt><dd>услуга ВИП-сопровождение (карта «Эксклюзив»)</dd></div>
     <div><dt>Компания</dt><dd>ООО «М-Ассистанс»</dd></div>
     <div><dt>Присуждено</dt><dd>42 810 ₽</dd></div>
   </dl>
-  <div class="chips"><span class="chip small">возврат цены или предоплаты</span> <span class="chip small">неустойка</span> <span class="chip small">компенсация морального вреда</span> <span class="chip small">штраф 50%</span> <span class="chip small">судебные, экспертные и иные расходы</span></div>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
   <h4>Что повлияло на исход</h4>
   <ul><li>истец ни разу не воспользовался услугами</li><li>ответчик не предоставил доказательств фактически понесённых расходов</li></ul>
   <div class="case-links">
-    <a href="https://sudact.ru/regular/doc/WJjAKsJGIglY/" target="_blank" rel="noopener">Первоисточник</a>
-    <span class="muted">Страница дела — позже: WJjAKsJGIglY</span>
+    <a class="button case-primary-link" href="../../dela/WJjAKsJGIglY/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/WJjAKsJGIglY/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
@@ -237,10 +242,10 @@
   data-claims="insurance_premium_refund||penalty||moral_damage||consumer_fine">
   <div class="case-card__header">
     <div>
-      <h3>Заемщица оформила потребительский кредит с добровольным страхованием жизни, через два дня отказалась от страховки и…</h3>
-      <p class="meta">Томская область · 2017-04-07 · дело 2-53/2017</p>
+      <h3>Страховая услуга: отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Томская область">Томская область</button> <span>· 2017-04-07 · дело 2-53/2017</span></p>
     </div>
-    <span class="result result-partially_satisfied">частично удовлетворено</span>
+    <button type="button" class="result result-partially_satisfied" data-quick-filter="result" data-quick-value="partially_satisfied">частично удовлетворено</button>
   </div>
   <p>Заемщица оформила потребительский кредит с добровольным страхованием жизни, через два дня отказалась от страховки и потребовала возврат уплаченной премии, но страховая компания отказала, сославшись на отсутствие оснований.</p>
   <dl class="case-facts">
@@ -248,39 +253,64 @@
     <div><dt>Компания</dt><dd>Ренессанс Жизнь</dd></div>
     <div><dt>Присуждено</dt><dd>не указано</dd></div>
   </dl>
-  <div class="chips"><span class="chip small">возврат страховой премии</span> <span class="chip small">неустойка</span> <span class="chip small">компенсация морального вреда</span> <span class="chip small">штраф 50%</span></div>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="insurance_premium_refund">возврат страховой премии</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button></div>
   <h4>Что повлияло на исход</h4>
   <ul><li>отказ от страховки в первые 10 дней (период охлаждения)</li><li>наличие в агентском договоре между банком и страховщиком условия о полном возврате премии при отказе в первые 10 дней</li></ul>
   <div class="case-links">
-    <a href="https://sudact.ru/regular/doc/Pde5A0X4dlZj/" target="_blank" rel="noopener">Первоисточник</a>
-    <span class="muted">Страница дела — позже: Pde5A0X4dlZj</span>
+    <a class="button case-primary-link" href="../../dela/Pde5A0X4dlZj/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/Pde5A0X4dlZj/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 </div>
-  </section>
+      </section>
 
-  <section class="panel checklist">
-    <h2>Проверить перед спором</h2>
-    <ul>
-      <li>Есть ли договор, чек, заказ, переписка или претензия.</li>
-      <li>Можно ли определить продавца, исполнителя или владельца агрегатора.</li>
-      <li>Какие требования подходят: возврат денег, неустойка, штраф, убытки, расходы.</li>
-      <li>Есть ли риск отказа: ненадлежащий ответчик, пропущенные доказательства, оплата вне платформы.</li>
-    </ul>
-  </section>
+      <section class="panel checklist">
+        <h2>Проверить перед спором</h2>
+        <ul>
+          <li>Есть ли договор, чек, заказ, переписка или претензия.</li>
+          <li>Можно ли определить продавца, исполнителя или владельца агрегатора.</li>
+          <li>Какие требования подходят: возврат денег, неустойка, штраф, убытки, расходы.</li>
+          <li>Есть ли риск отказа: ненадлежащий ответчик, пропущенные доказательства, оплата вне платформы.</li>
+        </ul>
+      </section>
 
-  <section class="panel">
-    <h2>Связанные ситуации</h2>
-    <div class="related-list"><span class="related"><a href="../nedostovernaya-informatsiya/index.html">Неверная цена, продавец или информация о товаре: что решил суд</a></span></div>
-  </section>
+      <section class="panel">
+        <h2>Связанные ситуации</h2>
+        <div class="related-list"><span class="related"><a href="../nedostovernaya-informatsiya/index.html">Неверная цена, продавец или информация о товаре: что решил суд</a></span></div>
+      </section>
+    </div>
+  </div>
 </main>
 <footer class="site-footer">
-  <p>Прототип. Не является юридической консультацией. Материалы основаны на судебных актах и требуют редакционной проверки перед публикацией.</p>
+  <p>Прототип. Не является юридической консультацией. Материалы основаны на судебных актах и обработаны алгоритмом для систематизации и обобщения текущей судебной практики судов разных инстанций.</p>
 </footer>
 
 <script>
 document.querySelectorAll('[data-filter]').forEach((select) => {
   select.addEventListener('change', () => {
+    applyFilters();
+  });
+});
+document.querySelectorAll('[data-quick-filter]').forEach((chip) => {
+  chip.addEventListener('click', () => {
+    const field = chip.dataset.quickFilter;
+    const value = chip.dataset.quickValue || '';
+    const select = document.querySelector(`[data-filter="${field}"]`);
+    if (!select) return;
+    select.value = value;
+    applyFilters();
+    document.querySelector('[data-case-list]')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+document.querySelectorAll('[data-reset-filters]').forEach((button) => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter]').forEach((filter) => {
+      filter.value = '';
+    });
+    applyFilters();
+  });
+});
+function applyFilters() {
     const cards = Array.from(document.querySelectorAll('[data-case-card]'));
     const filters = Array.from(document.querySelectorAll('[data-filter]'));
     cards.forEach((card) => {
@@ -292,8 +322,7 @@ document.querySelectorAll('[data-filter]').forEach((select) => {
       });
       card.hidden = !visible;
     });
-  });
-});
+}
 </script>
 </body>
 </html>

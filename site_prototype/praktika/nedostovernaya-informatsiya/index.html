@@ -9,7 +9,7 @@
 <body>
 
 <header class="site-header">
-  <a class="brand" href="../../index.html">ZPP Consult · прототип</a>
+  <a class="brand" href="../../index.html">Дела о защите прав потребителей</a>
   <nav><a href="../nekachestvennyy-tovar/index.html">nekachestvennyy-tovar</a> <a href="../vozvrat-tovara-online/index.html">vozvrat-tovara-online</a> <a href="index.html">nedostovernaya-informatsiya</a> <a href="../vozvrat-deneg-za-uslugu/index.html">vozvrat-deneg-za-uslugu</a> <a href="../oplatili-tovar-ne-peredali/index.html">oplatili-tovar-ne-peredali</a></nav>
 </header>
 <main>
@@ -20,64 +20,16 @@
     <p class="disclosure">Практика собрана из судебных актов. Обработка данных выполнена алгоритмически; ссылки на первоисточники сохранены в карточках дел.</p>
   </section>
 
-  <section class="grid two">
-    <div class="panel">
-      <h2>Краткое резюме практики</h2>
-      <ul class="summary-list">
-        <li>Дел в выборке: <b>6</b></li>
-        <li>Присуждённые суммы: <b>от 0 ₽ до 358 650 ₽; медиана — 2 804 ₽</b></li>
-        <li>Результаты: <span class="chip">в иске отказано <b>3</b></span>
-<span class="chip">требования удовлетворены частично <b>2</b></span>
-<span class="chip">требования удовлетворены полностью или почти полностью <b>1</b></span></li>
-      </ul>
-      <p class="hint">Это не статистика по всей судебной практике, а сводка по текущей выборке актов проекта.</p>
-    </div>
-    <div class="panel">
-      <h2>Что обычно требует потребитель</h2>
-      <div class="chips"><span class="chip">компенсация морального вреда <b>6</b></span>
-<span class="chip">штраф 50% <b>5</b></span>
-<span class="chip">неустойка <b>3</b></span>
-<span class="chip">разница в цене <b>2</b></span>
-<span class="chip">возврат цены или предоплаты <b>2</b></span>
-<span class="chip">судебные, экспертные и иные расходы <b>2</b></span>
-<span class="chip">убытки <b>1</b></span>
-<span class="chip">обязать предоставить информацию <b>1</b></span></div>
-    </div>
-  </section>
-
-  <section class="grid two">
-    <div class="panel">
-      <h2>Типичные объекты</h2>
-      <div class="chips"><span class="chip">видеокарта <b>1</b></span>
-<span class="chip">зарядное устройство <b>1</b></span>
-<span class="chip">медицинское изделие <b>1</b></span>
-<span class="chip">продовольственные товары <b>1</b></span>
-<span class="chip">массажная накидка <b>1</b></span>
-<span class="chip">информация о продавце <b>1</b></span></div>
-    </div>
-    <div class="panel">
-      <h2>Компании и платформы</h2>
-      <div class="chips"><span class="chip">ООО «Азон» <b>2</b></span>
-<span class="chip">Ozon <b>1</b></span>
-<span class="chip">Wildberries <b>1</b></span>
-<span class="chip">АО «Тандер» <b>1</b></span>
-<span class="chip">несколько маркетплейсов <b>1</b></span></div>
-    </div>
-  </section>
-
-  <section class="panel">
-    <h2>Почему суд удовлетворяет или отказывает</h2>
-    <ul><li>ООО &#x27;Интернет Решения&#x27; является владельцем агрегатора, а не продавцом товара.</li><li>Продавцом товара является ТОО &#x27;Озон Маркетплейс Казахстан&#x27; (иностранный продавец).</li><li>Истец не покупал товар и не понёс убытков.</li><li>На сайте содержались сведения о продавцах (наименование ИП, ОГРНИП).</li><li>Непредоставление информации о медицинских противопоказаниях (п. 72 Правил продажи отдельных видов товаров)</li><li>Отсутствие регистрационного удостоверения на медицинское изделие (Постановление №1416)</li></ul>
-  </section>
-
-  
+  <div class="situation-layout">
+    <aside class="filter-sidebar">
+      
 <section class="panel filters">
   <h2>Фильтры по делам</h2>
   <div class="filter-grid">
     <label>Результат<select data-filter="result"><option value="">Все</option>
-<option value="partially_satisfied">partially_satisfied</option>
-<option value="rejected">rejected</option>
-<option value="satisfied">satisfied</option></select></label>
+<option value="partially_satisfied">требования удовлетворены частично</option>
+<option value="rejected">в иске отказано</option>
+<option value="satisfied">требования удовлетворены полностью или почти полностью</option></select></label>
     <label>Компания<select data-filter="company"><option value="">Все</option>
 <option value="Ozon">Ozon</option>
 <option value="Wildberries">Wildberries</option>
@@ -92,14 +44,14 @@
 <option value="медицинское изделие">медицинское изделие</option>
 <option value="продовольственные товары">продовольственные товары</option></select></label>
     <label>Требование<select data-filter="claims"><option value="">Все</option>
-<option value="consumer_fine">consumer_fine</option>
-<option value="damages">damages</option>
-<option value="expenses">expenses</option>
-<option value="information_disclosure">information_disclosure</option>
-<option value="moral_damage">moral_damage</option>
-<option value="penalty">penalty</option>
-<option value="price_difference">price_difference</option>
-<option value="refund_price">refund_price</option></select></label>
+<option value="consumer_fine">штраф 50%</option>
+<option value="damages">убытки</option>
+<option value="expenses">судебные, экспертные и иные расходы</option>
+<option value="information_disclosure">обязать предоставить информацию</option>
+<option value="moral_damage">компенсация морального вреда</option>
+<option value="penalty">неустойка</option>
+<option value="price_difference">разница в цене</option>
+<option value="refund_price">возврат цены или предоплаты</option></select></label>
     <label>Регион<select data-filter="region"><option value="">Все</option>
 <option value="Алтайский край">Алтайский край</option>
 <option value="Кемеровская область">Кемеровская область</option>
@@ -108,13 +60,66 @@
 <option value="Самарская область">Самарская область</option>
 <option value="Ставропольский край">Ставропольский край</option></select></label>
   </div>
-  <p class="hint">Фильтры работают внутри страницы и не создают отдельные индексируемые URL.</p>
+  <div class="filter-actions">
+    <button type="button" class="button secondary" data-reset-filters>Сбросить фильтры</button>
+  </div>
 </section>
 
+    </aside>
+    <div class="situation-content">
+      <section class="grid two">
+        <div class="panel">
+          <h2>Краткое резюме практики</h2>
+          <ul class="summary-list">
+            <li>Дел в выборке: <b>6</b></li>
+            <li>Присуждённые суммы: <b>от 0 ₽ до 358 650 ₽; медиана — 2 804 ₽</b></li>
+            <li><span>Результаты:</span> <span class="inline-chips"><button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="rejected">в иске отказано <b>3</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="partially_satisfied">требования удовлетворены частично <b>2</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="satisfied">требования удовлетворены полностью или почти полностью <b>1</b></button></span></li>
+          </ul>
+          <p class="hint">Примечание: показатели являются не статистикой по всей судебной практике, а сводкой по текущей выборке судебных актов.</p>
+        </div>
+        <div class="panel">
+          <h2>Что обычно требует потребитель</h2>
+          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда <b>6</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50% <b>5</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="penalty">неустойка <b>3</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="price_difference">разница в цене <b>2</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты <b>2</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы <b>2</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="damages">убытки <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="information_disclosure">обязать предоставить информацию <b>1</b></button></div>
+        </div>
+      </section>
 
-  <section>
-    <h2>Дела в этом кластере</h2>
-    <div class="case-list">
+      <section class="grid two">
+        <div class="panel">
+          <h2>Типичные объекты</h2>
+          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="видеокарта">видеокарта <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="зарядное устройство">зарядное устройство <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="медицинское изделие">медицинское изделие <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="продовольственные товары">продовольственные товары <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="массажная накидка">массажная накидка <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="информация о продавце">информация о продавце <b>1</b></button></div>
+        </div>
+        <div class="panel">
+          <h2>Компании и платформы</h2>
+          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «Азон»">ООО «Азон» <b>2</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="Ozon">Ozon <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="Wildberries">Wildberries <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="АО «Тандер»">АО «Тандер» <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="несколько маркетплейсов">несколько маркетплейсов <b>1</b></button></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <h2>Почему суд удовлетворяет или отказывает</h2>
+        <ul><li>ООО &#x27;Интернет Решения&#x27; является владельцем агрегатора, а не продавцом товара.</li><li>Продавцом товара является ТОО &#x27;Озон Маркетплейс Казахстан&#x27; (иностранный продавец).</li><li>Истец не покупал товар и не понёс убытков.</li><li>На сайте содержались сведения о продавцах (наименование ИП, ОГРНИП).</li><li>Непредоставление информации о медицинских противопоказаниях (п. 72 Правил продажи отдельных видов товаров)</li><li>Отсутствие регистрационного удостоверения на медицинское изделие (Постановление №1416)</li></ul>
+      </section>
+
+      <section>
+        <h2>Дела в этой выборке</h2>
+        <div class="case-list" data-case-list>
 <article class="case-card"
   data-case-card
   data-result="rejected"
@@ -124,23 +129,23 @@
   data-claims="price_difference||damages||penalty||moral_damage||consumer_fine">
   <div class="case-card__header">
     <div>
-      <h3>Потребитель купил видеокарту на маркетплейсе Ozon за 140557 руб. В гарантийный срок выявился неустранимый недостаток.…</h3>
-      <p class="meta">Республика Алтай · 25.03.2025 · дело 2-80/2025</p>
+      <h3>Palit GeForce RTX 4090 GameRock OC 24 ГБ: спор о недостоверной информации</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Республика Алтай">Республика Алтай</button> <span>· 25.03.2025 · дело 2-80/2025</span></p>
     </div>
-    <span class="result result-rejected">отказано</span>
+    <button type="button" class="result result-rejected" data-quick-filter="result" data-quick-value="rejected">отказано</button>
   </div>
-  <p>Потребитель купил видеокарту на маркетплейсе Ozon за 140557 руб. В гарантийный срок выявился неустранимый недостаток. Он вернул товар, ему вернули деньги, но он потребовал доплатить разницу в цене из-за подорожания аналогичной видеокарты. Маркетплейс сначала начислил компенсацию, затем списал её. Потребитель обратился в суд с требованиями о взыскании разницы, неустойки, упущенной выгоды, морального вреда и штрафа.</p>
+  <p>Потребитель купил видеокарту на маркетплейсе Ozon за 140557 руб. В гарантийный срок выявился неустранимый недостаток. Он вернул товар, ему вернули деньги, но он потребовал доплатить разницу в цене из-за подорожания аналогичной видеокарты.</p>
   <dl class="case-facts">
     <div><dt>Объект</dt><dd>Palit GeForce RTX 4090 GameRock OC 24 ГБ</dd></div>
     <div><dt>Компания</dt><dd>Ozon</dd></div>
     <div><dt>Присуждено</dt><dd>0 ₽</dd></div>
   </dl>
-  <div class="chips"><span class="chip small">разница в цене</span> <span class="chip small">убытки</span> <span class="chip small">неустойка</span> <span class="chip small">компенсация морального вреда</span> <span class="chip small">штраф 50%</span></div>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="price_difference">разница в цене</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="damages">убытки</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button></div>
   <h4>Что повлияло на исход</h4>
   <ul><li>ООО &#x27;Интернет Решения&#x27; является владельцем агрегатора, а не продавцом товара.</li><li>Продавцом товара является ТОО &#x27;Озон Маркетплейс Казахстан&#x27; (иностранный продавец).</li></ul>
   <div class="case-links">
-    <a href="https://sudact.ru/regular/doc/yQ8qgPoesvWJ/" target="_blank" rel="noopener">Первоисточник</a>
-    <span class="muted">Страница дела — позже: yQ8qgPoesvWJ</span>
+    <a class="button case-primary-link" href="../../dela/yQ8qgPoesvWJ/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/yQ8qgPoesvWJ/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
@@ -154,23 +159,23 @@
   data-claims="moral_damage">
   <div class="case-card__header">
     <div>
-      <h3>Потребитель, не приобретая зарядные устройства, обнаружил на сайте Wildberries отсутствие полной информации о…</h3>
-      <p class="meta">Самарская область · 2023-12-04 · дело 2-4404/2023</p>
+      <h3>Зарядное устройство: спор о недостоверной информации</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Самарская область">Самарская область</button> <span>· 2023-12-04 · дело 2-4404/2023</span></p>
     </div>
-    <span class="result result-rejected">отказано</span>
+    <button type="button" class="result result-rejected" data-quick-filter="result" data-quick-value="rejected">отказано</button>
   </div>
-  <p>Потребитель, не приобретая зарядные устройства, обнаружил на сайте Wildberries отсутствие полной информации о продавцах, изготовителях и сертификатах. Через чат потребовал предоставить сведения, но ответом остался недоволен. Предъявил иск о компенсации морального вреда в размере 3900 руб. за 39 нарушений.</p>
+  <p>Потребитель, не приобретая зарядные устройства, обнаружил на сайте Wildberries отсутствие полной информации о продавцах, изготовителях и сертификатах. Через чат потребовал предоставить сведения, но ответом остался недоволен.</p>
   <dl class="case-facts">
     <div><dt>Объект</dt><dd>зарядное устройство</dd></div>
     <div><dt>Компания</dt><dd>Wildberries</dd></div>
     <div><dt>Присуждено</dt><dd>0 ₽</dd></div>
   </dl>
-  <div class="chips"><span class="chip small">компенсация морального вреда</span></div>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button></div>
   <h4>Что повлияло на исход</h4>
   <ul><li>Истец не покупал товар и не понёс убытков.</li><li>На сайте содержались сведения о продавцах (наименование ИП, ОГРНИП).</li></ul>
   <div class="case-links">
-    <a href="https://sudact.ru/regular/doc/qVUccWRuFprb/" target="_blank" rel="noopener">Первоисточник</a>
-    <span class="muted">Страница дела — позже: qVUccWRuFprb</span>
+    <a class="button case-primary-link" href="../../dela/qVUccWRuFprb/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/qVUccWRuFprb/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
@@ -184,23 +189,23 @@
   data-claims="refund_price||penalty||moral_damage||consumer_fine||expenses">
   <div class="case-card__header">
     <div>
-      <h3>Потребитель (инвалид 2 группы) приобрела у ООО «Азон» вибромассажную накидку за 118 000 руб. в кредит. При продаже ей…</h3>
-      <p class="meta">Кемеровская область · 2020-07-10 · дело 2-1466/2020</p>
+      <h3>Вибромассажная накидка (NМ-218): спор о недостоверной информации</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Кемеровская область">Кемеровская область</button> <span>· 2020-07-10 · дело 2-1466/2020</span></p>
     </div>
-    <span class="result result-partially_satisfied">частично удовлетворено</span>
+    <button type="button" class="result result-partially_satisfied" data-quick-filter="result" data-quick-value="partially_satisfied">частично удовлетворено</button>
   </div>
-  <p>Потребитель (инвалид 2 группы) приобрела у ООО «Азон» вибромассажную накидку за 118 000 руб. в кредит. При продаже ей не сообщили о медицинских противопоказаниях товара и не предоставили регистрационное удостоверение на медицинское изделие. Претензия о возврате денег оставлена без ответа.</p>
+  <p>Потребитель (инвалид 2 группы) приобрела у ООО «Азон» вибромассажную накидку за 118 000 руб. в кредит. При продаже ей не сообщили о медицинских противопоказаниях товара и не предоставили регистрационное удостоверение на медицинское изделие.</p>
   <dl class="case-facts">
     <div><dt>Объект</dt><dd>вибромассажная накидка (NМ-218)</dd></div>
     <div><dt>Компания</dt><dd>ООО «Азон»</dd></div>
     <div><dt>Присуждено</dt><dd>358 650 ₽</dd></div>
   </dl>
-  <div class="chips"><span class="chip small">возврат цены или предоплаты</span> <span class="chip small">неустойка</span> <span class="chip small">компенсация морального вреда</span> <span class="chip small">штраф 50%</span> <span class="chip small">судебные, экспертные и иные расходы</span></div>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
   <h4>Что повлияло на исход</h4>
   <ul><li>Непредоставление информации о медицинских противопоказаниях (п. 72 Правил продажи отдельных видов товаров)</li><li>Отсутствие регистрационного удостоверения на медицинское изделие (Постановление №1416)</li></ul>
   <div class="case-links">
-    <a href="https://sudact.ru/regular/doc/P5oLZX7sQPoI/" target="_blank" rel="noopener">Первоисточник</a>
-    <span class="muted">Страница дела — позже: P5oLZX7sQPoI</span>
+    <a class="button case-primary-link" href="../../dela/P5oLZX7sQPoI/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/P5oLZX7sQPoI/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
@@ -214,23 +219,23 @@
   data-claims="price_difference||moral_damage||consumer_fine||expenses">
   <div class="case-card__header">
     <div>
-      <h3>Потребитель приобрёл 6 плиток шоколада по цене 19 рублей вместо указанных на ценнике 12,90 рублей. После попытки…</h3>
-      <p class="meta">Омская область · 2020-07-03 · дело 2-1411/2020</p>
+      <h3>Шоколад «Аленка» 20 г: спор о недостоверной информации</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Омская область">Омская область</button> <span>· 2020-07-03 · дело 2-1411/2020</span></p>
     </div>
-    <span class="result result-partially_satisfied">частично удовлетворено</span>
+    <button type="button" class="result result-partially_satisfied" data-quick-filter="result" data-quick-value="partially_satisfied">частично удовлетворено</button>
   </div>
-  <p>Потребитель приобрёл 6 плиток шоколада по цене 19 рублей вместо указанных на ценнике 12,90 рублей. После попытки урегулировать ситуацию в магазине, потребитель столкнулся с грубостью сотрудников (оскорбления) и направил претензию, оставшуюся без ответа. Истец потребовал возврата разницы в цене, штрафа, компенсации морального вреда за нарушение прав потребителя и за оскорбление, а также возмещения судебных расходов…</p>
+  <p>Потребитель приобрёл 6 плиток шоколада по цене 19 рублей вместо указанных на ценнике 12,90 рублей. После попытки урегулировать ситуацию в магазине, потребитель столкнулся с грубостью сотрудников (оскорбления) и направил претензию, оставшуюся без ответа.</p>
   <dl class="case-facts">
     <div><dt>Объект</dt><dd>Шоколад «Аленка» 20 г</dd></div>
     <div><dt>Компания</dt><dd>АО «Тандер»</dd></div>
     <div><dt>Присуждено</dt><dd>2 804 ₽</dd></div>
   </dl>
-  <div class="chips"><span class="chip small">разница в цене</span> <span class="chip small">компенсация морального вреда</span> <span class="chip small">штраф 50%</span> <span class="chip small">судебные, экспертные и иные расходы</span></div>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="price_difference">разница в цене</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
   <h4>Что повлияло на исход</h4>
   <ul><li>Наличие чека и фотографий ценника с метаданными</li><li>Отсутствие доказательств публичного оскорбления</li></ul>
   <div class="case-links">
-    <a href="https://sudact.ru/regular/doc/TZsI5FbnZOZJ/" target="_blank" rel="noopener">Первоисточник</a>
-    <span class="muted">Страница дела — позже: TZsI5FbnZOZJ</span>
+    <a class="button case-primary-link" href="../../dela/TZsI5FbnZOZJ/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/TZsI5FbnZOZJ/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
@@ -244,23 +249,23 @@
   data-claims="refund_price||moral_damage||consumer_fine">
   <div class="case-card__header">
     <div>
-      <h3>Потребитель-пенсионер по приглашению посетила презентацию массажных накидок, где под психологическим давлением…</h3>
-      <p class="meta">Алтайский край · 2018-11-06 · дело 2-3333/2018</p>
+      <h3>Вибромассажная накидка НМ 2187: спор о недостоверной информации</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Алтайский край">Алтайский край</button> <span>· 2018-11-06 · дело 2-3333/2018</span></p>
     </div>
-    <span class="result result-satisfied">удовлетворено</span>
+    <button type="button" class="result result-satisfied" data-quick-filter="result" data-quick-value="satisfied">удовлетворено</button>
   </div>
-  <p>Потребитель-пенсионер по приглашению посетила презентацию массажных накидок, где под психологическим давлением заключила договор купли-продажи накидки за 99 900 рублей и кредитный договор для её оплаты. Дома обнаружилось, что информация о производителе, характеристиках и сервисных центрах отсутствует, как и инструкция с гарантийным талоном. Претензия о возврате денег была проигнорирована продавцом. В защиту прав…</p>
+  <p>Потребитель-пенсионер по приглашению посетила презентацию массажных накидок, где под психологическим давлением заключила договор купли-продажи накидки за 99 900 рублей и кредитный договор для её оплаты. Дома обнаружилось, что информация о производителе, характеристиках и сервисных центрах отсутствует, как и инструкция с гарантийным талоном.</p>
   <dl class="case-facts">
     <div><dt>Объект</dt><dd>вибромассажная накидка НМ 2187</dd></div>
     <div><dt>Компания</dt><dd>ООО «Азон»</dd></div>
     <div><dt>Присуждено</dt><dd>157 350 ₽</dd></div>
   </dl>
-  <div class="chips"><span class="chip small">возврат цены или предоплаты</span> <span class="chip small">компенсация морального вреда</span> <span class="chip small">штраф 50%</span></div>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button></div>
   <h4>Что повлияло на исход</h4>
   <ul><li>Продавец не предоставил потребителю необходимую и достоверную информацию о свойствах, технических характеристиках, изготовителе и сертификации товара.</li><li>Способ продажи (презентация в непредназначенном для торговли помещении) ограничил свободу выбора потребителя.</li></ul>
   <div class="case-links">
-    <a href="https://sudact.ru/regular/doc/4686FPHUhLZC/" target="_blank" rel="noopener">Первоисточник</a>
-    <span class="muted">Страница дела — позже: 4686FPHUhLZC</span>
+    <a class="button case-primary-link" href="../../dela/4686FPHUhLZC/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/4686FPHUhLZC/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
@@ -274,50 +279,75 @@
   data-claims="information_disclosure||moral_damage||penalty||consumer_fine">
   <div class="case-card__header">
     <div>
-      <h3>Потребитель намеревался приобрести крупные партии товаров на четырёх маркетплейсах, но посчитал, что агрегаторы не…</h3>
-      <p class="meta">Ставропольский край · 2024-07-24 · дело 2-519/2024</p>
+      <h3>Информация о продавце: спор о недостоверной информации</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Ставропольский край">Ставропольский край</button> <span>· 2024-07-24 · дело 2-519/2024</span></p>
     </div>
-    <span class="result result-rejected">отказано</span>
+    <button type="button" class="result result-rejected" data-quick-filter="result" data-quick-value="rejected">отказано</button>
   </div>
-  <p>Потребитель намеревался приобрести крупные партии товаров на четырёх маркетплейсах, но посчитал, что агрегаторы не раскрывают полные данные о продавцах (в частности, адреса и ОГРНИП). Он направил претензии, а затем иск в суд с требованием обязать раскрыть информацию и выплатить компенсации. Ответчики утверждали, что действуют в рамках закона, а истец злоупотребляет правами.</p>
+  <p>Потребитель намеревался приобрести крупные партии товаров на четырёх маркетплейсах, но посчитал, что агрегаторы не раскрывают полные данные о продавцах (в частности, адреса и ОГРНИП). Он направил претензии, а затем иск в суд с требованием обязать раскрыть информацию и выплатить компенсации.</p>
   <dl class="case-facts">
     <div><dt>Объект</dt><dd>информация о продавце</dd></div>
     <div><dt>Компания</dt><dd>несколько маркетплейсов</dd></div>
     <div><dt>Присуждено</dt><dd>не указано</dd></div>
   </dl>
-  <div class="chips"><span class="chip small">обязать предоставить информацию</span> <span class="chip small">компенсация морального вреда</span> <span class="chip small">неустойка</span> <span class="chip small">штраф 50%</span></div>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="information_disclosure">обязать предоставить информацию</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button></div>
   <h4>Что повлияло на исход</h4>
   <ul><li>Маркетплейсы выполнили требования закона об агрегаторах, указав ФИО, ОГРНИП и ссылки на сайты продавцов</li><li>Перечень обязательных сведений о продавце-ИП является закрытым и не включает физический адрес</li></ul>
   <div class="case-links">
-    <a href="https://sudact.ru/regular/doc/DvLR6OZqCqt/" target="_blank" rel="noopener">Первоисточник</a>
-    <span class="muted">Страница дела — позже: DvLR6OZqCqt</span>
+    <a class="button case-primary-link" href="../../dela/DvLR6OZqCqt/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/DvLR6OZqCqt/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 </div>
-  </section>
+      </section>
 
-  <section class="panel checklist">
-    <h2>Проверить перед спором</h2>
-    <ul>
-      <li>Есть ли договор, чек, заказ, переписка или претензия.</li>
-      <li>Можно ли определить продавца, исполнителя или владельца агрегатора.</li>
-      <li>Какие требования подходят: возврат денег, неустойка, штраф, убытки, расходы.</li>
-      <li>Есть ли риск отказа: ненадлежащий ответчик, пропущенные доказательства, оплата вне платформы.</li>
-    </ul>
-  </section>
+      <section class="panel checklist">
+        <h2>Проверить перед спором</h2>
+        <ul>
+          <li>Есть ли договор, чек, заказ, переписка или претензия.</li>
+          <li>Можно ли определить продавца, исполнителя или владельца агрегатора.</li>
+          <li>Какие требования подходят: возврат денег, неустойка, штраф, убытки, расходы.</li>
+          <li>Есть ли риск отказа: ненадлежащий ответчик, пропущенные доказательства, оплата вне платформы.</li>
+        </ul>
+      </section>
 
-  <section class="panel">
-    <h2>Связанные ситуации</h2>
-    <div class="related-list"><span class="related"><a href="../vozvrat-tovara-online/index.html">Как вернуть товар, купленный онлайн</a></span> <span class="related"><a href="../vozvrat-deneg-za-uslugu/index.html">Как отказаться от услуги и вернуть деньги</a></span> <span class="related"><a href="../nekachestvennyy-tovar/index.html">Некачественный товар: как вернуть деньги, взыскать неустойку и штраф</a></span></div>
-  </section>
+      <section class="panel">
+        <h2>Связанные ситуации</h2>
+        <div class="related-list"><span class="related"><a href="../vozvrat-tovara-online/index.html">Как вернуть товар, купленный онлайн</a></span> <span class="related"><a href="../vozvrat-deneg-za-uslugu/index.html">Как отказаться от услуги и вернуть деньги</a></span> <span class="related"><a href="../nekachestvennyy-tovar/index.html">Некачественный товар: как вернуть деньги, взыскать неустойку и штраф</a></span></div>
+      </section>
+    </div>
+  </div>
 </main>
 <footer class="site-footer">
-  <p>Прототип. Не является юридической консультацией. Материалы основаны на судебных актах и требуют редакционной проверки перед публикацией.</p>
+  <p>Прототип. Не является юридической консультацией. Материалы основаны на судебных актах и обработаны алгоритмом для систематизации и обобщения текущей судебной практики судов разных инстанций.</p>
 </footer>
 
 <script>
 document.querySelectorAll('[data-filter]').forEach((select) => {
   select.addEventListener('change', () => {
+    applyFilters();
+  });
+});
+document.querySelectorAll('[data-quick-filter]').forEach((chip) => {
+  chip.addEventListener('click', () => {
+    const field = chip.dataset.quickFilter;
+    const value = chip.dataset.quickValue || '';
+    const select = document.querySelector(`[data-filter="${field}"]`);
+    if (!select) return;
+    select.value = value;
+    applyFilters();
+    document.querySelector('[data-case-list]')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+document.querySelectorAll('[data-reset-filters]').forEach((button) => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter]').forEach((filter) => {
+      filter.value = '';
+    });
+    applyFilters();
+  });
+});
+function applyFilters() {
     const cards = Array.from(document.querySelectorAll('[data-case-card]'));
     const filters = Array.from(document.querySelectorAll('[data-filter]'));
     cards.forEach((card) => {
@@ -329,8 +359,7 @@ document.querySelectorAll('[data-filter]').forEach((select) => {
       });
       card.hidden = !visible;
     });
-  });
-});
+}
 </script>
 </body>
 </html>

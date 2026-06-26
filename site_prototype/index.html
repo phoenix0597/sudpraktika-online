@@ -9,7 +9,7 @@
 <body>
 
 <header class="site-header">
-  <a class="brand" href="index.html">ZPP Consult · прототип</a>
+  <a class="brand" href="index.html">Дела о защите прав потребителей</a>
 </header>
 <main>
   <section class="hero">
@@ -57,12 +57,35 @@
   </section>
 </main>
 <footer class="site-footer">
-  <p>Прототип создан из JSON-структур проекта.</p>
+  <p>Прототип. Не является юридической консультацией. Материалы основаны на судебных актах и обработаны алгоритмом для систематизации и обобщения текущей судебной практики судов разных инстанций.</p>
 </footer>
 
 <script>
 document.querySelectorAll('[data-filter]').forEach((select) => {
   select.addEventListener('change', () => {
+    applyFilters();
+  });
+});
+document.querySelectorAll('[data-quick-filter]').forEach((chip) => {
+  chip.addEventListener('click', () => {
+    const field = chip.dataset.quickFilter;
+    const value = chip.dataset.quickValue || '';
+    const select = document.querySelector(`[data-filter="${field}"]`);
+    if (!select) return;
+    select.value = value;
+    applyFilters();
+    document.querySelector('[data-case-list]')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+document.querySelectorAll('[data-reset-filters]').forEach((button) => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter]').forEach((filter) => {
+      filter.value = '';
+    });
+    applyFilters();
+  });
+});
+function applyFilters() {
     const cards = Array.from(document.querySelectorAll('[data-case-card]'));
     const filters = Array.from(document.querySelectorAll('[data-filter]'));
     cards.forEach((card) => {
@@ -74,8 +97,7 @@ document.querySelectorAll('[data-filter]').forEach((select) => {
       });
       card.hidden = !visible;
     });
-  });
-});
+}
 </script>
 </body>
 </html>
