@@ -1,0 +1,124 @@
+:root {
+  --bg: #f6f3ed;
+  --paper: #fffdf8;
+  --ink: #1f2933;
+  --muted: #687381;
+  --line: #ded6c8;
+  --accent: #8b5e34;
+  --accent-2: #294b63;
+  --good: #236b4a;
+  --bad: #8f2f2f;
+  --mixed: #8a651c;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  line-height: 1.55;
+}
+a { color: var(--accent-2); text-decoration: none; }
+a:hover { text-decoration: underline; }
+.site-header, .site-footer {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 22px 24px;
+}
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+}
+.site-header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 14px;
+}
+.brand { font-weight: 750; color: var(--ink); }
+main { max-width: 1180px; margin: 0 auto; padding: 0 24px 48px; }
+.hero {
+  background: linear-gradient(135deg, #fffdf8, #efe5d5);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  padding: 38px;
+  margin: 16px 0 24px;
+}
+.hero h1 { font-size: clamp(32px, 4vw, 56px); line-height: 1.05; margin: 8px 0 16px; }
+.lead { font-size: 20px; max-width: 820px; color: #344150; }
+.eyebrow { text-transform: uppercase; letter-spacing: .08em; color: var(--accent); font-size: 13px; font-weight: 700; }
+.disclosure, .hint, .muted { color: var(--muted); }
+.grid.two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin: 18px 0; }
+.panel, .case-card, .index-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(31, 41, 51, .04);
+}
+.summary-list { padding-left: 20px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.chip {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 7px 10px;
+  background: #efe8dc;
+  border-radius: 999px;
+  font-size: 14px;
+}
+.chip.small { font-size: 12px; padding: 5px 8px; }
+.filters { margin: 24px 0; }
+.filter-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+label { display: grid; gap: 6px; font-size: 14px; color: var(--muted); }
+select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+  background: white;
+  color: var(--ink);
+}
+.case-list { display: grid; gap: 18px; }
+.case-card__header { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+.case-card h3 { margin: 0 0 8px; font-size: 22px; }
+.case-card h4 { margin-bottom: 6px; }
+.meta { color: var(--muted); margin: 0; }
+.result {
+  white-space: nowrap;
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  background: #eceff2;
+}
+.result-satisfied { color: var(--good); background: #e7f3ed; }
+.result-partially_satisfied { color: var(--mixed); background: #f5edd8; }
+.result-rejected { color: var(--bad); background: #f8e7e7; }
+.result-mixed { color: var(--accent-2); background: #e7edf2; }
+.case-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; }
+.case-facts div { background: #f6f1e8; border-radius: 16px; padding: 12px; }
+dt { color: var(--muted); font-size: 12px; }
+dd { margin: 2px 0 0; font-weight: 700; }
+.case-links { display: flex; gap: 14px; margin-top: 16px; }
+.related-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.related, .button {
+  display: inline-block;
+  padding: 10px 14px;
+  background: var(--accent-2);
+  color: white;
+  border-radius: 12px;
+}
+.related a { color: white; }
+.index-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.index-card h2 { margin-top: 0; }
+[hidden] { display: none !important; }
+@media (max-width: 900px) {
+  .grid.two, .index-grid, .filter-grid, .case-facts { grid-template-columns: 1fr; }
+  .site-header { display: block; }
+  .hero { padding: 26px; }
+  .case-card__header { display: block; }
+  .result { display: inline-block; margin-top: 10px; }
+}

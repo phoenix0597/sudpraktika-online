@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SSG-прототип страниц практики</title>
+  <link rel="stylesheet" href="assets/prototype.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="index.html">ZPP Consult · прототип</a>
+</header>
+<main>
+  <section class="hero">
+    <p class="eyebrow">SSG-прототип</p>
+    <h1>Первые страницы судебной практики по ЗоЗПП</h1>
+    <p class="lead">Пять страниц-ситуаций собраны из 46 индексируемых судебных актов первой партии. Цель — проверить структуру, карточки и данные перед полноценным фронтендом.</p>
+  </section>
+  <section class="index-grid">
+    
+<article class="index-card">
+  <p class="eyebrow">24 судебных акта в выборке</p>
+  <h2><a href="praktika/nekachestvennyy-tovar/index.html">Некачественный товар: как вернуть деньги, взыскать неустойку и штраф</a></h2>
+  <p>Потребитель купил товар, но он сломался, оказался с недостатком или продавец отказался исполнять гарантийные обязанности.</p>
+  <a class="button" href="praktika/nekachestvennyy-tovar/index.html">Открыть страницу</a>
+</article>
+
+<article class="index-card">
+  <p class="eyebrow">7 судебных актов в выборке</p>
+  <h2><a href="praktika/vozvrat-tovara-online/index.html">Как вернуть товар, купленный онлайн</a></h2>
+  <p>Покупка была дистанционной: через сайт, маркетплейс или интернет-магазин, а потребитель хочет отказаться от товара и вернуть деньги.</p>
+  <a class="button" href="praktika/vozvrat-tovara-online/index.html">Открыть страницу</a>
+</article>
+
+<article class="index-card">
+  <p class="eyebrow">6 судебных актов в выборке</p>
+  <h2><a href="praktika/nedostovernaya-informatsiya/index.html">Неверная цена, продавец или информация о товаре: что решил суд</a></h2>
+  <p>Покупателю дали неполную или недостоверную информацию о цене, продавце, свойствах товара или условиях покупки.</p>
+  <a class="button" href="praktika/nedostovernaya-informatsiya/index.html">Открыть страницу</a>
+</article>
+
+<article class="index-card">
+  <p class="eyebrow">5 судебных актов в выборке</p>
+  <h2><a href="praktika/vozvrat-deneg-za-uslugu/index.html">Как отказаться от услуги и вернуть деньги</a></h2>
+  <p>Потребитель хочет отказаться от услуги, курса, страховки, сертификата или сервиса и вернуть оплату.</p>
+  <a class="button" href="praktika/vozvrat-deneg-za-uslugu/index.html">Открыть страницу</a>
+</article>
+
+<article class="index-card">
+  <p class="eyebrow">4 судебных акта в выборке</p>
+  <h2><a href="praktika/oplatili-tovar-ne-peredali/index.html">Оплатили товар, но его не передали: что можно взыскать</a></h2>
+  <p>Заказ был оплачен заранее, но продавец задержал передачу, отменил заказ или не вернул предоплату.</p>
+  <a class="button" href="praktika/oplatili-tovar-ne-peredali/index.html">Открыть страницу</a>
+</article>
+
+  </section>
+</main>
+<footer class="site-footer">
+  <p>Прототип создан из JSON-структур проекта.</p>
+</footer>
+
+<script>
+document.querySelectorAll('[data-filter]').forEach((select) => {
+  select.addEventListener('change', () => {
+    const cards = Array.from(document.querySelectorAll('[data-case-card]'));
+    const filters = Array.from(document.querySelectorAll('[data-filter]'));
+    cards.forEach((card) => {
+      const visible = filters.every((filter) => {
+        if (!filter.value) return true;
+        const field = filter.dataset.filter;
+        const value = (card.dataset[field] || '');
+        return value.split('||').includes(filter.value);
+      });
+      card.hidden = !visible;
+    });
+  });
+});
+</script>
+</body>
+</html>
