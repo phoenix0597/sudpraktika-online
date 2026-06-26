@@ -14,7 +14,7 @@
 </header>
 <main>
   <section class="hero">
-    <p class="eyebrow">4 судебных акта в выборке</p>
+    <p class="eyebrow">5 судебных актов в выборке</p>
     <h1>Оплатили товар, но его не передали: что можно взыскать</h1>
     <p class="lead">Заказ был оплачен заранее, но продавец задержал передачу, отменил заказ или не вернул предоплату.</p>
     <p class="disclosure">Практика собрана из судебных актов. Обработка данных выполнена алгоритмически; ссылки на первоисточники сохранены в карточках дел.</p>
@@ -32,15 +32,18 @@
 <option value="satisfied">требования удовлетворены полностью или почти полностью</option></select></label>
     <label>Компания<select data-filter="company"><option value="">Все</option>
 <option value="Ozon">Ozon</option>
+<option value="ООО &quot;Яндекс.Маркет&quot;">ООО &quot;Яндекс.Маркет&quot;</option>
 <option value="не указан">Не указано</option></select></label>
     <label>Объект<select data-filter="object"><option value="">Все</option>
 <option value="бревенчатый сруб дома">бревенчатый сруб дома</option>
 <option value="кухонный гарнитур">кухонный гарнитур</option>
 <option value="роллеты, калитка, монтаж">роллеты, калитка, монтаж</option>
+<option value="смартфон">смартфон</option>
 <option value="товар маркетплейса">товар маркетплейса</option></select></label>
     <label>Требование<select data-filter="claims"><option value="">Все</option>
 <option value="compel_transfer">обязать передать товар</option>
 <option value="consumer_fine">штраф 50%</option>
+<option value="damages">убытки</option>
 <option value="expenses">судебные, экспертные и иные расходы</option>
 <option value="moral_damage">компенсация морального вреда</option>
 <option value="penalty">неустойка</option>
@@ -49,6 +52,7 @@
 <option value="Кировская область">Кировская область</option>
 <option value="Мурманская область">Мурманская область</option>
 <option value="Республика Башкортостан">Республика Башкортостан</option>
+<option value="Свердловская область">Свердловская область</option>
 <option value="Удмуртская Республика">Удмуртская Республика</option></select></label>
   </div>
   <div class="filter-actions">
@@ -62,22 +66,23 @@
         <div class="panel">
           <h2>Краткое резюме практики</h2>
           <ul class="summary-list">
-            <li>Дел в выборке: <b>4</b></li>
-            <li>Присуждённые суммы: <b>от 31 556 ₽ до 444 000 ₽; медиана — 250 988 ₽</b></li>
-            <li><span>Результаты:</span> <span class="inline-chips"><button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="partially_satisfied">требования удовлетворены частично <b>2</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="mixed">смешанный результат <b>1</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="satisfied">требования удовлетворены полностью или почти полностью <b>1</b></button></span></li>
+            <li>Дел в выборке: <b>5</b></li>
+            <li>Присуждённые суммы: <b>от 31 556 ₽ до 444 000 ₽; медиана — 200 025 ₽</b></li>
+            <li><span>Результаты:</span> <span class="inline-chips"><button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="satisfied">требования удовлетворены полностью или почти полностью <b>2</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="partially_satisfied">требования удовлетворены частично <b>2</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="mixed">смешанный результат <b>1</b></button></span></li>
           </ul>
           <p class="hint">Примечание: показатели являются не статистикой по всей судебной практике, а сводкой по текущей выборке судебных актов.</p>
         </div>
         <div class="panel">
           <h2>Что обычно требует потребитель</h2>
-          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="penalty">неустойка <b>4</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50% <b>4</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда <b>3</b></button>
+          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="penalty">неустойка <b>5</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50% <b>5</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда <b>4</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты <b>3</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="compel_transfer">обязать передать товар <b>2</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы <b>2</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="compel_transfer">обязать передать товар <b>1</b></button></div>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="damages">убытки <b>1</b></button></div>
         </div>
       </section>
 
@@ -85,6 +90,7 @@
         <div class="panel">
           <h2>Типичные объекты</h2>
           <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="товар маркетплейса">товар маркетплейса <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="смартфон">смартфон <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="кухонный гарнитур">кухонный гарнитур <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="роллеты, калитка, монтаж">роллеты, калитка, монтаж <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="бревенчатый сруб дома">бревенчатый сруб дома <b>1</b></button></div>
@@ -92,13 +98,14 @@
         <div class="panel">
           <h2>Компании и платформы</h2>
           <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="не указан">не указан <b>2</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="Ozon">Ozon <b>1</b></button></div>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="Ozon">Ozon <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО &quot;Яндекс.Маркет&quot;">ООО &quot;Яндекс.Маркет&quot; <b>1</b></button></div>
         </div>
       </section>
 
       <section class="panel">
         <h2>Почему суд удовлетворяет или отказывает</h2>
-        <ul><li>Истец согласился на привлечение реального продавца (ИП ФИО2) в качестве соответчика, что предотвратило полный отказ в…</li><li>Суд признал ООО «Интернет Решения» лишь агрегатором (владельцем платформы), не несущим ответственности за передачу…</li><li>Фактическое ведение предпринимательской деятельности ответчиком без регистрации ИП</li><li>Полное исполнение обязательств покупателем (предоплата внесена)</li><li>Смешанный характер договора (купля-продажа и бытовой подряд), повлиявший на раздельный расчет неустоек.</li><li>Юридически значимое сообщение (претензия) считается доставленным адресату, несмотря на его неполучение (ст. 165.1 ГК).</li></ul>
+        <ul><li>Истец согласился на привлечение реального продавца (ИП ФИО2) в качестве соответчика, что предотвратило полный отказ в…</li><li>Суд признал ООО «Интернет Решения» лишь агрегатором (владельцем платформы), не несущим ответственности за передачу…</li><li>Договор купли-продажи был заключен и оплачен, что наложило на продавца обязательство передать товар.</li><li>Закон о защите прав потребителей и Гражданский кодекс РФ запрещают продавцу в одностороннем порядке отменять…</li><li>Фактическое ведение предпринимательской деятельности ответчиком без регистрации ИП</li><li>Полное исполнение обязательств покупателем (предоплата внесена)</li></ul>
       </section>
 
       <section>
@@ -130,6 +137,36 @@
   <div class="case-links">
     <a class="button case-primary-link" href="../../dela/FuXzeJou9YYT/index.html">Разобрать это дело →</a>
     <a class="source-link" href="https://sudact.ru/regular/doc/FuXzeJou9YYT/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="satisfied"
+  data-company="ООО &quot;Яндекс.Маркет&quot;"
+  data-object="смартфон"
+  data-region="Свердловская область"
+  data-claims="compel_transfer||penalty||damages||moral_damage||consumer_fine">
+  <div class="case-card__header">
+    <div>
+      <h3>Смартфон Samsung Galaxy Z Flip5 8/512 Gb: оплаченный товар не передали</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Свердловская область">Свердловская область</button> <span>· 2024-02-21 · дело 2-2168/2024</span></p>
+    </div>
+    <button type="button" class="result result-satisfied" data-quick-filter="result" data-quick-value="satisfied">удовлетворено</button>
+  </div>
+  <p>Потребитель купил смартфон через приложение Яндекс.Маркет, полностью предоплатив его. Продавец нарушил срок доставки, а затем в одностороннем порядке аннулировал заказ и вернул деньги, сославшись на условия пользовательского соглашения.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>смартфон Samsung Galaxy Z Flip5 8/512 Gb</dd></div>
+    <div><dt>Компания</dt><dd>ООО &quot;Яндекс.Маркет&quot;</dd></div>
+    <div><dt>Присуждено</dt><dd>117 729 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="compel_transfer">обязать передать товар</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="damages">убытки</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Договор купли-продажи был заключен и оплачен, что наложило на продавца обязательство передать товар.</li><li>Закон о защите прав потребителей и Гражданский кодекс РФ запрещают продавцу в одностороннем порядке отменять публичный договор розничной купли-продажи.</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/SpPjP40Ege5v/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/SpPjP40Ege5v/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
