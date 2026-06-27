@@ -25,8 +25,8 @@
     "procedure_type": "civil",
     "audience_segment": "citizen",
     "topic_vertical": "communal_services",
-    "dispute_type_code": "contract_validity_non_zpp",
-    "dispute_type": "ненадлежащее качество предоставления коммунальной услуги электроснабжения",
+    "dispute_type_code": "harm_from_defect_art14",
+    "dispute_type": "возмещение вреда от недостатка товара, работы или услуги",
     "claim_type_codes": [
       "damages",
       "moral_damage",
@@ -190,9 +190,9 @@
     ]
   },
   "publication": {
-    "main_site_fit": false,
-    "index_policy": "hold",
-    "exclude_reason": "contract_validity_or_candidate_situation_requires_human_review",
+    "main_site_fit": true,
+    "index_policy": "index",
+    "exclude_reason": null,
     "ai_generated": true,
     "citations_verified": true,
     "human_review_status": "not_reviewed",

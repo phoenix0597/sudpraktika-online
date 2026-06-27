@@ -72,6 +72,14 @@ PAGES: list[SituationPage] = [
         "Некачественный товар",
     ),
     SituationPage(
+        "proper_quality_goods_exchange_art25",
+        "vozvrat-obmen-kachestvennogo-tovara",
+        "Возврат и обмен товара надлежащего качества: что решил суд",
+        "Товар качественный, но не подошёл по форме, размеру, фасону, расцветке, комплектации или другим потребительским параметрам.",
+        "long_tail",
+        "Возврат качественного товара",
+    ),
+    SituationPage(
         "distance_sale_return_art26_1",
         "vozvrat-tovara-online",
         "Как вернуть товар, купленный онлайн",
@@ -96,6 +104,14 @@ PAGES: list[SituationPage] = [
         "Возврат денег за услугу",
     ),
     SituationPage(
+        "unfair_terms_imposed_services_art16",
+        "navyazannye-uslugi-i-usloviya",
+        "Навязанные услуги и недопустимые условия договора: практика судов",
+        "Потребитель спорит с платными опциями, дополнительными услугами или условиями договора, которые ущемляют его права.",
+        "landing",
+        "Навязанные услуги",
+    ),
+    SituationPage(
         "prepaid_goods_delay_art23_1",
         "oplatili-tovar-ne-peredali",
         "Оплатили товар, но его не передали: что можно взыскать",
@@ -110,6 +126,22 @@ PAGES: list[SituationPage] = [
         "Потребитель заказал работы или услуги (ремонт, установка окон/дверей, изготовление мебели), но они выполнены некачественно или с дефектами.",
         "pillar",
         "Некачественные работы и услуги",
+    ),
+    SituationPage(
+        "consumer_material_damage_art35",
+        "povrezhdenie-veschi-potrebitelya",
+        "Повреждение или утрата вещи потребителя при работах: практика по ст. 35 ЗоЗПП",
+        "Потребитель передал вещь, материал или имущество исполнителю, а в ходе работ оно было повреждено, утрачено или испорчено.",
+        "pillar",
+        "Повреждение вещи при работах",
+    ),
+    SituationPage(
+        "harm_from_defect_art14",
+        "vred-ot-nedostatka",
+        "Вред от недостатка товара, работы или услуги: когда взыскивают ущерб",
+        "Недостаток товара, работы или услуги причинил вред имуществу, здоровью или иным охраняемым интересам потребителя.",
+        "landing",
+        "Вред от недостатка",
     ),
     SituationPage(
         "work_service_delay_art28",
@@ -154,11 +186,54 @@ AMOUNT_ITEM_LABELS = {
 
 
 RELATED = {
-    "goods_defect_art18": ["distance_sale_return_art26_1", "info_violation_art10_12"],
-    "distance_sale_return_art26_1": ["goods_defect_art18", "info_violation_art10_12", "prepaid_goods_delay_art23_1"],
-    "info_violation_art10_12": ["distance_sale_return_art26_1", "service_refusal_art32", "goods_defect_art18"],
-    "service_refusal_art32": ["info_violation_art10_12"],
+    "goods_defect_art18": [
+        "proper_quality_goods_exchange_art25",
+        "distance_sale_return_art26_1",
+        "harm_from_defect_art14",
+        "info_violation_art10_12",
+    ],
+    "proper_quality_goods_exchange_art25": [
+        "goods_defect_art18",
+        "distance_sale_return_art26_1",
+        "info_violation_art10_12",
+    ],
+    "distance_sale_return_art26_1": [
+        "proper_quality_goods_exchange_art25",
+        "goods_defect_art18",
+        "info_violation_art10_12",
+        "prepaid_goods_delay_art23_1",
+    ],
+    "info_violation_art10_12": [
+        "distance_sale_return_art26_1",
+        "unfair_terms_imposed_services_art16",
+        "service_refusal_art32",
+        "goods_defect_art18",
+    ],
+    "service_refusal_art32": [
+        "unfair_terms_imposed_services_art16",
+        "info_violation_art10_12",
+        "work_service_defect_art29",
+    ],
+    "unfair_terms_imposed_services_art16": [
+        "service_refusal_art32",
+        "info_violation_art10_12",
+    ],
     "prepaid_goods_delay_art23_1": ["distance_sale_return_art26_1", "goods_defect_art18"],
+    "work_service_defect_art29": [
+        "consumer_material_damage_art35",
+        "harm_from_defect_art14",
+        "work_service_delay_art28",
+    ],
+    "consumer_material_damage_art35": [
+        "work_service_defect_art29",
+        "harm_from_defect_art14",
+    ],
+    "harm_from_defect_art14": [
+        "goods_defect_art18",
+        "work_service_defect_art29",
+        "consumer_material_damage_art35",
+    ],
+    "work_service_delay_art28": ["work_service_defect_art29", "service_refusal_art32"],
 }
 
 
@@ -1376,7 +1451,7 @@ def render_index(by_cluster: dict[str, list[dict[str, Any]]]) -> str:
   <section class="hero">
     <p class="eyebrow">Судебная практика</p>
     <h1>Первые страницы судебной практики по ЗоЗПП</h1>
-    <p class="lead">Пять страниц-ситуаций собраны из {escape(court_acts_label(total_cases))}: карточки дел, обобщающие показатели, фильтры, рекомендации по выборке и разборы конкретных историй.</p>
+    <p class="lead">Страницы-ситуации собраны из {escape(court_acts_label(total_cases))}: карточки дел, обобщающие показатели, фильтры, рекомендации по выборке и разборы конкретных историй.</p>
   </section>
   <section class="index-grid">
     {''.join(cards)}

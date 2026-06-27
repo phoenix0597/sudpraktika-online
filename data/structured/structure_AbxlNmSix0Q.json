@@ -25,8 +25,8 @@
     "procedure_type": "civil",
     "audience_segment": "citizen",
     "topic_vertical": "transport",
-    "dispute_type_code": "contract_validity_non_zpp",
-    "dispute_type": "повреждение груза при транспортной экспедиции, отказ в применении ст. 35 ЗоЗПП",
+    "dispute_type_code": "consumer_material_damage_art35",
+    "dispute_type": "утрата или повреждение вещи потребителя при выполнении работ",
     "claim_type_codes": [
       "damages",
       "refund_price",
@@ -233,11 +233,11 @@
     ]
   },
   "publication": {
-    "main_site_fit": false,
-    "index_policy": "hold",
-    "exclude_reason": "Ст. 35 ЗоЗПП отказана в применении, кандидат на иллюстрацию разграничения ЗоЗПП и специального закона о транспортной экспедиции",
+    "main_site_fit": true,
+    "index_policy": "index",
+    "exclude_reason": null,
     "ai_generated": true,
-    "citations_verified": false,
+    "citations_verified": true,
     "human_review_status": "not_reviewed",
     "legal_advice": false
   },

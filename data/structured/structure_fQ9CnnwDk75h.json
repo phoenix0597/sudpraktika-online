@@ -25,8 +25,8 @@
     "procedure_type": "civil",
     "audience_segment": "citizen",
     "topic_vertical": "housing_services",
-    "dispute_type_code": "contract_validity_non_zpp",
-    "dispute_type": "вред здоровью при падении на льду на придомовой территории -- ст. 14 ЗоЗПП, ст. 1064 ГК РФ",
+    "dispute_type_code": "harm_from_defect_art14",
+    "dispute_type": "возмещение вреда от недостатка товара, работы или услуги",
     "claim_type_codes": [
       "damages",
       "moral_damage",
@@ -260,11 +260,11 @@
     ]
   },
   "publication": {
-    "main_site_fit": false,
-    "index_policy": "hold",
-    "exclude_reason": "Кандидатная ситуация ст. 14 ЗоЗПП (вред здоровью при ненадлежащем содержании придомовой территории управляющей компанией) -- не вошла в текущий словарь enum. Спор о жилищных услугах с нетипичной конструкцией ст. 14 ЗоЗПП. Требуется ручная проверка.",
+    "main_site_fit": true,
+    "index_policy": "index",
+    "exclude_reason": null,
     "ai_generated": true,
-    "citations_verified": false,
+    "citations_verified": true,
     "human_review_status": "not_reviewed",
     "legal_advice": false
   },

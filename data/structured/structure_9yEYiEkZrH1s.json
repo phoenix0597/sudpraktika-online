@@ -25,8 +25,8 @@
     "procedure_type": "civil",
     "audience_segment": "citizen",
     "topic_vertical": "marketplaces",
-    "dispute_type_code": "contract_validity_non_zpp",
-    "dispute_type": "возврат платы за подключение к программе коллективного страхования в связи с отсутствием согласия заемщика",
+    "dispute_type_code": "unfair_terms_imposed_services_art16",
+    "dispute_type": "навязанные услуги или недопустимые условия договора",
     "claim_type_codes": [
       "refund_price",
       "damages",
@@ -200,11 +200,11 @@
     "arguments_rejected": []
   },
   "publication": {
-    "main_site_fit": false,
-    "index_policy": "hold",
-    "exclude_reason": "contract_validity_or_candidate_situation_requires_human_review",
+    "main_site_fit": true,
+    "index_policy": "index",
+    "exclude_reason": null,
     "ai_generated": true,
-    "citations_verified": false,
+    "citations_verified": true,
     "human_review_status": "not_reviewed",
     "legal_advice": false
   },

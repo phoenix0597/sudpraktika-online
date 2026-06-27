@@ -25,8 +25,8 @@
     "procedure_type": "civil",
     "audience_segment": "citizen",
     "topic_vertical": "repair",
-    "dispute_type_code": "contract_validity_non_zpp",
-    "dispute_type": "некачественный ремонт ноутбука, отказ в ст. 35 ЗоЗПП — ноутбук не утрачен",
+    "dispute_type_code": "consumer_material_damage_art35",
+    "dispute_type": "утрата или повреждение вещи потребителя при выполнении работ",
     "claim_type_codes": [
       "refund_price",
       "damages",
@@ -234,11 +234,11 @@
     ]
   },
   "publication": {
-    "main_site_fit": false,
-    "index_policy": "hold",
-    "exclude_reason": "Ст. 35 ЗоЗПП отказана в применении — кандидат на иллюстрацию разграничения утраты/повреждения и устранимых неисправностей",
+    "main_site_fit": true,
+    "index_policy": "index",
+    "exclude_reason": null,
     "ai_generated": true,
-    "citations_verified": false,
+    "citations_verified": true,
     "human_review_status": "not_reviewed",
     "legal_advice": false
   },

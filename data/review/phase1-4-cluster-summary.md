@@ -12,101 +12,21 @@
 
 | Кластер | Дел | Reviewed | Inferred | Приоритет | Угол страницы |
 |---|---:|---:|---:|---|---|
-| `contract_validity_non_zpp` — Пограничные договорные споры / риск не ЗоЗПП | 75 | 75 | 0 | hold | Дела, которые требуют ручной проверки перед публикацией |
 | `goods_defect_art18` — Товар с недостатком / технически сложный товар | 60 | 60 | 0 | pillar | Что взыскивать и как доказывать недостаток товара |
 | `work_service_defect_art29` — Недостатки работ или услуг | 43 | 43 | 0 | pillar | Некачественные работы: окна, монтаж, изготовление |
 | `service_refusal_art32` — Отказ от услуги и возврат денег | 35 | 35 | 0 | pillar | Возврат оплаты за услуги, курсы, страховки и сервисы |
 | `info_violation_art10_12` — Недостоверная или неполная информация о товаре/продавце | 33 | 33 | 0 | pillar | Ошибки в цене, продавце, свойствах товара и последствия для иска |
+| `contract_validity_non_zpp` — Пограничные договорные споры / риск не ЗоЗПП | 30 | 30 | 0 | hold | Дела, которые требуют ручной проверки перед публикацией |
+| `consumer_material_damage_art35` — Утрата или повреждение вещи потребителя при выполнении работ | 23 | 23 | 0 | pillar | Что взыскивают при повреждении вещи, переданной исполнителю |
 | `prepaid_goods_delay_art23_1` — Оплаченный товар не передали или задержали | 18 | 18 | 0 | pillar | Что делать, если заказ оплачен, но товар не передают |
 | `work_service_delay_art28` — Нарушение сроков работ или услуг | 15 | 15 | 0 | pillar | Просрочка работ, монтажа или изготовления |
 | `distance_sale_return_art26_1` — Дистанционная продажа: отказ от товара и возврат денег | 12 | 12 | 0 | pillar | Когда можно вернуть товар, купленный онлайн |
+| `unfair_terms_imposed_services_art16` — Недопустимые условия договора и навязанные услуги | 11 | 11 | 0 | pillar | Как суды оценивают навязанные услуги и ущемляющие условия договора |
+| `harm_from_defect_art14` — Вред от недостатка товара, работы или услуги | 9 | 9 | 0 | landing | Возмещение вреда имуществу, жизни или здоровью из-за недостатка |
 | `non_consumer_hold` — Не потребительский спор | 6 | 6 | 0 | hold | Исключить из основного индекса ЗоЗПП-сайта |
+| `proper_quality_goods_exchange_art25` — Обмен или возврат товара надлежащего качества | 2 | 2 | 0 | long_tail | Когда можно вернуть или обменять качественный товар, который не подошёл |
 
 ## Кластеры по делам
-
-### `contract_validity_non_zpp` — Пограничные договорные споры / риск не ЗоЗПП
-
-- Дел: 75
-- Приоритет: `hold`
-- Угол будущей страницы: Дела, которые требуют ручной проверки перед публикацией
-
-| docid | объект/компания | результат | уверенность |
-|---|---|---|---|
-| `1RxwxVY6Q3YQ` | кредит / ПАО Почта Банк | satisfied | reviewed |
-| `1WquChZlLAlg` | бытовое обслуживание / ООО «Созвездие» | satisfied | reviewed |
-| `2CFuVIPm27d0` | коммунальные услуги / ТСЖ «Лига» | rejected | reviewed |
-| `3mGKVaOIJ3g8` | шуба / ИП ФИО3 | partially_satisfied | reviewed |
-| `5D14XXTO7DLV` | дополнительные услуги при кредитовании / Почта Банк | partially_satisfied | reviewed |
-| `7ltNyhBxj85V` | car / ТрансТехСервис | rejected | reviewed |
-| `9xUCtLJ9m3HR` | ремонт бытовой техники / — | satisfied | reviewed |
-| `9yEYiEkZrH1s` | коллективное страхование / ВТБ | partially_satisfied | reviewed |
-| `A0LlEwfLCJbW` | коллективное страхование / ВТБ | partially_satisfied | reviewed |
-| `AbxlNmSix0Q` | транспортная экспедиция / ООО «Деловые линии» | partially_satisfied | reviewed |
-| `B6m6axFiG5Up` | ремонт бытовой техники / ИП ФИО1 (сервисный центр «Сота») | partially_satisfied | reviewed |
-| `BtKD92kZ27LA` | ремонт бытовой техники / ООО «Адамант» | partially_satisfied | reviewed |
-| `C9SrxQGQwsxa` | общественное питание / ООО «Корпорация питания» | satisfied | reviewed |
-| `D1fAmwQXk3d` | химчистка / ООО «Кайзер» | partially_satisfied | reviewed |
-| `DnDKACLnBZ7` | химчистка / ИП ФИО2 (Евро химчистка «ЛЕДА») | partially_satisfied | reviewed |
-| `E0AuTM2x496w` | дополнительные услуги автосалона / Авто Ритейл Диамант | rejected | reviewed |
-| `EVaTwapXFJ6W` | ремонт бытовой техники / ИП ФИО2 (сервисный центр «Help my Apple») | partially_satisfied | reviewed |
-| `GMjXio3dnCrR` | газовый баллон / ООО «Легион» | rejected | reviewed |
-| `HZZImaYBl1oQ` | массажер / ООО «Мистерия» | hold | reviewed |
-| `Its4p1mA2Lbq` | ремонт бытовой техники / ООО «Сеть Связной» (бывш. «Евросеть-Ритейл») | partially_satisfied | reviewed |
-| `K4vajruoDnd1` | коллективное страхование / Совкомбанк | rejected | reviewed |
-| `K5LBBWYaIFUW` | услуги связи и интерактивного телевидения / ПАО Ростелеком | rejected | reviewed |
-| `KGxYKfv5qQNh` | услуги автосервиса / — | satisfied | reviewed |
-| `L6OX0C4vODr8` | развлекательные услуги / фитнес и спорт / ООО «Энергия Спорта» | partially_satisfied | reviewed |
-| `LEM5MFXCKK6L` | смартфон / Wildberries | rejected | reviewed |
-| `OiVXdUIOiRYW` | химчистка / ИП ФИО2 (прачечная-химчистка «Белье мое») | rejected | reviewed |
-| `P4XHDMeet1NZ` | Финансовые услуги / ПАО «Почта Банк» | hold | reviewed |
-| `QWaAvZwe4Qx5` | кредит / ПАО Восточный экспресс банк | mixed | reviewed |
-| `SW8mtYL4Ca5` | кредитное страхование / Альфа-Банк | rejected | reviewed |
-| `TDpRFW3KQ4xW` | услуга по содержанию общего имущества МКД / ООО УК «Жилищник-25» | partially_satisfied | reviewed |
-| `TRJAjBS3H41P` | автомобиль / ПАО СК «Росгосстрах» | partially_satisfied | reviewed |
-| `UMSVHkiyiN6Q` | коммунальные услуги / ОАО «Кузбассэнергосбыт» | satisfied | reviewed |
-| `VvdgwtPLLRWO` | Финансовые услуги / ПАО «Банк ВТБ» | hold | reviewed |
-| `ZFESkIkRNMgy` | химчистка / ООО химчистка «Блеск» | partially_satisfied | reviewed |
-| `ZwT0slBVSQm` | — / АО «Донэнерго» | hold | reviewed |
-| `awc1JLDcrjU1` | услуги автошколы / — | rejected | reviewed |
-| `df0QBtIxrbYt` | — / САО «РЕСО-Гарантия» (Ставропольский филиал) | partially_satisfied | reviewed |
-| `e43iAjG2IkUx` | — / ООО «ОМЕГА» | satisfied | reviewed |
-| `eNap3egF8yYP` | общественное питание / ООО «Система» | partially_satisfied | reviewed |
-| `ebtVncIUeTZ` | инвестиционное страхование жизни / Сбербанк страхование жизни | rejected | reviewed |
-| `etduQEx0I5Wv` | услуга шиномонтажа / ООО «Торговый Дом «АвтоОпт» | partially_satisfied | reviewed |
-| `fQ9CnnwDk75h` | услуги управляющей компании / — | partially_satisfied | reviewed |
-| `fej8tAz2p8NP` | — / — | hold | reviewed |
-| `flVxOoBiwCr8` | услуги связи / Ростелеком | rejected | reviewed |
-| `g2mB62RIjp6Q` | — / — | hold | reviewed |
-| `hDVwlrm5jIbg` | — / ООО «Мособлбыт-Мытищи» (химчистка «Диана») | partially_satisfied | reviewed |
-| `iX3Ly6r8T7WO` | развлекательные услуги / водные аттракционы / ООО «Аквапарк» | partially_satisfied | reviewed |
-| `iiFrae5lHbdp` | — / ООО «ЕвроЧистка» | partially_satisfied | reviewed |
-| `j10Le5fy4ebd` | — / ИП ФИО5 (СТО «RENOSTART») | partially_satisfied | reviewed |
-| `jxrhPThJ8fL4` | — / — | hold | reviewed |
-| `lofHMAbow961` | — / ООО «Лаваджио» | partially_satisfied | reviewed |
-| `luQO6RgzTBmC` | — / ИП ФИО3 (Забалуев Олег Александрович) | satisfied | reviewed |
-| `lxw63q3TtAZj` | бонусные баллы / Мегамаркет / СберСпасибо | satisfied | reviewed |
-| `q0Zr7E4oBOWH` | оборудование связи / ПАО Ростелеком | rejected | reviewed |
-| `qING46DO7tmN` | service / Связной | hold | reviewed |
-| `qhVLhQxpwYYw` | — / — | hold | reviewed |
-| `sXx6jwskcamO` | — / ИП ФИО2 | partially_satisfied | reviewed |
-| `t4XCCvkBMnU1` | — / ИП ФИО2 (Sneak'n'Fresh) | rejected | reviewed |
-| `uBSNUUmLfvNx` | — / — | hold | reviewed |
-| `uNnAL7AINnmK` | — / — | hold | reviewed |
-| `uPBnfGYfIAmK` | — / ООО «Созвездие» (Кронштадт) | partially_satisfied | reviewed |
-| `uhug73HSdyYX` | — / — | hold | reviewed |
-| `wAK9HEDeFtbb` | — / — | hold | reviewed |
-| `wKVnsHe6BpbT` | — / ООО «Ритейл Групп» | partially_satisfied | reviewed |
-| `wnrZsOjKQVWt` | мобильная связь / ПАО «Мобильные ТелеСистемы» | rejected | reviewed |
-| `xFynck7nm1gW` | — / — | hold | reviewed |
-| `xaPFd5m1V86i` | — / — | hold | reviewed |
-| `xqYAVqrmG6oO` | — / — | hold | reviewed |
-| `xwrG3d38fUVg` | цифровая техника / СберМегаМаркет | hold | reviewed |
-| `ygH0ZmEWXtK` | — / — | hold | reviewed |
-| `ypdiIjtZacHr` | — / — | hold | reviewed |
-| `z78ERmxhRjxq` | — / — | hold | reviewed |
-| `zJyif1zBXuHu` | — / — | hold | reviewed |
-| `zfvhZ7h0qIxW` | — / — | hold | reviewed |
-| `zhmojGgAwwrx` | — / — | hold | reviewed |
 
 ### `goods_defect_art18` — Товар с недостатком / технически сложный товар
 
@@ -315,6 +235,77 @@
 | `yQ8qgPoesvWJ` | видеокарта / Ozon | rejected | reviewed |
 | `zCfOD70dZF1` | вибромассажная накидка / — | satisfied | reviewed |
 
+### `contract_validity_non_zpp` — Пограничные договорные споры / риск не ЗоЗПП
+
+- Дел: 30
+- Приоритет: `hold`
+- Угол будущей страницы: Дела, которые требуют ручной проверки перед публикацией
+
+| docid | объект/компания | результат | уверенность |
+|---|---|---|---|
+| `7ltNyhBxj85V` | car / ТрансТехСервис | rejected | reviewed |
+| `HZZImaYBl1oQ` | массажер / ООО «Мистерия» | hold | reviewed |
+| `LEM5MFXCKK6L` | смартфон / Wildberries | rejected | reviewed |
+| `P4XHDMeet1NZ` | Финансовые услуги / ПАО «Почта Банк» | hold | reviewed |
+| `TRJAjBS3H41P` | автомобиль / ПАО СК «Росгосстрах» | partially_satisfied | reviewed |
+| `VvdgwtPLLRWO` | Финансовые услуги / ПАО «Банк ВТБ» | hold | reviewed |
+| `ZwT0slBVSQm` | — / АО «Донэнерго» | hold | reviewed |
+| `df0QBtIxrbYt` | — / САО «РЕСО-Гарантия» (Ставропольский филиал) | partially_satisfied | reviewed |
+| `fej8tAz2p8NP` | — / — | hold | reviewed |
+| `flVxOoBiwCr8` | услуги связи / Ростелеком | rejected | reviewed |
+| `g2mB62RIjp6Q` | — / — | hold | reviewed |
+| `jxrhPThJ8fL4` | — / — | hold | reviewed |
+| `lxw63q3TtAZj` | бонусные баллы / Мегамаркет / СберСпасибо | satisfied | reviewed |
+| `qING46DO7tmN` | service / Связной | hold | reviewed |
+| `qhVLhQxpwYYw` | — / — | hold | reviewed |
+| `uBSNUUmLfvNx` | — / — | hold | reviewed |
+| `uNnAL7AINnmK` | — / — | hold | reviewed |
+| `uhug73HSdyYX` | — / — | hold | reviewed |
+| `wAK9HEDeFtbb` | — / — | hold | reviewed |
+| `wnrZsOjKQVWt` | мобильная связь / ПАО «Мобильные ТелеСистемы» | rejected | reviewed |
+| `xFynck7nm1gW` | — / — | hold | reviewed |
+| `xaPFd5m1V86i` | — / — | hold | reviewed |
+| `xqYAVqrmG6oO` | — / — | hold | reviewed |
+| `xwrG3d38fUVg` | цифровая техника / СберМегаМаркет | hold | reviewed |
+| `ygH0ZmEWXtK` | — / — | hold | reviewed |
+| `ypdiIjtZacHr` | — / — | hold | reviewed |
+| `z78ERmxhRjxq` | — / — | hold | reviewed |
+| `zJyif1zBXuHu` | — / — | hold | reviewed |
+| `zfvhZ7h0qIxW` | — / — | hold | reviewed |
+| `zhmojGgAwwrx` | — / — | hold | reviewed |
+
+### `consumer_material_damage_art35` — Утрата или повреждение вещи потребителя при выполнении работ
+
+- Дел: 23
+- Приоритет: `pillar`
+- Угол будущей страницы: Что взыскивают при повреждении вещи, переданной исполнителю
+
+| docid | объект/компания | результат | уверенность |
+|---|---|---|---|
+| `1WquChZlLAlg` | бытовое обслуживание / ООО «Созвездие» | satisfied | reviewed |
+| `9xUCtLJ9m3HR` | ремонт бытовой техники / — | satisfied | reviewed |
+| `AbxlNmSix0Q` | транспортная экспедиция / ООО «Деловые линии» | partially_satisfied | reviewed |
+| `B6m6axFiG5Up` | ремонт бытовой техники / ИП ФИО1 (сервисный центр «Сота») | partially_satisfied | reviewed |
+| `BtKD92kZ27LA` | ремонт бытовой техники / ООО «Адамант» | partially_satisfied | reviewed |
+| `D1fAmwQXk3d` | химчистка / ООО «Кайзер» | partially_satisfied | reviewed |
+| `DnDKACLnBZ7` | химчистка / ИП ФИО2 (Евро химчистка «ЛЕДА») | partially_satisfied | reviewed |
+| `EVaTwapXFJ6W` | ремонт бытовой техники / ИП ФИО2 (сервисный центр «Help my Apple») | partially_satisfied | reviewed |
+| `Its4p1mA2Lbq` | ремонт бытовой техники / ООО «Сеть Связной» (бывш. «Евросеть-Ритейл») | partially_satisfied | reviewed |
+| `KGxYKfv5qQNh` | услуги автосервиса / — | satisfied | reviewed |
+| `OiVXdUIOiRYW` | химчистка / ИП ФИО2 (прачечная-химчистка «Белье мое») | rejected | reviewed |
+| `ZFESkIkRNMgy` | химчистка / ООО химчистка «Блеск» | partially_satisfied | reviewed |
+| `e43iAjG2IkUx` | — / ООО «ОМЕГА» | satisfied | reviewed |
+| `etduQEx0I5Wv` | услуга шиномонтажа / ООО «Торговый Дом «АвтоОпт» | partially_satisfied | reviewed |
+| `hDVwlrm5jIbg` | — / ООО «Мособлбыт-Мытищи» (химчистка «Диана») | partially_satisfied | reviewed |
+| `iiFrae5lHbdp` | — / ООО «ЕвроЧистка» | partially_satisfied | reviewed |
+| `j10Le5fy4ebd` | — / ИП ФИО5 (СТО «RENOSTART») | partially_satisfied | reviewed |
+| `lofHMAbow961` | — / ООО «Лаваджио» | partially_satisfied | reviewed |
+| `luQO6RgzTBmC` | — / ИП ФИО3 (Забалуев Олег Александрович) | satisfied | reviewed |
+| `sXx6jwskcamO` | — / ИП ФИО2 | partially_satisfied | reviewed |
+| `t4XCCvkBMnU1` | — / ИП ФИО2 (Sneak'n'Fresh) | rejected | reviewed |
+| `uPBnfGYfIAmK` | — / ООО «Созвездие» (Кронштадт) | partially_satisfied | reviewed |
+| `wKVnsHe6BpbT` | — / ООО «Ритейл Групп» | partially_satisfied | reviewed |
+
 ### `prepaid_goods_delay_art23_1` — Оплаченный товар не передали или задержали
 
 - Дел: 18
@@ -387,6 +378,44 @@
 | `hV75aLss4lWU` | одежда / Lamoda | partially_satisfied | reviewed |
 | `pWN4OmLFKfm8` | беговая дорожка / ООО «Ситилинк» | partially_satisfied | reviewed |
 
+### `unfair_terms_imposed_services_art16` — Недопустимые условия договора и навязанные услуги
+
+- Дел: 11
+- Приоритет: `pillar`
+- Угол будущей страницы: Как суды оценивают навязанные услуги и ущемляющие условия договора
+
+| docid | объект/компания | результат | уверенность |
+|---|---|---|---|
+| `1RxwxVY6Q3YQ` | кредит / ПАО Почта Банк | satisfied | reviewed |
+| `5D14XXTO7DLV` | дополнительные услуги при кредитовании / Почта Банк | partially_satisfied | reviewed |
+| `9yEYiEkZrH1s` | коллективное страхование / ВТБ | partially_satisfied | reviewed |
+| `A0LlEwfLCJbW` | коллективное страхование / ВТБ | partially_satisfied | reviewed |
+| `E0AuTM2x496w` | дополнительные услуги автосалона / Авто Ритейл Диамант | rejected | reviewed |
+| `K4vajruoDnd1` | коллективное страхование / Совкомбанк | rejected | reviewed |
+| `K5LBBWYaIFUW` | услуги связи и интерактивного телевидения / ПАО Ростелеком | rejected | reviewed |
+| `QWaAvZwe4Qx5` | кредит / ПАО Восточный экспресс банк | mixed | reviewed |
+| `SW8mtYL4Ca5` | кредитное страхование / Альфа-Банк | rejected | reviewed |
+| `ebtVncIUeTZ` | инвестиционное страхование жизни / Сбербанк страхование жизни | rejected | reviewed |
+| `q0Zr7E4oBOWH` | оборудование связи / ПАО Ростелеком | rejected | reviewed |
+
+### `harm_from_defect_art14` — Вред от недостатка товара, работы или услуги
+
+- Дел: 9
+- Приоритет: `landing`
+- Угол будущей страницы: Возмещение вреда имуществу, жизни или здоровью из-за недостатка
+
+| docid | объект/компания | результат | уверенность |
+|---|---|---|---|
+| `2CFuVIPm27d0` | коммунальные услуги / ТСЖ «Лига» | rejected | reviewed |
+| `C9SrxQGQwsxa` | общественное питание / ООО «Корпорация питания» | satisfied | reviewed |
+| `L6OX0C4vODr8` | развлекательные услуги / фитнес и спорт / ООО «Энергия Спорта» | partially_satisfied | reviewed |
+| `TDpRFW3KQ4xW` | услуга по содержанию общего имущества МКД / ООО УК «Жилищник-25» | partially_satisfied | reviewed |
+| `UMSVHkiyiN6Q` | коммунальные услуги / ОАО «Кузбассэнергосбыт» | satisfied | reviewed |
+| `awc1JLDcrjU1` | услуги автошколы / — | rejected | reviewed |
+| `eNap3egF8yYP` | общественное питание / ООО «Система» | partially_satisfied | reviewed |
+| `fQ9CnnwDk75h` | услуги управляющей компании / — | partially_satisfied | reviewed |
+| `iX3Ly6r8T7WO` | развлекательные услуги / водные аттракционы / ООО «Аквапарк» | partially_satisfied | reviewed |
+
 ### `non_consumer_hold` — Не потребительский спор
 
 - Дел: 6
@@ -402,14 +431,25 @@
 | `qNPGP4ky266p` | поставка товара / Ozon | hold | reviewed |
 | `xWGVwR38DWrZ` | компьютерные комплектующие / ООО «ДНС Ритейл» | hold | reviewed |
 
+### `proper_quality_goods_exchange_art25` — Обмен или возврат товара надлежащего качества
+
+- Дел: 2
+- Приоритет: `long_tail`
+- Угол будущей страницы: Когда можно вернуть или обменять качественный товар, который не подошёл
+
+| docid | объект/компания | результат | уверенность |
+|---|---|---|---|
+| `3mGKVaOIJ3g8` | шуба / ИП ФИО3 | partially_satisfied | reviewed |
+| `GMjXio3dnCrR` | газовый баллон / ООО «Легион» | rejected | reviewed |
+
 ## Практический вывод
 
 1. Основной пиллар для первой версии — дела о недостатках товара: это самый крупный и понятный пользователю кластер.
 2. Отдельные посадочные страницы стоит готовить по дистанционной продаже, задержке/непередаче оплаченного товара, информационным нарушениям и отказу от услуг.
 3. Кластеры работ/услуг уже пригодны для отдельных страниц; их нужно расширять точечно по подтипам, регионам и судам.
 4. Дела с `hold` не смешивать с основным гражданским ЗоЗПП-индексом.
-5. Кластеризация строится по проверенным enum-кодам из JSON; новые кандидатные ситуации без утверждённого кода остаются в `hold` до отдельного решения.
+5. Кластеризация строится по проверенным enum-кодам из JSON; новые ситуации добавляются в словарь только после отдельного решения и затем участвуют в общем индексе как обычные кластеры.
 
 ## Следующий шаг
 
-Проверить, какие кандидатные ситуации из `hold` пора переводить в словарь, и только после этого генерировать новые страницы-ситуации.
+Продолжать добор слабых и перспективных кластеров; новые неизвестные ситуации фиксировать как кандидаты и не смешивать с существующими кодами без отдельного решения.

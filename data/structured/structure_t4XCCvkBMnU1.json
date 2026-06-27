@@ -25,8 +25,8 @@
     "procedure_type": "civil",
     "audience_segment": "citizen",
     "topic_vertical": "marketplaces",
-    "dispute_type_code": "contract_validity_non_zpp",
-    "dispute_type": "спор вне основного перечня ЗоЗПП (ст. 35, 14, 16, 25)",
+    "dispute_type_code": "consumer_material_damage_art35",
+    "dispute_type": "утрата или повреждение вещи потребителя при выполнении работ",
     "claim_type_codes": [
       "damages",
       "expenses"
@@ -107,11 +107,11 @@
     "arguments_rejected": []
   },
   "publication": {
-    "main_site_fit": false,
-    "index_policy": "hold",
-    "exclude_reason": "Отрицательный прецедент по ст. 35 ЗоЗПП — полный отказ потребителю. Химчистка обуви. Дополнительная экспертиза перевернула дело: свойства обуви утрачены до чистки. Тип не входит в основной перечень enum.",
+    "main_site_fit": true,
+    "index_policy": "index",
+    "exclude_reason": null,
     "ai_generated": true,
-    "citations_verified": false,
+    "citations_verified": true,
     "human_review_status": "not_reviewed",
     "legal_advice": false
   },

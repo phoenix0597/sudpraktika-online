@@ -2,80 +2,80 @@
 FGX1FyE5nZNv,structured,info_violation_art10_12,satisfied,index,True,170100.0,
 W33FU0lFLlZJ,structured,info_violation_art10_12,satisfied,index,True,25983.5,
 JhSL3cL8u4oB,structured,goods_defect_art18,rejected,index,True,0.0,
-3mGKVaOIJ3g8,hold,contract_validity_non_zpp,partially_satisfied,hold,False,151332.0,contract_validity_or_candidate_situation_requires_human_review
+3mGKVaOIJ3g8,structured,proper_quality_goods_exchange_art25,partially_satisfied,index,True,151332.0,promoted_after_enum_expansion_2026-06-28
 a39bcsyWpdHv,structured,goods_defect_art18,partially_satisfied,index,True,57916.0,
 urAwlIOo5lgF,structured,goods_defect_art18,satisfied,index,True,149508.25,
 MaqpPxOPwzWF,structured,goods_defect_art18,satisfied,index,True,669440.0,
-GMjXio3dnCrR,hold,contract_validity_non_zpp,rejected,hold,False,0.0,contract_validity_or_candidate_situation_requires_human_review
+GMjXio3dnCrR,structured,proper_quality_goods_exchange_art25,rejected,index,True,0.0,promoted_after_enum_expansion_2026-06-28
 85sGjvBZd3lR,structured,goods_defect_art18,partially_satisfied,index,True,5439397.94,
 0Y1JyoZbl3HL,structured,goods_defect_art18,partially_satisfied,index,True,28928.0,
 envlLlHKNexZ,structured,info_violation_art10_12,partially_satisfied,index,True,28789.43,
 TmsdMbd6SWbB,structured,service_refusal_art32,partially_satisfied,index,True,141922.0,
-ebtVncIUeTZ,hold,contract_validity_non_zpp,rejected,hold,False,0.0,contract_validity_or_candidate_situation_requires_human_review
-SW8mtYL4Ca5,hold,contract_validity_non_zpp,rejected,hold,False,0.0,contract_validity_or_candidate_situation_requires_human_review
-A0LlEwfLCJbW,hold,contract_validity_non_zpp,partially_satisfied,hold,False,144232.26,contract_validity_or_candidate_situation_requires_human_review
-9yEYiEkZrH1s,hold,contract_validity_non_zpp,partially_satisfied,hold,False,86700.34,contract_validity_or_candidate_situation_requires_human_review
-K4vajruoDnd1,hold,contract_validity_non_zpp,rejected,hold,False,0.0,contract_validity_or_candidate_situation_requires_human_review
-E0AuTM2x496w,hold,contract_validity_non_zpp,rejected,hold,False,0.0,contract_validity_or_candidate_situation_requires_human_review
-5D14XXTO7DLV,hold,contract_validity_non_zpp,partially_satisfied,hold,False,,contract_validity_or_candidate_situation_requires_human_review
+ebtVncIUeTZ,structured,unfair_terms_imposed_services_art16,rejected,index,True,0.0,promoted_after_enum_expansion_2026-06-28
+SW8mtYL4Ca5,structured,unfair_terms_imposed_services_art16,rejected,index,True,0.0,promoted_after_enum_expansion_2026-06-28
+A0LlEwfLCJbW,structured,unfair_terms_imposed_services_art16,partially_satisfied,index,True,144232.26,promoted_after_enum_expansion_2026-06-28
+9yEYiEkZrH1s,structured,unfair_terms_imposed_services_art16,partially_satisfied,index,True,86700.34,promoted_after_enum_expansion_2026-06-28
+K4vajruoDnd1,structured,unfair_terms_imposed_services_art16,rejected,index,True,0.0,promoted_after_enum_expansion_2026-06-28
+E0AuTM2x496w,structured,unfair_terms_imposed_services_art16,rejected,index,True,0.0,promoted_after_enum_expansion_2026-06-28
+5D14XXTO7DLV,structured,unfair_terms_imposed_services_art16,partially_satisfied,index,True,,promoted_after_enum_expansion_2026-06-28
 vEYzUwo3klZt,structured,service_refusal_art32,partially_satisfied,index,True,300000.0,
 CsVce7Qv37gw,structured,service_refusal_art32,rejected,index,True,0.0,
 pxYJYWBZTG5j,structured,service_refusal_art32,rejected,index,True,0.0,
-QWaAvZwe4Qx5,hold,contract_validity_non_zpp,mixed,hold,False,,contract_validity_or_candidate_situation_requires_human_review
+QWaAvZwe4Qx5,structured,unfair_terms_imposed_services_art16,mixed,index,True,,promoted_after_enum_expansion_2026-06-28
 jOo3LEgnEbQZ,structured,service_refusal_art32,satisfied,index,True,181559.16,
 sXOzeo6TOBl,structured,service_refusal_art32,rejected,index,True,0.0,
 4lxVIPUNKglJ,structured,service_refusal_art32,partially_satisfied,index,True,111765.64,
 wcc2Nwwl3n6V,structured,service_refusal_art32,partially_satisfied,index,True,287303.9,
 9xqNlIbQlyxm,structured,service_refusal_art32,rejected,index,True,0.0,
-K5LBBWYaIFUW,hold,contract_validity_non_zpp,rejected,hold,False,0.0,candidate_unfair_terms_imposed_services_art16_requires_enum_decision
+K5LBBWYaIFUW,structured,unfair_terms_imposed_services_art16,rejected,index,True,0.0,promoted_after_enum_expansion_2026-06-28
 6OMEZDw1B3l4,structured,service_refusal_art32,rejected,index,True,0.0,
 ea0SgeM6fU6h,structured,info_violation_art10_12,partially_satisfied,index,True,7500.0,
-1RxwxVY6Q3YQ,hold,contract_validity_non_zpp,satisfied,hold,False,189393.98,"Спор о навязанном кредитном страховании (финансовые услуги), не относится к пилотному сегменту маркетплейсов и услуг."
-q0Zr7E4oBOWH,hold,contract_validity_non_zpp,rejected,hold,False,19179.24,contract_validity_or_candidate_situation_requires_human_review
+1RxwxVY6Q3YQ,structured,unfair_terms_imposed_services_art16,satisfied,index,True,189393.98,promoted_after_enum_expansion_2026-06-28
+q0Zr7E4oBOWH,structured,unfair_terms_imposed_services_art16,rejected,index,True,19179.24,promoted_after_enum_expansion_2026-06-28
 IGatj9CndNrz,structured,work_service_defect_art29,partially_satisfied,index,True,119257.55,
 17KhMs8uDxmn,structured,work_service_defect_art29,partially_satisfied,index,True,680982.0,
-UMSVHkiyiN6Q,hold,contract_validity_non_zpp,satisfied,hold,False,82257.0,contract_validity_or_candidate_situation_requires_human_review
+UMSVHkiyiN6Q,structured,harm_from_defect_art14,satisfied,index,True,82257.0,promoted_after_enum_expansion_2026-06-28
 bgSVj285E3ZP,error,,,,,,no_raw_or_no_structure
-C9SrxQGQwsxa,hold,contract_validity_non_zpp,satisfied,hold,False,36800.03,contract_validity_or_candidate_situation_requires_human_review
-eNap3egF8yYP,hold,contract_validity_non_zpp,partially_satisfied,hold,False,47518.92,contract_validity_or_candidate_situation_requires_human_review
-2CFuVIPm27d0,hold,contract_validity_non_zpp,rejected,hold,False,0.0,contract_validity_or_candidate_situation_requires_human_review
-TDpRFW3KQ4xW,hold,contract_validity_non_zpp,partially_satisfied,hold,False,266949,contract_validity_or_candidate_situation_requires_human_review
+C9SrxQGQwsxa,structured,harm_from_defect_art14,satisfied,index,True,36800.03,promoted_after_enum_expansion_2026-06-28
+eNap3egF8yYP,structured,harm_from_defect_art14,partially_satisfied,index,True,47518.92,promoted_after_enum_expansion_2026-06-28
+2CFuVIPm27d0,structured,harm_from_defect_art14,rejected,index,True,0.0,promoted_after_enum_expansion_2026-06-28
+TDpRFW3KQ4xW,structured,harm_from_defect_art14,partially_satisfied,index,True,266949,promoted_after_enum_expansion_2026-06-28
 rzLiynLmxaxN,structured,work_service_defect_art29,partially_satisfied,index,True,272465.4,
 k2cPUTq3HDrX,structured,work_service_defect_art29,partially_satisfied,index,True,81050.0,
 PRsbw5Saq5VW,structured,work_service_defect_art29,partially_satisfied,index,True,40033.0,
 djw9QhNugpNF,structured,work_service_defect_art29,partially_satisfied,index,True,157841.5,
-iX3Ly6r8T7WO,hold,contract_validity_non_zpp,partially_satisfied,hold,False,22500.0,contract_validity_or_candidate_situation_requires_human_review
+iX3Ly6r8T7WO,structured,harm_from_defect_art14,partially_satisfied,index,True,22500.0,promoted_after_enum_expansion_2026-06-28
 ubkSUbequjg9,structured,work_service_defect_art29,partially_satisfied,index,True,60940.0,
-L6OX0C4vODr8,hold,contract_validity_non_zpp,partially_satisfied,hold,False,391861.96,contract_validity_or_candidate_situation_requires_human_review
+L6OX0C4vODr8,structured,harm_from_defect_art14,partially_satisfied,index,True,391861.96,promoted_after_enum_expansion_2026-06-28
 trH3J3RlerN5,structured,work_service_defect_art29,partially_satisfied,index,True,676844.0,
 i0B35yZwIzoX,structured,work_service_defect_art29,partially_satisfied,index,True,67329.3,
 52yel0MbTAQv,structured,work_service_defect_art29,partially_satisfied,index,True,154792.68,
-awc1JLDcrjU1,hold,contract_validity_non_zpp,rejected,hold,False,0,"Кандидатная ситуация ст. 14 ЗоЗПП (вред имуществу при оказании услуг автошколы) -- отказ в иске, случай с пропуском сроков и коронавирусными ограничениями, не вошёл в текущий словарь enum. Требуется ручная проверка целесообразности публикации."
-fQ9CnnwDk75h,hold,contract_validity_non_zpp,partially_satisfied,hold,False,194027.28,Кандидатная ситуация ст. 14 ЗоЗПП (вред здоровью при ненадлежащем содержании придомовой территории управляющей компанией) -- не вошла в текущий словарь enum. Спор о жилищных услугах с нетипичной конструкцией ст. 14 ЗоЗПП. Требуется ручная проверка.
-etduQEx0I5Wv,hold,contract_validity_non_zpp,partially_satisfied,hold,False,157136,Кандидат на новый кластер ст. 35 ЗоЗПП (consumer_material_damage_art35) — код не добавлен в словарь без подтверждения пользователя
-KGxYKfv5qQNh,hold,contract_validity_non_zpp,satisfied,hold,False,1038300,Кандидатная ситуация ст. 35 ЗоЗПП (утрата автомобиля в автосервисе при пожаре с субсидиарной ответственностью директора) -- не вошла в текущий словарь enum. Требуется ручная проверка целесообразности публикации.
-OiVXdUIOiRYW,hold,contract_validity_non_zpp,rejected,hold,False,0,Ст. 35 ЗоЗПП отказана — важный прецедент: скрытые производственные дефекты ≠ вина химчистки
-iiFrae5lHbdp,hold,contract_validity_non_zpp,partially_satisfied,hold,False,57000,Ст. 35 ЗоЗПП (утрата вещи при окраске мехового изделия) не входит в основной enum.
-e43iAjG2IkUx,hold,contract_validity_non_zpp,satisfied,hold,False,101103,Ст. 35 ЗоЗПП (повреждение вещи при ремонте) не входит в основной enum. Телефон передан в собственность исполнителя.
-D1fAmwQXk3d,hold,contract_validity_non_zpp,partially_satisfied,hold,False,145455.0,Ситуация ст. 35 ЗоЗПП (повреждение и утрата вещи при химчистке) — кандидат на добавление в enum dictionary
-j10Le5fy4ebd,hold,contract_validity_non_zpp,partially_satisfied,hold,False,0,"Ст. 35 ЗоЗПП (освобождение исполнителя при предупреждении о рисках деталей заказчика). Полный отказ. Ключевой прецедент для ситуаций, когда клиент сам приносит запчасти."
-lofHMAbow961,hold,contract_validity_non_zpp,partially_satisfied,hold,False,133024,"Ст. 35 ЗоЗПП (повреждение вещи при химчистке). Апелляционное определение, оставившее решение первой инстанции в силе."
-t4XCCvkBMnU1,hold,contract_validity_non_zpp,rejected,hold,False,0,Отрицательный прецедент по ст. 35 ЗоЗПП — полный отказ потребителю. Химчистка обуви. Дополнительная экспертиза перевернула дело: свойства обуви утрачены до чистки. Тип не входит в основной перечень enum.
+awc1JLDcrjU1,structured,harm_from_defect_art14,rejected,index,True,0,promoted_after_enum_expansion_2026-06-28
+fQ9CnnwDk75h,structured,harm_from_defect_art14,partially_satisfied,index,True,194027.28,promoted_after_enum_expansion_2026-06-28
+etduQEx0I5Wv,structured,consumer_material_damage_art35,partially_satisfied,index,True,157136,promoted_after_enum_expansion_2026-06-28
+KGxYKfv5qQNh,structured,consumer_material_damage_art35,satisfied,index,True,1038300,promoted_after_enum_expansion_2026-06-28
+OiVXdUIOiRYW,structured,consumer_material_damage_art35,rejected,index,True,0,promoted_after_enum_expansion_2026-06-28
+iiFrae5lHbdp,structured,consumer_material_damage_art35,partially_satisfied,index,True,57000,promoted_after_enum_expansion_2026-06-28
+e43iAjG2IkUx,structured,consumer_material_damage_art35,satisfied,index,True,101103,promoted_after_enum_expansion_2026-06-28
+D1fAmwQXk3d,structured,consumer_material_damage_art35,partially_satisfied,index,True,145455.0,promoted_after_enum_expansion_2026-06-28
+j10Le5fy4ebd,structured,consumer_material_damage_art35,partially_satisfied,index,True,0,promoted_after_enum_expansion_2026-06-28
+lofHMAbow961,structured,consumer_material_damage_art35,partially_satisfied,index,True,133024,promoted_after_enum_expansion_2026-06-28
+t4XCCvkBMnU1,structured,consumer_material_damage_art35,rejected,index,True,0,promoted_after_enum_expansion_2026-06-28
 f2vYzeWwzilv,structured,goods_defect_art18,partially_satisfied,index,True,48250,
-sXx6jwskcamO,hold,contract_validity_non_zpp,partially_satisfied,hold,False,173745,"Спор по ст. 35 ЗоЗПП об утрате вещи при ремонте. Тип не входит в основной перечень enum (бытовые услуги по ремонту). Ключевое указание: неустойка по ст. 28 ЗоЗПП не взыскивается, если ремонт не оплачен потребителем."
-ZFESkIkRNMgy,hold,contract_validity_non_zpp,partially_satisfied,hold,False,34613.7,Ситуация ст. 35 ЗоЗПП (повреждение вещи при химчистке) — кандидат на добавление в enum dictionary
-uPBnfGYfIAmK,hold,contract_validity_non_zpp,partially_satisfied,hold,False,150644.91,Комбинированный спор по двум договорам: ст. 35 ЗоЗПП (утрата шапки из меха соболя) + нарушение сроков пошива. Тип не входит в основной перечень enum. Ключевой прецедент: ст. 333 ГК РФ не применена при ограничении неустойки ценой заказа; проценты вместо неустойки при утрате вещи.
-hDVwlrm5jIbg,hold,contract_validity_non_zpp,partially_satisfied,hold,False,45000,Ст. 35 ЗоЗПП (повреждение вещи при химчистке) — полный отказ. Ключевой прецедент: судебная экспертиза подтвердила отсутствие вины химчистки. Дефекты — производственные и эксплуатационные.
-DnDKACLnBZ7,hold,contract_validity_non_zpp,partially_satisfied,hold,False,73515.0,Ситуация ст. 35 ЗоЗПП (повреждение вещи при химчистке) — кандидат на добавление в enum dictionary
-B6m6axFiG5Up,hold,contract_validity_non_zpp,partially_satisfied,hold,False,32850.0,Ст. 35 ЗоЗПП отказана в применении — кандидат на иллюстрацию разграничения ст. 35 и ремонта (ст. 14 ЗоЗПП + ГК РФ)
-9xUCtLJ9m3HR,hold,contract_validity_non_zpp,satisfied,hold,False,352500.0,Ситуация ст. 35 ЗоЗПП (утрата вещи при ремонте) — кандидат на добавление в enum dictionary. Ключевые даты и суммы скрыты в решении.
-1WquChZlLAlg,hold,contract_validity_non_zpp,satisfied,hold,False,44282.78,Ситуация ст. 35 ЗоЗПП (утрата вещи при выполнении работ) — кандидат на добавление в enum dictionary
-AbxlNmSix0Q,hold,contract_validity_non_zpp,partially_satisfied,hold,False,45112.0,"Ст. 35 ЗоЗПП отказана в применении, кандидат на иллюстрацию разграничения ЗоЗПП и специального закона о транспортной экспедиции"
-Its4p1mA2Lbq,hold,contract_validity_non_zpp,partially_satisfied,hold,False,,Ситуация ст. 35 ЗоЗПП (утрата вещи при ремонте) — кандидат на добавление в enum dictionary
-EVaTwapXFJ6W,hold,contract_validity_non_zpp,partially_satisfied,hold,False,,Ст. 35 ЗоЗПП отказана в применении — кандидат на иллюстрацию разграничения утраты/повреждения и устранимых неисправностей
-wKVnsHe6BpbT,hold,contract_validity_non_zpp,partially_satisfied,hold,False,24238,"Ключевой прецедент по ст. 35 ЗоЗПП: цена утраченной вещи = цена переданной вещи (по моменту приобретения), а не аналогичной новой. При невозможности экспертизы из-за сокрытия вещи ответчиком — цена по документам потребителя. Тип не входит в основной перечень enum."
-luQO6RgzTBmC,hold,contract_validity_non_zpp,satisfied,hold,False,98800,Ст. 35 ЗоЗПП (повреждение ювелирного изделия при ремонте) не входит в основной enum.
-BtKD92kZ27LA,hold,contract_validity_non_zpp,partially_satisfied,hold,False,86550.0,Ситуация ст. 35 ЗоЗПП (утрата вещи при ремонте) — кандидат на добавление в enum dictionary
+sXx6jwskcamO,structured,consumer_material_damage_art35,partially_satisfied,index,True,173745,promoted_after_enum_expansion_2026-06-28
+ZFESkIkRNMgy,structured,consumer_material_damage_art35,partially_satisfied,index,True,34613.7,promoted_after_enum_expansion_2026-06-28
+uPBnfGYfIAmK,structured,consumer_material_damage_art35,partially_satisfied,index,True,150644.91,promoted_after_enum_expansion_2026-06-28
+hDVwlrm5jIbg,structured,consumer_material_damage_art35,partially_satisfied,index,True,45000,promoted_after_enum_expansion_2026-06-28
+DnDKACLnBZ7,structured,consumer_material_damage_art35,partially_satisfied,index,True,73515.0,promoted_after_enum_expansion_2026-06-28
+B6m6axFiG5Up,structured,consumer_material_damage_art35,partially_satisfied,index,True,32850.0,promoted_after_enum_expansion_2026-06-28
+9xUCtLJ9m3HR,structured,consumer_material_damage_art35,satisfied,index,True,352500.0,promoted_after_enum_expansion_2026-06-28
+1WquChZlLAlg,structured,consumer_material_damage_art35,satisfied,index,True,44282.78,promoted_after_enum_expansion_2026-06-28
+AbxlNmSix0Q,structured,consumer_material_damage_art35,partially_satisfied,index,True,45112.0,promoted_after_enum_expansion_2026-06-28
+Its4p1mA2Lbq,structured,consumer_material_damage_art35,partially_satisfied,index,True,,promoted_after_enum_expansion_2026-06-28
+EVaTwapXFJ6W,structured,consumer_material_damage_art35,partially_satisfied,index,True,,promoted_after_enum_expansion_2026-06-28
+wKVnsHe6BpbT,structured,consumer_material_damage_art35,partially_satisfied,index,True,24238,promoted_after_enum_expansion_2026-06-28
+luQO6RgzTBmC,structured,consumer_material_damage_art35,satisfied,index,True,98800,promoted_after_enum_expansion_2026-06-28
+BtKD92kZ27LA,structured,consumer_material_damage_art35,partially_satisfied,index,True,86550.0,promoted_after_enum_expansion_2026-06-28
 T7JnMha7wd1l,structured,work_service_delay_art28,satisfied,index,True,103915.5,
 df0QBtIxrbYt,hold,contract_validity_non_zpp,partially_satisfied,hold,False,969053.73,Страховой спор по КАСКО с применением ЗоЗПП как к финансовой услуге. Ст. 28 ЗоЗПП применена к страховщику как исполнителю. Тип спора не входит в основной перечень enum (страхование).
 xljcgUano8Ys,structured,work_service_delay_art28,partially_satisfied,index,True,192500,

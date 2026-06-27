@@ -335,6 +335,13 @@ def validate_structure(docid: str, path: Path, act_text: str, errors: ErrorLog,
     if not validate_enum_fields(docid, data, enum_values, errors):
         ok = False
 
+    publication = data.get("publication") if isinstance(data.get("publication"), dict) else {}
+    if publication.get("index_policy") == "index":
+        serialized = json.dumps(data, ensure_ascii=False)
+        if "????" in serialized:
+            errors.add(f"{docid}: indexed JSON contains suspicious mojibake marker '????'")
+            ok = False
+
     processing = data.get("processing") if isinstance(data.get("processing"), dict) else {}
     status = processing.get("status")
     if not allow_incomplete and status != "complete":

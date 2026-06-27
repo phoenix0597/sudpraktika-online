@@ -25,8 +25,8 @@
     "procedure_type": "civil",
     "audience_segment": "citizen",
     "topic_vertical": "services",
-    "dispute_type_code": "contract_validity_non_zpp",
-    "dispute_type": "повреждение пиджака Armani при химчистке, двукратная стоимость по ст. 35 ЗоЗПП",
+    "dispute_type_code": "consumer_material_damage_art35",
+    "dispute_type": "утрата или повреждение вещи потребителя при выполнении работ",
     "claim_type_codes": [
       "damages",
       "refund_price",
@@ -235,11 +235,11 @@
     ]
   },
   "publication": {
-    "main_site_fit": false,
-    "index_policy": "hold",
-    "exclude_reason": "Ситуация ст. 35 ЗоЗПП (повреждение вещи при химчистке) — кандидат на добавление в enum dictionary",
+    "main_site_fit": true,
+    "index_policy": "index",
+    "exclude_reason": null,
     "ai_generated": true,
-    "citations_verified": false,
+    "citations_verified": true,
     "human_review_status": "not_reviewed",
     "legal_advice": false
   },
