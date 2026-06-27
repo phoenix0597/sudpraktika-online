@@ -1,0 +1,166 @@
+{
+  "schema_version": "2.0",
+  "source": {
+    "docid": "luQO6RgzTBmC",
+    "source_url": "https://sudact.ru/regular/doc/luQO6RgzTBmC/",
+    "source_domain": "sudact.ru",
+    "source_title": "Решение № 2-805/2017 2-805/2017 ~ М-693/2017... :: СудАкт.ру",
+    "source_passage": "возместить потребителю двукратную цену утраченного (поврежденного) материала (вещи), а также расходы, понесенные потребителем. В п. 28 постановления Пленума Верховного Суда Российской Федерации от 28 июня 2012 г. № 17 «О рассмотрении судами гражданских дел по спорам о защите прав потребителей» разъяснено, что при разрешении требований потребителей необходимо учитывать, что бремя доказывания обстоятельств...",
+    "raw_act_path": "data/raw_acts/act_luQO6RgzTBmC.txt",
+    "raw_text_sha256": "4e3608a7630e68911487b3bcfc8697cbe92fb0fff947fdf3d4c23ff4ac37acbb",
+    "source_type": "court_act"
+  },
+  "court": {
+    "case_number": null,
+    "court_name": "Псковский районный суд",
+    "court_level": "районный",
+    "court_system": "general_jurisdiction",
+    "region": "Псковская область",
+    "city_or_locality": null,
+    "decision_date": null,
+    "instance": "первая"
+  },
+  "taxonomy": {
+    "legal_domain": "consumer_protection",
+    "procedure_type": "civil",
+    "audience_segment": "citizen",
+    "topic_vertical": "marketplaces",
+    "dispute_type_code": "contract_validity_non_zpp",
+    "dispute_type": "спор вне основного перечня ЗоЗПП (ст. 35, 14, 16, 25)",
+    "claim_type_codes": [
+      "damages",
+      "replacement",
+      "expenses"
+    ],
+    "claim_type": "Двукратная стоимость серёжек — 79 000 ₽; Моральный вред — 15 000 ₽; Штраф — 39 500 ₽; Судебные расходы — 1 800 ₽",
+    "platform_or_company": "ИП ФИО3 (Забалуев Олег Александрович)",
+    "object_type": null,
+    "object_name": "Ремонт золотых серёжек (снятие, запайка дужки, замена камня)",
+    "situation_tags": [
+      "кандидат_ст35_ювелирный_ремонт"
+    ]
+  },
+  "parties": {
+    "focus_party": {
+      "role": "consumer",
+      "name_raw": "ФИО2 — владелица золотых серёжек с топазами"
+    },
+    "opponents": [
+      {
+        "role": "defendant",
+        "name_raw": "ИП ФИО3 (Забалуев Олег Александрович)"
+      }
+    ],
+    "third_parties": []
+  },
+  "case_summary": {
+    "situation": "Ст. 35 ЗоЗПП (повреждение ювелирного изделия при ремонте) не входит в основной enum.",
+    "timeline": [],
+    "key_factors": [
+      "Ювелир-профессионал обязан предупреждать о риске повреждения камня при пайке",
+      "Бремя доказывания обстоятельств освобождения от ответственности — на исполнителе",
+      "Согласие на перекусывание дужки ≠ согласие на риск повреждения камня",
+      "Замена камня без согласования с заказчиком — нарушение",
+      "Чистка (полировка), изменившая цвет золота, не была оговорена",
+      "ЗоЗПП применим: стоимость работ оговорена устно (300 ₽) — договор возмездный",
+      "Штраф снижён по ст. 333 ГК РФ: учтены меры по урегулированию спора"
+    ],
+    "practical_takeaways": [],
+    "unusual_points": []
+  },
+  "claims_and_result": {
+    "remedy": "Двукратная стоимость серёжек — 79 000 ₽; Моральный вред — 15 000 ₽; Штраф — 39 500 ₽; Судебные расходы — 1 800 ₽",
+    "outcome": {
+      "focus_party_result": "full_satisfaction",
+      "result_type": "satisfied",
+      "short_reason": "Ст. 35 ЗоЗПП (повреждение ювелирного изделия при ремонте) не входит в основной enum."
+    },
+    "amounts": {
+      "claimed_total": null,
+      "awarded_total": 98800,
+      "items_claimed": [],
+      "items_awarded": [
+        {
+          "name": "Двукратная стоимость серёжек (ст. 35)",
+          "amount": 79000,
+          "satisfied": true,
+          "reduced": false,
+          "original_amount": null
+        },
+        {
+          "name": "Моральный вред",
+          "amount": 3000,
+          "satisfied": "partial",
+          "reduced": true,
+          "original_amount": 15000
+        },
+        {
+          "name": "Штраф (снижён по ст. 333)",
+          "amount": 15000,
+          "satisfied": "partial",
+          "reduced": true,
+          "original_amount": 41000
+        },
+        {
+          "name": "Судебные расходы",
+          "amount": 1800,
+          "satisfied": true,
+          "reduced": false,
+          "original_amount": null
+        }
+      ]
+    }
+  },
+  "legal_analysis": {
+    "holding": "Ювелир-профессионал обязан предупреждать о риске повреждения камня при пайке; Бремя доказывания обстоятельств освобождения от ответственности — на исполнителе; Согласие на перекусывание дужки ≠ согласие на риск повреждения камня; Замена камня без согласования с заказчиком — нарушение; Чистка (полировка), изменившая цвет золота, не была оговорена; ЗоЗПП применим: стоимость работ оговорена устно (300 ₽) — договор возмездный; Штраф снижён по ст. 333 ГК РФ: учтены меры по урегулированию спора",
+    "legal_refs": [
+      {
+        "ref": "п. 1, 2, 3 ст. 35 Закона РФ «О защите прав потребителей»",
+        "context": ""
+      },
+      {
+        "ref": "ст. 4 Закона РФ «О защите прав потребителей»",
+        "context": ""
+      },
+      {
+        "ref": "ст. 15 Закона РФ «О защите прав потребителей»",
+        "context": ""
+      },
+      {
+        "ref": "п. 6 ст. 13 Закона РФ «О защите прав потребителей»",
+        "context": ""
+      },
+      {
+        "ref": "ст. 702 ГК РФ",
+        "context": ""
+      },
+      {
+        "ref": "ст. 333 ГК РФ",
+        "context": ""
+      },
+      {
+        "ref": "п. 28 Пленума ВС РФ № 17 от 28.06.2012",
+        "context": ""
+      },
+      {
+        "ref": "Правила бытового обслуживания населения (Постановление Правительства РФ от 15.08.1997 № 1025)",
+        "context": ""
+      }
+    ],
+    "arguments_rejected": []
+  },
+  "publication": {
+    "main_site_fit": false,
+    "index_policy": "hold",
+    "exclude_reason": "Ст. 35 ЗоЗПП (повреждение ювелирного изделия при ремонте) не входит в основной enum.",
+    "ai_generated": true,
+    "citations_verified": false,
+    "human_review_status": "not_reviewed",
+    "legal_advice": false
+  },
+  "processing": {
+    "status": "complete",
+    "processed_by": "ZCode/GLM-5-Turbo",
+    "processed_at": "2026-06-27"
+  }
+}

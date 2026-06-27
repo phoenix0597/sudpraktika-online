@@ -175,9 +175,9 @@
     ]
   },
   "publication": {
-    "main_site_fit": true,
-    "index_policy": "index",
-    "exclude_reason": null,
+    "main_site_fit": false,
+    "index_policy": "hold",
+    "exclude_reason": "contract_validity_or_candidate_situation_requires_human_review",
     "ai_generated": true,
     "citations_verified": true,
     "human_review_status": "not_reviewed",

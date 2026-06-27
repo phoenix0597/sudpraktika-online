@@ -14,7 +14,7 @@
 </header>
 <main>
   <section class="hero">
-    <p class="eyebrow">12 судебных актов в выборке</p>
+    <p class="eyebrow">14 судебных актов в выборке</p>
     <h1>Нарушение сроков выполнения работ и услуг: расчет неустойки и права</h1>
     <p class="lead">Исполнитель нарушил сроки начала или окончания работ/услуг (ремонт, монтаж, строительство).</p>
     <p class="disclosure">Практика собрана из судебных актов. Обработка данных выполнена алгоритмически; ссылки на первоисточники сохранены в карточках дел.</p>
@@ -33,6 +33,7 @@
     <label>Компания<select data-filter="company"><option value="">Все</option>
 <option value="ИП (подрядчик по остеклению)">ИП (подрядчик по остеклению)</option>
 <option value="ИП ФИО2">ИП ФИО2</option>
+<option value="ИП ФИО2 (столярные и плотничные работы)">ИП ФИО2 (столярные и плотничные работы)</option>
 <option value="ООО «Авангард»">ООО «Авангард»</option>
 <option value="ООО «Ле Монлид»">ООО «Ле Монлид»</option>
 <option value="ООО «Островок.Ру»">ООО «Островок.Ру»</option>
@@ -45,6 +46,7 @@
 <option value="service">service</option>
 <option value="автомобиль">автомобиль</option>
 <option value="бронирование отеля">бронирование отеля</option>
+<option value="бытовой подряд">бытовой подряд</option>
 <option value="бытовые подрядные работы">бытовые подрядные работы</option>
 <option value="дом">дом</option>
 <option value="коммунальные услуги">коммунальные услуги</option>
@@ -53,7 +55,8 @@
 <option value="работа">работа</option>
 <option value="ритуальные услуги">ритуальные услуги</option>
 <option value="строительные работы и проектирование">строительные работы и проектирование</option>
-<option value="услуга">услуга</option></select></label>
+<option value="услуга">услуга</option>
+<option value="не указан">Не указано</option></select></label>
     <label>Требование<select data-filter="claims"><option value="">Все</option>
 <option value="compel_transfer">обязать передать товар</option>
 <option value="consumer_fine">штраф 50%</option>
@@ -66,12 +69,14 @@
 <option value="Белгородская область">Белгородская область</option>
 <option value="Краснодарский край">Краснодарский край</option>
 <option value="Красноярский край">Красноярский край</option>
+<option value="Пензенская область">Пензенская область</option>
 <option value="Республика Башкортостан">Республика Башкортостан</option>
 <option value="Республика Бурятия">Республика Бурятия</option>
 <option value="Республика Татарстан">Республика Татарстан</option>
 <option value="Ростовская область">Ростовская область</option>
 <option value="Ставропольский край">Ставропольский край</option>
 <option value="Тверская область">Тверская область</option>
+<option value="Ульяновская область">Ульяновская область</option>
 <option value="Челябинская область">Челябинская область</option></select></label>
   </div>
   <div class="filter-actions">
@@ -85,22 +90,22 @@
         <div class="panel">
           <h2>Краткое резюме практики</h2>
           <ul class="summary-list">
-            <li>Дел в выборке: <b>12</b></li>
-            <li>Присуждённые суммы: <b>от 0 ₽ до 706 796 ₽; медиана — 210 000 ₽</b></li>
-            <li><span>Результаты:</span> <span class="inline-chips"><button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="partially_satisfied">требования удовлетворены частично <b>7</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="satisfied">требования удовлетворены полностью или почти полностью <b>4</b></button>
+            <li>Дел в выборке: <b>14</b></li>
+            <li>Присуждённые суммы: <b>от 0 ₽ до 706 796 ₽; медиана — 192 500 ₽</b></li>
+            <li><span>Результаты:</span> <span class="inline-chips"><button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="partially_satisfied">требования удовлетворены частично <b>8</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="satisfied">требования удовлетворены полностью или почти полностью <b>5</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="rejected">в иске отказано <b>1</b></button></span></li>
           </ul>
           <p class="hint">Примечание: показатели являются не статистикой по всей судебной практике, а сводкой по текущей выборке судебных актов.</p>
         </div>
         <div class="panel">
           <h2>Что обычно требует потребитель</h2>
-          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="penalty">неустойка <b>11</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда <b>9</b></button>
+          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="penalty">неустойка <b>13</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда <b>10</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты <b>10</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50% <b>9</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты <b>9</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы <b>5</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="damages">убытки <b>3</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы <b>6</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="damages">убытки <b>4</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="compel_transfer">обязать передать товар <b>1</b></button></div>
         </div>
       </section>
@@ -112,19 +117,20 @@
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="кухонный гарнитур">кухонный гарнитур <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="ритуальные услуги">ритуальные услуги <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="автомобиль">автомобиль <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="бытовой подряд">бытовой подряд <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="мебель под заказ">мебель под заказ <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="бытовые подрядные работы">бытовые подрядные работы <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="работа">работа <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="service">service <b>1</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="строительные работы и проектирование">строительные работы и проектирование <b>1</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="бронирование отеля">бронирование отеля <b>1</b></button></div>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="строительные работы и проектирование">строительные работы и проектирование <b>1</b></button></div>
         </div>
         <div class="panel">
           <h2>Компании и платформы</h2>
-          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ИП ФИО2">ИП ФИО2 <b>2</b></button>
+          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ИП ФИО2">ИП ФИО2 <b>3</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ПАО «Россети Сибирь»">ПАО «Россети Сибирь» <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «Ле Монлид»">ООО «Ле Монлид» <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «Авангард»">ООО «Авангард» <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ИП ФИО2 (столярные и плотничные работы)">ИП ФИО2 (столярные и плотничные работы) <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ИП (подрядчик по остеклению)">ИП (подрядчик по остеклению) <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «СК «ИОНА»">ООО «СК «ИОНА» <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «Островок.Ру»">ООО «Островок.Ру» <b>1</b></button>
@@ -143,8 +149,8 @@
         <h2>Что показывает выборка и на что обратить внимание</h2>
         <p class="hint">Это алгоритмическое обобщение текущей подборки судебных актов, а не индивидуальная юридическая консультация.</p>
         <ul class="summary-list">
-          <li><b>Требования.</b> В похожих делах чаще встречаются: неустойка — 11; компенсация морального вреда — 9; штраф 50% — 9; возврат цены или предоплаты — 9.</li>
-          <li><b>Исходы.</b> Распределение результатов в этой выборке: требования удовлетворены частично — 7; требования удовлетворены полностью или почти полностью — 4; в иске отказано — 1.</li>
+          <li><b>Требования.</b> В похожих делах чаще встречаются: неустойка — 13; компенсация морального вреда — 10; возврат цены или предоплаты — 10; штраф 50% — 9.</li>
+          <li><b>Исходы.</b> Распределение результатов в этой выборке: требования удовлетворены частично — 8; требования удовлетворены полностью или почти полностью — 5; в иске отказано — 1.</li>
           <li><b>Факторы.</b> Суд чаще обращает внимание на такие обстоятельства: Полная оплата услуг потребителем; Срыв срока выполнения обязательств исполнителем более чем на 10 месяцев; Продавец несет самостоятельную ответственность перед потребителем за просрочку замены некачественного товара в….</li>
           <li><b>Регионы и суды.</b> Сейчас в выборке заметны регионы: Красноярский край — 2; Краснодарский край — 2; Республика Бурятия — 1; Ростовская область — 1; суды: Железнодорожный районный суд г. Улан-Удэ — 1; Октябрьский районный суд г. Ростова-на-Дону — 1; Шарыповский городской суд Красноярского края — 1. При расширении базы этот слой можно использовать для сравнения региональной и судебной практики.</li>
         </ul>
@@ -247,6 +253,36 @@
 <article class="case-card"
   data-case-card
   data-result="partially_satisfied"
+  data-company="ИП ФИО2"
+  data-object="не указан"
+  data-region="Пензенская область"
+  data-claims="penalty||expenses">
+  <div class="case-card__header">
+    <div>
+      <h3>Договор подряда на разработку дизайн-проекта интерьера помещения: нарушение сроков выполнения работы (ст. 28 ЗоЗПП)</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Пензенская область">Пензенская область</button> <span>· 2020-11-02 · дело xljcgUano8Ys</span></p>
+    </div>
+    <button type="button" class="result result-partially_satisfied" data-quick-filter="result" data-quick-value="partially_satisfied">частично удовлетворено</button>
+  </div>
+  <p>Нарушение сроков выполнения работы по договору подряда (дизайн-проект интерьера). Ст. 28 ЗоЗПП.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>Договор подряда на разработку дизайн-проекта интерьера помещения</dd></div>
+    <div><dt>Компания</dt><dd>ИП ФИО2</dd></div>
+    <div><dt>Присуждено</dt><dd>192 500 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>COVID-19 не является уважительной причиной просрочки при фактически продолжавшейся работе (удалённо через мессенджер)</li><li>Неустойка снижена с 92 000 ₽ до 30 000 ₽ по ст. 333 ГК РФ (заявление ответчика): учтён объём проделанной работы и конкретные обстоятельства</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/xljcgUano8Ys/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/xljcgUano8Ys/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="partially_satisfied"
   data-company="ООО «Авангард»"
   data-object="автомобиль"
   data-region="Белгородская область"
@@ -270,6 +306,36 @@
   <div class="case-links">
     <a class="button case-primary-link" href="../../dela/QqSw46fUvPr/index.html">Разобрать это дело →</a>
     <a class="source-link" href="https://sudact.ru/regular/doc/QqSw46fUvPr/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="satisfied"
+  data-company="ИП ФИО2 (столярные и плотничные работы)"
+  data-object="бытовой подряд"
+  data-region="Ульяновская область"
+  data-claims="refund_price||damages||moral_damage||penalty">
+  <div class="case-card__header">
+    <div>
+      <h3>Договор подряда на общестроительные и отделочные работы квартиры: нарушение сроков выполнения ремонтных работ квартиры, расторжение договора</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Ульяновская область">Ульяновская область</button> <span>· 29.05.2020 · дело 2-1259/2020</span></p>
+    </div>
+    <button type="button" class="result result-satisfied" data-quick-filter="result" data-quick-value="satisfied">удовлетворено</button>
+  </div>
+  <p>Заказчик заключила договор подряда на ремонт квартиры за 56 777 руб. (оплата через кредит). Подрядчик в течение 14 дней работы не выполнил и к выполнению не приступил.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>договор подряда на общестроительные и отделочные работы квартиры</dd></div>
+    <div><dt>Компания</dt><dd>ИП ФИО2 (столярные и плотничные работы)</dd></div>
+    <div><dt>Присуждено</dt><dd>103 916 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="damages">убытки</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Подрядчик не приступил к работе — прямое нарушение срока</li><li>Заочное производство — ответчик не явился</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/T7JnMha7wd1l/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/T7JnMha7wd1l/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 

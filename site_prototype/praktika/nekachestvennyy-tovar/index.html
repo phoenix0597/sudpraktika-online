@@ -14,7 +14,7 @@
 </header>
 <main>
   <section class="hero">
-    <p class="eyebrow">53 судебных акта в выборке</p>
+    <p class="eyebrow">60 судебных актов в выборке</p>
     <h1>Некачественный товар: как вернуть деньги, взыскать неустойку и штраф</h1>
     <p class="lead">Потребитель купил товар, но он сломался, оказался с недостатком или продавец отказался исполнять гарантийные обязанности.</p>
     <p class="disclosure">Практика собрана из судебных актов. Обработка данных выполнена алгоритмически; ссылки на первоисточники сохранены в карточках дел.</p>
@@ -36,6 +36,7 @@
 <option value="DNS">DNS</option>
 <option value="Ozon">Ozon</option>
 <option value="Wildberries">Wildberries</option>
+<option value="АО «Лада-Сервис»">АО «Лада-Сервис»</option>
 <option value="АО «Мегафон Ритейл»">АО «Мегафон Ритейл»</option>
 <option value="АО «РТК»">АО «РТК»</option>
 <option value="АО «Русская Телефонная Компания»">АО «Русская Телефонная Компания»</option>
@@ -44,13 +45,17 @@
 <option value="ДНС">ДНС</option>
 <option value="ИП ФИО2">ИП ФИО2</option>
 <option value="ИП ФИО3 (дилер под брендом «Много мебели»)">ИП ФИО3 (дилер под брендом «Много мебели»)</option>
+<option value="ИП ФИО3 (продавец «Седьмое небо»)">ИП ФИО3 (продавец «Седьмое небо»)</option>
+<option value="ИП ФИО5">ИП ФИО5</option>
 <option value="Лазурит">Лазурит</option>
 <option value="М.Видео">М.Видео</option>
 <option value="ООО &quot;Дайсон&quot;">ООО &quot;Дайсон&quot;</option>
 <option value="ООО &quot;ФАВОРИТТРАНСИМПОРТ&quot;">ООО &quot;ФАВОРИТТРАНСИМПОРТ&quot;</option>
 <option value="ООО &quot;ЧАНЪАНЬ МОТОРС РУС&quot;">ООО &quot;ЧАНЪАНЬ МОТОРС РУС&quot;</option>
 <option value="ООО &quot;Эппл Рус&quot;">ООО &quot;Эппл Рус&quot;</option>
+<option value="ООО [ О ]">ООО [ О ]</option>
 <option value="ООО «АвтоРитм»">ООО «АвтоРитм»</option>
+<option value="ООО «Автоломбард»">ООО «Автоломбард»</option>
 <option value="ООО «Артан»">ООО «Артан»</option>
 <option value="ООО «ДНС Ритейл»">ООО «ДНС Ритейл»</option>
 <option value="ООО «Компания «Оконный Континент»">ООО «Компания «Оконный Континент»</option>
@@ -65,6 +70,7 @@
 <option value="ООО «Торговый дом «Аскона»">ООО «Торговый дом «Аскона»</option>
 <option value="ООО МВМ">ООО МВМ</option>
 <option value="ООО ТК «Хайер Рус» (Haier)">ООО ТК «Хайер Рус» (Haier)</option>
+<option value="ПАО «ВымпелКом»">ПАО «ВымпелКом»</option>
 <option value="Сегодня Дома">Сегодня Дома</option>
 <option value="УАЗ">УАЗ</option>
 <option value="ФИО2">ФИО2</option>
@@ -96,9 +102,12 @@
 <option value="пылесос">пылесос</option>
 <option value="смартфон">смартфон</option>
 <option value="сотовый телефон">сотовый телефон</option>
+<option value="стиральная машина">стиральная машина</option>
 <option value="телевизор">телевизор</option>
 <option value="холодильник">холодильник</option>
-<option value="электроника">электроника</option></select></label>
+<option value="циркуляционный насос">циркуляционный насос</option>
+<option value="электроника">электроника</option>
+<option value="не указан">Не указано</option></select></label>
     <label>Требование<select data-filter="claims"><option value="">Все</option>
 <option value="consumer_fine">штраф 50%</option>
 <option value="damages">убытки</option>
@@ -123,9 +132,12 @@
 <option value="Московская область">Московская область</option>
 <option value="Мурманская область">Мурманская область</option>
 <option value="Нижегородская область">Нижегородская область</option>
+<option value="Оренбургская область">Оренбургская область</option>
 <option value="Пензенская область">Пензенская область</option>
+<option value="Пермский край">Пермский край</option>
 <option value="Республика Башкортостан">Республика Башкортостан</option>
 <option value="Республика Коми">Республика Коми</option>
+<option value="Республика Марий Эл">Республика Марий Эл</option>
 <option value="Республика Татарстан">Республика Татарстан</option>
 <option value="Рязанская область">Рязанская область</option>
 <option value="Самарская область">Самарская область</option>
@@ -148,26 +160,26 @@
         <div class="panel">
           <h2>Краткое резюме практики</h2>
           <ul class="summary-list">
-            <li>Дел в выборке: <b>53</b></li>
-            <li>Присуждённые суммы: <b>от 0 ₽ до 2 465 335 ₽; медиана — 98 901 ₽</b></li>
-            <li><span>Результаты:</span> <span class="inline-chips"><button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="partially_satisfied">требования удовлетворены частично <b>40</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="satisfied">требования удовлетворены полностью или почти полностью <b>6</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="rejected">в иске отказано <b>6</b></button>
+            <li>Дел в выборке: <b>60</b></li>
+            <li>Присуждённые суммы: <b>от 0 ₽ до 5 439 398 ₽; медиана — 98 701 ₽</b></li>
+            <li><span>Результаты:</span> <span class="inline-chips"><button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="partially_satisfied">требования удовлетворены частично <b>44</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="satisfied">требования удовлетворены полностью или почти полностью <b>8</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="rejected">в иске отказано <b>7</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="mixed">смешанный результат <b>1</b></button></span></li>
           </ul>
           <p class="hint">Примечание: показатели являются не статистикой по всей судебной практике, а сводкой по текущей выборке судебных актов.</p>
         </div>
         <div class="panel">
           <h2>Что обычно требует потребитель</h2>
-          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда <b>49</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50% <b>49</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты <b>48</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="penalty">неустойка <b>48</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы <b>44</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="damages">убытки <b>10</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="repair_or_defect_cure">безвозмездное устранение недостатков <b>4</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="price_difference">разница в цене <b>4</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="replacement">замена товара <b>2</b></button>
+          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50% <b>55</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда <b>54</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты <b>53</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="penalty">неустойка <b>53</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы <b>51</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="damages">убытки <b>12</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="repair_or_defect_cure">безвозмездное устранение недостатков <b>5</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="price_difference">разница в цене <b>5</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="replacement">замена товара <b>3</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="price_reduction">соразмерное уменьшение цены <b>1</b></button></div>
         </div>
       </section>
@@ -175,9 +187,9 @@
       <section class="grid two">
         <div class="panel">
           <h2>Типичные объекты</h2>
-          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="смартфон">смартфон <b>12</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="телевизор">телевизор <b>5</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="автомобиль">автомобиль <b>5</b></button>
+          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="смартфон">смартфон <b>13</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="автомобиль">автомобиль <b>7</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="телевизор">телевизор <b>6</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="мебель">мебель <b>4</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="ноутбук">ноутбук <b>3</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="видеокарта">видеокарта <b>2</b></button>
@@ -195,9 +207,9 @@
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «Ситилинк»">ООО «Ситилинк» <b>2</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="М.Видео">М.Видео <b>2</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ИП ФИО2">ИП ФИО2 <b>2</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «Самсунг Электроникс Рус Компани»">ООО «Самсунг Электроникс Рус Компани» <b>2</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «ДНС Ритейл»">ООО «ДНС Ритейл» <b>2</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «МВМ»">ООО «МВМ» <b>2</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «Сеть Связной»">ООО «Сеть Связной» <b>2</b></button></div>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «МВМ»">ООО «МВМ» <b>2</b></button></div>
         </div>
       </section>
 
@@ -211,8 +223,8 @@
         <h2>Что показывает выборка и на что обратить внимание</h2>
         <p class="hint">Это алгоритмическое обобщение текущей подборки судебных актов, а не индивидуальная юридическая консультация.</p>
         <ul class="summary-list">
-          <li><b>Требования.</b> В похожих делах чаще встречаются: компенсация морального вреда — 49; штраф 50% — 49; возврат цены или предоплаты — 48; неустойка — 48.</li>
-          <li><b>Исходы.</b> Распределение результатов в этой выборке: требования удовлетворены частично — 40; требования удовлетворены полностью или почти полностью — 6; в иске отказано — 6.</li>
+          <li><b>Требования.</b> В похожих делах чаще встречаются: штраф 50% — 55; компенсация морального вреда — 54; возврат цены или предоплаты — 53; неустойка — 53.</li>
+          <li><b>Исходы.</b> Распределение результатов в этой выборке: требования удовлетворены частично — 44; требования удовлетворены полностью или почти полностью — 8; в иске отказано — 7.</li>
           <li><b>Факторы.</b> Суд чаще обращает внимание на такие обстоятельства: Скрытый производственный дефект системной платы смартфона подтвержден судебной экспертизой; Устранение дефекта путем замены системной платы невозможно на территории РФ из-за прекращения поставок оригинальных…; Производственный характер недостатка подтверждён судебной экспертизой.</li>
           <li><b>Регионы и суды.</b> Сейчас в выборке заметны регионы: Самарская область — 14; Краснодарский край — 4; Республика Башкортостан — 3; Саратовская область — 3; суды: Автозаводский районный суд г. Тольятти — 5; Автозаводский районный суд г. Тольятти Самарской области — 3; Ставропольский районный суд Самарской области — 2. При расширении базы этот слой можно использовать для сравнения региональной и судебной практики.</li>
         </ul>
@@ -974,6 +986,36 @@
 
 <article class="case-card"
   data-case-card
+  data-result="partially_satisfied"
+  data-company="ООО «Самсунг Электроникс Рус Компани»"
+  data-object="телевизор"
+  data-region="Челябинская область"
+  data-claims="refund_price||penalty||moral_damage||consumer_fine||expenses">
+  <div class="case-card__header">
+    <div>
+      <h3>Samsung QE82Q900RBUXRU: спор о недостатке товара</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Челябинская область">Челябинская область</button> <span>· 2020-07-28 · дело 2-889/2020</span></p>
+    </div>
+    <button type="button" class="result result-partially_satisfied" data-quick-filter="result" data-quick-value="partially_satisfied">частично удовлетворено</button>
+  </div>
+  <p>Покупатель приобрел в интернет-магазине телевизор Samsung QE82Q900RBUXRU с подарочным телевизором за 999 990 рублей. В день доставки обнаружился производственный брак USB-портов.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>Samsung QE82Q900RBUXRU</dd></div>
+    <div><dt>Компания</dt><dd>ООО «Самсунг Электроникс Рус Компани»</dd></div>
+    <div><dt>Присуждено</dt><dd>5 439 398 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Дефект USB-портов является производственным, что подтверждено судебной товароведческой экспертизой.</li><li>Потребитель обратился с письменной претензией о недостатках в пределах 15 дней с момента получения технически сложного товара.</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/85sGjvBZd3lR/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/85sGjvBZd3lR/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
   data-result="satisfied"
   data-company="М.Видео"
   data-object="телевизор"
@@ -1028,6 +1070,36 @@
   <div class="case-links">
     <a class="button case-primary-link" href="../../dela/uivLG43dcYu/index.html">Разобрать это дело →</a>
     <a class="source-link" href="https://sudact.ru/regular/doc/uivLG43dcYu/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="partially_satisfied"
+  data-company="ООО [ О ]"
+  data-object="стиральная машина"
+  data-region="Нижегородская область"
+  data-claims="refund_price||penalty||moral_damage||consumer_fine||expenses">
+  <div class="case-card__header">
+    <div>
+      <h3>Стиральная машина [ марка ]: спор о недостатке товара</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Нижегородская область">Нижегородская область</button> <span>· 2020-07-23 · дело 2-323/2020</span></p>
+    </div>
+    <button type="button" class="result result-partially_satisfied" data-quick-filter="result" data-quick-value="partially_satisfied">частично удовлетворено</button>
+  </div>
+  <p>Покупатель обнаружил дефект в стиральной машине и по указанию продавца сдал её в авторизованный сервисный центр. Ремонт не был выполнен в установленный законом 45-дневный срок из-за отсутствия деталей у изготовителя.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>стиральная машина [ марка ]</dd></div>
+    <div><dt>Компания</dt><dd>ООО [ О ]</dd></div>
+    <div><dt>Присуждено</dt><dd>57 916 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Превышение 45-дневного срока гарантийного ремонта</li><li>Направление покупателя в АСЦ самим продавцом</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/a39bcsyWpdHv/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/a39bcsyWpdHv/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
@@ -1305,6 +1377,36 @@
 <article class="case-card"
   data-case-card
   data-result="partially_satisfied"
+  data-company="АО «Лада-Сервис»"
+  data-object="автомобиль"
+  data-region="Оренбургская область"
+  data-claims="repair_or_defect_cure||damages||moral_damage||consumer_fine||expenses">
+  <div class="case-card__header">
+    <div>
+      <h3>LADA VESTA: спор о недостатке товара</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Оренбургская область">Оренбургская область</button> <span>· 2020-05-27 · дело 2-115/2020</span></p>
+    </div>
+    <button type="button" class="result result-partially_satisfied" data-quick-filter="result" data-quick-value="partially_satisfied">частично удовлетворено</button>
+  </div>
+  <p>Покупатель приобрел у официального дилера новый автомобиль LADA VESTA. В процессе эксплуатации обнаружился разнотон окраски правой задней двери из-за её повторного окрашивания на заводе-изготовителе.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>LADA VESTA</dd></div>
+    <div><dt>Компания</dt><dd>АО «Лада-Сервис»</dd></div>
+    <div><dt>Присуждено</dt><dd>28 928 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="repair_or_defect_cure">безвозмездное устранение недостатков</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="damages">убытки</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Судебная экспертиза подтвердила отличие тона цвета двери от остального кузова, что является недостатком в соответствии с технологическими инструкциями изготовителя.</li><li>Дилер добровольно предлагал покупателю компенсацию (21 244 рубля) и ремонт, которые полностью перекрывали реальный размер убытков (12 080 рублей).</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/0Y1JyoZbl3HL/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/0Y1JyoZbl3HL/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="partially_satisfied"
   data-company="Яндекс.Маркет"
   data-object="планшет"
   data-region="Самарская область"
@@ -1358,6 +1460,36 @@
   <div class="case-links">
     <a class="button case-primary-link" href="../../dela/NBXqmj3oX2Lm/index.html">Разобрать это дело →</a>
     <a class="source-link" href="https://sudact.ru/regular/doc/NBXqmj3oX2Lm/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="satisfied"
+  data-company="ПАО «ВымпелКом»"
+  data-object="смартфон"
+  data-region="Республика Марий Эл"
+  data-claims="refund_price||penalty||consumer_fine||expenses">
+  <div class="case-card__header">
+    <div>
+      <h3>Сотовый телефон Apple iPhone SE 32Gb Spacegrey: спор о недостатке товара</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Республика Марий Эл">Республика Марий Эл</button> <span>· 2020-02-28 · дело 2-25/2020</span></p>
+    </div>
+    <button type="button" class="result result-satisfied" data-quick-filter="result" data-quick-value="satisfied">удовлетворено</button>
+  </div>
+  <p>Потребитель купил iPhone с навязанным договором страхования. В течение гарантийного срока телефон перестал заряжаться и включаться.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>сотовый телефон Apple iPhone SE 32Gb Spacegrey</dd></div>
+    <div><dt>Компания</dt><dd>ПАО «ВымпелКом»</dd></div>
+    <div><dt>Присуждено</dt><dd>149 508 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Полная неработоспособность телефона из-за производственного дефекта платы</li><li>Отсутствие физической возможности отключить функцию безопасности на самом устройстве</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/urAwlIOo5lgF/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/urAwlIOo5lgF/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
@@ -1694,6 +1826,66 @@
 
 <article class="case-card"
   data-case-card
+  data-result="rejected"
+  data-company="ИП ФИО5"
+  data-object="циркуляционный насос"
+  data-region="Вологодская область"
+  data-claims="replacement||price_difference||penalty||moral_damage||consumer_fine||expenses">
+  <div class="case-card__header">
+    <div>
+      <h3>Grundfos UPS 32-60 180: спор о недостатке товара</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Вологодская область">Вологодская область</button> <span>· 2018-05-21 · дело 2-1137/2018</span></p>
+    </div>
+    <button type="button" class="result result-rejected" data-quick-filter="result" data-quick-value="rejected">отказано</button>
+  </div>
+  <p>Потребитель купил насос, который гудел слишком громко по его мнению. Магазин сдал насос на диагностику, а взамен выдал подменный прибор TAIFU.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>Grundfos UPS 32-60 180</dd></div>
+    <div><dt>Компания</dt><dd>ИП ФИО5</dd></div>
+    <div><dt>Присуждено</dt><dd>0 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="replacement">замена товара</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="price_difference">разница в цене</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Подтверждение исправности товара судебной экспертизой</li><li>Принадлежность насоса к категории технически сложных товаров надлежащего качества</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/JhSL3cL8u4oB/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/JhSL3cL8u4oB/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="satisfied"
+  data-company="ООО «Автоломбард»"
+  data-object="автомобиль"
+  data-region="Пермский край"
+  data-claims="refund_price||consumer_fine||expenses">
+  <div class="case-card__header">
+    <div>
+      <h3>Автомобиль TOYOTA AVENSIS: спор о недостатке товара</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Пермский край">Пермский край</button> <span>· 2017-12-27 · дело 2-1576/2017</span></p>
+    </div>
+    <button type="button" class="result result-satisfied" data-quick-filter="result" data-quick-value="satisfied">удовлетворено</button>
+  </div>
+  <p>Потребитель купил подержанный автомобиль в автосалоне по договору комиссии. Салон выдал диагностическую карту, которая оказалась фальшивой.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>автомобиль TOYOTA AVENSIS</dd></div>
+    <div><dt>Компания</dt><dd>ООО «Автоломбард»</dd></div>
+    <div><dt>Присуждено</dt><dd>669 440 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Наличие скрытого износа электропроводки до момента продажи</li><li>Выдача автосалоном фальшивой диагностической карты без реального техосмотра</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/MaqpPxOPwzWF/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/MaqpPxOPwzWF/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
   data-result="partially_satisfied"
   data-company="ООО &quot;Дайсон&quot;"
   data-object="пылесос"
@@ -1718,6 +1910,36 @@
   <div class="case-links">
     <a class="button case-primary-link" href="../../dela/rrObAHc2FOxm/index.html">Разобрать это дело →</a>
     <a class="source-link" href="https://sudact.ru/regular/doc/rrObAHc2FOxm/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="partially_satisfied"
+  data-company="ИП ФИО3 (продавец «Седьмое небо»)"
+  data-object="не указан"
+  data-region="Республика Татарстан"
+  data-claims="penalty||moral_damage||damages||refund_price||expenses">
+  <div class="case-card__header">
+    <div>
+      <h3>Свадебное платье «Вера Вонг» (25 500 ₽) + химчистка (1 920 ₽): спор о недостатке товара</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Республика Татарстан">Республика Татарстан</button> <span>· 2017-08-23 · дело f2vYzeWwzilv</span></p>
+    </div>
+    <button type="button" class="result result-partially_satisfied" data-quick-filter="result" data-quick-value="partially_satisfied">частично удовлетворено</button>
+  </div>
+  <p>Основной спор — с продавцом по ст. 18 (скрытые производственные дефекты товара). Иск к химчистке по ст. 35 отклонён.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>Свадебное платье «Вера Вонг» (25 500 ₽) + химчистка (1 920 ₽)</dd></div>
+    <div><dt>Компания</dt><dd>ИП ФИО3 (продавец «Седьмое небо»)</dd></div>
+    <div><dt>Присуждено</dt><dd>48 250 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="damages">убытки</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Экспертиза подтвердила скрытые производственные дефекты платья (неправильный режим отбелки, отсутствие термической обработки)</li><li>Нарушений технологического процесса химчистки не выявлено — вина химчистки отсутствует</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/f2vYzeWwzilv/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/f2vYzeWwzilv/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 

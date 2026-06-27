@@ -14,7 +14,7 @@
 </header>
 <main>
   <section class="hero">
-    <p class="eyebrow">24 судебных акта в выборке</p>
+    <p class="eyebrow">34 судебных акта в выборке</p>
     <h1>Как отказаться от услуги и вернуть деньги</h1>
     <p class="lead">Потребитель хочет отказаться от услуги, курса, страховки, сертификата или сервиса и вернуть оплату.</p>
     <p class="disclosure">Практика собрана из судебных актов. Обработка данных выполнена алгоритмически; ссылки на первоисточники сохранены в карточках дел.</p>
@@ -29,14 +29,19 @@
     <label>Результат<select data-filter="result"><option value="">Все</option>
 <option value="mixed">смешанный результат</option>
 <option value="partially_satisfied">требования удовлетворены частично</option>
+<option value="rejected">в иске отказано</option>
 <option value="satisfied">требования удовлетворены полностью или почти полностью</option></select></label>
     <label>Компания<select data-filter="company"><option value="">Все</option>
+<option value="LegalHelp">LegalHelp</option>
 <option value="Ozon Travel / Air Serbia">Ozon Travel / Air Serbia</option>
 <option value="Skillbox">Skillbox</option>
 <option value="АО &quot;Автоассистанс&quot;">АО &quot;Автоассистанс&quot;</option>
 <option value="АО «АВТОАССИСТАНС»">АО «АВТОАССИСТАНС»</option>
 <option value="АО «КарВит»">АО «КарВит»</option>
 <option value="АО «Согаз»">АО «Согаз»</option>
+<option value="АО Тинькофф Банк">АО Тинькофф Банк</option>
+<option value="АО ЮниКредит Банк">АО ЮниКредит Банк</option>
+<option value="ГК ЭЙ ЭС ДЖИ">ГК ЭЙ ЭС ДЖИ</option>
 <option value="ИП ФИО2">ИП ФИО2</option>
 <option value="Клуб Миллионеров">Клуб Миллионеров</option>
 <option value="ООО [К]">ООО [К]</option>
@@ -51,8 +56,14 @@
 <option value="ООО «Правовая защита населения»">ООО «Правовая защита населения»</option>
 <option value="ООО «Сириус»">ООО «Сириус»</option>
 <option value="ООО «Суточно»">ООО «Суточно»</option>
+<option value="ООО Авто Решения">ООО Авто Решения</option>
+<option value="ООО Капитал Лайф Страхование Жизни">ООО Капитал Лайф Страхование Жизни</option>
 <option value="ООО Миленти Резортс">ООО Миленти Резортс</option>
+<option value="ООО Ринг-Сити">ООО Ринг-Сити</option>
+<option value="ООО Сетелем Банк">ООО Сетелем Банк</option>
 <option value="ПАО «Совкомбанк»">ПАО «Совкомбанк»</option>
+<option value="ПАО Сбербанк России">ПАО Сбербанк России</option>
+<option value="ПАО Совкомбанк">ПАО Совкомбанк</option>
 <option value="Парус Авто">Парус Авто</option>
 <option value="Ренессанс Жизнь">Ренессанс Жизнь</option></select></label>
     <label>Объект<select data-filter="object"><option value="">Все</option>
@@ -60,15 +71,22 @@
 <option value="service_contract">service_contract</option>
 <option value="абонентские автомобильные услуги">абонентские автомобильные услуги</option>
 <option value="авиабилеты">авиабилеты</option>
+<option value="автокредит">автокредит</option>
 <option value="гостиничные услуги">гостиничные услуги</option>
 <option value="дополнительная услуга автопомощи к кредиту">дополнительная услуга автопомощи к кредиту</option>
+<option value="дополнительные автоуслуги">дополнительные автоуслуги</option>
 <option value="дополнительные услуги при автокредитовании">дополнительные услуги при автокредитовании</option>
+<option value="кредит">кредит</option>
+<option value="кредитная карта">кредитная карта</option>
+<option value="кредитное страхование">кредитное страхование</option>
 <option value="онлайн-курс">онлайн-курс</option>
 <option value="опционная услуга">опционная услуга</option>
 <option value="опционный договор">опционный договор</option>
+<option value="помощь на дорогах">помощь на дорогах</option>
 <option value="программное обеспечение">программное обеспечение</option>
 <option value="сервисная карта">сервисная карта</option>
 <option value="сертификат на ПО">сертификат на ПО</option>
+<option value="страхование">страхование</option>
 <option value="страхование заемщика">страхование заемщика</option>
 <option value="страховая услуга">страховая услуга</option>
 <option value="страховой полис">страховой полис</option>
@@ -77,6 +95,7 @@
 <option value="услуга независимой гарантии и абонентского обслуживания">услуга независимой гарантии и абонентского обслуживания</option>
 <option value="финансовые услуги">финансовые услуги</option>
 <option value="фитнес-услуги">фитнес-услуги</option>
+<option value="юридические и медицинские услуги">юридические и медицинские услуги</option>
 <option value="юридические услуги">юридические услуги</option></select></label>
     <label>Требование<select data-filter="claims"><option value="">Все</option>
 <option value="consumer_fine">штраф 50%</option>
@@ -89,17 +108,25 @@
 <option value="refund_price">возврат цены или предоплаты</option></select></label>
     <label>Регион<select data-filter="region"><option value="">Все</option>
 <option value="Астраханская область">Астраханская область</option>
+<option value="Белгородская область">Белгородская область</option>
+<option value="Брянская область">Брянская область</option>
 <option value="Волгоградская область">Волгоградская область</option>
 <option value="Кемеровская область">Кемеровская область</option>
+<option value="Костромская область">Костромская область</option>
 <option value="Краснодарский край">Краснодарский край</option>
+<option value="Красноярский край">Красноярский край</option>
 <option value="Липецкая область">Липецкая область</option>
+<option value="Московская область">Московская область</option>
 <option value="Нижегородская область">Нижегородская область</option>
+<option value="Новосибирская область">Новосибирская область</option>
 <option value="Приморский край">Приморский край</option>
 <option value="Республика Башкортостан">Республика Башкортостан</option>
 <option value="Ростовская область">Ростовская область</option>
 <option value="Саратовская область">Саратовская область</option>
 <option value="Ставропольский край">Ставропольский край</option>
 <option value="Томская область">Томская область</option>
+<option value="Тульская область">Тульская область</option>
+<option value="Удмуртская Республика">Удмуртская Республика</option>
 <option value="Ульяновская область">Ульяновская область</option>
 <option value="Челябинская область">Челябинская область</option>
 <option value="г. Санкт-Петербург">г. Санкт-Петербург</option></select></label>
@@ -115,24 +142,25 @@
         <div class="panel">
           <h2>Краткое резюме практики</h2>
           <ul class="summary-list">
-            <li>Дел в выборке: <b>24</b></li>
-            <li>Присуждённые суммы: <b>от 1 500 ₽ до 301 000 ₽; медиана — 92 826 ₽</b></li>
-            <li><span>Результаты:</span> <span class="inline-chips"><button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="partially_satisfied">требования удовлетворены частично <b>17</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="satisfied">требования удовлетворены полностью или почти полностью <b>4</b></button>
+            <li>Дел в выборке: <b>34</b></li>
+            <li>Присуждённые суммы: <b>от 0 ₽ до 301 000 ₽; медиана — 92 826 ₽</b></li>
+            <li><span>Результаты:</span> <span class="inline-chips"><button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="partially_satisfied">требования удовлетворены частично <b>21</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="satisfied">требования удовлетворены полностью или почти полностью <b>5</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="rejected">в иске отказано <b>5</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="result" data-quick-value="mixed">смешанный результат <b>3</b></button></span></li>
           </ul>
           <p class="hint">Примечание: показатели являются не статистикой по всей судебной практике, а сводкой по текущей выборке судебных актов.</p>
         </div>
         <div class="panel">
           <h2>Что обычно требует потребитель</h2>
-          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда <b>22</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50% <b>22</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты <b>20</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы <b>16</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="penalty">неустойка <b>15</b></button>
+          <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты <b>30</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда <b>30</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50% <b>30</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы <b>23</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="penalty">неустойка <b>18</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="damages">убытки <b>4</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="insurance_premium_refund">возврат страховой премии <b>3</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="contract_recognition">признать договор заключенным или незаключенным <b>2</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="damages">убытки <b>1</b></button></div>
+<button type="button" class="chip chip-button" data-quick-filter="claims" data-quick-value="contract_recognition">признать договор заключенным или незаключенным <b>2</b></button></div>
         </div>
       </section>
 
@@ -140,28 +168,28 @@
         <div class="panel">
           <h2>Типичные объекты</h2>
           <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="финансовые услуги">финансовые услуги <b>2</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="дополнительные услуги при автокредитовании">дополнительные услуги при автокредитовании <b>2</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="страхование">страхование <b>2</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="опционный договор">опционный договор <b>2</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="авиабилеты">авиабилеты <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="сертификат на ПО">сертификат на ПО <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="услуга независимой гарантии и абонентского обслуживания">услуга независимой гарантии и абонентского обслуживания <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="юридические и медицинские услуги">юридические и медицинские услуги <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="программное обеспечение">программное обеспечение <b>1</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="онлайн-курс">онлайн-курс <b>1</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="сервисная карта">сервисная карта <b>1</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="service_contract">service_contract <b>1</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="гостиничные услуги">гостиничные услуги <b>1</b></button></div>
+<button type="button" class="chip chip-button" data-quick-filter="object" data-quick-value="онлайн-курс">онлайн-курс <b>1</b></button></div>
         </div>
         <div class="panel">
           <h2>Компании и платформы</h2>
           <div class="chips"><button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="Ozon Travel / Air Serbia">Ozon Travel / Air Serbia <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="АО «КарВит»">АО «КарВит» <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «Сириус»">ООО «Сириус» <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="LegalHelp">LegalHelp <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «Д.С.Авто»">ООО «Д.С.Авто» <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «ДФМ»">ООО «ДФМ» <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО Ринг-Сити">ООО Ринг-Сити <b>1</b></button>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО Капитал Лайф Страхование Жизни">ООО Капитал Лайф Страхование Жизни <b>1</b></button>
 <button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="Skillbox">Skillbox <b>1</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="АО «АВТОАССИСТАНС»">АО «АВТОАССИСТАНС» <b>1</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО «АВТО-ЗАЩИТА»">ООО «АВТО-ЗАЩИТА» <b>1</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО [К]">ООО [К] <b>1</b></button>
-<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО Миленти Резортс">ООО Миленти Резортс <b>1</b></button></div>
+<button type="button" class="chip chip-button" data-quick-filter="company" data-quick-value="ООО Авто Решения">ООО Авто Решения <b>1</b></button></div>
         </div>
       </section>
 
@@ -175,10 +203,10 @@
         <h2>Что показывает выборка и на что обратить внимание</h2>
         <p class="hint">Это алгоритмическое обобщение текущей подборки судебных актов, а не индивидуальная юридическая консультация.</p>
         <ul class="summary-list">
-          <li><b>Требования.</b> В похожих делах чаще встречаются: компенсация морального вреда — 22; штраф 50% — 22; возврат цены или предоплаты — 20; судебные, экспертные и иные расходы — 16.</li>
-          <li><b>Исходы.</b> Распределение результатов в этой выборке: требования удовлетворены частично — 17; требования удовлетворены полностью или почти полностью — 4; смешанный результат — 3.</li>
+          <li><b>Требования.</b> В похожих делах чаще встречаются: возврат цены или предоплаты — 30; компенсация морального вреда — 30; штраф 50% — 30; судебные, экспертные и иные расходы — 23.</li>
+          <li><b>Исходы.</b> Распределение результатов в этой выборке: требования удовлетворены частично — 21; требования удовлетворены полностью или почти полностью — 5; в иске отказано — 5.</li>
           <li><b>Факторы.</b> Суд чаще обращает внимание на такие обстоятельства: Отсутствие в билетах сведений о невозвратности тарифа; Заблаговременное уведомление перевозчика об отказе от перевозки (за месяц до вылета); суд переквалифицировал лицензионный договор в договор возмездного оказания услуг.</li>
-          <li><b>Регионы и суды.</b> Сейчас в выборке заметны регионы: Нижегородская область — 4; Республика Башкортостан — 4; Ростовская область — 2; Краснодарский край — 2; суды: Железнодорожный районный суд г. Ростова-на-Дону — 1; Шпаковский районный суд Ставропольского края — 1; Энгельсский районный суд Саратовской области — 1. При расширении базы этот слой можно использовать для сравнения региональной и судебной практики.</li>
+          <li><b>Регионы и суды.</b> Сейчас в выборке заметны регионы: Нижегородская область — 5; Республика Башкортостан — 4; Ростовская область — 3; Краснодарский край — 2; суды: Железнодорожный районный суд г. Ростова-на-Дону — 1; Шпаковский районный суд Ставропольского края — 1; Энгельсский районный суд Саратовской области — 1. При расширении базы этот слой можно использовать для сравнения региональной и судебной практики.</li>
         </ul>
       </section>
 
@@ -279,6 +307,36 @@
 <article class="case-card"
   data-case-card
   data-result="partially_satisfied"
+  data-company="LegalHelp"
+  data-object="юридические и медицинские услуги"
+  data-region="Ростовская область"
+  data-claims="refund_price||penalty||moral_damage||consumer_fine||expenses">
+  <div class="case-card__header">
+    <div>
+      <h3>Доступ к мобильному приложению LEGALHELP и абонентское обслуживание: отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Ростовская область">Ростовская область</button> <span>· 14.05.2024 · дело 2-2080/2024</span></p>
+    </div>
+    <button type="button" class="result result-partially_satisfied" data-quick-filter="result" data-quick-value="partially_satisfied">частично удовлетворено</button>
+  </div>
+  <p>Потребитель заключил абонентские договоры на юридическое и медицинское обслуживание с использованием мобильного приложения LEGALHELP. При оформлении ему навязали покупку самого мобильного приложения стоимостью 39 974 руб. Потребитель в пределах 14 дней отказался от всех договоров.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>доступ к мобильному приложению LEGALHELP и абонентское обслуживание</dd></div>
+    <div><dt>Компания</dt><dd>LegalHelp</dd></div>
+    <div><dt>Присуждено</dt><dd>141 922 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Своевременное (в течение 3 дней) направление потребителем уведомления об отказе от договора</li><li>Отсутствие у исполнителя доказательств фактически понесенных расходов по предоставлению доступа к приложению</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/TmsdMbd6SWbB/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/TmsdMbd6SWbB/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="partially_satisfied"
   data-company="ООО «Д.С.Авто»"
   data-object="финансовые услуги"
   data-region="Краснодарский край"
@@ -339,6 +397,66 @@
 <article class="case-card"
   data-case-card
   data-result="satisfied"
+  data-company="ООО Ринг-Сити"
+  data-object="дополнительные услуги при автокредитовании"
+  data-region="Московская область"
+  data-claims="refund_price||expenses||consumer_fine">
+  <div class="case-card__header">
+    <div>
+      <h3>Договор Р-шоколад NEW и AUTOLIFE Baza: отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Московская область">Московская область</button> <span>· 2023-08-16 · дело 2-1284/2023</span></p>
+    </div>
+    <button type="button" class="result result-satisfied" data-quick-filter="result" data-quick-value="satisfied">удовлетворено</button>
+  </div>
+  <p>Потребитель при покупке автомобиля в автосалоне заключил два договора с ООО «Ринг-Сити», предусматривающих абонентские услуги и независимые гарантии. Через 2 дня обратился с отказом от договоров и возвратом всей уплаченной суммы, но получил отказ.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>договор Р-шоколад NEW и AUTOLIFE Baza</dd></div>
+    <div><dt>Компания</dt><dd>ООО Ринг-Сити</dd></div>
+    <div><dt>Присуждено</dt><dd>181 559 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Абонентский договор может быть расторгнут потребителем в любое время с возвратом платы за неиспользованный период.</li><li>Разделение цены договоров с выделением невозвратной стоимости независимой гарантии (до 90% цены) признано недобросовестной практикой обхода ст. 32 ЗоЗПП.</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/jOo3LEgnEbQZ/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/jOo3LEgnEbQZ/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="rejected"
+  data-company="ООО Капитал Лайф Страхование Жизни"
+  data-object="страхование"
+  data-region="Удмуртская Республика"
+  data-claims="refund_price||moral_damage||expenses||consumer_fine">
+  <div class="case-card__header">
+    <div>
+      <h3>Полис добровольного страхования Авто Форсаж 2: отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Удмуртская Республика">Удмуртская Республика</button> <span>· 2021-07-16 · дело 2-1037/2021</span></p>
+    </div>
+    <button type="button" class="result result-rejected" data-quick-filter="result" data-quick-value="rejected">отказано</button>
+  </div>
+  <p>Потребитель досрочно погасил автокредит и потребовал от страховой компании вернуть часть страховой премии пропорционально неиспользованному сроку действия договора личного страхования.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>полис добровольного страхования Авто Форсаж 2</dd></div>
+    <div><dt>Компания</dt><dd>ООО Капитал Лайф Страхование Жизни</dd></div>
+    <div><dt>Присуждено</dt><dd>0 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Договор страхования заключен до 1 сентября 2020 года, поэтому поправки к закону о возврате премии при досрочном погашении кредита к нему не применяются.</li><li>Страховая сумма по договору страхования не зависит от размера задолженности по кредиту и не становится равной нулю после погашения кредита, следовательно, страховой риск не отпал.</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/CsVce7Qv37gw/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/CsVce7Qv37gw/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="satisfied"
   data-company="Skillbox"
   data-object="онлайн-курс"
   data-region="Приморский край"
@@ -362,6 +480,36 @@
   <div class="case-links">
     <a class="button case-primary-link" href="../../dela/3mMKR7CNUYQ8/index.html">Разобрать это дело →</a>
     <a class="source-link" href="https://sudact.ru/regular/doc/3mMKR7CNUYQ8/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="partially_satisfied"
+  data-company="ООО Авто Решения"
+  data-object="дополнительные автоуслуги"
+  data-region="Красноярский край"
+  data-claims="refund_price||damages||moral_damage||consumer_fine||penalty">
+  <div class="case-card__header">
+    <div>
+      <h3>Сертификат Дорожная карта: отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Красноярский край">Красноярский край</button> <span>· 2021-07-15 · дело 2-584/2021</span></p>
+    </div>
+    <button type="button" class="result result-partially_satisfied" data-quick-filter="result" data-quick-value="partially_satisfied">частично удовлетворено</button>
+  </div>
+  <p>Потребитель при оформлении автокредита заключил договор на оказание дополнительных услуг эвакуации и консультаций (сертификат Дорожная карта) с ООО «Авто Решения». Через 3 дня направил заявление о расторжении договора, однако деньги ему не вернули, что привело к судебному иску.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>сертификат Дорожная карта</dd></div>
+    <div><dt>Компания</dt><dd>ООО Авто Решения</dd></div>
+    <div><dt>Присуждено</dt><dd>287 304 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="damages">убытки</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Потребитель отказался от договора в течение периода охлаждения (3 дня после заключения) и не пользовался услугами.</li><li>Ответчик не предоставил доказательств несения каких-либо фактически понесенных расходов по исполнению договора.</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/wcc2Nwwl3n6V/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/wcc2Nwwl3n6V/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
@@ -428,6 +576,36 @@
 
 <article class="case-card"
   data-case-card
+  data-result="rejected"
+  data-company="ООО Сетелем Банк"
+  data-object="страхование"
+  data-region="Костромская область"
+  data-claims="refund_price||moral_damage||expenses||consumer_fine">
+  <div class="case-card__header">
+    <div>
+      <h3>Договор добровольного страхования жизни и здоровья: отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Костромская область">Костромская область</button> <span>· 2021-03-11 · дело 2-143/2021</span></p>
+    </div>
+    <button type="button" class="result result-rejected" data-quick-filter="result" data-quick-value="rejected">отказано</button>
+  </div>
+  <p>Потребитель обратился в суд с иском к банку о взыскании страховой премии по договору добровольного страхования жизни, заключенному при получении автокредита, ссылаясь на навязывание страховой услуги банком.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>договор добровольного страхования жизни и здоровья</dd></div>
+    <div><dt>Компания</dt><dd>ООО Сетелем Банк</dd></div>
+    <div><dt>Присуждено</dt><dd>0 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Иск предъявлен к банку, который является страховым агентом, а не к страховой компании (стороне договора страхования).</li><li>Документы, подписанные заемщиком, подтверждают его добровольное согласие на страхование и информированность о цене услуги.</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/pxYJYWBZTG5j/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/pxYJYWBZTG5j/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
   data-result="partially_satisfied"
   data-company="ООО [К]"
   data-object="service_contract"
@@ -482,6 +660,36 @@
   <div class="case-links">
     <a class="button case-primary-link" href="../../dela/fZ0mM6NxYymT/index.html">Разобрать это дело →</a>
     <a class="source-link" href="https://sudact.ru/regular/doc/fZ0mM6NxYymT/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="rejected"
+  data-company="ПАО Совкомбанк"
+  data-object="кредит"
+  data-region="Белгородская область"
+  data-claims="refund_price||moral_damage||expenses">
+  <div class="case-card__header">
+    <div>
+      <h3>Договор потребительского кредита с пакетом Золотой Ключ Все включено: отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Белгородская область">Белгородская область</button> <span>· 2020-11-24 · дело 2-3441/2020</span></p>
+    </div>
+    <button type="button" class="result result-rejected" data-quick-filter="result" data-quick-value="rejected">отказано</button>
+  </div>
+  <p>Потребитель обратился в суд с иском к банку о признании недействительными условий кредитного договора в части подключения к программе страхования и платным услугам (дистанционное обслуживание СовкомLine, Гарантия минимальной ставки, пакет Золотой Ключ), требуя вернуть комиссии и пересчитать кредит.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>договор потребительского кредита с пакетом Золотой Ключ Все включено</dd></div>
+    <div><dt>Компания</dt><dd>ПАО Совкомбанк</dd></div>
+    <div><dt>Присуждено</dt><dd>0 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Заемщик добровольно подписал заявления о согласии на подключение дополнительных платных услуг, содержащие условия об их стоимости и праве отказаться.</li><li>Претензия о возврате комиссий и расторжении договора направлена за пределами установленных банком и законом сроков (периода охлаждения в 14-30 дней).</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/sXOzeo6TOBl/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/sXOzeo6TOBl/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
@@ -759,6 +967,36 @@
 <article class="case-card"
   data-case-card
   data-result="partially_satisfied"
+  data-company="ГК ЭЙ ЭС ДЖИ"
+  data-object="помощь на дорогах"
+  data-region="Нижегородская область"
+  data-claims="refund_price||moral_damage||consumer_fine||expenses">
+  <div class="case-card__header">
+    <div>
+      <h3>Договор добровольного коллективного участия в программе Взаимопомощь автомобилистов: отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Нижегородская область">Нижегородская область</button> <span>· 23.12.2019 · дело 2-353/2019 (2-270/2019)</span></p>
+    </div>
+    <button type="button" class="result result-partially_satisfied" data-quick-filter="result" data-quick-value="partially_satisfied">частично удовлетворено</button>
+  </div>
+  <p>Потребитель при покупке автомобиля в кредит заключила договор добровольного коллективного участия в программе «Взаимопомощь автомобилистов» («Помощь на дорогах») с ООО «ГК ЭЙ ЭС ДЖИ» стоимостью 240 000 руб. Через некоторое время потребитель направила исполнителю заявление об одностороннем отказе от договора и возврате платы. Исполнитель вернул только 12…</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>договор добровольного коллективного участия в программе Взаимопомощь автомобилистов</dd></div>
+    <div><dt>Компания</dt><dd>ГК ЭЙ ЭС ДЖИ</dd></div>
+    <div><dt>Присуждено</dt><dd>300 000 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Право потребителя в любое время отказаться от услуг с возмещением исполнителю только фактических расходов (ст. 32 Закона о ЗПП)</li><li>Пункт договора о возврате только 5% от взноса при расторжении существенно ущемляет установленные законом права потребителя</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/vEYzUwo3klZt/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/vEYzUwo3klZt/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="partially_satisfied"
   data-company="ООО «Суточно»"
   data-object="услуга бронирования жилья"
   data-region="Ульяновская область"
@@ -782,6 +1020,66 @@
   <div class="case-links">
     <a class="button case-primary-link" href="../../dela/tLtz253BMqLq/index.html">Разобрать это дело →</a>
     <a class="source-link" href="https://sudact.ru/regular/doc/tLtz253BMqLq/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="rejected"
+  data-company="АО ЮниКредит Банк"
+  data-object="автокредит"
+  data-region="Новосибирская область"
+  data-claims="refund_price||moral_damage||damages||consumer_fine||penalty">
+  <div class="case-card__header">
+    <div>
+      <h3>Кредитный договор и договоры страхования Кардиф: отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Новосибирская область">Новосибирская область</button> <span>· 2019-09-24 · дело 2-1541/2019</span></p>
+    </div>
+    <button type="button" class="result result-rejected" data-quick-filter="result" data-quick-value="rejected">отказано</button>
+  </div>
+  <p>Потребитель при оформлении автокредита в ЮниКредит Банке за счет кредитных средств оплатила договоры страхования жизни и GAP-страхования. После досрочного погашения кредита заемщица обратилась в страховую компанию с заявлением о расторжении договоров и возврате денег.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>кредитный договор и договоры страхования Кардиф</dd></div>
+    <div><dt>Компания</dt><dd>АО ЮниКредит Банк</dd></div>
+    <div><dt>Присуждено</dt><dd>0 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="damages">убытки</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="penalty">неустойка</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Кредитный договор предусматривал альтернативные условия кредитования: заемщик могла отказаться от страхования жизни, в этом случае процентная ставка увеличивалась с 12,9% до…</li><li>Заемщица лично и добровольно подписала кредитный договор и договоры страхования, ознакомившись с условиями, и пропустила установленный период охлаждения (5 рабочих дней).</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/6OMEZDw1B3l4/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/6OMEZDw1B3l4/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="rejected"
+  data-company="ПАО Сбербанк России"
+  data-object="кредитное страхование"
+  data-region="Брянская область"
+  data-claims="refund_price||moral_damage||damages||consumer_fine">
+  <div class="case-card__header">
+    <div>
+      <h3>Программа добровольного страхования жизни и здоровья: отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Брянская область">Брянская область</button> <span>· 2019-02-12 · дело 2-320/2019</span></p>
+    </div>
+    <button type="button" class="result result-rejected" data-quick-filter="result" data-quick-value="rejected">отказано</button>
+  </div>
+  <p>Потребитель при получении потребительского кредита в Сбербанке подключился к программе добровольного страхования жизни и здоровья. Досрочно погасив кредит, он потребовал вернуть часть платы за страхование за неиспользованный период.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>программа добровольного страхования жизни и здоровья</dd></div>
+    <div><dt>Компания</dt><dd>ПАО Сбербанк России</dd></div>
+    <div><dt>Присуждено</dt><dd>0 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="moral_damage">компенсация морального вреда</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="damages">убытки</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="consumer_fine">штраф 50%</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Заемщик обратился с заявлением о выходе из программы страхования за пределами установленного договором 14-дневного периода охлаждения.</li><li>Досрочное погашение кредита не прекращает действие договора страхования, поскольку страховая сумма является фиксированной на весь срок и не зависит от остатка долга по кредиту.…</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/9xqNlIbQlyxm/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/9xqNlIbQlyxm/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 
@@ -812,6 +1110,36 @@
   <div class="case-links">
     <a class="button case-primary-link" href="../../dela/qtC0iQLRs9LE/index.html">Разобрать это дело →</a>
     <a class="source-link" href="https://sudact.ru/regular/doc/qtC0iQLRs9LE/" target="_blank" rel="noopener">↗ Судебный акт</a>
+  </div>
+</article>
+
+
+<article class="case-card"
+  data-case-card
+  data-result="partially_satisfied"
+  data-company="АО Тинькофф Банк"
+  data-object="кредитная карта"
+  data-region="Тульская область"
+  data-claims="refund_price||expenses">
+  <div class="case-card__header">
+    <div>
+      <h3>Договор кредитной карты Тинькофф Голд: отказ от услуги и возврат денег</h3>
+      <p class="meta"><button type="button" class="meta-filter" data-quick-filter="region" data-quick-value="Тульская область">Тульская область</button> <span>· 2017-07-10 · дело 2-1328/2017</span></p>
+    </div>
+    <button type="button" class="result result-partially_satisfied" data-quick-filter="result" data-quick-value="partially_satisfied">частично удовлетворено</button>
+  </div>
+  <p>Банк обратился в суд с иском к заемщице о взыскании задолженности по договору кредитной карты. Заемщица выдвинула возражения, утверждая, что банк навязал ей страховки, комиссии за снятие наличных и услуги СМС-банка, которые подлежат исключению из расчета долга как нарушающие права потребителя.</p>
+  <dl class="case-facts">
+    <div><dt>Объект</dt><dd>договор кредитной карты Тинькофф Голд</dd></div>
+    <div><dt>Компания</dt><dd>АО Тинькофф Банк</dd></div>
+    <div><dt>Присуждено</dt><dd>111 766 ₽</dd></div>
+  </dl>
+  <div class="chips"><button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="refund_price">возврат цены или предоплаты</button> <button type="button" class="chip chip-button small" data-quick-filter="claims" data-quick-value="expenses">судебные, экспертные и иные расходы</button></div>
+  <h4>Что повлияло на исход</h4>
+  <ul><li>Заемщица добровольно подключила дополнительные услуги: письменно в заявлении-анкете (не заполнив графу отказа) и устно по телефону (подтверждено аудиозаписью).</li><li>На протяжении 5 лет заемщица регулярно пользовалась картой, получала счета-выписки и оплачивала комиссии без направления претензий.</li></ul>
+  <div class="case-links">
+    <a class="button case-primary-link" href="../../dela/4lxVIPUNKglJ/index.html">Разобрать это дело →</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/4lxVIPUNKglJ/" target="_blank" rel="noopener">↗ Судебный акт</a>
   </div>
 </article>
 

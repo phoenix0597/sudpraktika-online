@@ -107,24 +107,24 @@
       "short_reason": "Иск автосалона к покупателю удовлетворен в полном объеме, поскольку покупатель нарушил условия предоставления скидки, расторгнув сопутствующий договор услуг."
     },
     "amounts": {
-      "claimed_total": 80000.00,
-      "awarded_total": 80000.00,
+      "claimed_total": 80000.0,
+      "awarded_total": 80000.0,
       "items_claimed": [
         {
           "type": "refund_price",
-          "amount": 80000.00,
+          "amount": 80000.0,
           "note": "сумма аннулированной скидки на автомобиль"
         }
       ],
       "items_awarded": [
         {
           "type": "refund_price",
-          "amount": 80000.00,
+          "amount": 80000.0,
           "note": "сумма аннулированной скидки на автомобиль"
         },
         {
           "type": "expenses",
-          "amount": 2600.00,
+          "amount": 2600.0,
           "note": "государственная пошлина"
         }
       ]
@@ -217,9 +217,9 @@
     ]
   },
   "publication": {
-    "main_site_fit": true,
-    "index_policy": "index",
-    "exclude_reason": null,
+    "main_site_fit": false,
+    "index_policy": "hold",
+    "exclude_reason": "contract_validity_or_candidate_situation_requires_human_review",
     "ai_generated": true,
     "citations_verified": true,
     "human_review_status": "not_reviewed",

@@ -279,6 +279,23 @@ def validate_enum_fields(docid: str, data: dict, enum_values: dict[str, set[str]
         errors.add(f"{docid}: publication.main_site_fit must be boolean")
         ok = False
 
+    index_policy = nested_get(data, ("publication", "index_policy"))
+    dispute_type_code = nested_get(data, ("taxonomy", "dispute_type_code"))
+    claim_type_codes = nested_get(data, ("taxonomy", "claim_type_codes"))
+    if index_policy == "index":
+        if main_site_fit is not True:
+            errors.add(f"{docid}: publication.index_policy='index' requires main_site_fit=true")
+            ok = False
+        if dispute_type_code in {"contract_validity_non_zpp", "non_consumer_hold"}:
+            errors.add(f"{docid}: {dispute_type_code} cannot be indexed")
+            ok = False
+        if isinstance(claim_type_codes, list) and "hold" in claim_type_codes:
+            errors.add(f"{docid}: indexed case cannot use service claim_type_code 'hold'")
+            ok = False
+    elif index_policy == "hold" and main_site_fit is not False:
+        errors.add(f"{docid}: publication.index_policy='hold' requires main_site_fit=false")
+        ok = False
+
     return ok
 
 
