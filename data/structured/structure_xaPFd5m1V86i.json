@@ -1,0 +1,79 @@
+{
+  "schema_version": "2.0",
+  "source": {
+    "docid": "xaPFd5m1V86i",
+    "source_url": "https://sudact.ru/regular/doc/xaPFd5m1V86i/",
+    "source_domain": "sudact.ru",
+    "source_type": "sudact_doc",
+    "raw_act_path": "data/raw_acts/act_xaPFd5m1V86i.txt",
+    "raw_text_sha256": "b21f6c0802a09490eb96afd72e585a98710d1824b0d77566cc8953bfa3459346"
+  },
+  "court": {
+    "case_number": "",
+    "court_name": "",
+    "court_level": "",
+    "court_system": "",
+    "region": "",
+    "decision_date": "",
+    "instance": ""
+  },
+  "taxonomy": {
+    "legal_area": "consumer_protection",
+    "procedure_type": "civil",
+    "audience": "consumer",
+    "vertical": "zpp",
+    "dispute_type_code": "contract_validity_non_zpp",
+    "dispute_type": "???? ???????? ??? ??????? ?? ????????? ?????????",
+    "claim_type_codes": [
+      "hold"
+    ],
+    "claim_type": "?? ??????????",
+    "platform_or_company": "",
+    "object_type": "",
+    "object_name": "",
+    "situation_tags": [
+      "raw_fetched_but_not_structured",
+      "needs_reprocessing"
+    ]
+  },
+  "parties": {
+    "focus_party": "consumer",
+    "opponents": [],
+    "third_parties": []
+  },
+  "case_summary": {
+    "short_summary": "??? ??????, ?? ?? ??? ?????????? ????????? ???????; ??????? ??? ???????.",
+    "timeline": [],
+    "key_factors": [],
+    "practical_lessons": [],
+    "unusual_points": []
+  },
+  "claims_and_result": {
+    "claims": [],
+    "amounts": {},
+    "outcome": {
+      "focus_party_result": "hold",
+      "result_type": "hold",
+      "short_reason": "????????? ????????? ?????????"
+    }
+  },
+  "legal_analysis": {
+    "holding": "",
+    "legal_references": [],
+    "rejected_arguments": []
+  },
+  "publication": {
+    "main_site_fit": false,
+    "index_policy": "hold",
+    "exclude_reason": "raw_fetched_but_not_structured_needs_reprocessing",
+    "ai_generated": false,
+    "citations_verified": true,
+    "human_review_status": "needs_reprocessing",
+    "legal_advice": false
+  },
+  "processing": {
+    "status": "complete",
+    "processed_by": "Codex/local hold stub",
+    "processed_at": "2026-06-27T18:28:38+03:00"
+  }
+}

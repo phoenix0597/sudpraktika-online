@@ -18,6 +18,7 @@ import verify_citations
 
 RAW_DIR = Path("data/raw_acts")
 STRUCTURED_DIR = Path("data/structured")
+ENUM_DICTIONARY_PATH = Path("data/reference/zpp_enum_dictionary.json")
 
 REQUIRED_TOP_LEVEL = [
     "schema_version",
@@ -40,6 +41,35 @@ REQUIRED_SOURCE_FIELDS = [
     "raw_text_sha256",
     "source_type",
 ]
+
+ENUM_FIELDS = {
+    "taxonomy.dispute_type_code": ("taxonomy", "dispute_type_code"),
+    "taxonomy.claim_type_codes": ("taxonomy", "claim_type_codes"),
+    "claims_and_result.outcome.result_type": ("claims_and_result", "outcome", "result_type"),
+    "publication.index_policy": ("publication", "index_policy"),
+}
+
+
+def load_enum_values() -> dict[str, set[str]]:
+    if not ENUM_DICTIONARY_PATH.exists():
+        return {}
+    data = json.loads(ENUM_DICTIONARY_PATH.read_text(encoding="utf-8"))
+    fields = data.get("fields", {})
+    result: dict[str, set[str]] = {}
+    for field_name, spec in fields.items():
+        values = spec.get("values", {}) if isinstance(spec, dict) else {}
+        if isinstance(values, dict):
+            result[field_name] = set(values)
+    return result
+
+
+def nested_get(data: dict, path: tuple[str, ...]) -> object:
+    current: object = data
+    for key in path:
+        if not isinstance(current, dict):
+            return None
+        current = current.get(key)
+    return current
 
 
 class ErrorLog:
@@ -219,7 +249,41 @@ def validate_json_citations(docid: str, data: dict, act_text: str,
     return True
 
 
+def validate_enum_fields(docid: str, data: dict, enum_values: dict[str, set[str]],
+                         errors: ErrorLog) -> bool:
+    if not enum_values:
+        return True
+
+    ok = True
+    for field_name, path in ENUM_FIELDS.items():
+        allowed = enum_values.get(field_name)
+        if not allowed:
+            continue
+        value = nested_get(data, path)
+        if field_name == "taxonomy.claim_type_codes":
+            if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
+                errors.add(f"{docid}: taxonomy.claim_type_codes must be a list of strings")
+                ok = False
+                continue
+            invalid = [item for item in value if item not in allowed]
+            if invalid:
+                errors.add(f"{docid}: invalid taxonomy.claim_type_codes: {', '.join(invalid)}")
+                ok = False
+            continue
+        if not isinstance(value, str) or value not in allowed:
+            errors.add(f"{docid}: invalid {field_name}: {value!r}")
+            ok = False
+
+    main_site_fit = nested_get(data, ("publication", "main_site_fit"))
+    if not isinstance(main_site_fit, bool):
+        errors.add(f"{docid}: publication.main_site_fit must be boolean")
+        ok = False
+
+    return ok
+
+
 def validate_structure(docid: str, path: Path, act_text: str, errors: ErrorLog,
+                       enum_values: dict[str, set[str]],
                        allow_incomplete: bool, skip_citation_check: bool) -> bool:
     if not path.exists():
         errors.add(f"{docid}: нет {path.as_posix()}")
@@ -249,6 +313,9 @@ def validate_structure(docid: str, path: Path, act_text: str, errors: ErrorLog,
 
     if source.get("docid") and source.get("docid") != docid:
         errors.add(f"{docid}: source.docid не совпадает с именем файла")
+        ok = False
+
+    if not validate_enum_fields(docid, data, enum_values, errors):
         ok = False
 
     processing = data.get("processing") if isinstance(data.get("processing"), dict) else {}
@@ -311,6 +378,7 @@ def main() -> int:
 
     errors = ErrorLog(args.max_errors)
     warnings = WarningLog(args.max_errors)
+    enum_values = load_enum_values()
     stats = {
         "acts": len(act_files),
         "user_story_ok": 0,
@@ -345,6 +413,7 @@ def main() -> int:
             structure,
             act_text,
             errors,
+            enum_values,
             args.allow_incomplete,
             args.skip_citation_check,
         ):

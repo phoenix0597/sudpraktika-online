@@ -103,6 +103,22 @@ PAGES: list[SituationPage] = [
         "landing",
         "Оплатили, но товар не передали",
     ),
+    SituationPage(
+        "work_service_defect_art29",
+        "nekachestvennaya-rabota-usluga",
+        "Некачественные работы и услуги: права потребителя и возврат денег",
+        "Потребитель заказал работы или услуги (ремонт, установка окон/дверей, изготовление мебели), но они выполнены некачественно или с дефектами.",
+        "pillar",
+        "Некачественные работы и услуги",
+    ),
+    SituationPage(
+        "work_service_delay_art28",
+        "prosrochka-rabot-uslug",
+        "Нарушение сроков выполнения работ и услуг: расчет неустойки и права",
+        "Исполнитель нарушил сроки начала или окончания работ/услуг (ремонт, монтаж, строительство).",
+        "landing",
+        "Просрочка работ и услуг",
+    ),
 ]
 
 
@@ -1163,6 +1179,52 @@ def render_case_detail_page(
     return html_page(title, body, "../../assets/prototype.css")
 
 
+def top_counter_text(items: Counter[str], labels: dict[str, str] | None = None, max_items: int = 4) -> str:
+    labels = labels or {}
+    parts: list[str] = []
+    for code, count in items.most_common(max_items):
+        if not code:
+            continue
+        parts.append(f"{labels.get(code, code)} — {count}")
+    return "; ".join(parts) if parts else "недостаточно данных"
+
+
+def render_service_recommendations(
+    cases: list[dict[str, Any]],
+    labels: dict[str, dict[str, str]],
+    result_counts: Counter[str],
+    claim_counts: Counter[str],
+    factor_items: list[str],
+) -> str:
+    region_counts: Counter[str] = Counter()
+    court_counts: Counter[str] = Counter()
+
+    for row in cases:
+        data = row["_json"]
+        court = data.get("court", {})
+        if court.get("region"):
+            region_counts[str(court["region"])] += 1
+        if court.get("court_name"):
+            court_counts[str(court["court_name"])] += 1
+
+    factor_text = "; ".join(factor_items[:3]) if factor_items else "по текущей выборке повторяющиеся факторы пока не выделены"
+    region_text = top_counter_text(region_counts, max_items=4)
+    court_text = top_counter_text(court_counts, max_items=3)
+
+    return f"""
+      <section class="panel">
+        <h2>Что показывает выборка и на что обратить внимание</h2>
+        <p class="hint">Это алгоритмическое обобщение текущей подборки судебных актов, а не индивидуальная юридическая консультация.</p>
+        <ul class="summary-list">
+          <li><b>Требования.</b> В похожих делах чаще встречаются: {escape(top_counter_text(claim_counts, labels['claim_type_codes']))}.</li>
+          <li><b>Исходы.</b> Распределение результатов в этой выборке: {escape(top_counter_text(result_counts, labels['result_type'], 3))}.</li>
+          <li><b>Факторы.</b> Суд чаще обращает внимание на такие обстоятельства: {escape(factor_text)}.</li>
+          <li><b>Регионы и суды.</b> Сейчас в выборке заметны регионы: {escape(region_text)}; суды: {escape(court_text)}. При расширении базы этот слой можно использовать для сравнения региональной и судебной практики.</li>
+        </ul>
+      </section>
+"""
+
+
 def render_situation_page(page: SituationPage, cases: list[dict[str, Any]], labels: dict[str, dict[str, str]]) -> str:
     result_counts = Counter(row.get("result_type") for row in cases)
     claim_counts: Counter[str] = Counter()
@@ -1260,6 +1322,8 @@ def render_situation_page(page: SituationPage, cases: list[dict[str, Any]], labe
         <ul>{''.join(f'<li>{escape(item)}</li>' for item in factor_items)}</ul>
       </section>
 
+{render_service_recommendations(cases, labels, result_counts, claim_counts, factor_items)}
+
       <section>
         <h2>Дела в этой выборке</h2>
         <div class="case-list" data-case-list>{cards}</div>
@@ -1290,6 +1354,7 @@ def render_situation_page(page: SituationPage, cases: list[dict[str, Any]], labe
 
 
 def render_index(by_cluster: dict[str, list[dict[str, Any]]]) -> str:
+    total_cases = sum(len(cases) for cases in by_cluster.values())
     cards = []
     for page in PAGES:
         count = len(by_cluster.get(page.code, []))
@@ -1311,7 +1376,7 @@ def render_index(by_cluster: dict[str, list[dict[str, Any]]]) -> str:
   <section class="hero">
     <p class="eyebrow">Судебная практика</p>
     <h1>Первые страницы судебной практики по ЗоЗПП</h1>
-    <p class="lead">Пять страниц-ситуаций собраны из 46 индексируемых судебных актов первой партии: карточки дел, обобщающие показатели, фильтры и разборы конкретных историй.</p>
+    <p class="lead">Пять страниц-ситуаций собраны из {escape(court_acts_label(total_cases))}: карточки дел, обобщающие показатели, фильтры, рекомендации по выборке и разборы конкретных историй.</p>
   </section>
   <section class="index-grid">
     {''.join(cards)}

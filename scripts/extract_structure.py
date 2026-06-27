@@ -21,7 +21,17 @@ import requests
 from dotenv import load_dotenv
 
 load_dotenv(Path(__file__).parent / ".env")
-KEY = os.environ["DEEPSEEK_API_KEY"].strip()
+KEY = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+
+
+def require_external_llm_api_permission() -> None:
+    if os.environ.get("ZPP_ALLOW_EXTERNAL_LLM_API") != "1":
+        raise RuntimeError(
+            "This script calls an external LLM API. Run it only after explicit "
+            "user permission for the current task and set ZPP_ALLOW_EXTERNAL_LLM_API=1."
+        )
+    if not KEY:
+        raise RuntimeError("DEEPSEEK_API_KEY is not set.")
 
 
 def docid_from_act_path(path: Path) -> str:
@@ -58,6 +68,7 @@ def main() -> int:
     ap.add_argument("--model", default="deepseek-v4-pro",
                     help="Модель DeepSeek")
     args = ap.parse_args()
+    require_external_llm_api_permission()
 
     prompt = Path(args.prompt).read_text(encoding="utf-8")
     act_path = Path(args.act)
