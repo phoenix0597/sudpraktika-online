@@ -137,6 +137,26 @@ test.describe('SSG smoke tests', () => {
     }
   });
 
+  test('legacy norm bullets render as legal notes with left rail', async ({ page }) => {
+    await page.goto('/zpp/dela/BRRlQN72V9V6/');
+    const legalAnalysis = page.locator('section.story-content').filter({ hasText: 'Подробный правовой разбор' }).first();
+    await expect(legalAnalysis.getByRole('heading', { name: 'Нормы, на которые сослался суд' })).toBeVisible();
+
+    const notes = legalAnalysis.locator('.md-note');
+    expect(await notes.count()).toBeGreaterThan(10);
+    await expect(notes.first()).toContainText('Значение в деле');
+
+    const border = await notes.first().evaluate((node) => {
+      const style = window.getComputedStyle(node);
+      return {
+        style: style.borderLeftStyle,
+        width: style.borderLeftWidth,
+      };
+    });
+    expect(border.style).not.toBe('none');
+    expect(parseFloat(border.width)).toBeGreaterThan(0);
+  });
+
   test('internal links on representative pages do not point to missing local pages', async ({ page, request, baseURL }) => {
     for (const path of REPRESENTATIVE_PATHS) {
       await page.goto(path);

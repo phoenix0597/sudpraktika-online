@@ -888,7 +888,7 @@ def split_legacy_application(text: str) -> tuple[str, str | None]:
 
 
 def render_legacy_norm_item(text: str) -> str | None:
-    match = re.match(r"^\*\*(.+?)\*\*:\s*(.+)$", text.strip())
+    match = re.match(r"^\*\*(.+?)\*\*\s*(?::|[—-])\s*(.+)$", text.strip())
     if not match:
         return None
 

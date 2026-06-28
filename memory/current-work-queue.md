@@ -46,7 +46,7 @@
 - Локальный Docker Compose сервер настроен: `site` отдаёт `site_prototype/`, `caddy` служит входной точкой и будущим HTTPS-слоем; локальный адрес — `http://localhost:8080/`. Проверены главная и страница ситуации через HTTP 200 ✓.
 - Базовый технический SEO для SSG-прототипа реализован: canonical URL на всех HTML-страницах, `sitemap.xml` на 270 URL и `robots.txt` генерируются из `SITE_PUBLIC_URL`.
 - Pre-production URL-решение выполнено: ЗоПП-страницы перенесены под `/zpp/` (`/zpp/praktika/...`, `/zpp/dela/...`), старые root-level `/praktika/...` и `/dela/...` больше не генерируются.
-- Минимальный контур регрессионных тестов внедрён: `npm run test:data` проверяет structured/markdown consistency; `@playwright/test` даёт 9 smoke-тестов и 14 visual snapshot-тестов; `npm run site:test` проходит на локальном Docker-сервере ✓.
+- Минимальный контур регрессионных тестов внедрён: `npm run test:data` проверяет structured/markdown consistency; `@playwright/test` даёт 10 smoke-тестов и 14 visual snapshot-тестов; `npm run site:test` проходит на локальном Docker-сервере ✓.
 - Публичный ребрендинг выполнен: README, npm metadata, канонические файлы памяти/ТЗ и SSG-шапка используют “Судпрактика Онлайн”; локальная папка `zpp-consult` не переименовывалась, чтобы не ломать окружение перед GitHub/CI.
 - Нормализация legacy `user_story_*.md` под стандартные подзаголовки завершена: 145/145 предупреждений закрыты, `validate_structures.py --check-user-story-format` показывает 297/297 OK; строгая проверка включена в `npm run test:data`.
 - Удалённый GitHub-репозиторий создан и привязан как `origin` (`git@github.com:phoenix0597/sudpraktika-online.git`); последний push пользователем выполнен, новые локальные коммиты после настройки CI нужно отправить и проверить в Actions.
