@@ -2,11 +2,12 @@ const { test, expect } = require('@playwright/test');
 
 const PAGES = [
   { name: 'home', path: '/' },
-  { name: 'situation-goods-defect', path: '/praktika/nekachestvennyy-tovar/' },
-  { name: 'situation-service-refusal', path: '/praktika/vozvrat-deneg-za-uslugu/' },
-  { name: 'case-important-points', path: '/dela/9xUCtLJ9m3HR/' },
-  { name: 'case-legal-analysis', path: '/dela/xyw1pNsfewV8/' },
-  { name: 'case-long-title', path: '/dela/3mMKR7CNUYQ8/' },
+  { name: 'zpp-section', path: '/zpp/' },
+  { name: 'situation-goods-defect', path: '/zpp/praktika/nekachestvennyy-tovar/' },
+  { name: 'situation-service-refusal', path: '/zpp/praktika/vozvrat-deneg-za-uslugu/' },
+  { name: 'case-important-points', path: '/zpp/dela/9xUCtLJ9m3HR/' },
+  { name: 'case-legal-analysis', path: '/zpp/dela/xyw1pNsfewV8/' },
+  { name: 'case-long-title', path: '/zpp/dela/3mMKR7CNUYQ8/' },
 ];
 
 const VIEWPORTS = [

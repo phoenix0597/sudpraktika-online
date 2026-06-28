@@ -2,10 +2,11 @@ const { test, expect } = require('@playwright/test');
 
 const REPRESENTATIVE_PATHS = [
   '/',
-  '/praktika/nekachestvennyy-tovar/',
-  '/praktika/vozvrat-deneg-za-uslugu/',
-  '/dela/9xUCtLJ9m3HR/',
-  '/dela/xyw1pNsfewV8/',
+  '/zpp/',
+  '/zpp/praktika/nekachestvennyy-tovar/',
+  '/zpp/praktika/vozvrat-deneg-za-uslugu/',
+  '/zpp/dela/9xUCtLJ9m3HR/',
+  '/zpp/dela/xyw1pNsfewV8/',
 ];
 
 const FORBIDDEN_UI_TOKENS = [
@@ -31,8 +32,11 @@ async function sitemapPaths(request, baseURL) {
   });
   expect(paths.length).toBeGreaterThan(200);
   expect(paths).toContain('/');
-  expect(paths.some((path) => path.startsWith('/praktika/'))).toBeTruthy();
-  expect(paths.some((path) => path.startsWith('/dela/'))).toBeTruthy();
+  expect(paths).toContain('/zpp/');
+  expect(paths.some((path) => path.startsWith('/zpp/praktika/'))).toBeTruthy();
+  expect(paths.some((path) => path.startsWith('/zpp/dela/'))).toBeTruthy();
+  expect(paths.some((path) => path.startsWith('/praktika/'))).toBeFalsy();
+  expect(paths.some((path) => path.startsWith('/dela/'))).toBeFalsy();
   expect(new Set(paths).size).toBe(paths.length);
   expect(baseURL).toBeTruthy();
   return paths;
@@ -69,15 +73,21 @@ test.describe('SSG smoke tests', () => {
     }
   });
 
-  test('home page exposes situation navigation', async ({ page }) => {
+  test('home page exposes ZPP section', async ({ page }) => {
     await page.goto('/');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Судпрактика Онлайн');
+    await expect(page.getByRole('link', { name: /Дела о защите прав потребителей/ })).toBeVisible();
+  });
+
+  test('ZPP section page exposes situation navigation', async ({ page }) => {
+    await page.goto('/zpp/');
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Первые страницы судебной практики');
     await expect(page.getByRole('link', { name: /Некачественный товар/ })).toBeVisible();
     await expect(page.getByRole('link', { name: /Как вернуть товар, купленный онлайн/ })).toBeVisible();
   });
 
   test('situation page exposes filters, summary, recommendations and case cards', async ({ page }) => {
-    await page.goto('/praktika/nekachestvennyy-tovar/');
+    await page.goto('/zpp/praktika/nekachestvennyy-tovar/');
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Некачественный товар');
     await expect(page.getByRole('heading', { name: 'Фильтры по делам' })).toBeVisible();
     await expect(page.locator('[data-filter]')).toHaveCount(5);
@@ -88,7 +98,7 @@ test.describe('SSG smoke tests', () => {
   });
 
   test('case page exposes story, result, source and legal analysis blocks', async ({ page }) => {
-    await page.goto('/dela/9xUCtLJ9m3HR/');
+    await page.goto('/zpp/dela/9xUCtLJ9m3HR/');
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'Итог дела' })).toBeVisible();
     await expect(page.getByRole('heading', { name: 'История дела простым языком' })).toBeVisible();
@@ -102,8 +112,8 @@ test.describe('SSG smoke tests', () => {
 
   test('case story labels are rendered as headings consistently', async ({ page }) => {
     const paths = [
-      '/dela/yz0M6YZip7Qn/',
-      '/dela/GMjXio3dnCrR/',
+      '/zpp/dela/yz0M6YZip7Qn/',
+      '/zpp/dela/GMjXio3dnCrR/',
     ];
     const labels = [
       'Кто участвовал',

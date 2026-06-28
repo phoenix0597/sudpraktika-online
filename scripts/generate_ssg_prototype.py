@@ -9,8 +9,9 @@
 Пишет:
 - site_prototype/index.html
 - site_prototype/assets/prototype.css
-- site_prototype/praktika/<slug>/index.html
-- site_prototype/dela/<docid>/index.html
+- site_prototype/zpp/index.html
+- site_prototype/zpp/praktika/<slug>/index.html
+- site_prototype/zpp/dela/<docid>/index.html
 
 Это не финальный фронтенд, а проверочный SSG-прототип: он нужен, чтобы быстро
 посмотреть структуру страниц, карточки дел, сводки и фильтры на реальных данных.
@@ -61,6 +62,8 @@ def config_value(name: str, default: str) -> str:
 
 DEFAULT_PUBLIC_BASE_URL = "https://sudpraktika-online.ru"
 PUBLIC_BASE_URL = config_value("SITE_PUBLIC_URL", DEFAULT_PUBLIC_BASE_URL).strip().rstrip("/")
+ZPP_ROUTE_PREFIX = "/zpp"
+ZPP_OUT_DIR = OUT_DIR / "zpp"
 PROTOTYPE_DISCLAIMER = (
     "Не является юридической консультацией. Материалы основаны на судебных актах "
     "и обработаны алгоритмом для систематизации и обобщения текущей судебной практики судов разных инстанций."
@@ -78,11 +81,11 @@ class SituationPage:
 
     @property
     def route(self) -> str:
-        return f"/praktika/{self.slug}/"
+        return f"{ZPP_ROUTE_PREFIX}/praktika/{self.slug}/"
 
     @property
     def output_path(self) -> Path:
-        return OUT_DIR / "praktika" / self.slug / "index.html"
+        return ZPP_OUT_DIR / "praktika" / self.slug / "index.html"
 
 
 PAGES: list[SituationPage] = [
@@ -466,7 +469,7 @@ function applyFilters() {{
 
 def page_href(page: SituationPage, current_page: SituationPage | None = None) -> str:
     if current_page is None:
-        return f"praktika/{page.slug}/index.html"
+        return f"praktika/{page.slug}/"
     if page.code == current_page.code:
         return "index.html"
     return f"../{page.slug}/index.html"
@@ -481,7 +484,7 @@ def case_page_href(docid: str) -> str:
 
 
 def case_route(docid: str) -> str:
-    return f"/dela/{docid}/"
+    return f"{ZPP_ROUTE_PREFIX}/dela/{docid}/"
 
 
 def load_cases() -> tuple[list[dict[str, Any]], dict[str, list[dict[str, Any]]]]:
@@ -1313,7 +1316,7 @@ def render_case_detail_page(
   <p>{escape(PROTOTYPE_DISCLAIMER)}</p>
 </footer>
 """
-    return html_page(title, body, "../../assets/prototype.css", canonical_path=case_route(docid))
+    return html_page(title, body, "../../../assets/prototype.css", canonical_path=case_route(docid))
 
 
 def top_counter_text(items: Counter[str], labels: dict[str, str] | None = None, max_items: int = 4) -> str:
@@ -1487,10 +1490,10 @@ def render_situation_page(page: SituationPage, cases: list[dict[str, Any]], labe
   <p>{escape(PROTOTYPE_DISCLAIMER)}</p>
 </footer>
 """
-    return html_page(page.h1, body, "../../assets/prototype.css", canonical_path=page.route)
+    return html_page(page.h1, body, "../../../assets/prototype.css", canonical_path=page.route)
 
 
-def render_index(by_cluster: dict[str, list[dict[str, Any]]]) -> str:
+def render_zpp_index(by_cluster: dict[str, list[dict[str, Any]]]) -> str:
     total_cases = sum(len(cases) for cases in by_cluster.values())
     cards = []
     for page in PAGES:
@@ -1503,11 +1506,12 @@ def render_index(by_cluster: dict[str, list[dict[str, Any]]]) -> str:
   <p>{escape(page.short_problem)}</p>
   <a class="button" href="{escape(page_href(page))}">Открыть страницу</a>
 </article>
-"""
+            """
         )
+    cards_html = "\n".join(card.strip() for card in cards)
     body = f"""
 <header class="site-header">
-  <a class="brand" href="index.html">{escape(SITE_BRAND)}</a>
+  <a class="brand" href="../index.html">{escape(SITE_BRAND)}</a>
 </header>
 <main>
   <section class="hero">
@@ -1516,14 +1520,43 @@ def render_index(by_cluster: dict[str, list[dict[str, Any]]]) -> str:
     <p class="lead">Страницы-ситуации собраны из {escape(court_acts_label(total_cases))}: карточки дел, обобщающие показатели, фильтры, рекомендации по выборке и разборы конкретных историй.</p>
   </section>
   <section class="index-grid">
-    {''.join(cards)}
+{cards_html}
   </section>
 </main>
 <footer class="site-footer">
   <p>{escape(PROTOTYPE_DISCLAIMER)}</p>
 </footer>
 """
-    return html_page("Судебная практика по защите прав потребителей", body, "assets/prototype.css", canonical_path="/")
+    return html_page("Судебная практика по защите прав потребителей", body, "../assets/prototype.css", canonical_path="/zpp/")
+
+
+def render_home_index(by_cluster: dict[str, list[dict[str, Any]]]) -> str:
+    total_cases = sum(len(cases) for cases in by_cluster.values())
+    total_situations = sum(1 for page in PAGES if by_cluster.get(page.code))
+    body = f"""
+<header class="site-header">
+  <a class="brand" href="index.html">{escape(SITE_BRAND)}</a>
+</header>
+<main>
+  <section class="hero">
+    <p class="eyebrow">Каталог судебной практики</p>
+    <h1>Судпрактика Онлайн</h1>
+    <p class="lead">Сервис систематизирует судебные акты простым языком: жизненные истории, выводы судов, требования, результаты и обобщения по выборкам.</p>
+  </section>
+  <section class="index-grid">
+    <article class="index-card">
+      <p class="eyebrow">{escape(court_acts_label(total_cases))} · {escape(str(total_situations))} ситуаций</p>
+      <h2><a href="zpp/">Дела о защите прав потребителей</a></h2>
+      <p>Первый раздел сервиса: возврат товаров и услуг, некачественные товары, недостоверная информация, навязанные услуги, вред и другие ситуации по ЗоЗПП.</p>
+      <a class="button" href="zpp/">Открыть раздел</a>
+    </article>
+  </section>
+</main>
+<footer class="site-footer">
+  <p>{escape(PROTOTYPE_DISCLAIMER)}</p>
+</footer>
+"""
+    return html_page("Судпрактика Онлайн — каталог судебной практики", body, "assets/prototype.css", canonical_path="/")
 
 
 def write_css() -> None:
@@ -1792,25 +1825,26 @@ def main() -> int:
 
     if OUT_DIR.exists():
         shutil.rmtree(OUT_DIR)
-    (OUT_DIR / "praktika").mkdir(parents=True, exist_ok=True)
-    (OUT_DIR / "dela").mkdir(parents=True, exist_ok=True)
+    (ZPP_OUT_DIR / "praktika").mkdir(parents=True, exist_ok=True)
+    (ZPP_OUT_DIR / "dela").mkdir(parents=True, exist_ok=True)
     write_css()
 
     generated_case_pages = 0
-    seo_paths = ["/"]
+    seo_paths = ["/", f"{ZPP_ROUTE_PREFIX}/"]
     for page in PAGES:
         page.output_path.parent.mkdir(parents=True, exist_ok=True)
         page.output_path.write_text(render_situation_page(page, by_cluster[page.code], labels), encoding="utf-8")
         seo_paths.append(page.route)
         for row in by_cluster[page.code]:
             docid = row["docid"]
-            case_path = OUT_DIR / "dela" / docid / "index.html"
+            case_path = ZPP_OUT_DIR / "dela" / docid / "index.html"
             case_path.parent.mkdir(parents=True, exist_ok=True)
             case_path.write_text(render_case_detail_page(row, page, labels), encoding="utf-8")
             seo_paths.append(case_route(docid))
             generated_case_pages += 1
 
-    (OUT_DIR / "index.html").write_text(render_index(by_cluster), encoding="utf-8")
+    (ZPP_OUT_DIR / "index.html").write_text(render_zpp_index(by_cluster), encoding="utf-8")
+    (OUT_DIR / "index.html").write_text(render_home_index(by_cluster), encoding="utf-8")
     write_seo_files(seo_paths)
 
     print(f"Сгенерировано страниц-ситуаций: {len(PAGES)}")
