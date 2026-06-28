@@ -34,9 +34,12 @@ http://localhost:8080/
 SITE_ADDRESS=sudpraktika-online.ru
 SITE_HTTP_PORT=80
 SITE_HTTPS_PORT=443
+SITE_PUBLIC_URL=https://sudpraktika-online.ru
 ```
 
 Caddy сможет получить публичный SSL-сертификат, когда DNS домена указывает на сервер, а входящие порты 80 и 443 открыты.
+
+`SITE_PUBLIC_URL` используется генератором статических страниц для canonical URL, `sitemap.xml` и `robots.txt`. Генератор читает это значение из переменной окружения или из `.env`. Если домен изменится, достаточно поменять значение и пересобрать сайт.
 
 Остановить локальные контейнеры:
 

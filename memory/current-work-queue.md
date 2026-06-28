@@ -44,6 +44,7 @@
 - Кандидатные ЗоЗПП-ситуации batch-3 приняты и добавлены в `data/reference/zpp_enum_dictionary.json`: `proper_quality_goods_exchange_art25` (2 дела), `unfair_terms_imposed_services_art16` (11), `harm_from_defect_art14` (9), `consumer_material_damage_art35` (23). 45 дел переведены из `hold` в индекс.
 - Статический прототип пересобран: 257 активных страниц-дел, 11 страниц-ситуаций ✓.
 - Локальный Docker Compose сервер настроен: `site` отдаёт `site_prototype/`, `caddy` служит входной точкой и будущим HTTPS-слоем; локальный адрес — `http://localhost:8080/`. Проверены главная и страница ситуации через HTTP 200 ✓.
+- Базовый технический SEO для SSG-прототипа реализован: canonical URL на всех HTML-страницах, `sitemap.xml` на 269 URL и `robots.txt` генерируются из `SITE_PUBLIC_URL`; вопрос перехода внутренних ссылок с относительных на root-relative оставлен как отдельное pre-production решение.
 
 ## Следующий Шаг
 

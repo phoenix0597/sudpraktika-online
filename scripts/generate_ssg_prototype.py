@@ -20,6 +20,7 @@ from __future__ import annotations
 
 import csv
 import json
+import os
 import math
 import re
 import shutil
@@ -38,6 +39,28 @@ STRUCTURED_DIR = ROOT / "data/structured"
 ENUM_DICT = ROOT / "data/reference/zpp_enum_dictionary.json"
 OUT_DIR = ROOT / "site_prototype"
 SITE_BRAND = "Дела о защите прав потребителей"
+
+
+def read_local_env(name: str) -> str | None:
+    env_path = ROOT / ".env"
+    if not env_path.exists():
+        return None
+    for raw_line in env_path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        if key.strip() == name:
+            return value.strip().strip('"').strip("'")
+    return None
+
+
+def config_value(name: str, default: str) -> str:
+    return os.environ.get(name) or read_local_env(name) or default
+
+
+DEFAULT_PUBLIC_BASE_URL = "https://sudpraktika-online.ru"
+PUBLIC_BASE_URL = config_value("SITE_PUBLIC_URL", DEFAULT_PUBLIC_BASE_URL).strip().rstrip("/")
 PROTOTYPE_DISCLAIMER = (
     "Не является юридической консультацией. Материалы основаны на судебных актах "
     "и обработаны алгоритмом для систематизации и обобщения текущей судебной практики судов разных инстанций."
@@ -369,13 +392,30 @@ def slug_attr(value: Any) -> str:
     return re.sub(r"\s+", " ", str(value or "")).strip()
 
 
-def html_page(title: str, body: str, stylesheet_href: str) -> str:
+def public_url(path: str) -> str | None:
+    if not PUBLIC_BASE_URL:
+        return None
+    normalized = path if path.startswith("/") else f"/{path}"
+    return f"{PUBLIC_BASE_URL}{normalized}"
+
+
+def canonical_link(path: str | None) -> str:
+    if not path:
+        return ""
+    url = public_url(path)
+    if not url:
+        return ""
+    return f'  <link rel="canonical" href="{escape(url)}">\n'
+
+
+def html_page(title: str, body: str, stylesheet_href: str, canonical_path: str | None = None) -> str:
     return f"""<!doctype html>
 <html lang="ru">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{escape(title)}</title>
+{canonical_link(canonical_path).rstrip()}
   <link rel="stylesheet" href="{escape(stylesheet_href)}">
 </head>
 <body>
@@ -438,6 +478,10 @@ def page_link(page: SituationPage, label: str | None = None, current_page: Situa
 
 def case_page_href(docid: str) -> str:
     return f"../../dela/{docid}/index.html"
+
+
+def case_route(docid: str) -> str:
+    return f"/dela/{docid}/"
 
 
 def load_cases() -> tuple[list[dict[str, Any]], dict[str, list[dict[str, Any]]]]:
@@ -1251,7 +1295,7 @@ def render_case_detail_page(
   <p>{escape(PROTOTYPE_DISCLAIMER)}</p>
 </footer>
 """
-    return html_page(title, body, "../../assets/prototype.css")
+    return html_page(title, body, "../../assets/prototype.css", canonical_path=case_route(docid))
 
 
 def top_counter_text(items: Counter[str], labels: dict[str, str] | None = None, max_items: int = 4) -> str:
@@ -1425,7 +1469,7 @@ def render_situation_page(page: SituationPage, cases: list[dict[str, Any]], labe
   <p>{escape(PROTOTYPE_DISCLAIMER)}</p>
 </footer>
 """
-    return html_page(page.h1, body, "../../assets/prototype.css")
+    return html_page(page.h1, body, "../../assets/prototype.css", canonical_path=page.route)
 
 
 def render_index(by_cluster: dict[str, list[dict[str, Any]]]) -> str:
@@ -1461,7 +1505,7 @@ def render_index(by_cluster: dict[str, list[dict[str, Any]]]) -> str:
   <p>{escape(PROTOTYPE_DISCLAIMER)}</p>
 </footer>
 """
-    return html_page("Судебная практика по защите прав потребителей", body, "assets/prototype.css")
+    return html_page("Судебная практика по защите прав потребителей", body, "assets/prototype.css", canonical_path="/")
 
 
 def write_css() -> None:
@@ -1684,6 +1728,46 @@ dd { margin: 2px 0 0; font-weight: 700; }
     (OUT_DIR / "assets" / "prototype.css").write_text(css.strip() + "\n", encoding="utf-8")
 
 
+def unique_paths(paths: list[str]) -> list[str]:
+    seen: set[str] = set()
+    result: list[str] = []
+    for path in paths:
+        if path in seen:
+            continue
+        seen.add(path)
+        result.append(path)
+    return result
+
+
+def write_seo_files(paths: list[str]) -> None:
+    sitemap_urls = []
+    for path in unique_paths(paths):
+        url = public_url(path)
+        if not url:
+            continue
+        sitemap_urls.append(f"  <url><loc>{escape(url)}</loc></url>")
+
+    sitemap_xml = "\n".join(
+        [
+            '<?xml version="1.0" encoding="UTF-8"?>',
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+            *sitemap_urls,
+            "</urlset>",
+            "",
+        ]
+    )
+    (OUT_DIR / "sitemap.xml").write_text(sitemap_xml, encoding="utf-8")
+
+    robots_lines = [
+        "User-agent: *",
+        "Allow: /",
+    ]
+    sitemap_url = public_url("/sitemap.xml")
+    if sitemap_url:
+        robots_lines.append(f"Sitemap: {sitemap_url}")
+    (OUT_DIR / "robots.txt").write_text("\n".join(robots_lines) + "\n", encoding="utf-8")
+
+
 def main() -> int:
     labels = load_enum_labels()
     _, by_cluster = load_cases()
@@ -1695,20 +1779,25 @@ def main() -> int:
     write_css()
 
     generated_case_pages = 0
+    seo_paths = ["/"]
     for page in PAGES:
         page.output_path.parent.mkdir(parents=True, exist_ok=True)
         page.output_path.write_text(render_situation_page(page, by_cluster[page.code], labels), encoding="utf-8")
+        seo_paths.append(page.route)
         for row in by_cluster[page.code]:
             docid = row["docid"]
             case_path = OUT_DIR / "dela" / docid / "index.html"
             case_path.parent.mkdir(parents=True, exist_ok=True)
             case_path.write_text(render_case_detail_page(row, page, labels), encoding="utf-8")
+            seo_paths.append(case_route(docid))
             generated_case_pages += 1
 
     (OUT_DIR / "index.html").write_text(render_index(by_cluster), encoding="utf-8")
+    write_seo_files(seo_paths)
 
     print(f"Сгенерировано страниц-ситуаций: {len(PAGES)}")
     print(f"Сгенерировано страниц дел: {generated_case_pages}")
+    print(f"SEO: {(OUT_DIR / 'sitemap.xml').as_posix()}, {(OUT_DIR / 'robots.txt').as_posix()}")
     print(f"Индекс: {(OUT_DIR / 'index.html').as_posix()}")
     for page in PAGES:
         print(f"- {page.route} -> {page.output_path.as_posix()} ({len(by_cluster[page.code])} дел)")
