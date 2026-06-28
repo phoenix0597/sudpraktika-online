@@ -64,6 +64,8 @@ npm run test:all
 
 ```bash
 npm run test:data           # structured-артефакты, формат user_story и защита от рассинхрона markdown с делом
+npm run test:citations      # проверка правовых ссылок на галлюцинации по всем practice-файлам
+npm run test:ci             # полный CI-контур: data + citations + пересборка SSG + UI-тесты
 npm run test:smoke          # маршруты, обязательные блоки, ссылки, sitemap/robots
 npm run test:visual         # сравнение с эталонными скриншотами
 npm run site:test           # полный UI-прогон smoke + visual
@@ -72,6 +74,8 @@ npm run test:visual:update  # обновить эталонные скриншо
 ```
 
 Visual snapshots обновляйте только после проверки, что изменения интерфейса ожидаемые.
+
+GitHub Actions использует тот же CI-контур через `.github/workflows/ci.yml` и сохраняет Playwright-отчёт как artifact.
 
 ---
 
