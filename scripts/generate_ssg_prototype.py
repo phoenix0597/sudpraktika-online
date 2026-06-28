@@ -674,6 +674,16 @@ GENERIC_STORY_HEADINGS = {
 }
 
 
+def normalize_story_section_heading(text: str) -> str | None:
+    title = text.strip()
+    title = re.sub(r"^#{1,6}\s+", "", title).strip()
+    title = re.sub(r"^\*\*(.+?)\*\*$", r"\1", title).strip()
+    title = re.sub(r"^\*(.+?)\*$", r"\1", title).strip()
+    title = title.rstrip(":").strip()
+    title = re.sub(r"\s+", " ", title)
+    return title if title.lower() in GENERIC_STORY_HEADINGS else None
+
+
 def first_markdown_line(markdown: str) -> tuple[int, str] | None:
     lines = markdown.splitlines()
     for idx, line in enumerate(lines):
@@ -947,7 +957,7 @@ def inline_practice_list_item(text: str, section: str | None) -> str:
     return html
 
 
-def markdown_to_html(markdown: str) -> str:
+def markdown_to_html(markdown: str, *, context: str = "generic") -> str:
     html: list[str] = []
     list_type: str | None = None
     current_practice_section: str | None = None
@@ -963,6 +973,14 @@ def markdown_to_html(markdown: str) -> str:
         if not line:
             close_list()
             continue
+
+        if context == "story":
+            story_heading = normalize_story_section_heading(line)
+            if story_heading:
+                close_list()
+                current_practice_section = None
+                html.append(f"<h4>{escape(story_heading)}</h4>")
+                continue
 
         numbered_heading = practice_numbered_heading(line)
         if numbered_heading:
@@ -1270,7 +1288,7 @@ def render_case_detail_page(
 
   <section class="panel story-content">
     <h2>История дела простым языком</h2>
-    {markdown_to_html(story_body)}
+    {markdown_to_html(story_body, context="story")}
   </section>
 
   <section class="grid two">

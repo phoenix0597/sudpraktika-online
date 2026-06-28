@@ -100,6 +100,33 @@ test.describe('SSG smoke tests', () => {
     expect(text.includes('Ошибки и риски')).toBeFalsy();
   });
 
+  test('case story labels are rendered as headings consistently', async ({ page }) => {
+    const paths = [
+      '/dela/yz0M6YZip7Qn/',
+      '/dela/GMjXio3dnCrR/',
+    ];
+    const labels = [
+      'Кто участвовал',
+      'Обстоятельства и развитие событий',
+      'Результат для потребителя',
+      'Итог суда',
+      'Что сделано не так и как поступить правильно',
+    ];
+
+    for (const path of paths) {
+      await page.goto(path);
+      const story = page.locator('section.story-content').filter({ hasText: 'История дела простым языком' }).first();
+      for (const label of labels) {
+        await expect(story.getByRole('heading', { level: 4, name: label }), `${path}: ${label}`).toBeVisible();
+        const plainParagraphExists = await story.locator('p').evaluateAll(
+          (paragraphs, expectedLabel) => paragraphs.some((paragraph) => paragraph.textContent.trim() === `${expectedLabel}:`),
+          label
+        );
+        expect(plainParagraphExists, `${path}: ${label} should not be rendered as a plain paragraph`).toBeFalsy();
+      }
+    }
+  });
+
   test('internal links on representative pages do not point to missing local pages', async ({ page, request, baseURL }) => {
     for (const path of REPRESENTATIVE_PATHS) {
       await page.goto(path);
