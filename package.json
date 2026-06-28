@@ -1,0 +1,17 @@
+{
+  "name": "zpp-consult",
+  "version": "1.0.0",
+  "description": "Каталог судебной практики по защите прав потребителей простым бытовым языком. Генератор трафика → монетизация через РСЯ → масштабирование расширением правовой тематики.",
+  "scripts": {
+    "playwright:install": "playwright install chromium",
+    "site:up": "docker compose up -d",
+    "site:test": "npm run site:up && playwright test",
+    "test:smoke": "npm run site:up && playwright test tests/smoke",
+    "test:visual": "npm run site:up && playwright test tests/visual",
+    "test:visual:update": "npm run site:up && playwright test tests/visual --update-snapshots"
+  },
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
+  }
+}

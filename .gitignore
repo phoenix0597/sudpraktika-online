@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 .venv/
 venv/
+node_modules/
 
 # Учётные данные и секреты — НИКОГДА в репозиторий
 .env
@@ -14,6 +15,8 @@ scripts/.wordstat_counter.json
 
 # Вывод прогонов
 output/
+test-results/
+playwright-report/
 
 # ОС / редактор
 .DS_Store
