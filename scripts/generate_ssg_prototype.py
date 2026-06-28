@@ -1281,8 +1281,8 @@ def render_case_detail_page(
       {render_plain_list(summary.get('key_factors'), 'Ключевые факторы не выделены.')}
     </div>
     <div class="panel">
-      <h2>Ошибки и риски</h2>
-      {render_plain_list(summary.get('unusual_points') or legal.get('arguments_rejected'), 'Отдельные риски не выделены.')}
+      <h2>Что важно учитывать</h2>
+      {render_plain_list(summary.get('unusual_points') or legal.get('arguments_rejected'), 'Отдельные особенности не выделены.')}
     </div>
   </section>
 
