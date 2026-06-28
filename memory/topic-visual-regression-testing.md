@@ -68,7 +68,7 @@ BackstopJS и Percy не внедрять на старте. Вернуться 
 Команды:
 
 ```bash
-npm run test:data          # structured JSON + базовая защита от рассинхрона user_story/practice с docid
+npm run test:data          # structured JSON + формат user_story + базовая защита от рассинхрона markdown с docid
 npm run site:test          # полный UI-прогон smoke + visual
 npm run test:all           # data-test + полный UI-прогон
 npm run test:smoke         # только smoke
@@ -78,7 +78,7 @@ npm run test:visual:update # обновить эталоны после наме
 
 Текущий набор:
 
-- data: валидность 297 `structure_*.json`, наличие `user_story_*.md`/`practice_*.md`, проверка правовых ссылок внутри JSON и технические признаки рассинхрона markdown-артефактов с текущим `docid`;
+- data: валидность 297 `structure_*.json`, наличие `user_story_*.md`/`practice_*.md`, стандартные подзаголовки `user_story`, проверка правовых ссылок внутри JSON и технические признаки рассинхрона markdown-артефактов с текущим `docid`;
 - smoke: 8 тестов — sitemap/robots, доступность страниц из sitemap, canonical/H1, отсутствие служебных enum-кодов в видимом UI, обязательные блоки страниц ситуации/дела, единый рендер подзаголовков `user_story`, внутренние ссылки на выборке;
 - visual: 12 тестов — 6 репрезентативных страниц × 2 viewport.
 

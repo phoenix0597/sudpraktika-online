@@ -63,7 +63,7 @@ npm run test:all
 Отдельные команды:
 
 ```bash
-npm run test:data           # валидность structured-артефактов и базовая защита от рассинхрона markdown с делом
+npm run test:data           # structured-артефакты, формат user_story и защита от рассинхрона markdown с делом
 npm run test:smoke          # маршруты, обязательные блоки, ссылки, sitemap/robots
 npm run test:visual         # сравнение с эталонными скриншотами
 npm run site:test           # полный UI-прогон smoke + visual
