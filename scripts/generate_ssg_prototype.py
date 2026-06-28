@@ -38,7 +38,7 @@ CLUSTERS_CSV = ROOT / "data/review/phase1-4-case-clusters.csv"
 STRUCTURED_DIR = ROOT / "data/structured"
 ENUM_DICT = ROOT / "data/reference/zpp_enum_dictionary.json"
 OUT_DIR = ROOT / "site_prototype"
-SITE_BRAND = "Дела о защите прав потребителей"
+SITE_BRAND = "Судпрактика Онлайн"
 
 
 def read_local_env(name: str) -> str | None:
