@@ -5,6 +5,8 @@
   "scripts": {
     "playwright:install": "playwright install chromium",
     "site:up": "docker compose up -d",
+    "test:data": "python scripts/validate_structures.py --strict-md-consistency",
+    "test:all": "npm run test:data && npm run site:test",
     "site:test": "npm run site:up && playwright test",
     "test:smoke": "npm run site:up && playwright test tests/smoke",
     "test:visual": "npm run site:up && playwright test tests/visual",
