@@ -5,7 +5,7 @@
 
 Полная дорожная карта — в `memory/topic-product-strategy.md`. Канонические требования — в `technical-specification-mvp.md`.
 
-## Текущее Состояние (на 2026-06-28)
+## Текущее Состояние (на 2026-06-29)
 
 - Фаза 0 закрыта: спрос (450K/мес, 88 фраз) ✓, экономика РСЯ (модель 4.5K→54K ₽/мес) ✓, данные (20 актов + полнотекстовой доступ) ✓, инфраструктура (Wordstat, Yandex Search, гибридный поиск) ✓.
 - Фаза 1.1 закрыта: ядро доказано — DeepSeek v4-pro извлекает структуру акта качества уровня верифицированного эталона (A/B-тест с Gemini: не уступает).
@@ -46,15 +46,17 @@
 - Локальный Docker Compose сервер настроен: `site` отдаёт `site_prototype/`, `caddy` служит входной точкой и будущим HTTPS-слоем; локальный адрес — `http://localhost:8080/`. Проверены главная и страница ситуации через HTTP 200 ✓.
 - Базовый технический SEO для SSG-прототипа реализован: canonical URL на всех HTML-страницах, `sitemap.xml` на 270 URL и `robots.txt` генерируются из `SITE_PUBLIC_URL`.
 - Pre-production URL-решение выполнено: ЗоПП-страницы перенесены под `/zpp/` (`/zpp/praktika/...`, `/zpp/dela/...`), старые root-level `/praktika/...` и `/dela/...` больше не генерируются.
-- Минимальный контур регрессионных тестов внедрён: `npm run test:data` проверяет structured/markdown consistency; `@playwright/test` даёт 10 smoke-тестов и 14 visual snapshot-тестов; `npm run site:test` проходит на локальном Docker-сервере ✓.
+- Минимальный контур регрессионных тестов внедрён: `npm run test:data` проверяет structured/markdown consistency; `@playwright/test` даёт 11 smoke-тестов и 14 visual snapshot-тестов; `npm run site:test` проходит на локальном Docker-сервере ✓.
 - Публичный ребрендинг выполнен: README, npm metadata, канонические файлы памяти/ТЗ и SSG-шапка используют “Судпрактика Онлайн”; локальная папка `zpp-consult` не переименовывалась, чтобы не ломать окружение перед GitHub/CI.
 - Нормализация legacy `user_story_*.md` под стандартные подзаголовки завершена: 145/145 предупреждений закрыты, `validate_structures.py --check-user-story-format` показывает 297/297 OK; строгая проверка включена в `npm run test:data`.
 - Удалённый GitHub-репозиторий создан и привязан как `origin` (`git@github.com:phoenix0597/sudpraktika-online.git`); последний push пользователем выполнен, новые локальные коммиты после настройки CI нужно отправить и проверить в Actions.
 - GitHub Actions CI настроен: `.github/workflows/ci.yml` запускает `npm run test:ci` на `push`/`pull_request` в `main`, сохраняет Playwright artifacts; локально `npm run test:ci` проходит ✓.
+- Долг по неполному `Применение судом` в legacy `practice_*.md` закрыт: 13 страниц переобработаны, `data/review/practice-norm-application-debt.txt` пустой, `npm run test:data` ловит новые такие случаи, смешанные markdown-заголовки вида `### 1. ...` и латинские буквы в правовых аббревиатурах (`GК/GПК` вместо `ГК/ГПК`).
+- Pre-deploy UI-полиш ЗоПП-раздела выполнен: hero `/zpp/` переведён на позиционирование без числа актов, а денежные подблоки на страницах дел без таймлайна рендерятся как две вложенные карточки; smoke/visual-тесты обновлены и проходят.
 
 ## Следующий Шаг
 
-1. Push текущих локальных коммитов в GitHub и проверить первый GitHub Actions run.
+1. Закоммитить текущий пакет исправлений `practice_*.md`/валидации/SSG/UI-полиша, отправить в GitHub и проверить GitHub Actions run.
 2. Подготовить PROD-deploy контур: production `.env`, GitHub Secrets, deploy workflow по SSH, порядок ручного запуска/rollback.
 3. Следующую партию парсинга запускать уже с учётом 11 принятых ситуаций и действующего контракта.
 
@@ -65,6 +67,7 @@
 | Дискуссия | Стадия | resolves_to |
 |---|---|---|
 | `memory/discussions/statistics-analytics.md` — продуктовый инкремент «статистика/аналитика» | round-1 | `memory/topic-statistics-analytics.md` |
+| `memory/discussions/content-scale-limits.md` — пределы наполнения (количественные/качественные) под трафик-цель 10–30K/сутки | round-2 (2/3 рецензий: Zcode-Deepseek-v4-pro, Zcode-GLM-5.2) | `memory/topic-content-fill-plan.md` |
 
 ## Извлечение через агентный mailbox / LLM API
 
@@ -88,6 +91,7 @@
 4. **Передать выбранному ИИ-агенту задачу на следующую партию парсинга/структурирования** — достаточно команды: «Восстанови контекст. Сделай парсинг очередной партии судебных актов». Агент должен найти `data/review/_TASK_PARSE_NEXT_BATCH_AGY.md` и следовать повторяемому контракту. *(Повторяющаяся задача)*
 5. **Донастроить `timeline` и `amounts` точечно** только если прототип покажет реальные дыры в шаблоне.
 6. **Нормализовать legacy `user_story_*.md` под стандартные подзаголовки** — ВЫПОЛНЕНО: 297/297 историй проходят `--strict-user-story-format`; строгая проверка включена в `npm run test:data`.
+7. **Переобработать неполные `practice_*.md` по применению норм** — ВЫПОЛНЕНО: 13 опубликованных страниц переобработаны, `data/review/practice-norm-application-debt.txt` пустой, новые такие случаи ловит `npm run test:data`.
 
 ## Затем (Фаза 1 — продолжение)
 

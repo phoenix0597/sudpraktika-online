@@ -1,7 +1,7 @@
 ---
 title: Регрессионное тестирование SSG-страниц
 created: 2026-06-27
-updated: 2026-06-28
+updated: 2026-06-29
 status: active
 tags: [testing, data-quality, visual-regression, playwright, ci, design-system]
 related:
@@ -59,7 +59,8 @@ BackstopJS и Percy не внедрять на старте. Вернуться 
 
 - Конфиг: `playwright.config.js`.
 - Зависимости и команды: `package.json`.
-- Data-test: `scripts/validate_structures.py --strict-md-consistency`.
+- Data-test: `scripts/validate_structures.py --strict-user-story-format --strict-md-consistency` +
+  `scripts/check_practice_norm_application_debt.py`.
 - Smoke-тесты: `tests/smoke/site.spec.js`.
 - Visual-тесты: `tests/visual/pages.spec.js`.
 - Эталонные скриншоты: `tests/__screenshots__/`.
@@ -68,7 +69,7 @@ BackstopJS и Percy не внедрять на старте. Вернуться 
 Команды:
 
 ```bash
-npm run test:data          # structured JSON + формат user_story + базовая защита от рассинхрона markdown с docid
+npm run test:data          # structured JSON + формат user_story + markdown consistency + debt-list по применению норм
 npm run test:citations     # проверка правовых ссылок practice-файлов на галлюцинации
 npm run test:ci            # полный CI-контур: data + citations + SSG freshness + smoke/visual
 npm run site:test          # полный UI-прогон smoke + visual
@@ -80,10 +81,10 @@ npm run test:visual:update # обновить эталоны после наме
 
 Текущий набор:
 
-- data: валидность 297 `structure_*.json`, наличие `user_story_*.md`/`practice_*.md`, стандартные подзаголовки `user_story`, проверка правовых ссылок внутри JSON и технические признаки рассинхрона markdown-артефактов с текущим `docid`;
+- data: валидность 297 `structure_*.json`, наличие `user_story_*.md`/`practice_*.md`, стандартные подзаголовки `user_story`, проверка правовых ссылок внутри JSON, технические признаки рассинхрона markdown-артефактов с текущим `docid`, контроль долга по отсутствующему `Применение судом` в legacy-нормах, запрет смешанных markdown-заголовков вида `### 1. ...` в `practice_*.md`, защита от латинских букв в русских правовых аббревиатурах (`GК/GПК` вместо `ГК/ГПК`) и запрет англоязычных служебных значений в `claims_and_result.remedy` индексируемых JSON;
 - citations: `scripts/verify_all.py` проверяет `practice_*.md` на неподтверждённые правовые ссылки;
 - SSG freshness: в CI сайт пересобирается, затем `git diff --exit-code -- site_prototype` проверяет, что сгенерированный прототип закоммичен;
-- smoke: 10 тестов — sitemap/robots, доступность страниц из sitemap, canonical/H1, отсутствие служебных enum-кодов в видимом UI, общая главная, входная страница `/zpp/`, обязательные блоки страниц ситуации/дела, единый рендер подзаголовков `user_story`, нормализация legacy-списков норм с левой вертикальной линией, внутренние ссылки на выборке;
+- smoke: 11 тестов — sitemap/robots, доступность страниц из sitemap, canonical/H1, отсутствие служебных enum-кодов в видимом UI, общая главная, входная страница `/zpp/`, обязательные блоки страниц ситуации/дела, компактный рендер денежных подблоков без таймлайна, единый рендер подзаголовков `user_story`, нормализация legacy-списков норм с левой вертикальной линией, внутренние ссылки на выборке;
 - visual: 14 тестов — 7 репрезентативных страниц × 2 viewport.
 
 ## Минимальная архитектура тестов
@@ -105,7 +106,7 @@ docker compose up -d
 - главная страница открывается;
 - все ссылки на страницы-ситуации и страницы дел ведут на существующие HTML;
 - на странице есть ровно один `h1`;
-- нет служебных строк типа `refund`, `penalty_fine`, `goods_defect_art18` в пользовательском интерфейсе;
+- нет служебных строк типа `refund`, `penalty`, `penalty_fine`, `goods_defect_art18` в пользовательском интерфейсе на representative pages;
 - нет слова `Прототип` в публичной части;
 - есть дисклеймер;
 - на страницах-ситуациях есть фильтры, карточки дел и блок рекомендаций по выборке;

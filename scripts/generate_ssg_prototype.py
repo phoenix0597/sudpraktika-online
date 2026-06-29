@@ -20,6 +20,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import json
 import os
 import math
@@ -68,6 +69,7 @@ PROTOTYPE_DISCLAIMER = (
     "Не является юридической консультацией. Материалы основаны на судебных актах "
     "и обработаны алгоритмом для систематизации и обобщения текущей судебной практики судов разных инстанций."
 )
+CSS_VERSION = "dev"
 
 
 @dataclass(frozen=True)
@@ -209,6 +211,13 @@ AMOUNT_ITEM_LABELS = {
     "refund_under_contract_249": "возврат уплаченной суммы по договору",
     "return_of_premium": "возврат страховой премии",
 }
+
+
+SERVICE_REMEDY_PATTERN = re.compile(
+    r"\b(refund|penalty|loan\s+interest|moral\s+damages|removal\s+of\s+remaining\s+item|"
+    r"consumer\s+fine|legal\s+expenses|court\s+costs)\b",
+    re.IGNORECASE,
+)
 
 
 RELATED = {
@@ -411,7 +420,14 @@ def canonical_link(path: str | None) -> str:
     return f'  <link rel="canonical" href="{escape(url)}">\n'
 
 
+def versioned_stylesheet_href(stylesheet_href: str) -> str:
+    if "prototype.css" not in stylesheet_href or "?" in stylesheet_href:
+        return stylesheet_href
+    return f"{stylesheet_href}?v={CSS_VERSION}"
+
+
 def html_page(title: str, body: str, stylesheet_href: str, canonical_path: str | None = None) -> str:
+    stylesheet_href = versioned_stylesheet_href(stylesheet_href)
     return f"""<!doctype html>
 <html lang="ru">
 <head>
@@ -804,6 +820,15 @@ NOTE_LABELS = (
     "Как применена судом",
 )
 
+NOTE_LABEL_ALIASES = {
+    "Значение": "Значение в деле",
+    "Применение": "Применение судом",
+    "Значение в деле": "Значение в деле",
+    "Применение судом": "Применение судом",
+    "Что означает в деле": "Что означает в деле",
+    "Как применена судом": "Как применена судом",
+}
+
 PRACTICE_SECTION_TITLES = (
     "Нормы, на которые сослался суд",
     "Логика решения",
@@ -850,14 +875,15 @@ def semantic_note_markdown(raw_line: str) -> str | None:
     nested_bullet = re.match(r"^\s+[*-]\s+(.+)$", raw_line)
     has_indent = bool(re.match(r"^\s+", raw_line))
     candidate = nested_bullet.group(1).strip() if nested_bullet else raw_line.strip()
-    probe = re.sub(r"^[*_]+", "", candidate).strip()
-    probe = re.sub(r"^[*_]+", "", probe).strip()
-
-    label_pattern = "|".join(re.escape(label) for label in NOTE_LABELS)
-    if re.match(rf"^(?:{label_pattern}):", probe):
-        return candidate
-    if has_indent and re.match(r"^Пункт\s+\d+:", probe):
-        return candidate
+    note_match = re.match(r"^(?:\*\*|\*)?([^:*]+?)(?::)(?:\*\*|\*)?\s*(.*)$", candidate)
+    if note_match:
+        label = re.sub(r"\s+", " ", note_match.group(1)).strip()
+        body = note_match.group(2).strip()
+        normalized_label = NOTE_LABEL_ALIASES.get(label)
+        if normalized_label:
+            return f"{normalized_label}: {body}" if body else f"{normalized_label}:"
+        if has_indent and re.match(r"^Пункт\s+\d+$", label):
+            return f"{label}: {body}" if body else f"{label}:"
     return None
 
 
@@ -1113,6 +1139,15 @@ def amount_item_label(value: Any) -> str:
     return AMOUNT_ITEM_LABELS.get(text, "денежное требование")
 
 
+def claims_remedy_text(value: Any, claim_labels: list[str]) -> str:
+    text = str(value or "").strip()
+    if text and re.search(r"[А-Яа-яЁё]", text) and not SERVICE_REMEDY_PATTERN.search(text):
+        return short(text, 700)
+    if claim_labels:
+        return ", ".join(dict.fromkeys(claim_labels))
+    return "Требования в JSON не выделены."
+
+
 def render_amount_items(items: Any, title: str) -> str:
     if not isinstance(items, list) or not items:
         return ""
@@ -1133,6 +1168,24 @@ def render_amount_items(items: Any, title: str) -> str:
 """
         )
     return f"<h3>{escape(title)}</h3><ul class=\"amount-list\">{''.join(rows)}</ul>" if rows else ""
+
+
+def render_claim_amount_sections(amounts: Any, compact_two_columns: bool = False) -> str:
+    if not isinstance(amounts, dict):
+        return ""
+    claimed = render_amount_items(amounts.get("items_claimed"), "Состав требований")
+    awarded = render_amount_items(amounts.get("items_awarded"), "Что присуждено")
+    if compact_two_columns and claimed and awarded:
+        return f"""
+      <div class="amount-columns">
+        <div class="amount-subpanel">{claimed}</div>
+        <div class="amount-subpanel">{awarded}</div>
+      </div>
+"""
+    return f"""
+      {claimed}
+      {awarded}
+"""
 
 
 LEGAL_APPLICATION_PLACEHOLDERS = {
@@ -1223,17 +1276,19 @@ def render_case_detail_page(
         labels["claim_type_codes"].get(code, code)
         for code in taxonomy.get("claim_type_codes") or []
     ]
+    remedy_text = claims_remedy_text(claims.get("remedy"), claim_labels)
     chips = " ".join(f'<span class="chip small">{escape(label)}</span>' for label in claim_labels[:8])
     source_url = source.get("source_url") or "#"
+    timeline_present = has_timeline(summary.get("timeline"))
+    amount_sections = render_claim_amount_sections(amounts, compact_two_columns=not timeline_present)
     claims_panel = f"""
     <div class="panel">
       <h2>Что требовал потребитель</h2>
-      <p>{escape(short(claims.get('remedy'), 700))}</p>
-      {render_amount_items(amounts.get('items_claimed'), 'Состав требований')}
-      {render_amount_items(amounts.get('items_awarded'), 'Что присуждено')}
+      <p>{escape(remedy_text)}</p>
+{amount_sections}
     </div>
 """
-    if has_timeline(summary.get("timeline")):
+    if timeline_present:
         timeline_and_claims_section = f"""
   <section class="grid two">
     <div class="panel">
@@ -1516,8 +1571,9 @@ def render_zpp_index(by_cluster: dict[str, list[dict[str, Any]]]) -> str:
 <main>
   <section class="hero">
     <p class="eyebrow">Судебная практика</p>
-    <h1>Первые страницы судебной практики по ЗоЗПП</h1>
-    <p class="lead">Страницы-ситуации собраны из {escape(court_acts_label(total_cases))}: карточки дел, обобщающие показатели, фильтры, рекомендации по выборке и разборы конкретных историй.</p>
+    <h1>Судебная практика по защите прав потребителей</h1>
+    <p class="lead">Сервис систематизирует судебные акты по жизненным ситуациям: что произошло, что требовал потребитель, как рассуждал суд, какие нормы применялись и какие выводы повторяются в похожих делах.</p>
+    <p class="disclosure">Показатели и рекомендации основаны на текущей выборке судебных актов и не являются статистикой всей судебной практики.</p>
   </section>
   <section class="index-grid">
 {cards_html}
@@ -1560,6 +1616,7 @@ def render_home_index(by_cluster: dict[str, list[dict[str, Any]]]) -> str:
 
 
 def write_css() -> None:
+    global CSS_VERSION
     css = """
 :root {
   --bg: #f6f3ed;
@@ -1741,6 +1798,9 @@ dd { margin: 2px 0 0; font-weight: 700; }
 .timeline { list-style: none; padding: 0; display: grid; gap: 10px; }
 .timeline li { display: grid; grid-template-columns: 130px 1fr; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
 .timeline time { color: var(--accent); font-weight: 750; }
+.amount-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; margin-top: 16px; }
+.amount-subpanel { background: #fffaf0; border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
+.amount-columns h3 { margin-top: 0; }
 .amount-list { list-style: none; padding: 0; display: grid; gap: 10px; }
 .amount-list li { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; background: #f6f1e8; border-radius: 14px; padding: 12px; }
 .amount-list small { grid-column: 1 / -1; color: var(--muted); }
@@ -1766,7 +1826,7 @@ dd { margin: 2px 0 0; font-weight: 700; }
 [hidden] { display: none !important; }
 @media (max-width: 900px) {
   :root { --content-block-padding: var(--content-block-padding-mobile); }
-  .situation-layout, .grid.two, .index-grid, .filter-grid, .case-facts { grid-template-columns: 1fr; }
+  .situation-layout, .grid.two, .index-grid, .filter-grid, .case-facts, .amount-columns { grid-template-columns: 1fr; }
   .situation-content, .filter-sidebar { grid-column: auto; grid-row: auto; }
   .filter-sidebar { position: static; max-height: none; overflow: visible; margin-bottom: 18px; }
   .timeline li, .amount-list li { grid-template-columns: 1fr; }
@@ -1776,7 +1836,9 @@ dd { margin: 2px 0 0; font-weight: 700; }
 }
 """
     (OUT_DIR / "assets").mkdir(parents=True, exist_ok=True)
-    (OUT_DIR / "assets" / "prototype.css").write_text(css.strip() + "\n", encoding="utf-8")
+    css_text = css.strip() + "\n"
+    CSS_VERSION = hashlib.sha256(css_text.encode("utf-8")).hexdigest()[:10]
+    (OUT_DIR / "assets" / "prototype.css").write_text(css_text, encoding="utf-8")
 
 
 def unique_paths(paths: list[str]) -> list[str]:

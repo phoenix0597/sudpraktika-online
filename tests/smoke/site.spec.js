@@ -7,12 +7,18 @@ const REPRESENTATIVE_PATHS = [
   '/zpp/praktika/vozvrat-deneg-za-uslugu/',
   '/zpp/dela/9xUCtLJ9m3HR/',
   '/zpp/dela/xyw1pNsfewV8/',
+  '/zpp/dela/YFjMxNYLsLlX/',
 ];
 
 const FORBIDDEN_UI_TOKENS = [
   'Прототип',
   'refund',
+  'refund_price',
+  'penalty',
   'penalty_fine',
+  'loan interest',
+  'moral damages',
+  'removal of remaining item',
   'goods_defect_art18',
   'service_refusal_art32',
   'non_consumer_hold',
@@ -81,7 +87,7 @@ test.describe('SSG smoke tests', () => {
 
   test('ZPP section page exposes situation navigation', async ({ page }) => {
     await page.goto('/zpp/');
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('Первые страницы судебной практики');
+    await expect(page.getByRole('heading', { level: 1 })).toContainText('Судебная практика по защите прав потребителей');
     await expect(page.getByRole('link', { name: /Некачественный товар/ })).toBeVisible();
     await expect(page.getByRole('link', { name: /Как вернуть товар, купленный онлайн/ })).toBeVisible();
   });
@@ -108,6 +114,43 @@ test.describe('SSG smoke tests', () => {
 
     const text = await visibleText(page);
     expect(text.includes('Ошибки и риски')).toBeFalsy();
+  });
+
+  test('case amount lists stay compact when timeline is absent', async ({ page }) => {
+    await page.goto('/zpp/dela/YFjMxNYLsLlX/');
+    await expect(page.getByRole('heading', { name: 'Что требовал потребитель' })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Что произошло по датам' })).toHaveCount(0);
+
+    const columns = page.locator('.amount-columns');
+    await expect(columns).toHaveCount(1);
+    await expect(columns.locator('.amount-subpanel')).toHaveCount(2);
+
+    const layout = await columns.evaluate((node) => {
+      const children = [...node.children].map((child) => {
+        const rect = child.getBoundingClientRect();
+        const style = window.getComputedStyle(child);
+        return {
+          x: rect.x,
+          y: rect.y,
+          width: rect.width,
+          borderLeftWidth: style.borderLeftWidth,
+          borderLeftStyle: style.borderLeftStyle,
+        };
+      });
+      return {
+        display: window.getComputedStyle(node).display,
+        children,
+      };
+    });
+
+    expect(layout.display).toBe('grid');
+    expect(layout.children).toHaveLength(2);
+    expect(Math.abs(layout.children[0].y - layout.children[1].y)).toBeLessThan(2);
+    expect(layout.children[1].x).toBeGreaterThan(layout.children[0].x + layout.children[0].width - 2);
+    for (const child of layout.children) {
+      expect(child.borderLeftStyle).not.toBe('none');
+      expect(parseFloat(child.borderLeftWidth)).toBeGreaterThan(0);
+    }
   });
 
   test('case story labels are rendered as headings consistently', async ({ page }) => {
@@ -138,23 +181,38 @@ test.describe('SSG smoke tests', () => {
   });
 
   test('legacy norm bullets render as legal notes with left rail', async ({ page }) => {
-    await page.goto('/zpp/dela/BRRlQN72V9V6/');
-    const legalAnalysis = page.locator('section.story-content').filter({ hasText: 'Подробный правовой разбор' }).first();
-    await expect(legalAnalysis.getByRole('heading', { name: 'Нормы, на которые сослался суд' })).toBeVisible();
+    const paths = [
+      '/zpp/dela/BRRlQN72V9V6/',
+      '/zpp/dela/qx9K417NRkWN/',
+    ];
 
-    const notes = legalAnalysis.locator('.md-note');
-    expect(await notes.count()).toBeGreaterThan(10);
-    await expect(notes.first()).toContainText('Значение в деле');
+    for (const path of paths) {
+      await page.goto(path);
+      const legalAnalysis = page.locator('section.story-content').filter({ hasText: 'Подробный правовой разбор' }).first();
+      await expect(legalAnalysis.getByRole('heading', { name: 'Нормы, на которые сослался суд' })).toBeVisible();
 
-    const border = await notes.first().evaluate((node) => {
-      const style = window.getComputedStyle(node);
-      return {
-        style: style.borderLeftStyle,
-        width: style.borderLeftWidth,
-      };
-    });
-    expect(border.style).not.toBe('none');
-    expect(parseFloat(border.width)).toBeGreaterThan(0);
+      const notes = legalAnalysis.locator('.md-note');
+      expect(await notes.count(), `${path}: legal notes`).toBeGreaterThan(10);
+      await expect(notes.first()).toContainText('Значение в деле');
+
+      const text = await visibleText(page);
+      expect(text.includes('Суд сослался на эту норму при разрешении спора'), `${path}: weak placeholder`).toBeFalsy();
+
+      const flatLegacyLabels = await legalAnalysis.locator('li strong').evaluateAll((nodes) =>
+        nodes.filter((node) => ['Значение:', 'Применение:'].includes(node.textContent.trim())).length
+      );
+      expect(flatLegacyLabels, `${path}: nested meaning/application labels should be notes`).toBe(0);
+
+      const border = await notes.first().evaluate((node) => {
+        const style = window.getComputedStyle(node);
+        return {
+          style: style.borderLeftStyle,
+          width: style.borderLeftWidth,
+        };
+      });
+      expect(border.style).not.toBe('none');
+      expect(parseFloat(border.width)).toBeGreaterThan(0);
+    }
   });
 
   test('internal links on representative pages do not point to missing local pages', async ({ page, request, baseURL }) => {

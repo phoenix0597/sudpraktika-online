@@ -95,7 +95,7 @@
     ]
   },
   "claims_and_result": {
-    "remedy": "refund, penalty, loan interest, moral damages, removal of remaining item",
+    "remedy": "возврат оставшейся стоимости товара, неустойка, проценты по кредиту, компенсация морального вреда, штраф и обязанность продавца забрать оставшуюся банкетку",
     "outcome": {
       "focus_party_result": "partially_satisfied",
       "result_type": "partially_satisfied",

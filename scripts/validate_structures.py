@@ -58,6 +58,15 @@ STORY_SECTION_HEADINGS = (
 )
 
 ORG_PATTERN = re.compile(r"(?:ООО|АО|ПАО|ОАО|ЗАО)\s+[«\"]([^»\"]{2,100})[»\"]", re.IGNORECASE)
+NUMBERED_MARKDOWN_HEADING_PATTERN = re.compile(r"^#{1,6}\s+\d+\.\s+\S")
+MIXED_LATIN_LEGAL_ABBR_PATTERN = re.compile(
+    r"\b(?:G(?=[\u041a\u041f])|A(?=\u041f\u041a)|K(?=\u0410\u0421)|B(?=\u0421))"
+)
+SERVICE_REMEDY_PATTERN = re.compile(
+    r"\b(refund|penalty|loan\s+interest|moral\s+damages|removal\s+of\s+remaining\s+item|"
+    r"consumer\s+fine|legal\s+expenses|court\s+costs)\b",
+    re.IGNORECASE,
+)
 
 ANCHOR_STOPWORDS = {
     "потребитель",
@@ -246,6 +255,30 @@ def validate_markdown_case_consistency(docid: str, kind: str, path: Path, data: 
     ok = True
 
     if kind == "practice":
+        numbered_markdown_headings = [
+            line.strip()
+            for line in text.splitlines()
+            if NUMBERED_MARKDOWN_HEADING_PATTERN.match(line.strip())
+        ]
+        if numbered_markdown_headings:
+            log.add(
+                f"{docid}: practice.md содержит смешанный формат заголовка Markdown+нумерация "
+                f"({numbered_markdown_headings[0]}); используй '# Нормы...' или '1. Нормы...', но не '### 1. ...'"
+            )
+            ok = False
+
+        mixed_latin_legal_abbr = [
+            line.strip()
+            for line in text.splitlines()
+            if MIXED_LATIN_LEGAL_ABBR_PATTERN.search(line)
+        ]
+        if mixed_latin_legal_abbr:
+            log.add(
+                f"{docid}: practice.md содержит похожую на латиницу букву в правовой аббревиатуре "
+                f"({mixed_latin_legal_abbr[0]}); проверь ГК/ГПК/АПК/КАС/ВС"
+            )
+            ok = False
+
         anchors = case_anchor_terms(data)
         anchor_hits = sorted(term for term in anchors if term in normalized_text)
 
@@ -494,6 +527,14 @@ def validate_structure(docid: str, path: Path, act_text: str, errors: ErrorLog,
         serialized = json.dumps(data, ensure_ascii=False)
         if "????" in serialized:
             errors.add(f"{docid}: indexed JSON contains suspicious mojibake marker '????'")
+            ok = False
+        claims = data.get("claims_and_result") if isinstance(data.get("claims_and_result"), dict) else {}
+        remedy = str(claims.get("remedy") or "").strip()
+        if SERVICE_REMEDY_PATTERN.search(remedy):
+            errors.add(
+                f"{docid}: claims_and_result.remedy contains service/English tokens; "
+                "use Russian user-facing text or taxonomy.claim_type_codes"
+            )
             ok = False
 
     processing = data.get("processing") if isinstance(data.get("processing"), dict) else {}
