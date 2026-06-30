@@ -55,16 +55,16 @@
 - Pre-deploy UI-полиш ЗоПП-раздела выполнен: hero `/zpp/` переведён на позиционирование без числа актов, а денежные подблоки на страницах дел без таймлайна рендерятся как две вложенные карточки; smoke/visual-тесты обновлены и проходят.
 - Первая DDU-партия технически закрыта после остановки Antigravity: 68 raw-актов → 68 комплектов `user_story`/`practice`/`structure`, очередь `data/ddu/inbox/_queue.json` = 68/68 done, `validate_structures.py --strict-encoding` = 0 ошибок/0 предупреждений, `verify_all.py` = 68/68. Публикационный итог: 17 `index`, 51 `hold` (42 `ddu_non_target_hold`, 9 `ddu_manual_review_hold`). Handoff партии: `data/ddu/parse_batches/2026-06-29-ddu-001/batch_state.md`.
 - По DDU выявлен слабый yield первой поисковой воронки: 17 целевых актов из 68. Контракт усилен: следующая партия должна использовать лёгкий triage кандидатов до fetch и фиксировать `rejected_before_fetch`/`maybe_target`, чтобы снизить долю `hold` без потери потенциально целевых дел.
-- DDU SSG стартовой выборки сгенерирован в `dist/ddu-online.ru/`: главная, 7 страниц-ситуаций, 17 страниц дел, `sitemap.xml`, `robots.txt`; npm-команда — `npm run site:generate:ddu`.
+- DDU SSG стартовой выборки сгенерирован в `dist/ddu-online.ru/`: главная, 7 страниц-ситуаций, 17 страниц дел, `sitemap.xml`, `robots.txt`; npm-команда — `npm run site:generate:ddu`. Страницы дел переведены на зрелый ZPP-like шаблон: верхние панели, история, требования, логика решения и правовой разбор с `md-note`.
 - Актуальный техдолг вынесен в `memory/topic-technical-debt.md`: TD-001 — 64 legacy `practice_*.md` / 78 предупреждений по формату; TD-002 — 22 ЗоПП docid с legacy encoding/mojibake-артефактами. До закрытия TD-001/TD-002 полный strict-регресс включается только по новым/изменённым docid, не по всему ЗоПП-корпусу.
 
 ## Следующий Шаг
 
-1. Закоммитить текущий пакет исправлений `practice_*.md`/валидации/SSG/UI-полиша, отправить в GitHub и проверить GitHub Actions run.
+1. Провести DDU pre-PROD gate: визуально проверить главную, 2–3 страницы ситуаций и 4–6 страниц дел; отдельно решить, какие из 7 страниц-ситуаций индексировать сразу, а какие временно не включать в sitemap из-за thin-page риска.
 2. По DDU перейти к кластеризации 17 index-дел и решению судьбы 9 `ddu_manual_review_hold`.
 3. Выбрать первые 3–5 страниц-ситуаций для `ddu-online.ru` по `memory/topic-ddu-online-fill-plan.md`.
-4. Перед полным strict-регрессом закрыть TD-001/TD-002 из `memory/topic-technical-debt.md`.
-5. Подготовить PROD-deploy контур: production `.env`, GitHub Secrets, deploy workflow по SSH, порядок ручного запуска/rollback.
+4. Подготовить PROD-deploy контур: production `.env`, GitHub Secrets, deploy workflow по SSH, порядок ручного запуска/rollback.
+5. Перед полным strict-регрессом закрыть TD-001/TD-002 из `memory/topic-technical-debt.md`.
 6. Следующую партию ЗоПП-парсинга отложить; возвращаться к ней после решения первичных задач по ДДУ.
 
 ## Активные обсуждения

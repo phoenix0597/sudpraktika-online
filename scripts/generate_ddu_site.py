@@ -105,16 +105,30 @@ def inline_md(text: Any) -> str:
     return value
 
 
+def note_html(label: str, body: Any) -> str:
+    return f'<p class="md-note"><strong><em>{escape(label)}:</em></strong> {inline_md(body)}</p>'
+
+
 def markdown_to_html(text: str, *, skip_first_h1: bool = False) -> str:
     lines = text.splitlines()
     html: list[str] = []
-    list_stack: list[int] = []
+    list_stack: list[tuple[int, str]] = []
     first_h1_skipped = False
 
     def close_lists(to_level: int = 0) -> None:
         while len(list_stack) > to_level:
-            html.append("</ul>")
-            list_stack.pop()
+            _level, tag = list_stack.pop()
+            html.append(f"</{tag}>")
+
+    def ensure_list(level: int, tag: str) -> None:
+        close_lists(level)
+        while len(list_stack) < level:
+            html.append(f"<{tag}>")
+            list_stack.append((len(list_stack) + 1, tag))
+        if list_stack and list_stack[-1][1] != tag:
+            close_lists(level - 1)
+            html.append(f"<{tag}>")
+            list_stack.append((level, tag))
 
     for raw in lines:
         line = raw.rstrip()
@@ -133,15 +147,19 @@ def markdown_to_html(text: str, *, skip_first_h1: bool = False) -> str:
             html.append(f"<h{level}>{inline_md(heading.group(2))}</h{level}>")
             continue
 
-        bullet = re.match(r"^(\s*)(?:[-*]|\d+\.)\s+(.+)$", raw)
+        nested_note = re.match(r"^\s+(?:[-*])\s+\*\*(Значение в деле|Применение судом):\*\*\s*(.+)$", raw)
+        if nested_note:
+            close_lists()
+            html.append(note_html(nested_note.group(1), nested_note.group(2).strip()))
+            continue
+
+        bullet = re.match(r"^(\s*)([-*]|\d+\.)\s+(.+)$", raw)
         if bullet:
             indent = len(bullet.group(1).replace("\t", "    "))
             level = 1 if indent < 4 else 2
-            while len(list_stack) < level:
-                html.append("<ul>")
-                list_stack.append(level)
-            close_lists(level)
-            html.append(f"<li>{inline_md(bullet.group(2).strip())}</li>")
+            tag = "ol" if bullet.group(2).endswith(".") else "ul"
+            ensure_list(level, tag)
+            html.append(f"<li>{inline_md(bullet.group(3).strip())}</li>")
             continue
 
         close_lists()
@@ -185,12 +203,46 @@ def first_sentence(text: str, limit: int = 260) -> str:
     return value[:limit].rsplit(" ", 1)[0] + "…"
 
 
+def short(value: Any, limit: int = 360) -> str:
+    text = re.sub(r"\s+", " ", str(value or "")).strip()
+    if len(text) <= limit:
+        return text
+    return text[:limit].rsplit(" ", 1)[0] + "…"
+
+
 def display_value(value: Any, fallback: str = "не указано") -> str:
     if value is None:
         return fallback
     if isinstance(value, str) and not value.strip():
         return fallback
     return str(value)
+
+
+def extract_story_title_and_body(markdown: str, fallback_title: str) -> tuple[str, str]:
+    text = markdown.strip()
+    if text.startswith("## Стандартная структура истории") and "\n---\n" in text:
+        text = text.split("\n---\n", 1)[1].strip()
+    match = re.match(r"^#\s+(.+?)\s*\n+", text)
+    if not match:
+        return fallback_title, text
+    title = re.sub(r"\s+", " ", match.group(1)).strip()
+    body = text[match.end() :].strip()
+    if len(title) > 95:
+        title = fallback_title
+    return (title or fallback_title, body)
+
+
+def strip_norm_section(markdown: str) -> str:
+    text = markdown.strip()
+    text = re.sub(r"^#\s+.+?(?:\n+|$)", "", text, count=1).strip()
+    norm_heading = re.search(r"^#{2,4}\s+Нормы, на которые сослался суд\s*$", text, flags=re.MULTILINE)
+    if not norm_heading:
+        return text
+    next_heading = re.search(r"^#{2,4}\s+(?!Нормы, на которые сослался суд).+$", text[norm_heading.end() :], flags=re.MULTILINE)
+    if not next_heading:
+        return text[: norm_heading.start()].strip()
+    tail_start = norm_heading.end() + next_heading.start()
+    return (text[: norm_heading.start()] + "\n\n" + text[tail_start:]).strip()
 
 
 def result_label(enum_labels: dict[str, str], result_type: str) -> str:
@@ -256,7 +308,15 @@ def build_pages(cases: list[dict[str, Any]], dispute_specs: dict[str, Any]) -> l
     return pages
 
 
-def html_page(title: str, body: str, css_href: str, canonical: str, *, brand_href: str = "/") -> str:
+def html_page(
+    title: str,
+    body: str,
+    css_href: str,
+    canonical: str,
+    *,
+    brand_href: str = "/",
+    header_nav: str = "",
+) -> str:
     return f"""<!doctype html>
 <html lang="ru">
 <head>
@@ -270,6 +330,7 @@ def html_page(title: str, body: str, css_href: str, canonical: str, *, brand_hre
 
 <header class="site-header">
   <a class="brand" href="{escape(brand_href)}">DDU Online</a>
+  {header_nav}
 </header>
 <main>
 {body}
@@ -474,11 +535,43 @@ def render_timeline(timeline: Any) -> str:
     return f'<section class="panel"><h2>Что произошло по датам</h2><ul class="timeline">{"".join(rows)}</ul></section>'
 
 
+def render_plain_list(items: Any, empty_text: str) -> str:
+    if not isinstance(items, list) or not items:
+        return f'<p class="muted">{escape(empty_text)}</p>'
+    rows = [f"<li>{escape(short(item, 300))}</li>" for item in items if str(item).strip()]
+    return f'<ul class="summary-list">{"".join(rows)}</ul>' if rows else f'<p class="muted">{escape(empty_text)}</p>'
+
+
+def render_legal_refs_as_notes(legal_refs: Any, fallback_html: str) -> str:
+    if not isinstance(legal_refs, list) or not legal_refs:
+        return fallback_html
+
+    parts = ["<h4>Нормы, на которые сослался суд</h4>"]
+    for ref in legal_refs:
+        if not isinstance(ref, dict):
+            continue
+        title = str(ref.get("ref") or "").strip()
+        if not title:
+            continue
+        parts.append("<ul>")
+        parts.append(f"<li><strong>{escape(title)}</strong></li>")
+        parts.append("</ul>")
+        if ref.get("context"):
+            parts.append(note_html("Значение в деле", short(ref.get("context"), 420)))
+        if ref.get("applied_by_court"):
+            parts.append(note_html("Применение судом", short(ref.get("applied_by_court"), 420)))
+
+    if len(parts) == 1:
+        return fallback_html
+    return "\n".join(parts)
+
+
 def render_case_page(
     data: dict[str, Any],
     page: DduPage,
     base_url: str,
     result_labels: dict[str, str],
+    claim_labels: dict[str, str],
 ) -> str:
     source = data.get("source", {})
     docid = source.get("docid", "")
@@ -487,59 +580,113 @@ def render_case_page(
     claims = data.get("claims_and_result", {})
     outcome = claims.get("outcome", {})
     amounts = claims.get("amounts", {})
+    legal = data.get("legal_analysis", {})
     story_path = Path("data/ddu/structured") / f"user_story_{docid}.md"
     practice_path = Path("data/ddu/structured") / f"practice_{docid}.md"
-    story_html = markdown_to_html(story_path.read_text(encoding="utf-8")) if story_path.exists() else ""
-    practice_html = markdown_to_html(practice_path.read_text(encoding="utf-8"), skip_first_h1=True) if practice_path.exists() else ""
-    title = case_title(data, page.label)
+    fallback_title = case_title(data, page.label)
+    story_markdown = story_path.read_text(encoding="utf-8") if story_path.exists() else ""
+    practice_markdown = practice_path.read_text(encoding="utf-8") if practice_path.exists() else ""
+    title, story_body = extract_story_title_and_body(story_markdown, fallback_title)
+    story_html = markdown_to_html(story_body)
+    practice_tail = strip_norm_section(practice_markdown)
+    practice_html = render_legal_refs_as_notes(
+        legal.get("legal_refs"),
+        markdown_to_html(practice_markdown, skip_first_h1=True),
+    )
+    tail_html = markdown_to_html(practice_tail, skip_first_h1=True)
+    if tail_html:
+        practice_html = practice_html + "\n" + tail_html
     result_type = outcome.get("result_type", "")
+    result_text = result_label(result_labels, result_type)
+    taxonomy = data.get("taxonomy", {})
+    claim_chips = [
+        claim_labels.get(code, code)
+        for code in taxonomy.get("claim_type_codes", [])
+        if code != "hold"
+    ]
+    chips = " ".join(f'<span class="chip small">{escape(label)}</span>' for label in claim_chips[:8])
+    source_url = source.get("source_url") or "#"
     timeline_html = render_timeline(summary.get("timeline"))
+    timeline_present = bool(timeline_html)
     claimed = render_amounts(amounts.get("items_claimed") or [], "Состав требований")
     awarded = render_amounts(amounts.get("items_awarded") or [], "Что присуждено")
     amount_block = ""
     if claimed or awarded:
+        amount_layout_class = "amount-stack" if timeline_present else "amount-columns"
         amount_block = f"""
 <section class="panel">
   <h2>Что требовал дольщик</h2>
-  <div class="amount-columns">{claimed}{awarded}</div>
-</section>"""
-    key_factors = summary.get("key_factors") or []
-    takeaways = summary.get("practical_takeaways") or []
-    factors_html = ""
-    if key_factors or takeaways:
-        factors_html = f"""
-<section class="panel">
-  <h2>Что важно учитывать</h2>
-  <ul class="summary-list">{"".join(f'<li>{escape(str(item))}</li>' for item in key_factors[:8])}</ul>
-  {('<h3>Практические выводы</h3><ul class="summary-list">' + ''.join(f'<li>{escape(str(item))}</li>' for item in takeaways[:8]) + '</ul>') if takeaways else ''}
+  <div class="{amount_layout_class}">{claimed}{awarded}</div>
 </section>"""
     body = f"""
   <section class="hero case-hero">
     <p class="eyebrow">Разбор судебного дела · {escape(display_value(court.get("region"), "регион не указан"))} · {escape(display_value(court.get("decision_date"), "дата не указана"))}</p>
     <h1>{escape(title)}</h1>
     <p class="lead">{escape(first_sentence(summary.get("situation", "")))}</p>
-    <p><span class="result {escape(RESULT_CSS.get(result_type, "result-mixed"))}">{escape(result_label(result_labels, result_type))}</span></p>
+    <p class="disclosure">Это пользовательская история на основе судебного акта. Она помогает понять жизненную ситуацию, ошибки сторон и значение применённых норм, но не является юридической консультацией.</p>
   </section>
-  <section class="panel">
-    <h2>История дела простым языком</h2>
-    <div class="story-content">{story_html}</div>
+
+  <section class="grid two">
+    <div class="panel">
+      <h2>Итог дела</h2>
+      <dl class="case-facts stacked">
+        <div><dt>Результат</dt><dd><span class="result {escape(RESULT_CSS.get(result_type, "result-mixed"))}">{escape(result_text)}</span></dd></div>
+        <div><dt>Заявлено</dt><dd>{escape(money(amounts.get("claimed_total")))}</dd></div>
+        <div><dt>Присуждено</dt><dd>{escape(money(amounts.get("awarded_total")))}</dd></div>
+        <div><dt>Суд</dt><dd>{escape(display_value(court.get("court_name"), "не указан"))}</dd></div>
+        <div><dt>Дело</dt><dd>{escape(display_value(court.get("case_number"), docid))}</dd></div>
+      </dl>
+      <div class="case-links">
+        <a href="{escape(source_url)}" target="_blank" rel="noopener">Открыть судебный акт</a>
+        <a href="../../praktika/{escape(page.slug)}/">Все похожие дела</a>
+      </div>
+    </div>
+    <div class="panel">
+      <h2>Что важно вынести</h2>
+      {render_plain_list(summary.get("practical_takeaways"), "Практические выводы не выделены.")}
+      <div class="chips">{chips}</div>
+    </div>
   </section>
-  <div class="grid two">{timeline_html}{amount_block}</div>
+
+  <section class="grid two">{timeline_html}{amount_block}</section>
+
   <section class="panel">
     <h2>Что решил суд</h2>
     <p>{escape(outcome.get("short_reason") or "Итог дела выделен в структурированных данных.")}</p>
   </section>
-  {factors_html}
-  <section class="panel">
-    <h2>Подробный правовой разбор</h2>
-    <div class="story-content">{practice_html}</div>
+
+  <section class="panel story-content">
+    <h2>История дела простым языком</h2>
+    {story_html}
   </section>
-  <section class="panel">
-    <h2>Источник</h2>
-    <p><a class="button" href="{escape(source.get("source_url", ""))}">Открыть судебный акт</a></p>
+
+  <section class="grid two">
+    <div class="panel">
+      <h2>Почему суд так решил</h2>
+      <p>{escape(short(legal.get("holding"), 900))}</p>
+      <h3>Ключевые факторы</h3>
+      {render_plain_list(summary.get("key_factors"), "Ключевые факторы не выделены.")}
+    </div>
+    <div class="panel">
+      <h2>Что важно учитывать</h2>
+      {render_plain_list(summary.get("unusual_points"), "Отдельные особенности не выделены.")}
+    </div>
+  </section>
+
+  <section class="panel story-content">
+    <h2>Подробный правовой разбор</h2>
+    {practice_html}
   </section>
 """
-    return html_page(title, body, "../../assets/prototype.css", public_url(base_url, f"/dela/{docid}/"), brand_href="../../index.html")
+    nav = f'<nav><a href="../../praktika/{escape(page.slug)}/">Назад к ситуации</a></nav>'
+    return html_page(
+        title,
+        body,
+        "../../assets/prototype.css",
+        public_url(base_url, f"/dela/{docid}/"),
+        brand_href="../../index.html",
+        header_nav=nav,
+    )
 
 
 def render_sitemap(base_url: str, paths: list[str]) -> str:
@@ -580,7 +727,7 @@ def main() -> int:
         paths.append(page.route)
         for case in page_cases:
             docid = case.get("source", {}).get("docid", "")
-            write_text(output / "dela" / docid / "index.html", render_case_page(case, page, base_url, result_labels))
+            write_text(output / "dela" / docid / "index.html", render_case_page(case, page, base_url, result_labels, claim_labels))
             paths.append(f"/dela/{docid}/")
 
     write_text(output / "sitemap.xml", render_sitemap(base_url, paths))

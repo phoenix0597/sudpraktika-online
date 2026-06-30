@@ -179,6 +179,7 @@ dd { margin: 2px 0 0; font-weight: 700; }
 .timeline li { display: grid; grid-template-columns: 130px 1fr; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
 .timeline time { color: var(--accent); font-weight: 750; }
 .amount-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; margin-top: 16px; }
+.amount-stack { display: grid; gap: 18px; margin-top: 16px; }
 .amount-subpanel { background: #fffaf0; border: 1px solid var(--line); border-radius: 18px; padding: 18px; }
 .amount-columns h3 { margin-top: 0; }
 .amount-list { list-style: none; padding: 0; display: grid; gap: 10px; }
