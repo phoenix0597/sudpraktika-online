@@ -43,7 +43,7 @@
 - Общая база после batch-3: 297 raw / 297 structured JSON. `validate_structures.py`: 297/297 OK; `verify_all.py`: 297/297 OK. Валидатор усилен защитой от индексации `contract_validity_non_zpp`/`non_consumer_hold`, `claim_type_codes: hold` и несогласованных `index_policy`/`main_site_fit`.
 - Кандидатные ЗоЗПП-ситуации batch-3 приняты и добавлены в `data/reference/zpp_enum_dictionary.json`: `proper_quality_goods_exchange_art25` (2 дела), `unfair_terms_imposed_services_art16` (11), `harm_from_defect_art14` (9), `consumer_material_damage_art35` (23). 45 дел переведены из `hold` в индекс.
 - Статический прототип пересобран: общая главная `/`, раздел `/zpp/`, 11 страниц-ситуаций и 257 активных страниц-дел ✓.
-- Локальные Docker Compose DEV-контуры разделены по сайтам: `http://localhost:8080/` — ЗоПП (`site_prototype/`), `http://localhost:8081/` — ДДУ (`site_dev/ddu-placeholder/` до появления SSG-сборки). `caddy` остаётся входной точкой и будущим HTTPS-слоем.
+- Локальные Docker Compose DEV-контуры разделены по сайтам: `http://localhost:8080/` — ЗоПП (`site_prototype/`), `http://localhost:8081/` — ДДУ (`dist/ddu-online.ru/`). `caddy` остаётся входной точкой и будущим HTTPS-слоем.
 - Базовый технический SEO для SSG-прототипа реализован: canonical URL на всех HTML-страницах, `sitemap.xml` на 270 URL и `robots.txt` генерируются из `SITE_PUBLIC_URL`.
 - Pre-production URL-решение выполнено: ЗоПП-страницы перенесены под `/zpp/` (`/zpp/praktika/...`, `/zpp/dela/...`), старые root-level `/praktika/...` и `/dela/...` больше не генерируются.
 - Минимальный контур регрессионных тестов внедрён: `npm run test:data` проверяет structured/markdown consistency; `@playwright/test` даёт 11 smoke-тестов и 14 visual snapshot-тестов; `npm run site:test` проходит на локальном Docker-сервере ✓.
@@ -55,6 +55,7 @@
 - Pre-deploy UI-полиш ЗоПП-раздела выполнен: hero `/zpp/` переведён на позиционирование без числа актов, а денежные подблоки на страницах дел без таймлайна рендерятся как две вложенные карточки; smoke/visual-тесты обновлены и проходят.
 - Первая DDU-партия технически закрыта после остановки Antigravity: 68 raw-актов → 68 комплектов `user_story`/`practice`/`structure`, очередь `data/ddu/inbox/_queue.json` = 68/68 done, `validate_structures.py --strict-encoding` = 0 ошибок/0 предупреждений, `verify_all.py` = 68/68. Публикационный итог: 17 `index`, 51 `hold` (42 `ddu_non_target_hold`, 9 `ddu_manual_review_hold`). Handoff партии: `data/ddu/parse_batches/2026-06-29-ddu-001/batch_state.md`.
 - По DDU выявлен слабый yield первой поисковой воронки: 17 целевых актов из 68. Контракт усилен: следующая партия должна использовать лёгкий triage кандидатов до fetch и фиксировать `rejected_before_fetch`/`maybe_target`, чтобы снизить долю `hold` без потери потенциально целевых дел.
+- DDU SSG стартовой выборки сгенерирован в `dist/ddu-online.ru/`: главная, 7 страниц-ситуаций, 17 страниц дел, `sitemap.xml`, `robots.txt`; npm-команда — `npm run site:generate:ddu`.
 - Актуальный техдолг вынесен в `memory/topic-technical-debt.md`: TD-001 — 64 legacy `practice_*.md` / 78 предупреждений по формату; TD-002 — 22 ЗоПП docid с legacy encoding/mojibake-артефактами. До закрытия TD-001/TD-002 полный strict-регресс включается только по новым/изменённым docid, не по всему ЗоПП-корпусу.
 
 ## Следующий Шаг

@@ -6,6 +6,7 @@
     "playwright:install": "playwright install chromium",
     "site:up": "docker compose up -d",
     "site:generate": "python scripts/generate_ssg_prototype.py",
+    "site:generate:ddu": "python scripts/generate_ddu_site.py",
     "test:data": "python scripts/validate_structures.py --strict-user-story-format --strict-md-consistency && python scripts/check_practice_norm_application_debt.py",
     "test:citations": "python scripts/verify_all.py",
     "test:ci": "npm run test:data && npm run test:citations && npm run site:generate && git diff --exit-code -- site_prototype && npm run site:test",

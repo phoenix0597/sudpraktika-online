@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Спор вокруг эскроу-счёта</title>
+  <link rel="canonical" href="https://ddu-online.ru/praktika/eskrou-ddu/">
+  <link rel="stylesheet" href="../../assets/prototype.css?v=57c471f95e">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="../../index.html">DDU Online</a>
+</header>
+<main>
+
+  <section class="hero">
+    <p class="eyebrow">Ситуация по ДДУ</p>
+    <h1>Спор вокруг эскроу-счёта</h1>
+    <p class="lead">Споры о расчётах через эскроу, раскрытии счёта, возврате средств, роли банка, застройщика и участника долевого строительства.</p>
+  </section>
+  <div class="situation-layout">
+    <div class="situation-content">
+      
+<section class="panel">
+  <h2>Краткое резюме практики</h2>
+  <p class="disclosure">Показатели являются сводкой по текущей выборке судебных актов.</p>
+  <ul class="summary-list">
+    <li>В выборке: 1 судебный акт.</li>
+    <li>Результаты: требования удовлетворены частично — 1.</li>
+    <li>Частые требования: неустойка — 1, компенсация морального вреда — 1, потребительский штраф 50% — 1, обязать передать квартиру или объект — 1.</li>
+  </ul>
+</section>
+      <section class="panel">
+        <h2>Дела в этой выборке</h2>
+        <div class="case-list" data-case-list><article class="case-card" data-case-card data-region="Хабаровский край" data-result="partially_satisfied" data-claims="неустойка|компенсация морального вреда|потребительский штраф 50%|обязать передать квартиру или объект">
+  <div class="case-card__header">
+    <div>
+      <h3>Апартаменты комплекс В1-В2, корпусы 13, 14, 15, Хабаровск: спор вокруг эскроу-счёта</h3>
+      <p class="meta">Хабаровский край · 2024-12-25 · Индустриальный районный суд г. Хабаровска</p>
+    </div>
+    <span class="result result-partially_satisfied">требования удовлетворены частично</span>
+  </div>
+  <p>Покупатель заключил ДДУ от 17.11.2020 на апартаменты за 4 071 541,57 руб.</p>
+  <div class="chips"><span class="chip small">неустойка</span><span class="chip small">компенсация морального вреда</span><span class="chip small">потребительский штраф 50%</span><span class="chip small">обязать передать квартиру или объект</span></div>
+  <div class="case-links">
+    <a class="button" href="../../dela/v8fYlftGBN6E/">Разобрать это дело</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/v8fYlftGBN6E/">Источник</a>
+  </div>
+</article></div>
+      </section>
+    </div>
+    
+<aside class="filter-sidebar">
+  <section class="panel filters">
+    <h2>Фильтры по делам</h2>
+    <div class="filter-grid">
+      <label>Регион
+        <select data-filter="region"><option value="">Все</option><option value="Хабаровский край">Хабаровский край</option></select>
+      </label>
+      <label>Результат
+        <select data-filter="result"><option value="">Все</option><option value="partially_satisfied">требования удовлетворены частично</option></select>
+      </label>
+      <label>Требование
+        <select data-filter="claims"><option value="">Все</option><option value="компенсация морального вреда">компенсация морального вреда</option>
+<option value="неустойка">неустойка</option>
+<option value="обязать передать квартиру или объект">обязать передать квартиру или объект</option>
+<option value="потребительский штраф 50%">потребительский штраф 50%</option></select>
+      </label>
+    </div>
+    <div class="filter-actions"><button class="button" type="button" data-reset-filters>Сбросить фильтры</button></div>
+    <p class="muted">Показано дел: <span data-visible-count>1</span></p>
+  </section>
+</aside>
+  </div>
+
+</main>
+<footer class="site-footer">
+  <p>Не является юридической консультацией. Материалы основаны на судебных актах и обработаны алгоритмом для систематизации и обобщения текущей судебной практики.</p>
+</footer>
+
+<script>
+document.querySelectorAll('[data-filter]').forEach((select) => {
+  select.addEventListener('change', applyFilters);
+});
+document.querySelectorAll('[data-reset-filters]').forEach((button) => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter]').forEach((filter) => filter.value = '');
+    applyFilters();
+  });
+});
+function applyFilters() {
+  const cards = Array.from(document.querySelectorAll('[data-case-card]'));
+  const filters = Array.from(document.querySelectorAll('[data-filter]'));
+  cards.forEach((card) => {
+    const visible = filters.every((filter) => {
+      if (!filter.value) return true;
+      const field = filter.dataset.filter;
+      return (card.dataset[field] || '').split('|').includes(filter.value);
+    });
+    card.hidden = !visible;
+  });
+  const counter = document.querySelector('[data-visible-count]');
+  if (counter) counter.textContent = String(cards.filter((card) => !card.hidden).length);
+}
+</script>
+</body>
+</html>

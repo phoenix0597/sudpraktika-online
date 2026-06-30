@@ -20,6 +20,9 @@ playwright-report/
 
 # Локально клонированные соседние/внешние репозитории
 ddu-online.ru/
+!dist/
+!dist/ddu-online.ru/
+!dist/ddu-online.ru/**
 
 # ОС / редактор
 .DS_Store

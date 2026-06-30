@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ddu-online.ru/sitemap.xml

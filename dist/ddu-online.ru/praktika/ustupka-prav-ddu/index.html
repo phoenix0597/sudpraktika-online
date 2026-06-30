@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Уступка прав требования по ДДУ</title>
+  <link rel="canonical" href="https://ddu-online.ru/praktika/ustupka-prav-ddu/">
+  <link rel="stylesheet" href="../../assets/prototype.css?v=57c471f95e">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="../../index.html">DDU Online</a>
+</header>
+<main>
+
+  <section class="hero">
+    <p class="eyebrow">Ситуация по ДДУ</p>
+    <h1>Уступка прав требования по ДДУ</h1>
+    <p class="lead">Споры о цессии по ДДУ и о том, кто вправе требовать неустойку, убытки или иные суммы после уступки.</p>
+  </section>
+  <div class="situation-layout">
+    <div class="situation-content">
+      
+<section class="panel">
+  <h2>Краткое резюме практики</h2>
+  <p class="disclosure">Показатели являются сводкой по текущей выборке судебных актов.</p>
+  <ul class="summary-list">
+    <li>В выборке: 1 судебный акт.</li>
+    <li>Результаты: требования удовлетворены полностью или почти полностью — 1.</li>
+    <li>Частые требования: расторжение договора — 1.</li>
+  </ul>
+</section>
+      <section class="panel">
+        <h2>Дела в этой выборке</h2>
+        <div class="case-list" data-case-list><article class="case-card" data-case-card data-region="" data-result="satisfied" data-claims="расторжение договора">
+  <div class="case-card__header">
+    <div>
+      <h3>Квартира: уступка прав требования по ДДУ</h3>
+      <p class="meta">регион не указан · 2020-01-28 · суд не указан</p>
+    </div>
+    <span class="result result-satisfied">требования удовлетворены полностью или почти полностью</span>
+  </div>
+  <p>Покупатель получил права на квартиру по цепочке уступок.</p>
+  <div class="chips"><span class="chip small">расторжение договора</span></div>
+  <div class="case-links">
+    <a class="button" href="../../dela/mJ8TjG4OypYx/">Разобрать это дело</a>
+    <a class="source-link" href="https://sudact.ru/regular/doc/mJ8TjG4OypYx/">Источник</a>
+  </div>
+</article></div>
+      </section>
+    </div>
+    
+<aside class="filter-sidebar">
+  <section class="panel filters">
+    <h2>Фильтры по делам</h2>
+    <div class="filter-grid">
+      <label>Регион
+        <select data-filter="region"><option value="">Все</option></select>
+      </label>
+      <label>Результат
+        <select data-filter="result"><option value="">Все</option><option value="satisfied">требования удовлетворены полностью или почти полностью</option></select>
+      </label>
+      <label>Требование
+        <select data-filter="claims"><option value="">Все</option><option value="расторжение договора">расторжение договора</option></select>
+      </label>
+    </div>
+    <div class="filter-actions"><button class="button" type="button" data-reset-filters>Сбросить фильтры</button></div>
+    <p class="muted">Показано дел: <span data-visible-count>1</span></p>
+  </section>
+</aside>
+  </div>
+
+</main>
+<footer class="site-footer">
+  <p>Не является юридической консультацией. Материалы основаны на судебных актах и обработаны алгоритмом для систематизации и обобщения текущей судебной практики.</p>
+</footer>
+
+<script>
+document.querySelectorAll('[data-filter]').forEach((select) => {
+  select.addEventListener('change', applyFilters);
+});
+document.querySelectorAll('[data-reset-filters]').forEach((button) => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter]').forEach((filter) => filter.value = '');
+    applyFilters();
+  });
+});
+function applyFilters() {
+  const cards = Array.from(document.querySelectorAll('[data-case-card]'));
+  const filters = Array.from(document.querySelectorAll('[data-filter]'));
+  cards.forEach((card) => {
+    const visible = filters.every((filter) => {
+      if (!filter.value) return true;
+      const field = filter.dataset.filter;
+      return (card.dataset[field] || '').split('|').includes(filter.value);
+    });
+    card.hidden = !visible;
+  });
+  const counter = document.querySelector('[data-visible-count]');
+  if (counter) counter.textContent = String(cards.filter((card) => !card.hidden).length);
+}
+</script>
+</body>
+</html>

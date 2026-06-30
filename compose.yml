@@ -11,7 +11,7 @@ services:
     image: nginx:1.27-alpine
     restart: unless-stopped
     volumes:
-      - ${DDU_SITE_ROOT:-./site_dev/ddu-placeholder}:/usr/share/nginx/html:ro
+      - ${DDU_SITE_ROOT:-./dist/ddu-online.ru}:/usr/share/nginx/html:ro
     expose:
       - "80"
 

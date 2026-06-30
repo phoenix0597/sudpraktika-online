@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Судебная практика по ДДУ</title>
+  <link rel="canonical" href="https://ddu-online.ru/">
+  <link rel="stylesheet" href="assets/prototype.css?v=57c471f95e">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="brand" href="index.html">DDU Online</a>
+</header>
+<main>
+
+  <section class="hero">
+    <p class="eyebrow">Судебная практика по ДДУ</p>
+    <h1>Судебная практика по ДДУ</h1>
+    <p class="lead">Сервис систематизирует судебные акты по спорам дольщиков с застройщиками: жизненные истории, требования, результаты, применённые нормы и повторяющиеся выводы судов.</p>
+    <p class="disclosure">Сейчас опубликована стартовая выборка: 17 судебных актов. Показатели являются сводкой по текущей базе проекта, а не статистикой всей судебной практики.</p>
+  </section>
+  <section class="index-grid">
+    <article class="index-card">
+  <p class="eyebrow">7 судебных актов в выборке</p>
+  <h2><a href="praktika/nedostatki-kvartiry/">Недостатки квартиры или объекта</a></h2>
+  <p>Споры о строительных недостатках, гарантийных обязательствах, устранении дефектов, расходах на ремонт или уменьшении цены.</p>
+  <a class="button" href="praktika/nedostatki-kvartiry/">Открыть страницу</a>
+</article><article class="index-card">
+  <p class="eyebrow">3 судебных акта в выборке</p>
+  <h2><a href="praktika/prosrochka-peredachi-kvartiry/">Просрочка передачи квартиры и неустойка</a></h2>
+  <p>Застройщик нарушил срок передачи объекта; участник долевого строительства требует неустойку и связанные производные требования. Снижение неустойки по ст. 333 ГК РФ отражать в situation_tags/result analysis, если это не самостоятельный центральный вопрос.</p>
+  <a class="button" href="praktika/prosrochka-peredachi-kvartiry/">Открыть страницу</a>
+</article><article class="index-card">
+  <p class="eyebrow">2 судебных акта в выборке</p>
+  <h2><a href="praktika/rastorzhenie-ddu-vozvrat-deneg/">Расторжение ДДУ и возврат денег</a></h2>
+  <p>Участник долевого строительства отказывается от договора или требует его расторжения, возврата уплаченных денег, процентов и связанных сумм.</p>
+  <a class="button" href="praktika/rastorzhenie-ddu-vozvrat-deneg/">Открыть страницу</a>
+</article><article class="index-card">
+  <p class="eyebrow">2 судебных акта в выборке</p>
+  <h2><a href="praktika/priemka-kvartiry-s-nedostatkami/">Приёмка квартиры с недостатками</a></h2>
+  <p>Споры об акте приёма-передачи, отказе подписывать акт, одностороннем акте, фиксации недостатков при приёмке.</p>
+  <a class="button" href="praktika/priemka-kvartiry-s-nedostatkami/">Открыть страницу</a>
+</article><article class="index-card">
+  <p class="eyebrow">1 судебный акт в выборке</p>
+  <h2><a href="praktika/eskrou-ddu/">Спор вокруг эскроу-счёта</a></h2>
+  <p>Споры о расчётах через эскроу, раскрытии счёта, возврате средств, роли банка, застройщика и участника долевого строительства.</p>
+  <a class="button" href="praktika/eskrou-ddu/">Открыть страницу</a>
+</article><article class="index-card">
+  <p class="eyebrow">1 судебный акт в выборке</p>
+  <h2><a href="praktika/ploshchad-kvartiry-pereraschet/">Площадь квартиры, доплаты и перерасчёт цены</a></h2>
+  <p>Споры о фактической площади объекта, доплатах за лишние метры, возврате за недостающую площадь и порядке перерасчёта цены.</p>
+  <a class="button" href="praktika/ploshchad-kvartiry-pereraschet/">Открыть страницу</a>
+</article><article class="index-card">
+  <p class="eyebrow">1 судебный акт в выборке</p>
+  <h2><a href="praktika/ustupka-prav-ddu/">Уступка прав требования по ДДУ</a></h2>
+  <p>Споры о цессии по ДДУ и о том, кто вправе требовать неустойку, убытки или иные суммы после уступки.</p>
+  <a class="button" href="praktika/ustupka-prav-ddu/">Открыть страницу</a>
+</article>
+  </section>
+
+</main>
+<footer class="site-footer">
+  <p>Не является юридической консультацией. Материалы основаны на судебных актах и обработаны алгоритмом для систематизации и обобщения текущей судебной практики.</p>
+</footer>
+
+<script>
+document.querySelectorAll('[data-filter]').forEach((select) => {
+  select.addEventListener('change', applyFilters);
+});
+document.querySelectorAll('[data-reset-filters]').forEach((button) => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('[data-filter]').forEach((filter) => filter.value = '');
+    applyFilters();
+  });
+});
+function applyFilters() {
+  const cards = Array.from(document.querySelectorAll('[data-case-card]'));
+  const filters = Array.from(document.querySelectorAll('[data-filter]'));
+  cards.forEach((card) => {
+    const visible = filters.every((filter) => {
+      if (!filter.value) return true;
+      const field = filter.dataset.filter;
+      return (card.dataset[field] || '').split('|').includes(filter.value);
+    });
+    card.hidden = !visible;
+  });
+  const counter = document.querySelector('[data-visible-count]');
+  if (counter) counter.textContent = String(cards.filter((card) => !card.hidden).length);
+}
+</script>
+</body>
+</html>

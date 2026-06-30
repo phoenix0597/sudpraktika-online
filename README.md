@@ -32,12 +32,12 @@ http://localhost:8081/  # ДДУ / ddu-online
 - `/zpp/praktika/<slug>/` — страницы ситуаций;
 - `/zpp/dela/<docid>/` — страницы конкретных судебных актов.
 
-DDU-контур на `8081` сейчас показывает служебную placeholder-страницу. После генерации DDU SSG укажите `DDU_SITE_ROOT=./dist/ddu-online.ru` в `.env` и перезапустите Docker Compose.
+Если DDU-сборка ещё не создана, выполните `npm run site:generate:ddu` и перезапустите Docker Compose.
 
 Контур состоит из двух сервисов:
 
 - `zpp-site` — отдаёт файлы из `ZPP_SITE_ROOT` (`site_prototype/` по умолчанию);
-- `ddu-site` — отдаёт файлы из `DDU_SITE_ROOT` (`site_dev/ddu-placeholder/` по умолчанию, до появления DDU SSG);
+- `ddu-site` — отдаёт файлы из `DDU_SITE_ROOT` (`dist/ddu-online.ru/` по умолчанию);
 - `caddy` — входная точка для двух локальных портов и будущего HTTPS-слоя.
 
 Для другого локального каталога сборки или production-настроек скопируйте `.env.example` в `.env` и укажите нужные значения, например:
