@@ -67,6 +67,16 @@ SERVICE_REMEDY_PATTERN = re.compile(
     r"consumer\s+fine|legal\s+expenses|court\s+costs)\b",
     re.IGNORECASE,
 )
+MOJIBAKE_MARKERS = (
+    "????",
+    "Рџ", "Рђ", "Р‘", "Р”", "Р•", "Р–", "Р—", "Рљ", "Р›", "Рњ", "Рќ", "Рћ",
+    "Р ", "РЎ", "Рў", "РЈ", "Р¤", "РҐ", "Р¦", "Р§", "РЁ", "Р©", "Р­", "Р®", "РЇ",
+    "Р°", "Р±", "РІ", "Рі", "Рґ", "Рµ", "Р¶", "Р·", "Рё", "Р№", "Рє",
+    "Рј", "РЅ", "Рѕ", "Рї", "СЂ", "СЃ", "С‚", "Сѓ", "С„", "С…", "С†", "С‡",
+    "С€", "С‰", "СЊ", "СЌ", "СЋ", "СЏ", "С‘",
+    "вЂ", "в„", "В«", "В»", "Ð", "Ñ", "�",
+)
+GREEK_MOJIBAKE_PATTERN = re.compile(r"[Α-Ωα-ω]{4,}")
 
 ANCHOR_STOPWORDS = {
     "потребитель",
@@ -117,10 +127,10 @@ ANCHOR_STOPWORDS = {
 }
 
 
-def load_enum_values() -> dict[str, set[str]]:
-    if not ENUM_DICTIONARY_PATH.exists():
+def load_enum_values(enum_dictionary_path: Path = ENUM_DICTIONARY_PATH) -> dict[str, set[str]]:
+    if not enum_dictionary_path.exists():
         return {}
-    data = json.loads(ENUM_DICTIONARY_PATH.read_text(encoding="utf-8"))
+    data = json.loads(enum_dictionary_path.read_text(encoding="utf-8"))
     fields = data.get("fields", {})
     result: dict[str, set[str]] = {}
     for field_name, spec in fields.items():
@@ -197,6 +207,28 @@ def iter_text_values(value: object) -> list[str]:
             result.extend(iter_text_values(child))
         return result
     return []
+
+
+def find_encoding_artifacts(text: str) -> list[str]:
+    """Detect common UTF-8/Windows-1251 mojibake in generated artifacts."""
+    if not text:
+        return []
+    findings: list[str] = []
+    marker_hits = sum(text.count(marker) for marker in MOJIBAKE_MARKERS)
+    if marker_hits:
+        findings.append(f"{marker_hits} mojibake marker(s)")
+    greek_match = GREEK_MOJIBAKE_PATTERN.search(text)
+    if greek_match:
+        findings.append(f"Greek-looking mojibake: {greek_match.group(0)[:40]}")
+    return findings
+
+
+def validate_text_encoding(docid: str, label: str, text: str, errors: ErrorLog) -> bool:
+    findings = find_encoding_artifacts(text)
+    if findings:
+        errors.add(f"{docid}: {label} contains suspicious encoding artifacts ({'; '.join(findings)})")
+        return False
+    return True
 
 
 def normalize_story_heading(line: str) -> str:
@@ -488,7 +520,8 @@ def validate_enum_fields(docid: str, data: dict, enum_values: dict[str, set[str]
 
 def validate_structure(docid: str, path: Path, act_text: str, errors: ErrorLog,
                        enum_values: dict[str, set[str]],
-                       allow_incomplete: bool, skip_citation_check: bool) -> bool:
+                       allow_incomplete: bool, skip_citation_check: bool,
+                       strict_encoding: bool) -> bool:
     if not path.exists():
         errors.add(f"{docid}: нет {path.as_posix()}")
         return False
@@ -522,9 +555,12 @@ def validate_structure(docid: str, path: Path, act_text: str, errors: ErrorLog,
     if not validate_enum_fields(docid, data, enum_values, errors):
         ok = False
 
+    serialized = json.dumps(data, ensure_ascii=False)
+    if strict_encoding and not validate_text_encoding(docid, "structure JSON", serialized, errors):
+        ok = False
+
     publication = data.get("publication") if isinstance(data.get("publication"), dict) else {}
     if publication.get("index_policy") == "index":
-        serialized = json.dumps(data, ensure_ascii=False)
         if "????" in serialized:
             errors.add(f"{docid}: indexed JSON contains suspicious mojibake marker '????'")
             ok = False
@@ -574,6 +610,21 @@ def main() -> int:
         help="Проверить только указанные docid. Можно передавать несколько раз или через запятую.",
     )
     parser.add_argument(
+        "--raw-dir",
+        default=str(RAW_DIR),
+        help="Каталог с act_<docid>.txt. По умолчанию data/raw_acts.",
+    )
+    parser.add_argument(
+        "--structured-dir",
+        default=str(STRUCTURED_DIR),
+        help="Каталог с user_story/practice/structure файлами. По умолчанию data/structured.",
+    )
+    parser.add_argument(
+        "--enum-dictionary",
+        default=str(ENUM_DICTIONARY_PATH),
+        help="Путь к enum-словарю. По умолчанию data/reference/zpp_enum_dictionary.json.",
+    )
+    parser.add_argument(
         "--check-practice-format",
         action="store_true",
         help="Проверять единый markdown-формат блока норм в practice_*.md.",
@@ -603,9 +654,17 @@ def main() -> int:
         action="store_true",
         help="Считать рассинхрон markdown-артефактов с делом ошибкой.",
     )
+    parser.add_argument(
+        "--strict-encoding",
+        action="store_true",
+        help="Считать признаки mojibake/сломанных кодировок в raw, JSON и markdown ошибкой.",
+    )
     args = parser.parse_args()
+    raw_dir = Path(args.raw_dir)
+    structured_dir = Path(args.structured_dir)
+    enum_dictionary_path = Path(args.enum_dictionary)
 
-    act_files = sorted(RAW_DIR.glob("act_*.txt"))
+    act_files = sorted(raw_dir.glob("act_*.txt"))
     if args.docid:
         wanted_docids = {
             value.strip()
@@ -617,7 +676,7 @@ def main() -> int:
 
     errors = ErrorLog(args.max_errors)
     warnings = WarningLog(args.max_errors)
-    enum_values = load_enum_values()
+    enum_values = load_enum_values(enum_dictionary_path)
     stats = {
         "acts": len(act_files),
         "user_story_ok": 0,
@@ -631,12 +690,16 @@ def main() -> int:
     for act_file in act_files:
         docid = docid_from_act_file(act_file)
         act_text = act_file.read_text(encoding="utf-8")
-        user_story = STRUCTURED_DIR / f"user_story_{docid}.md"
-        practice = STRUCTURED_DIR / f"practice_{docid}.md"
-        structure = STRUCTURED_DIR / f"structure_{docid}.json"
+        if args.strict_encoding:
+            validate_text_encoding(docid, "raw act", act_text, errors)
+        user_story = structured_dir / f"user_story_{docid}.md"
+        practice = structured_dir / f"practice_{docid}.md"
+        structure = structured_dir / f"structure_{docid}.json"
 
         if user_story.exists() and user_story.stat().st_size > 0:
             stats["user_story_ok"] += 1
+            if args.strict_encoding:
+                validate_text_encoding(docid, "user_story.md", user_story.read_text(encoding="utf-8"), errors)
             if args.check_user_story_format or args.strict_user_story_format:
                 story_format_log = errors if args.strict_user_story_format else warnings
                 if validate_user_story_markdown_format(docid, user_story, story_format_log):
@@ -646,6 +709,8 @@ def main() -> int:
 
         if practice.exists() and practice.stat().st_size > 0:
             stats["practice_ok"] += 1
+            if args.strict_encoding:
+                validate_text_encoding(docid, "practice.md", practice.read_text(encoding="utf-8"), errors)
             if args.check_practice_format or args.strict_practice_format:
                 format_log = errors if args.strict_practice_format else warnings
                 if validate_practice_markdown_format(docid, practice, format_log):
@@ -661,6 +726,7 @@ def main() -> int:
             enum_values,
             args.allow_incomplete,
             args.skip_citation_check,
+            args.strict_encoding,
         ):
             stats["structure_ok"] += 1
 

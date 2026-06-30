@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 """Скрипт верификации всех файлов правового анализа против исходных актов (без проблем с кодировкой консоли)."""
+import argparse
 import sys
 from pathlib import Path
 
@@ -13,8 +14,22 @@ sys.path.append(str(scripts_dir))
 import verify_citations
 
 def main():
-    structured_dir = Path("data/structured")
-    raw_dir = Path("data/raw_acts")
+    parser = argparse.ArgumentParser(
+        description="Проверка markdown-файлов правового анализа против исходных актов."
+    )
+    parser.add_argument(
+        "--structured-dir",
+        default="data/structured",
+        help="Каталог с practice_<docid>.md. По умолчанию data/structured.",
+    )
+    parser.add_argument(
+        "--raw-dir",
+        default="data/raw_acts",
+        help="Каталог с act_<docid>.txt. По умолчанию data/raw_acts.",
+    )
+    args = parser.parse_args()
+    structured_dir = Path(args.structured_dir)
+    raw_dir = Path(args.raw_dir)
     
     practice_files = sorted(structured_dir.glob("practice_*.md"))
     print(f"Найдено файлов для проверки: {len(practice_files)}")

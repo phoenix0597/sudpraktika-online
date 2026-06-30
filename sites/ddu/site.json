@@ -1,0 +1,34 @@
+{
+  "site_id": "ddu",
+  "domain": "ddu-online.ru",
+  "public_url": "https://ddu-online.ru",
+  "title": "Судебная практика по ДДУ",
+  "description": "Систематизированные судебные истории и обобщения по спорам участников долевого строительства с застройщиками.",
+  "legal_domain": "shared_construction",
+  "audience_segment": "citizen",
+  "procedure_default": "civil",
+  "route_prefix": "",
+  "routes": {
+    "index": "/",
+    "practice": "/praktika/{slug}/",
+    "case": "/dela/{docid}/"
+  },
+  "paths": {
+    "raw_acts": "data/ddu/raw_acts",
+    "structured": "data/ddu/structured",
+    "inbox_queue": "data/ddu/inbox/_queue.json",
+    "registry": "data/ddu/registry/case_registry.csv",
+    "enum_dictionary": "data/reference/ddu_enum_dictionary.json",
+    "output": "dist/ddu-online.ru"
+  },
+  "launch_target": {
+    "mode": "confident_start",
+    "valid_cases_min": 150,
+    "valid_cases_max": 250,
+    "situation_pages_min": 8,
+    "situation_pages_max": 12,
+    "strong_pages_min": 3,
+    "strong_pages_max": 5,
+    "strong_page_case_threshold": 20
+  }
+}

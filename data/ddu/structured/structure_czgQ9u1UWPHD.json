@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "source": {
+    "docid": "czgQ9u1UWPHD",
+    "source_url": "https://sudact.ru/regular/doc/czgQ9u1UWPHD/",
+    "source_domain": "sudact.ru",
+    "source_title": "Решение № 2-4546/2017 от 13 декабря 2017 г. по делу... :: СудАкт.ру",
+    "source_passage": "Руководствуясь приведенными нормами налогового права и статьями 214.1, 214.3, 214.4 НК РФ ООО «Компания БКС» (доп.офис Алтайский) представлены в Межрайонную ИФНС России № по <адрес> сведения о получении в 2011 году ФИО2 дохода на общую сумму 69 522 646 955,64 руб., налоговых вычетов в сумме 69 470 260 960,27 руб., данные о совокупном облагаемом доходе в.",
+    "raw_act_path": "data/ddu/raw_acts/act_czgQ9u1UWPHD.txt",
+    "raw_text_sha256": "9ba93591e93c893caef018b7922905d5c032cda79ae22a54ee025247399ffa69",
+    "source_type": "court_act"
+  },
+  "court": {
+    "case_number": "",
+    "court_name": "",
+    "court_level": "",
+    "court_system": "general_jurisdiction",
+    "region": "",
+    "city_or_locality": null,
+    "decision_date": "",
+    "instance": ""
+  },
+  "taxonomy": {
+    "legal_domain": "shared_construction",
+    "procedure_type": "civil",
+    "audience_segment": "citizen",
+    "topic_vertical": "ddu",
+    "dispute_type_code": "ddu_non_target_hold",
+    "dispute_type": "нецелевой для ДДУ-сайта спор",
+    "claim_type_codes": [
+      "hold"
+    ],
+    "claim_type": "нецелевой спор",
+    "platform_or_company": null,
+    "object_type": null,
+    "object_name": null,
+    "situation_tags": []
+  },
+  "parties": {
+    "focus_party": {
+      "role": "shareholder",
+      "name_raw": null
+    },
+    "opponents": [],
+    "third_parties": []
+  },
+  "case_summary": {
+    "situation": "Нецелевой спор",
+    "timeline": [],
+    "key_factors": [],
+    "practical_takeaways": [],
+    "unusual_points": []
+  },
+  "claims_and_result": {
+    "remedy": "Нецелевой спор",
+    "outcome": {
+      "focus_party_result": "hold",
+      "result_type": "hold",
+      "short_reason": "нецелевой спор"
+    },
+    "amounts": {
+      "claimed_total": null,
+      "awarded_total": null,
+      "items_claimed": [],
+      "items_awarded": []
+    }
+  },
+  "legal_analysis": {
+    "holding": "Нецелевой спор",
+    "legal_refs": [],
+    "arguments_rejected": []
+  },
+  "publication": {
+    "main_site_fit": false,
+    "index_policy": "hold",
+    "exclude_reason": "non_target",
+    "ai_generated": true,
+    "citations_verified": false,
+    "human_review_status": "not_reviewed",
+    "legal_advice": false
+  },
+  "processing": {
+    "status": "complete",
+    "processed_by": "Antigravity/Filter",
+    "processed_at": "2026-06-29T18:05:56.941838"
+  }
+}

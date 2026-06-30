@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "source": {
+    "docid": "ZLpGEgO2P1rw",
+    "source_url": "https://sudact.ru/regular/doc/ZLpGEgO2P1rw/",
+    "source_domain": "sudact.ru",
+    "source_title": "Решение № 2-214/2023 2-2-214/2023 от 1 ноября 2023... :: СудАкт.ру",
+    "source_passage": "Дело № 2-2-214/2023 №. РЕШЕНИЕ. Именем Российской Федерации. | Решение от 1 ноября 2023 г. по делу № 2-214/2023 Решение от 27 июля 2023 г. по делу № 2-214/2023 Решение от 20 июля 2023 г. по делу № 2-214/2023 Решение от 15 мая 2023 г. по делу № 2-214/2023.",
+    "raw_act_path": "data/ddu/raw_acts/act_ZLpGEgO2P1rw.txt",
+    "raw_text_sha256": "fe1e07995da6132f0e80dbe9459414c473af7922f6c0cb124d7e76023c8a76fe",
+    "source_type": "court_act"
+  },
+  "court": {
+    "case_number": "",
+    "court_name": "",
+    "court_level": "",
+    "court_system": "general_jurisdiction",
+    "region": "",
+    "city_or_locality": null,
+    "decision_date": "",
+    "instance": ""
+  },
+  "taxonomy": {
+    "legal_domain": "shared_construction",
+    "procedure_type": "civil",
+    "audience_segment": "citizen",
+    "topic_vertical": "ddu",
+    "dispute_type_code": "ddu_non_target_hold",
+    "dispute_type": "нецелевой для ДДУ-сайта спор",
+    "claim_type_codes": [
+      "hold"
+    ],
+    "claim_type": "нецелевой спор",
+    "platform_or_company": null,
+    "object_type": null,
+    "object_name": null,
+    "situation_tags": []
+  },
+  "parties": {
+    "focus_party": {
+      "role": "shareholder",
+      "name_raw": null
+    },
+    "opponents": [],
+    "third_parties": []
+  },
+  "case_summary": {
+    "situation": "Нецелевой спор",
+    "timeline": [],
+    "key_factors": [],
+    "practical_takeaways": [],
+    "unusual_points": []
+  },
+  "claims_and_result": {
+    "remedy": "Нецелевой спор",
+    "outcome": {
+      "focus_party_result": "hold",
+      "result_type": "hold",
+      "short_reason": "нецелевой спор"
+    },
+    "amounts": {
+      "claimed_total": null,
+      "awarded_total": null,
+      "items_claimed": [],
+      "items_awarded": []
+    }
+  },
+  "legal_analysis": {
+    "holding": "Нецелевой спор",
+    "legal_refs": [],
+    "arguments_rejected": []
+  },
+  "publication": {
+    "main_site_fit": false,
+    "index_policy": "hold",
+    "exclude_reason": "non_target",
+    "ai_generated": true,
+    "citations_verified": false,
+    "human_review_status": "not_reviewed",
+    "legal_advice": false
+  },
+  "processing": {
+    "status": "complete",
+    "processed_by": "Antigravity/Filter",
+    "processed_at": "2026-06-29T18:05:57.007848"
+  }
+}

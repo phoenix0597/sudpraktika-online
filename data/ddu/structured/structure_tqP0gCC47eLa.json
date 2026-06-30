@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "source": {
+    "docid": "tqP0gCC47eLa",
+    "source_url": "https://sudact.ru/regular/doc/tqP0gCC47eLa/",
+    "source_domain": "sudact.ru",
+    "source_title": "Решение № 2-4463/2018 2-4463/2018~М-3516/2018... :: СудАкт.ру",
+    "source_passage": "Решение № 2-4463/2018 2-4463/2018~М-3516/2018 М-3516/2018 от 7 октября 2018 г. по делу № 9-214/2018~М-5987/2017. Красногвардейский районный суд (Город Санкт-Петербург) - Гражданские и административные.",
+    "raw_act_path": "data/ddu/raw_acts/act_tqP0gCC47eLa.txt",
+    "raw_text_sha256": "f9a311f43111840aea64e8379cdf00051bf2b407d585131bac3373a67695ea9a",
+    "source_type": "court_act"
+  },
+  "court": {
+    "case_number": "",
+    "court_name": "",
+    "court_level": "",
+    "court_system": "general_jurisdiction",
+    "region": "",
+    "city_or_locality": null,
+    "decision_date": "",
+    "instance": ""
+  },
+  "taxonomy": {
+    "legal_domain": "shared_construction",
+    "procedure_type": "civil",
+    "audience_segment": "citizen",
+    "topic_vertical": "ddu",
+    "dispute_type_code": "ddu_non_target_hold",
+    "dispute_type": "нецелевой для ДДУ-сайта спор",
+    "claim_type_codes": [
+      "hold"
+    ],
+    "claim_type": "нецелевой спор",
+    "platform_or_company": null,
+    "object_type": null,
+    "object_name": null,
+    "situation_tags": []
+  },
+  "parties": {
+    "focus_party": {
+      "role": "shareholder",
+      "name_raw": null
+    },
+    "opponents": [],
+    "third_parties": []
+  },
+  "case_summary": {
+    "situation": "Нецелевой спор",
+    "timeline": [],
+    "key_factors": [],
+    "practical_takeaways": [],
+    "unusual_points": []
+  },
+  "claims_and_result": {
+    "remedy": "Нецелевой спор",
+    "outcome": {
+      "focus_party_result": "hold",
+      "result_type": "hold",
+      "short_reason": "нецелевой спор"
+    },
+    "amounts": {
+      "claimed_total": null,
+      "awarded_total": null,
+      "items_claimed": [],
+      "items_awarded": []
+    }
+  },
+  "legal_analysis": {
+    "holding": "Нецелевой спор",
+    "legal_refs": [],
+    "arguments_rejected": []
+  },
+  "publication": {
+    "main_site_fit": false,
+    "index_policy": "hold",
+    "exclude_reason": "non_target",
+    "ai_generated": true,
+    "citations_verified": false,
+    "human_review_status": "not_reviewed",
+    "legal_advice": false
+  },
+  "processing": {
+    "status": "complete",
+    "processed_by": "Antigravity/Filter",
+    "processed_at": "2026-06-29T18:05:56.983374"
+  }
+}

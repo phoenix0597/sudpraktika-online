@@ -43,7 +43,7 @@
 - Общая база после batch-3: 297 raw / 297 structured JSON. `validate_structures.py`: 297/297 OK; `verify_all.py`: 297/297 OK. Валидатор усилен защитой от индексации `contract_validity_non_zpp`/`non_consumer_hold`, `claim_type_codes: hold` и несогласованных `index_policy`/`main_site_fit`.
 - Кандидатные ЗоЗПП-ситуации batch-3 приняты и добавлены в `data/reference/zpp_enum_dictionary.json`: `proper_quality_goods_exchange_art25` (2 дела), `unfair_terms_imposed_services_art16` (11), `harm_from_defect_art14` (9), `consumer_material_damage_art35` (23). 45 дел переведены из `hold` в индекс.
 - Статический прототип пересобран: общая главная `/`, раздел `/zpp/`, 11 страниц-ситуаций и 257 активных страниц-дел ✓.
-- Локальный Docker Compose сервер настроен: `site` отдаёт `site_prototype/`, `caddy` служит входной точкой и будущим HTTPS-слоем; локальный адрес — `http://localhost:8080/`. Проверены главная и страница ситуации через HTTP 200 ✓.
+- Локальные Docker Compose DEV-контуры разделены по сайтам: `http://localhost:8080/` — ЗоПП (`site_prototype/`), `http://localhost:8081/` — ДДУ (`site_dev/ddu-placeholder/` до появления SSG-сборки). `caddy` остаётся входной точкой и будущим HTTPS-слоем.
 - Базовый технический SEO для SSG-прототипа реализован: canonical URL на всех HTML-страницах, `sitemap.xml` на 270 URL и `robots.txt` генерируются из `SITE_PUBLIC_URL`.
 - Pre-production URL-решение выполнено: ЗоПП-страницы перенесены под `/zpp/` (`/zpp/praktika/...`, `/zpp/dela/...`), старые root-level `/praktika/...` и `/dela/...` больше не генерируются.
 - Минимальный контур регрессионных тестов внедрён: `npm run test:data` проверяет structured/markdown consistency; `@playwright/test` даёт 11 smoke-тестов и 14 visual snapshot-тестов; `npm run site:test` проходит на локальном Docker-сервере ✓.
@@ -53,12 +53,18 @@
 - GitHub Actions CI настроен: `.github/workflows/ci.yml` запускает `npm run test:ci` на `push`/`pull_request` в `main`, сохраняет Playwright artifacts; локально `npm run test:ci` проходит ✓.
 - Долг по неполному `Применение судом` в legacy `practice_*.md` закрыт: 13 страниц переобработаны, `data/review/practice-norm-application-debt.txt` пустой, `npm run test:data` ловит новые такие случаи, смешанные markdown-заголовки вида `### 1. ...` и латинские буквы в правовых аббревиатурах (`GК/GПК` вместо `ГК/ГПК`).
 - Pre-deploy UI-полиш ЗоПП-раздела выполнен: hero `/zpp/` переведён на позиционирование без числа актов, а денежные подблоки на страницах дел без таймлайна рендерятся как две вложенные карточки; smoke/visual-тесты обновлены и проходят.
+- Первая DDU-партия технически закрыта после остановки Antigravity: 68 raw-актов → 68 комплектов `user_story`/`practice`/`structure`, очередь `data/ddu/inbox/_queue.json` = 68/68 done, `validate_structures.py --strict-encoding` = 0 ошибок/0 предупреждений, `verify_all.py` = 68/68. Публикационный итог: 17 `index`, 51 `hold` (42 `ddu_non_target_hold`, 9 `ddu_manual_review_hold`). Handoff партии: `data/ddu/parse_batches/2026-06-29-ddu-001/batch_state.md`.
+- По DDU выявлен слабый yield первой поисковой воронки: 17 целевых актов из 68. Контракт усилен: следующая партия должна использовать лёгкий triage кандидатов до fetch и фиксировать `rejected_before_fetch`/`maybe_target`, чтобы снизить долю `hold` без потери потенциально целевых дел.
+- Актуальный техдолг вынесен в `memory/topic-technical-debt.md`: TD-001 — 64 legacy `practice_*.md` / 78 предупреждений по формату; TD-002 — 22 ЗоПП docid с legacy encoding/mojibake-артефактами. До закрытия TD-001/TD-002 полный strict-регресс включается только по новым/изменённым docid, не по всему ЗоПП-корпусу.
 
 ## Следующий Шаг
 
 1. Закоммитить текущий пакет исправлений `practice_*.md`/валидации/SSG/UI-полиша, отправить в GitHub и проверить GitHub Actions run.
-2. Подготовить PROD-deploy контур: production `.env`, GitHub Secrets, deploy workflow по SSH, порядок ручного запуска/rollback.
-3. Следующую партию парсинга запускать уже с учётом 11 принятых ситуаций и действующего контракта.
+2. По DDU перейти к кластеризации 17 index-дел и решению судьбы 9 `ddu_manual_review_hold`.
+3. Выбрать первые 3–5 страниц-ситуаций для `ddu-online.ru` по `memory/topic-ddu-online-fill-plan.md`.
+4. Перед полным strict-регрессом закрыть TD-001/TD-002 из `memory/topic-technical-debt.md`.
+5. Подготовить PROD-deploy контур: production `.env`, GitHub Secrets, deploy workflow по SSH, порядок ручного запуска/rollback.
+6. Следующую партию ЗоПП-парсинга отложить; возвращаться к ней после решения первичных задач по ДДУ.
 
 ## Активные обсуждения
 
@@ -67,7 +73,7 @@
 | Дискуссия | Стадия | resolves_to |
 |---|---|---|
 | `memory/discussions/statistics-analytics.md` — продуктовый инкремент «статистика/аналитика» | round-1 | `memory/topic-statistics-analytics.md` |
-| `memory/discussions/content-scale-limits.md` — пределы наполнения (количественные/качественные) под трафик-цель 10–30K/сутки | round-2 (2/3 рецензий: Zcode-Deepseek-v4-pro, Zcode-GLM-5.2) | `memory/topic-content-fill-plan.md` |
+| `memory/discussions/content-scale-limits.md` — пределы наполнения (количественные/качественные) под трафик-цель 10–30K/сутки | verdict → ожидает accept/modify/reject владельцем | `memory/topic-content-fill-plan.md` |
 
 ## Извлечение через агентный mailbox / LLM API
 
@@ -105,4 +111,6 @@
 - Шаг 4 — лиды юристам + передача ПДн (отложено пользователем; фокус — РСЯ).
 - DOCX-генератор — пост-MVP.
 - Дополнительные каналы трафика — Фаза 9.
+- Перед масштабированием сети сайтов: проверить условия РСЯ по сетям/аффилированным площадкам, затем принимать решение о схеме РСЯ для 2–3-го сайта.
+- `ddu-online.ru`: перезапуск как тематического сайта судебной практики по ДДУ; план полного цикла — `memory/topic-ddu-online-fill-plan.md`.
 - После обкатки контракта многосторонних обсуждений на других thread'ах: промоутить процедуру в глобальную память (`C:\Users\Stas\.codex\memories\`) и синхронизировать с репозиторием `~/.codex/codex-memory-kit` с последующим push.

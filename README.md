@@ -18,10 +18,11 @@
 docker compose up -d
 ```
 
-После запуска сайт доступен по адресу:
+После запуска доступны два локальных DEV-контура:
 
 ```text
-http://localhost:8080/
+http://localhost:8080/  # ЗоПП / sudpraktika-online
+http://localhost:8081/  # ДДУ / ddu-online
 ```
 
 Основные локальные маршруты:
@@ -31,18 +32,23 @@ http://localhost:8080/
 - `/zpp/praktika/<slug>/` — страницы ситуаций;
 - `/zpp/dela/<docid>/` — страницы конкретных судебных актов.
 
+DDU-контур на `8081` сейчас показывает служебную placeholder-страницу. После генерации DDU SSG укажите `DDU_SITE_ROOT=./dist/ddu-online.ru` в `.env` и перезапустите Docker Compose.
+
 Контур состоит из двух сервисов:
 
-- `site` — отдаёт файлы из `site_prototype/`;
-- `caddy` — входная точка, через которую потом можно включить домен и автоматический HTTPS.
+- `zpp-site` — отдаёт файлы из `ZPP_SITE_ROOT` (`site_prototype/` по умолчанию);
+- `ddu-site` — отдаёт файлы из `DDU_SITE_ROOT` (`site_dev/ddu-placeholder/` по умолчанию, до появления DDU SSG);
+- `caddy` — входная точка для двух локальных портов и будущего HTTPS-слоя.
 
-Для production-настроек скопируйте `.env.example` в `.env` и укажите домен, например:
+Для другого локального каталога сборки или production-настроек скопируйте `.env.example` в `.env` и укажите нужные значения, например:
 
 ```text
-SITE_ADDRESS=sudpraktika-online.ru
-SITE_HTTP_PORT=80
+ZPP_SITE_ADDRESS=sudpraktika-online.ru
+ZPP_DEV_HTTP_PORT=80
 SITE_HTTPS_PORT=443
 SITE_PUBLIC_URL=https://sudpraktika-online.ru
+ZPP_SITE_ROOT=./site_prototype
+DDU_SITE_ROOT=./dist/ddu-online.ru
 ```
 
 Caddy сможет получить публичный SSL-сертификат, когда DNS домена указывает на сервер, а входящие порты 80 и 443 открыты.

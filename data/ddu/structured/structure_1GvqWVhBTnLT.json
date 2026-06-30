@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "source": {
+    "docid": "1GvqWVhBTnLT",
+    "source_url": "https://sudact.ru/regular/doc/1GvqWVhBTnLT/",
+    "source_domain": "sudact.ru",
+    "source_title": "Решение № 2-476/2020 от 28 июля 2020 г. по делу № 9-214/2019...",
+    "source_passage": "Судебные и нормативные акты РФ. Решение № 2-476/2020 от 28 июля 2020 г. по делу № 9-214/2019~М-1800/2019 Вынесен: Рудничный районный суд г. Прокопьевска (Кемеровская область). Судья: Полюцкая О.А.. | Решение № 2-476/2020 от 28 июля 2020 г. по делу № 9-214/2019~М-1800/2019. Рудничный районный суд г. Прокопьевска (Кемеровская область) - Гражданские и административные.",
+    "raw_act_path": "data/ddu/raw_acts/act_1GvqWVhBTnLT.txt",
+    "raw_text_sha256": "7a0c355235f9b6773c046f00f75e6fc45c674f50b527d2e6913e530eae20cb01",
+    "source_type": "court_act"
+  },
+  "court": {
+    "case_number": "",
+    "court_name": "",
+    "court_level": "",
+    "court_system": "general_jurisdiction",
+    "region": "",
+    "city_or_locality": null,
+    "decision_date": "",
+    "instance": ""
+  },
+  "taxonomy": {
+    "legal_domain": "shared_construction",
+    "procedure_type": "civil",
+    "audience_segment": "citizen",
+    "topic_vertical": "ddu",
+    "dispute_type_code": "ddu_non_target_hold",
+    "dispute_type": "нецелевой для ДДУ-сайта спор",
+    "claim_type_codes": [
+      "hold"
+    ],
+    "claim_type": "нецелевой спор",
+    "platform_or_company": null,
+    "object_type": null,
+    "object_name": null,
+    "situation_tags": []
+  },
+  "parties": {
+    "focus_party": {
+      "role": "shareholder",
+      "name_raw": null
+    },
+    "opponents": [],
+    "third_parties": []
+  },
+  "case_summary": {
+    "situation": "Нецелевой спор",
+    "timeline": [],
+    "key_factors": [],
+    "practical_takeaways": [],
+    "unusual_points": []
+  },
+  "claims_and_result": {
+    "remedy": "Нецелевой спор",
+    "outcome": {
+      "focus_party_result": "hold",
+      "result_type": "hold",
+      "short_reason": "нецелевой спор"
+    },
+    "amounts": {
+      "claimed_total": null,
+      "awarded_total": null,
+      "items_claimed": [],
+      "items_awarded": []
+    }
+  },
+  "legal_analysis": {
+    "holding": "Нецелевой спор",
+    "legal_refs": [],
+    "arguments_rejected": []
+  },
+  "publication": {
+    "main_site_fit": false,
+    "index_policy": "hold",
+    "exclude_reason": "non_target",
+    "ai_generated": true,
+    "citations_verified": false,
+    "human_review_status": "not_reviewed",
+    "legal_advice": false
+  },
+  "processing": {
+    "status": "complete",
+    "processed_by": "Antigravity/Filter",
+    "processed_at": "2026-06-29T18:05:56.930158"
+  }
+}

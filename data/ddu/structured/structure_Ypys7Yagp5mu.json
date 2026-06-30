@@ -1,0 +1,93 @@
+{
+  "schema_version": "2.0",
+  "source": {
+    "docid": "Ypys7Yagp5mu",
+    "source_url": "https://sudact.ru/regular/doc/Ypys7Yagp5mu/",
+    "source_domain": "sudact.ru",
+    "source_title": "Решение № 2-2295/2025 2-2295/2025(2-7447/2024...) :: СудАкт.ру",
+    "source_passage": "Квартира была принята у застройщика по акту приема-передачи 20.12.2023 года, в настоящее время истец проживает в указанной квартире. Согласно п. 5.3 договора участия в долевом строительстве гарантийный срок объекта долевого строительства составляет 5 лет, что соответствует п. 5 ст. 7 Федерального закона от 30.12.2004 года № 214.",
+    "raw_act_path": "data/ddu/raw_acts/act_Ypys7Yagp5mu.txt",
+    "raw_text_sha256": "1d93393c67c8afef71634ad79c9bd3c6bdf10ecc70a940764d431ac76324b702",
+    "source_type": "court_act"
+  },
+  "court": {
+    "case_number": "2-2295/2025",
+    "court_name": "",
+    "court_level": "",
+    "court_system": "general_jurisdiction",
+    "region": "",
+    "city_or_locality": "",
+    "decision_date": null,
+    "instance": "first"
+  },
+  "taxonomy": {
+    "legal_domain": "shared_construction",
+    "procedure_type": "civil",
+    "audience_segment": "citizen",
+    "topic_vertical": "ddu",
+    "dispute_type_code": "ddu_manual_review_hold",
+    "dispute_type": "нужна ручная проверка DDU-классификации",
+    "claim_type_codes": [
+      "hold"
+    ],
+    "claim_type": "требуется ручная проверка",
+    "platform_or_company": null,
+    "object_type": null,
+    "object_name": null,
+    "situation_tags": [
+      "manual_review_required"
+    ]
+  },
+  "parties": {
+    "focus_party": {
+      "role": "unknown",
+      "name_raw": null
+    },
+    "opponents": [],
+    "third_parties": []
+  },
+  "case_summary": {
+    "situation": "Акт был найден и сохранен, но первая автоматическая обработка не успела надежно выделить структуру дела.",
+    "timeline": [],
+    "key_factors": [
+      "требуется повторная структурная разметка"
+    ],
+    "practical_takeaways": [
+      "не публиковать до ручной проверки или повторной обработки"
+    ],
+    "unusual_points": []
+  },
+  "claims_and_result": {
+    "remedy": "требуется ручная проверка",
+    "outcome": {
+      "focus_party_result": "hold",
+      "result_type": "hold",
+      "short_reason": "Недостаточно надежной структурной разметки для публикации."
+    },
+    "amounts": {
+      "claimed_total": null,
+      "awarded_total": null,
+      "items_claimed": [],
+      "items_awarded": []
+    }
+  },
+  "legal_analysis": {
+    "holding": "Правовая позиция не выделялась автоматически: дело оставлено на повторную обработку.",
+    "legal_refs": [],
+    "arguments_rejected": []
+  },
+  "publication": {
+    "main_site_fit": false,
+    "index_policy": "hold",
+    "exclude_reason": "manual_review_required",
+    "ai_generated": true,
+    "citations_verified": false,
+    "human_review_status": "needs_review",
+    "legal_advice": false
+  },
+  "processing": {
+    "status": "complete",
+    "processed_by": "Codex/local-hold",
+    "processed_at": "2026-06-29T18:45:01+03:00"
+  }
+}

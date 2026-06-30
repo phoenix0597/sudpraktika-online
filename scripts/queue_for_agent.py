@@ -20,19 +20,20 @@ import json
 from datetime import date
 from pathlib import Path
 
-QUEUE_PATH = Path("data/inbox/_queue.json")
-RAW_ACTS = Path("data/raw_acts")
+DEFAULT_QUEUE_PATH = Path("data/inbox/_queue.json")
+DEFAULT_RAW_ACTS = Path("data/raw_acts")
 
 
-def load_queue() -> dict:
-    if not QUEUE_PATH.exists():
+def load_queue(queue_path: Path) -> dict:
+    if not queue_path.exists():
         return {"queue": []}
-    return json.loads(QUEUE_PATH.read_text(encoding="utf-8"))
+    return json.loads(queue_path.read_text(encoding="utf-8"))
 
 
-def save_queue(q: dict) -> None:
+def save_queue(q: dict, queue_path: Path) -> None:
     q["_last_updated"] = date.today().isoformat()
-    QUEUE_PATH.write_text(
+    queue_path.parent.mkdir(parents=True, exist_ok=True)
+    queue_path.write_text(
         json.dumps(q, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
@@ -74,17 +75,17 @@ def source_metadata_for(act_file: Path, docid: str) -> dict:
     }
 
 
-def register_all() -> int:
-    q = load_queue()
+def register_all(queue_path: Path, raw_dir: Path) -> int:
+    q = load_queue(queue_path)
     known = known_docids(q)
     added = 0
-    for act_file in sorted(RAW_ACTS.glob("act_*.txt")):
+    for act_file in sorted(raw_dir.glob("act_*.txt")):
         docid = docid_from_filename(act_file.name)
         if docid in known:
             continue
         q.setdefault("queue", []).append({
             "docid": docid,
-            "act_path": f"data/raw_acts/{act_file.name}",
+            "act_path": act_file.as_posix(),
             **source_metadata_for(act_file, docid),
             "case_number": "",
             "vertical": "",
@@ -95,12 +96,12 @@ def register_all() -> int:
         })
         added += 1
     if added:
-        save_queue(q)
+        save_queue(q, queue_path)
     return added
 
 
-def show_status() -> None:
-    q = load_queue()
+def show_status(queue_path: Path) -> None:
+    q = load_queue(queue_path)
     items = q.get("queue", [])
     pending = [i for i in items if i["status"] == "pending"]
     done = [i for i in items if i["status"] == "done"]
@@ -117,33 +118,46 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="Наполнение очереди обработки для ИИ-агента")
     ap.add_argument("--docid", default="", help="Зарегистрировать только один акт по docid")
     ap.add_argument("--status", action="store_true", help="Показать статус очереди")
+    ap.add_argument(
+        "--queue",
+        default=str(DEFAULT_QUEUE_PATH),
+        help="Путь к JSON-очереди. По умолчанию data/inbox/_queue.json.",
+    )
+    ap.add_argument(
+        "--raw-dir",
+        default=str(DEFAULT_RAW_ACTS),
+        help="Каталог с act_<docid>.txt. По умолчанию data/raw_acts.",
+    )
     args = ap.parse_args()
+    queue_path = Path(args.queue)
+    raw_dir = Path(args.raw_dir)
 
     if args.status:
-        show_status()
+        show_status(queue_path)
         return 0
 
     if args.docid:
         # Регистрация одного
-        q = load_queue()
+        q = load_queue(queue_path)
         if args.docid in known_docids(q):
             print(f"Акт {args.docid} уже в очереди")
             return 0
+        act_file = raw_dir / f"act_{args.docid}.txt"
         q.setdefault("queue", []).append({
             "docid": args.docid,
-            "act_path": f"data/raw_acts/act_{args.docid}.txt",
-            **source_metadata_for(Path(f"data/raw_acts/act_{args.docid}.txt"), args.docid),
+            "act_path": act_file.as_posix(),
+            **source_metadata_for(act_file, args.docid),
             "case_number": "", "vertical": "",
             "status": "pending",
             "processed_by": None, "processed_at": None, "notes": "",
         })
-        save_queue(q)
+        save_queue(q, queue_path)
         print(f"Добавлен акт {args.docid}")
         return 0
 
-    added = register_all()
+    added = register_all(queue_path, raw_dir)
     print(f"Зарегистрировано новых актов: {added}")
-    show_status()
+    show_status(queue_path)
     return 0
 
 

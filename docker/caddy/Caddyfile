@@ -1,4 +1,9 @@
-{$SITE_ADDRESS::80} {
+{$ZPP_SITE_ADDRESS::80} {
 	encode zstd gzip
-	reverse_proxy site:80
+	reverse_proxy zpp-site:80
+}
+
+{$DDU_SITE_ADDRESS::81} {
+	encode zstd gzip
+	reverse_proxy ddu-site:80
 }

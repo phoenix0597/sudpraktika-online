@@ -1,0 +1,93 @@
+{
+  "schema_version": "2.0",
+  "source": {
+    "docid": "WHn796jskSgN",
+    "source_url": "https://sudact.ru/regular/doc/WHn796jskSgN/",
+    "source_domain": "sudact.ru",
+    "source_title": "Решение № 2-126/2025 2-126/2025(2-3653/2024...) :: СудАкт.ру",
+    "source_passage": "Отношения, связанные с привлечением денежных средств граждан для долевого строительства многоквартирных домов и иных объектов недвижимости, урегулированы Федеральным законом от 30.12.2004 № 214-ФЗ «Об участии в долевом строительстве многоквартирных домов и иных объектов недвижимости и о внесении изменений в некоторые законодательные акты Российской Федерации» (далее Федеральный закон от 30.12.2004 № 214-ФЗ).",
+    "raw_act_path": "data/ddu/raw_acts/act_WHn796jskSgN.txt",
+    "raw_text_sha256": "d1a19d93f3a75265a26bd63632f9a0db0d2c5c48510050b2846eb6a6b08f2f2c",
+    "source_type": "court_act"
+  },
+  "court": {
+    "case_number": "",
+    "court_name": "",
+    "court_level": "",
+    "court_system": "general_jurisdiction",
+    "region": "",
+    "city_or_locality": "",
+    "decision_date": null,
+    "instance": "first"
+  },
+  "taxonomy": {
+    "legal_domain": "shared_construction",
+    "procedure_type": "civil",
+    "audience_segment": "citizen",
+    "topic_vertical": "ddu",
+    "dispute_type_code": "ddu_manual_review_hold",
+    "dispute_type": "нужна ручная проверка DDU-классификации",
+    "claim_type_codes": [
+      "hold"
+    ],
+    "claim_type": "требуется ручная проверка",
+    "platform_or_company": null,
+    "object_type": null,
+    "object_name": null,
+    "situation_tags": [
+      "manual_review_required"
+    ]
+  },
+  "parties": {
+    "focus_party": {
+      "role": "unknown",
+      "name_raw": null
+    },
+    "opponents": [],
+    "third_parties": []
+  },
+  "case_summary": {
+    "situation": "Акт был найден и сохранен, но первая автоматическая обработка не успела надежно выделить структуру дела.",
+    "timeline": [],
+    "key_factors": [
+      "требуется повторная структурная разметка"
+    ],
+    "practical_takeaways": [
+      "не публиковать до ручной проверки или повторной обработки"
+    ],
+    "unusual_points": []
+  },
+  "claims_and_result": {
+    "remedy": "требуется ручная проверка",
+    "outcome": {
+      "focus_party_result": "hold",
+      "result_type": "hold",
+      "short_reason": "Недостаточно надежной структурной разметки для публикации."
+    },
+    "amounts": {
+      "claimed_total": null,
+      "awarded_total": null,
+      "items_claimed": [],
+      "items_awarded": []
+    }
+  },
+  "legal_analysis": {
+    "holding": "Правовая позиция не выделялась автоматически: дело оставлено на повторную обработку.",
+    "legal_refs": [],
+    "arguments_rejected": []
+  },
+  "publication": {
+    "main_site_fit": false,
+    "index_policy": "hold",
+    "exclude_reason": "manual_review_required",
+    "ai_generated": true,
+    "citations_verified": false,
+    "human_review_status": "needs_review",
+    "legal_advice": false
+  },
+  "processing": {
+    "status": "complete",
+    "processed_by": "Codex/local-hold",
+    "processed_at": "2026-06-29T18:45:01+03:00"
+  }
+}

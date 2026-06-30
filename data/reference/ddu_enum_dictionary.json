@@ -1,0 +1,246 @@
+{
+  "schema_version": "1.0",
+  "status": "draft_for_first_batch",
+  "created_at": "2026-06-29",
+  "principle": "dispute_type_code is based on recurring legal situations under Federal Law No. 214-FZ and closely related civil/consumer remedies; factual details such as developer, project, region, court, object name and procedural nuances stay in separate metadata fields and situation_tags.",
+  "launch_target": {
+    "mode": "confident_start",
+    "valid_cases_min": 150,
+    "valid_cases_max": 250,
+    "situation_pages_min": 8,
+    "situation_pages_max": 12,
+    "strong_pages_min": 3,
+    "strong_pages_max": 5,
+    "strong_page_case_threshold": 20
+  },
+  "fields": {
+    "taxonomy.dispute_type_code": {
+      "description": "Normalized DDU/shared-construction situation code for clustering, filters and SSG pages.",
+      "values": {
+        "ddu_delay_penalty_art6": {
+          "label": "просрочка передачи квартиры и неустойка",
+          "legal_basis": [
+            "214-ФЗ ст. 6"
+          ],
+          "description": "Застройщик нарушил срок передачи объекта; участник долевого строительства требует неустойку и связанные производные требования. Снижение неустойки по ст. 333 ГК РФ отражать в situation_tags/result analysis, если это не самостоятельный центральный вопрос."
+        },
+        "ddu_pretension_claim_procedure": {
+          "label": "претензия и иск к застройщику",
+          "legal_basis": [
+            "214-ФЗ",
+            "ГПК РФ",
+            "ЗоЗПП"
+          ],
+          "description": "Спор полезен как процессуально-практический пример: направление претензии, обращение в суд, состав требований, последствия реакции или бездействия застройщика."
+        },
+        "ddu_termination_refund_art9": {
+          "label": "расторжение ДДУ и возврат денег",
+          "legal_basis": [
+            "214-ФЗ ст. 9"
+          ],
+          "description": "Участник долевого строительства отказывается от договора или требует его расторжения, возврата уплаченных денег, процентов и связанных сумм."
+        },
+        "ddu_quality_defects_art7": {
+          "label": "недостатки квартиры или объекта",
+          "legal_basis": [
+            "214-ФЗ ст. 7"
+          ],
+          "description": "Споры о строительных недостатках, гарантийных обязательствах, устранении дефектов, расходах на ремонт или уменьшении цены."
+        },
+        "ddu_acceptance_defects_art8": {
+          "label": "приёмка квартиры с недостатками",
+          "legal_basis": [
+            "214-ФЗ ст. 8"
+          ],
+          "description": "Споры об акте приёма-передачи, отказе подписывать акт, одностороннем акте, фиксации недостатков при приёмке."
+        },
+        "ddu_area_price_difference_art5": {
+          "label": "площадь квартиры, доплаты и перерасчёт цены",
+          "legal_basis": [
+            "214-ФЗ ст. 5"
+          ],
+          "description": "Споры о фактической площади объекта, доплатах за лишние метры, возврате за недостающую площадь и порядке перерасчёта цены."
+        },
+        "ddu_contract_terms_validity_art4": {
+          "label": "условия и действительность ДДУ",
+          "legal_basis": [
+            "214-ФЗ ст. 4"
+          ],
+          "description": "Споры о существенных условиях ДДУ, описании объекта, сроке передачи, регистрации договора, заключённости или действительности договора."
+        },
+        "ddu_project_info_violation": {
+          "label": "недостоверная или неполная информация о проекте",
+          "legal_basis": [
+            "214-ФЗ"
+          ],
+          "description": "Споры о проектной декларации, раскрытии информации о застройщике или объекте, изменении проекта и ожиданиях участника."
+        },
+        "ddu_assignment_rights_art11": {
+          "label": "уступка прав требования по ДДУ",
+          "legal_basis": [
+            "214-ФЗ ст. 11"
+          ],
+          "description": "Споры о цессии по ДДУ и о том, кто вправе требовать неустойку, убытки или иные суммы после уступки."
+        },
+        "ddu_escrow_dispute": {
+          "label": "спор вокруг эскроу-счёта",
+          "legal_basis": [
+            "214-ФЗ"
+          ],
+          "description": "Споры о расчётах через эскроу, раскрытии счёта, возврате средств, роли банка, застройщика и участника долевого строительства."
+        },
+        "ddu_developer_bankruptcy": {
+          "label": "банкротство застройщика и защита дольщика",
+          "legal_basis": [
+            "214-ФЗ",
+            "смежное банкротное регулирование"
+          ],
+          "description": "Сложные смежные споры о банкротстве застройщика, реестре требований, достройке или компенсации. Для первой партии индексировать только при очевидной пользовательской ценности и понятной гражданско-правовой ситуации."
+        },
+        "ddu_non_target_hold": {
+          "label": "нецелевой для ДДУ-сайта спор",
+          "legal_basis": [],
+          "description": "Дело не подходит для публичного DDU-каталога: не связано с ДДУ/долевым строительством, является чисто хозяйственным спором без полезной гражданской ситуации или требует отдельной вертикали."
+        },
+        "ddu_manual_review_hold": {
+          "label": "нужна ручная проверка DDU-классификации",
+          "legal_basis": [],
+          "description": "Ситуация похожа на ДДУ, но агент не может уверенно выбрать код или публикационную политику. publication.index_policy = hold до проверки."
+        }
+      }
+    },
+    "taxonomy.claim_type_codes": {
+      "description": "Normalized list of claims/remedies in DDU cases. Multiple values are allowed.",
+      "values": {
+        "penalty": {
+          "label": "неустойка",
+          "legal_basis": [
+            "214-ФЗ ст. 6"
+          ]
+        },
+        "refund_paid": {
+          "label": "возврат уплаченных денег",
+          "legal_basis": [
+            "214-ФЗ ст. 9"
+          ]
+        },
+        "interest": {
+          "label": "проценты за пользование деньгами",
+          "legal_basis": [
+            "214-ФЗ ст. 9",
+            "ГК РФ"
+          ]
+        },
+        "damages": {
+          "label": "убытки",
+          "legal_basis": [
+            "214-ФЗ ст. 10",
+            "ГК РФ"
+          ]
+        },
+        "defect_cure": {
+          "label": "устранение недостатков",
+          "legal_basis": [
+            "214-ФЗ ст. 7"
+          ]
+        },
+        "repair_expenses": {
+          "label": "расходы на устранение недостатков",
+          "legal_basis": [
+            "214-ФЗ ст. 7"
+          ]
+        },
+        "price_reduction": {
+          "label": "уменьшение цены",
+          "legal_basis": [
+            "214-ФЗ ст. 7"
+          ]
+        },
+        "contract_termination": {
+          "label": "расторжение договора",
+          "legal_basis": [
+            "214-ФЗ ст. 9",
+            "ГК РФ"
+          ]
+        },
+        "compel_transfer": {
+          "label": "обязать передать квартиру или объект",
+          "legal_basis": [
+            "214-ФЗ ст. 6",
+            "214-ФЗ ст. 8"
+          ]
+        },
+        "area_recalculation": {
+          "label": "перерасчёт цены из-за площади",
+          "legal_basis": [
+            "214-ФЗ ст. 5"
+          ]
+        },
+        "consumer_fine": {
+          "label": "потребительский штраф 50%",
+          "legal_basis": [
+            "ЗоЗПП ст. 13 п. 6"
+          ]
+        },
+        "moral_damage": {
+          "label": "компенсация морального вреда",
+          "legal_basis": [
+            "ЗоЗПП ст. 15"
+          ]
+        },
+        "expenses": {
+          "label": "судебные, экспертные и иные расходы",
+          "legal_basis": []
+        },
+        "information_disclosure": {
+          "label": "предоставление или опровержение информации",
+          "legal_basis": [
+            "214-ФЗ",
+            "ЗоЗПП"
+          ]
+        },
+        "escrow_refund": {
+          "label": "возврат средств с эскроу",
+          "legal_basis": [
+            "214-ФЗ"
+          ]
+        },
+        "bankruptcy_claim": {
+          "label": "требование в связи с банкротством застройщика",
+          "legal_basis": [
+            "смежное банкротное регулирование"
+          ]
+        },
+        "hold": {
+          "label": "нецелевой или требующий проверки спор",
+          "legal_basis": []
+        }
+      }
+    },
+    "claims_and_result.outcome.result_type": {
+      "description": "Normalized outcome code from the focus-party perspective.",
+      "values": {
+        "satisfied": "требования удовлетворены полностью или почти полностью",
+        "partially_satisfied": "требования удовлетворены частично",
+        "rejected": "в иске отказано",
+        "mixed": "смешанный результат",
+        "hold": "дело не подходит для основного индекса/вертикали"
+      }
+    },
+    "publication.index_policy": {
+      "description": "Publication gate for generated pages.",
+      "values": {
+        "index": "можно индексировать после обычной редакционной проверки",
+        "hold": "держать вне индекса/основного сайта до отдельного решения"
+      }
+    }
+  },
+  "normalization_rules": [
+    "Do not encode developer names, residential complex names, courts, regions or object names into dispute_type_code.",
+    "Use situation_tags for cross-cutting issues such as penalty reduction under Article 333 of the Civil Code, moratorium periods, expert evidence, limitation periods, assignment details and voluntary payment.",
+    "If a recurring situation is not in the dictionary, record it as a candidate in the batch report; do not silently invent a new taxonomy.dispute_type_code.",
+    "If a case is not a DDU/shared-construction dispute or is too unclear, use ddu_non_target_hold or ddu_manual_review_hold and publication.index_policy = hold.",
+    "claim_type_codes is a list; combine base remedies and derivative claims such as penalty, moral_damage, consumer_fine, expenses and damages.",
+    "Human-readable labels may be adapted for page copy, but enum codes must remain stable."
+  ]
+}

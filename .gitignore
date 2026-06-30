@@ -18,6 +18,9 @@ output/
 test-results/
 playwright-report/
 
+# Локально клонированные соседние/внешние репозитории
+ddu-online.ru/
+
 # ОС / редактор
 .DS_Store
 Thumbs.db

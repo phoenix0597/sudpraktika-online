@@ -111,8 +111,8 @@ def upsert(registry: dict[str, dict[str, str]], docid: str, values: dict[str, An
     row["normalized_source_url"] = normalize_url(row.get("source_url"))
 
 
-def collect_raw(registry: dict[str, dict[str, str]]) -> None:
-    for meta_path in sorted(RAW_DIR.glob("act_*.meta.json")):
+def collect_raw(registry: dict[str, dict[str, str]], raw_dir: Path = RAW_DIR) -> None:
+    for meta_path in sorted(raw_dir.glob("act_*.meta.json")):
         metadata = read_json(meta_path)
         docid = str(metadata.get("docid") or docid_from_meta_file(meta_path)).strip()
         upsert(
@@ -121,13 +121,13 @@ def collect_raw(registry: dict[str, dict[str, str]]) -> None:
             {
                 "source_url": metadata.get("source_url"),
                 "source_domain": metadata.get("source_domain"),
-                "raw_act_path": metadata.get("raw_act_path") or f"data/raw_acts/act_{docid}.txt",
+                "raw_act_path": metadata.get("raw_act_path") or (raw_dir / f"act_{docid}.txt").as_posix(),
                 "raw_text_sha256": metadata.get("raw_text_sha256"),
                 "has_raw": True,
             },
         )
 
-    for act_path in sorted(RAW_DIR.glob("act_*.txt")):
+    for act_path in sorted(raw_dir.glob("act_*.txt")):
         docid = docid_from_act_file(act_path)
         meta_path = act_path.with_suffix(".meta.json")
         if meta_path.exists():
@@ -145,8 +145,12 @@ def collect_raw(registry: dict[str, dict[str, str]]) -> None:
         )
 
 
-def collect_structured(registry: dict[str, dict[str, str]]) -> None:
-    for structure_path in sorted(STRUCTURED_DIR.glob("structure_*.json")):
+def collect_structured(
+    registry: dict[str, dict[str, str]],
+    raw_dir: Path = RAW_DIR,
+    structured_dir: Path = STRUCTURED_DIR,
+) -> None:
+    for structure_path in sorted(structured_dir.glob("structure_*.json")):
         data = read_json(structure_path)
         source = data.get("source", {}) if isinstance(data.get("source"), dict) else {}
         court = data.get("court", {}) if isinstance(data.get("court"), dict) else {}
@@ -163,7 +167,7 @@ def collect_structured(registry: dict[str, dict[str, str]]) -> None:
                 "source_domain": source.get("source_domain"),
                 "raw_act_path": source.get("raw_act_path"),
                 "raw_text_sha256": source.get("raw_text_sha256"),
-                "has_raw": bool(source.get("raw_act_path") or (RAW_DIR / f"act_{docid}.txt").exists()),
+                "has_raw": bool(source.get("raw_act_path") or (raw_dir / f"act_{docid}.txt").exists()),
                 "has_structure": True,
                 "processing_status": processing.get("status"),
                 "index_policy": publication.get("index_policy"),
@@ -180,10 +184,13 @@ def collect_structured(registry: dict[str, dict[str, str]]) -> None:
         )
 
 
-def build_registry() -> list[dict[str, str]]:
+def build_registry(
+    raw_dir: Path = RAW_DIR,
+    structured_dir: Path = STRUCTURED_DIR,
+) -> list[dict[str, str]]:
     registry: dict[str, dict[str, str]] = {}
-    collect_raw(registry)
-    collect_structured(registry)
+    collect_raw(registry, raw_dir)
+    collect_structured(registry, raw_dir, structured_dir)
     return [registry[docid] for docid in sorted(registry)]
 
 
@@ -198,9 +205,15 @@ def write_registry(rows: list[dict[str, str]], output: Path) -> None:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Собрать CSV-реестр уже известных судебных актов")
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT), help="Куда записать CSV-реестр")
+    parser.add_argument("--raw-dir", default=str(RAW_DIR), help="Каталог с act_<docid>.txt/.meta.json")
+    parser.add_argument(
+        "--structured-dir",
+        default=str(STRUCTURED_DIR),
+        help="Каталог с structure_<docid>.json",
+    )
     args = parser.parse_args()
 
-    rows = build_registry()
+    rows = build_registry(Path(args.raw_dir), Path(args.structured_dir))
     output = Path(args.output)
     write_registry(rows, output)
 

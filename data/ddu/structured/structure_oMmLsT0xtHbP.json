@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "source": {
+    "docid": "oMmLsT0xtHbP",
+    "source_url": "https://sudact.ru/regular/doc/oMmLsT0xtHbP/",
+    "source_domain": "sudact.ru",
+    "source_title": "Решение № 2-339/2021 2-339/2021~М-308/2021 М-308/2021 от 14 июня 2021 г. по делу № 2-339/2021 :: СудАкт.ру",
+    "source_passage": null,
+    "raw_act_path": "data/ddu/raw_acts/act_oMmLsT0xtHbP.txt",
+    "raw_text_sha256": "bc2ac8b9198247b52c57c9e1cd8441b8b622457ca5fbb64c87cc0388c8b69c4b",
+    "source_type": "court_act"
+  },
+  "court": {
+    "case_number": "",
+    "court_name": "",
+    "court_level": "",
+    "court_system": "general_jurisdiction",
+    "region": "",
+    "city_or_locality": null,
+    "decision_date": "",
+    "instance": ""
+  },
+  "taxonomy": {
+    "legal_domain": "shared_construction",
+    "procedure_type": "civil",
+    "audience_segment": "citizen",
+    "topic_vertical": "ddu",
+    "dispute_type_code": "ddu_non_target_hold",
+    "dispute_type": "нецелевой для ДДУ-сайта спор",
+    "claim_type_codes": [
+      "hold"
+    ],
+    "claim_type": "нецелевой спор",
+    "platform_or_company": null,
+    "object_type": null,
+    "object_name": null,
+    "situation_tags": []
+  },
+  "parties": {
+    "focus_party": {
+      "role": "shareholder",
+      "name_raw": null
+    },
+    "opponents": [],
+    "third_parties": []
+  },
+  "case_summary": {
+    "situation": "Нецелевой спор",
+    "timeline": [],
+    "key_factors": [],
+    "practical_takeaways": [],
+    "unusual_points": []
+  },
+  "claims_and_result": {
+    "remedy": "Нецелевой спор",
+    "outcome": {
+      "focus_party_result": "hold",
+      "result_type": "hold",
+      "short_reason": "нецелевой спор"
+    },
+    "amounts": {
+      "claimed_total": null,
+      "awarded_total": null,
+      "items_claimed": [],
+      "items_awarded": []
+    }
+  },
+  "legal_analysis": {
+    "holding": "Нецелевой спор",
+    "legal_refs": [],
+    "arguments_rejected": []
+  },
+  "publication": {
+    "main_site_fit": false,
+    "index_policy": "hold",
+    "exclude_reason": "non_target",
+    "ai_generated": true,
+    "citations_verified": false,
+    "human_review_status": "not_reviewed",
+    "legal_advice": false
+  },
+  "processing": {
+    "status": "complete",
+    "processed_by": "Antigravity/Filter",
+    "processed_at": "2026-06-29T18:05:56.971306"
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "schema_version": "2.0",
+  "source": {
+    "docid": "mJ8TjG4OypYx",
+    "source_url": "https://sudact.ru/regular/doc/mJ8TjG4OypYx/",
+    "source_domain": "sudact.ru",
+    "source_title": "Решение № 2-10568/2019 2-1105/2020 от 27 января... :: СудАкт.ру",
+    "source_passage": "№ 214-ФЗ «Об участии в долевом строительстве многоквартирных домов и иных объектов недвижимости и о внесении изменений в некоторые законодательные акты Российской Федерации», застройщик вправе расторгнуть договор не ранее чем через тридцать дней после направления в письменной форме участнику долевого строительства в порядке...",
+    "raw_act_path": "data/ddu/raw_acts/act_mJ8TjG4OypYx.txt",
+    "raw_text_sha256": "d82f402e1eea59f0c0d819435c91502a82319f27c2bdc3a896c0637f67e1b791",
+    "source_type": "court_act"
+  },
+  "court": {
+    "case_number": "2-1056",
+    "court_name": "",
+    "court_level": "",
+    "court_system": "general_jurisdiction",
+    "region": "",
+    "city_or_locality": "",
+    "decision_date": "2020-01-28",
+    "instance": "first"
+  },
+  "taxonomy": {
+    "legal_domain": "shared_construction",
+    "procedure_type": "civil",
+    "audience_segment": "citizen",
+    "topic_vertical": "ddu",
+    "dispute_type_code": "ddu_assignment_rights_art11",
+    "dispute_type": "уступка прав требования по ДДУ и защита приобретателя",
+    "claim_type_codes": [
+      "contract_termination"
+    ],
+    "claim_type": "спор о действительности перехода прав и расторжении ДДУ",
+    "platform_or_company": "ООО «КПК»",
+    "object_type": "квартира",
+    "object_name": null,
+    "situation_tags": [
+      "assignment_chain",
+      "developer_termination_claim",
+      "good_faith_assignee"
+    ]
+  },
+  "parties": {
+    "focus_party": {
+      "role": "shareholder",
+      "name_raw": "приобретатель прав по уступке"
+    },
+    "opponents": [
+      {
+        "role": "developer",
+        "name_raw": "ООО «КПК»"
+      }
+    ],
+    "third_parties": []
+  },
+  "case_summary": {
+    "situation": "Покупатель получил права на квартиру по цепочке уступок. Застройщик пытался расторгнуть исходный договор, ссылаясь на неоплату предыдущим участником, но суд оценивал защиту последующего приобретателя и судьбу переданных прав.",
+    "timeline": [],
+    "key_factors": [
+      "права на квартиру передавались по цепочке уступок",
+      "застройщик ссылался на нарушение оплаты первоначальным участником",
+      "суд оценивал добросовестность последующего приобретателя и последствия регистрации перехода прав"
+    ],
+    "practical_takeaways": [
+      "при покупке прав по уступке важно проверять оплату и регистрацию всей цепочки перехода прав",
+      "позицию в суде нужно строить вокруг доказательств добросовестного приобретения и фактической оплаты"
+    ],
+    "unusual_points": [
+      "дело относится к смежной группе: уступка прав по ДДУ"
+    ]
+  },
+  "claims_and_result": {
+    "remedy": "защита прав приобретателя по уступке и спор о расторжении договора",
+    "outcome": {
+      "focus_party_result": "satisfied",
+      "result_type": "satisfied",
+      "short_reason": "Суд не принял позицию застройщика в части изъятия результата уступки у последующего приобретателя."
+    },
+    "amounts": {
+      "claimed_total": null,
+      "awarded_total": null,
+      "items_claimed": [],
+      "items_awarded": []
+    }
+  },
+  "legal_analysis": {
+    "holding": "При споре о цепочке уступок ключевое значение имеют доказательства перехода прав, оплаты и регистрации. Застройщик не может механически перенести конфликт с первоначальным участником на последующего приобретателя без учета фактических обстоятельств перехода прав.",
+    "legal_refs": [],
+    "arguments_rejected": []
+  },
+  "publication": {
+    "main_site_fit": true,
+    "index_policy": "index",
+    "exclude_reason": null,
+    "ai_generated": true,
+    "citations_verified": false,
+    "human_review_status": "not_reviewed",
+    "legal_advice": false
+  },
+  "processing": {
+    "status": "complete",
+    "processed_by": "Codex/local-fix",
+    "processed_at": "2026-06-29T18:46:01+03:00"
+  }
+}

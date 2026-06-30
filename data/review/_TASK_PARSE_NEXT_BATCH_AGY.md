@@ -23,6 +23,8 @@
 - не начинать новую партию, если есть незавершённая;
 - при остановке всегда оставлять `batch_state.md`, по которому следующий агент сможет продолжить без догадок.
 
+Все создаваемые `.md`, `.json`, `.csv`, `.txt` сохраняй в UTF-8. Содержимое должно быть читаемой кириллицей, без mojibake/сломанных символов. Это проверяется `validate_structures.py --strict-encoding` по новым/изменённым `docid` партии; если проверка не проходит, партия не считается завершённой.
+
 ## 2. Найти или создать batch
 
 Рабочие партии лежат в:
@@ -187,6 +189,13 @@ python scripts\find_cases.py --query "<запрос>" --pages 3 --output data\pa
 ```powershell
 python scripts\filter_case_candidates.py --input data\parse_batches\<batch-id>\search_<slug_1>.csv --input data\parse_batches\<batch-id>\search_<slug_2>.csv --output data\parse_batches\<batch-id>\new_candidates.csv
 ```
+
+Перед fetch сделай лёгкий triage кандидатов:
+
+- приоритет — дела с явными признаками целевой правовой вертикали и конкретной ситуации из актуального словаря;
+- очевидно нецелевые кандидаты не скачивай полностью, но фиксируй в отчёте как `rejected_before_fetch` с причиной;
+- сомнительные кандидаты не удаляй: помечай как `maybe_target` и включай небольшую контрольную выборку, чтобы не потерять потенциально целевые дела;
+- в `batch_state.md` фиксируй эффективность запросов: найдено → скачано → `index`/`hold`.
 
 Если добавляешь новые поисковые CSV к уже существующему `new_candidates.csv`, пиши результат в:
 
@@ -372,9 +381,12 @@ data/inbox/_TASK.md
 
 ```powershell
 python scripts\validate_structures.py
+python scripts\validate_structures.py --strict-encoding --docid <new_docids_comma_separated>
 python scripts\verify_all.py
 python scripts\build_case_registry.py
 ```
+
+`--strict-encoding` не запускается на весь legacy-корпус ЗоПП до закрытия старого encoding-долга; для новой партии он обязателен по новым/изменённым docid.
 
 Если проверки не проходят:
 

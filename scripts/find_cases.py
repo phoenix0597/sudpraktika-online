@@ -113,7 +113,7 @@ def is_court_source(url: str, domain: str) -> bool:
     if any(j in d for j in JUNK_DOMAINS):
         return False
     if "sudact.ru" in d or "sudact.ru" in u:
-        return SUDACT_ACT_PATH in u and "/regular/doc/?" not in u
+        return SUDACT_ACT_PATH in u and "/regular/doc/?" not in u and bool(docid_from_url(url))
     return any(c in d or c in u for c in COURT_DOMAINS)
 
 
